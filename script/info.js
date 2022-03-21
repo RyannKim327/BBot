@@ -62,7 +62,7 @@ module.exports = (api, body, event) => {
 					}
 				})
 			}else{
-				if(isNaN(info[1])){
+				if(!isNaN(info[1])){
 					api.getUserInfo(parseInt(info[1]), (err, data) => {
 						if(err){
 							console.log(err)
