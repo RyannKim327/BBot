@@ -60,16 +60,15 @@ module.exports = (api, body, event, file) => {
 	}
 	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		try{
-			d.shift()
 			await yt.initalize()
-			const m = await yt.search(d.join(" ").replace(/[^\w\s]/gi, ''))
+			const m = await yt.search(d)
 			console.log(m)
 			if(m.content.length <= 0){
-				throw new Error(`${d.join(" ").replace(/[^\w\s]/gi, '')} returned no results found`)
+				throw new Error(`${d} returned no results found`)
 				return true
 			}else{
 				if(m.content[0].videoId == undefined){
-					throw new Error(`${d.join(" ").replace(/[^\w\s]/gi, '')} is not found on youtube music. Try to add the singer name, maybe I can find it now.`)
+					throw new Error(`${d} is not found on youtube music. Try to add the singer name, maybe I can find it now.`)
 					return true
 				}
 			}
@@ -80,11 +79,12 @@ module.exports = (api, body, event, file) => {
 			const info = await ytdl.getInfo(url)
 			//api.sendMessage("A moment please", event.threadID, event.messageID)
 			if(m.content[0].duration <= ((20 * 60) * 1000)){
-				ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../karaoke.mp4`).on("end", async () => {
+				ffmpegs(strm).audioBitrate(128).save(`${__dirname}/../karaoke.mp4`).on("end", async () => {
 					api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 					api.sendMessage({
 						//body: "Here is your request\n\nSong Title: " + info.videoDetails.title + "\nUploaded by: " + info.videoDetails.author.name,
-						attachment: fs.createReadStream(`${__dirname}/../song.mp3`).on("end", async () => {
+						body: "Song Request",
+						attachment: fs.createReadStream(`${__dirname}/../karaoke.mp4`).on("end", async () => {
 							if(fs.existsSync(`${__dirname}/../karaoke.mp4`)){
 								fs.unlink(`${__dirname}/../karaoke.mp4`, (err) => {
 									if(err){
