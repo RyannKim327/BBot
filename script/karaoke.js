@@ -111,7 +111,7 @@ module.exports = async (api, body, event, file) => {
 			}
 		}catch(err){
 			api.sendMessage("Error: " + err, event.threadID, event.messageID)
-			if(fs.existsSync(`${__dirname}/../karaoke.mpe`)){
+			if(fs.existsSync(`${__dirname}/../karaoke.mp4`)){
 				fs.unlink(`${__dirname}/../karaoke.mp4`, (err) => {
 					if(err){
 						console.log(err)
