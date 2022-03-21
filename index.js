@@ -39,7 +39,7 @@ async function qwak(q){
 	})
 }
 function read(){
-	return fs.readFileSync("thread.txt", "utf-8")
+	return fs.readFileSync("txt/thread.txt", "utf-8")
 }
 
 login({appState: JSON.parse(process.env['state'])}, (err, api) => {
@@ -113,7 +113,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}
 							})
 						}else if(x.startsWith("_off_")){
-							let mm = fs.readFileSync("thread.txt", "utf-8").split("/")
+							let mm = fs.readFileSync("txt/thread.txt", "utf-8").split("/")
 							for (let i = mm.length - 1; i >= 0; i--) {
 								api.getThreadInfo(parseInt(mm[i]), (err, data) => {
 									if(err){
@@ -210,7 +210,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									quote(api, x, event)
 								}else if(x.startsWith(prefix + "info")){
 									if(y.length <= 1){
-										api.sendMessage(fs.readFileSync("abt.txt", "utf-8"), event.threadID, event.messageID)
+										api.sendMessage(fs.readFileSync("txt/abt.txt", "utf-8"), event.threadID, event.messageID)
 									}else{
 										let sp = mess.split(" ")
 										sp.shift()
