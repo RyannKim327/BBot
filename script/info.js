@@ -30,8 +30,10 @@ module.exports = (api, body, event) => {
 		})
 	}else{
 		let info = body.split(" ")
-		if(info.length > 0){
-			try{
+		if(info.length <= 1){
+			api.sendMessage(fs.readFileSync("../txt/abt.txt", "utf8"), event.threadID)
+		}else{
+			if(Object.keys(event.mentions).length > 0){
 				let mention = Object.keys(event.mentions)[0]
 				api.getUserInfo(mention, (err, data) => {
 					if(err){
@@ -59,7 +61,7 @@ module.exports = (api, body, event) => {
 						api.sendMessage(message, event.threadID, event.messageID)
 					}
 				})
-			}catch(e){
+			}else{
 				try{
 					api.getUserInfo(parseInt(info[1]), (err, data) => {
 						if(err){
@@ -118,8 +120,6 @@ module.exports = (api, body, event) => {
 					})
 				}
 			}
-		}else{
-			api.sendMessage(fs.readFileSync("../txt/abt.txt", "utf8"), event.threadID)
 		}
 	}
 }
