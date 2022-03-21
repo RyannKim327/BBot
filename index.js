@@ -286,7 +286,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 										api.sendMessage("Lemme finish first the earlier request", event.threadID, event.messageID)
 									}
 								}else if(x.startsWith(prefix + "special")){
-									specials..kolai(api, event)
+									specials.kolai(api, event)
 								}else if(x.startsWith(prefix + "bang bang")){
 									specials.bang(api, event)
 								}else if(x.startsWith(prefix + "wiki")){
