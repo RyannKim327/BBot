@@ -36,7 +36,7 @@ module.exports = (api, body, event) => {
 				api.getUserInfo(mention, (err, data) => {
 					if(err){
 						console.log(err)
-						api.sendMessage("Error occured", event.threadID, event.messageID)
+						api.sendMessage("Error occured [Mention]", event.threadID, event.messageID)
 					}else{
 						let d = data[mention]
 						let gender = ""
@@ -64,7 +64,7 @@ module.exports = (api, body, event) => {
 					api.getUserInfo(parseInt(info[1]), (err, data) => {
 						if(err){
 							console.log(err)
-							api.sendMessage("Error occured", event.threadID, event.messageID)
+							api.sendMessage("Error occured [1]", event.threadID, event.messageID)
 						}else{
 							let d = data[info[1]]
 							let gender = ""
@@ -91,7 +91,7 @@ module.exports = (api, body, event) => {
 					api.getUserID(info[1], (err, obj) => {
 						if(err){
 							console.log(err)
-							api.sendMessage("Error occured", event.threadID, event.messageID)
+							api.sendMessage("Error occured [2]", event.threadID, event.messageID)
 						}else{
 							api.getUserInfo(obj[0].userID, (err, data) => {
 								let d = data[obj[0].userID]
