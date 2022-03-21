@@ -7,6 +7,7 @@ const login = require("fca-unofficial")
 
 const filter = require("./script/filter")
 const info = require("./script/info")
+const karaoke = require("./script/karaoke")
 const morse = require("./script/morse")
 const music = require("./script/music")
 const quote = require("./script/quote")
@@ -166,7 +167,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(mess.startsWith("~Bot: Deactivate ") && vip.includes(event.threadID)){
 							let d = x.split(" ")
 							threads += d[2] + "/"
-							fs.writeFileSync("thread.txt", threads, "utf-8")
+							fs.writeFileSync("txt/thread.txt", threads, "utf-8")
 							api.getThreadInfo(d[2], (err, data) => {
 								api.sendMessage("Added to off list:\nID: " + d[3] + "\nThread name: " + data.threadName, gc)
 								console.log(data)
@@ -174,12 +175,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(mess.startsWith("~Bot: Activate ") && !x.includes("here")){
 							let l = x.split(" ")
 							threads = threads.replace(l[2] + "/", "")
-							fs.writeFileSync("thread.txt", threads, "utf-8")
+							fs.writeFileSync("txt/thread.txt", threads, "utf-8")
 							api.sendMessage("Unlocked thread ID: " + l[2], event.threadID, event.messageID)
 						}else if(mess.startsWith("~Bot: Sleep") && !threads.includes(event.threadID)){
 							if(event.threadID != gc){
 								threads += event.threadID + "/"
-								fs.writeFileSync("thread.txt", threads, "utf-8")
+								fs.writeFileSync("txt/thread.txt", threads, "utf-8")
 								api.sendMessage({
 								  body:"Good night guys",
 								  attachment: fs.createReadStream(__dirname + "/sleep.gif")
@@ -191,7 +192,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 						}else if(mess.startsWith("~Bot: Wake-up") && threads.includes(event.threadID)){
 							threads = threads.replace(event.threadID + "/", "")
-							fs.writeFileSync("thread.txt", threads, "utf-8")
+							fs.writeFileSync("txt/thread.txt", threads, "utf-8")
 							api.getThreadInfo(event.threadID, (err, data) => {
 								if(err){
 									console.log(err)
@@ -215,6 +216,13 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									if(!fs.existsSync(__dirname + "/song.mp3")){
 										let file = fs.createWriteStream(__dirname + "/song.mp3")
 										music(api, mess, event, file)
+									}else{
+										api.sendMessage("Lemme finish first the earlier request", event.threadID, event.messageID)
+									}
+								}else if(x.startsWith(prefix + "karaoke")){
+									if(!fs.existsSync(__dirname + "/karaoke.mp4")){
+										let file = fs.createWriteStream(__dirname + "/karaoke.mp4")
+										karaoke(api, mess, event, file)
 									}else{
 										api.sendMessage("Lemme finish first the earlier request", event.threadID, event.messageID)
 									}
@@ -526,14 +534,14 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					}
 					if(mess.startsWith("~Bot: Deactivate") && !threads.includes(d[2])){
 						threads += d[2] + "/"
-						fs.writeFileSync("thread.txt", threads, "utf-8")
+						fs.writeFileSync("txt/thread.txt", threads, "utf-8")
 						api.getThreadInfo(parseInt(d[2]), (err, data) => {
 								api.sendMessage("Added to off list:\nID: " + d[2] + "\nThread name: " + data.threadName, gc)
 								console.log(d[2])
 						})
 					}else if(mess.startsWith("~Bot: Activate") && threads.includes(d[2])){
 						threads = threads.replace(d[2] + "/", "")
-						fs.writeFileSync("thread.txt", threads, "utf-8")
+						fs.writeFileSync("txt/thread.txt", threads, "utf-8")
 						console.log(d[2])
 						api.getThreadInfo(parseInt(d[2]), (err, data) => {
 							api.sendMessage("Unlocked:\nThread ID: " + d[2] + "\nThread name: " + data.threadName, event.threadID, event.messageID)
