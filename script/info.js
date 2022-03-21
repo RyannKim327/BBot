@@ -62,7 +62,7 @@ module.exports = (api, body, event) => {
 					}
 				})
 			}else{
-				try{
+				if(isNaN(info[1])){
 					api.getUserInfo(parseInt(info[1]), (err, data) => {
 						if(err){
 							console.log(err)
@@ -89,7 +89,7 @@ module.exports = (api, body, event) => {
 							api.sendMessage(message, event.threadID, event.messageID)
 						}
 					})
-				}catch(e){
+				}else{
 					api.getUserID(info[1], (err, obj) => {
 						if(err){
 							console.log(err)
