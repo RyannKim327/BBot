@@ -24,9 +24,9 @@ const bang = (api, event) => {
 					id: event.senderID
 				}],
 				attachment: [
-					fs.createReadStream(__dirname + "/img/b1.gif"),
-					fs.createReadStream(__dirname + "/img/b2.gif"),
-					fs.createReadStream(__dirname + "/img/b3.gif")
+					fs.createReadStream(__dirname + "/../img/b1.gif"),
+					fs.createReadStream(__dirname + "/../img/b2.gif"),
+					fs.createReadStream(__dirname + "/../img/b3.gif")
 				]
 			}, event.threadID, event.messageID)
 		}
@@ -37,7 +37,7 @@ const kolai = (api, event) => {
 	api.getThreadInfo(event.threadID, (err, data) => {
 		api.sendMessage({
 			body: `Kulay command executed to ${data.threadName}`,
-			attachment: fs.createReadStream(__dirname + "/img/kolai.gif")
+			attachment: fs.createReadStream(__dirname + "/../img/kolai.gif")
 		}, event.threadID)
 	})
 }
