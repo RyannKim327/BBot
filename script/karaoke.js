@@ -51,7 +51,7 @@ async function dl(x){
 	return r
 }
 
-module.exports = (api, body, event, file) => {
+module.exports = async (api, body, event, file) => {
 	let xpl = body.split(" ")
 	xpl.shift()
 	let d = xpl.join(" ").replace(/[^\w\s]+/gi, "")
