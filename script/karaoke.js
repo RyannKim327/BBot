@@ -79,7 +79,7 @@ module.exports = async (api, body, event, file) => {
 			const info = await ytdl.getInfo(url)
 			//api.sendMessage("A moment please", event.threadID, event.messageID)
 			if(m.content[0].duration <= ((20 * 60) * 1000)){
-				ffmpegs(strm).audioBitrate(128).save(`${__dirname}/../karaoke.mp4`).on("end", async () => {
+				ffmpegs(strm).audioBitrate(64).save(`${__dirname}/../karaoke.mp4`).on("end", async () => {
 					api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 					api.sendMessage({
 						//body: "Here is your request\n\nSong Title: " + info.videoDetails.title + "\nUploaded by: " + info.videoDetails.author.name,
@@ -89,9 +89,10 @@ module.exports = async (api, body, event, file) => {
 								fs.unlink(`${__dirname}/../karaoke.mp4`, (err) => {
 									if(err){
 										console.log(err)
+									}else{
+										console.log("Done")
+										api.setMessageReaction("✔", event.messageID, (err) => {}, true)
 									}
-									console.log("Done")
-									api.setMessageReaction("✔", event.messageID, (err) => {}, true)
 								})
 							}
 						})
