@@ -279,9 +279,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 										}
 									}
 								}else if(x.startsWith(prefix + "music")){
-									if(musics){
-										musics = false
-										musics = music(api, mess, event)
+									if(fs.existsSync(__dirname + "song.mp3")){
+										let file = fs.createWriteStream(__dirname + "song.mp3")
+										music(api, mess, event, file)
 									}else{
 										api.sendMessage("Lemme finish first the earlier request", event.threadID, event.messageID)
 									}
@@ -518,11 +518,11 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				if(event.body != undefined){
 					if(x.startsWith(prefix) && (gc.includes(event.threadID) || vip.includes(event.senderID))){
 						let least = event.messageReply.body
-						let data = least.match(/^Thread\sID:\s([0-9]+)/)
+						let regex = least.match(/^Thread\sID:\s([0-9]+)/)
 						if(x.startsWith(prefix + "say")){
 							let xpl = mess.split(" ")
 							xpl.shift()
-							api.sendMessage(xpl.join(" "), data[1])
+							api.sendMessage(xpl.join(" "), regex[1])
 							api.getThreadInfo(data[1], (err, dat) => {
 								api.sendMessage(`Message sent to ${dat.threadName}`, event.threadID, event.messageID)
 							})
