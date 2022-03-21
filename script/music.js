@@ -52,7 +52,7 @@ async function dl(x){
 	return r
 }
 
-module.exports = (api, body, event) => {
+module.exports = async (api, body, event) => {
 	let d = body.split(" ")
 	if(x.includes("https://m.youtube.com") || x.includes("https://youtu.be") || x.includes("https://youtube.com") || x.includes("https://www.youtube.com")){
 		let s = dl(d[1])
