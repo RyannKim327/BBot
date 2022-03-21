@@ -32,7 +32,7 @@ module.exports = (api, body, event) => {
 		let info = body.split(" ")
 		if(info.length > 0){
 			try{
-				let mention = Object.keys(event,mentions)[0]
+				let mention = Object.keys(event.mentions)[0]
 				api.getUserInfo(mention, (err, data) => {
 					if(err){
 						console.log(err)
@@ -67,7 +67,7 @@ module.exports = (api, body, event) => {
 							api.sendMessage("Error occured", event.threadID, event.messageID)
 						}else{
 							api.getUserInfo(obj.userID, (err, data) => {
-								let d = data[mention]
+								let d = data[obj.userID]
 								let gender = ""
 								switch(d.gender){
 									case 1:
