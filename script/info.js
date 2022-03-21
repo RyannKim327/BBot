@@ -20,7 +20,7 @@ module.exports = (api, body, event) => {
 						gender = "Custom"
 				}
 				message += "Name: " + d.name + "\n"
-				if(d.vanity != undefined){
+				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 					message += "Username: " + d.vanity + "\n"
 				}
 				message += "Gender: " + gender + "\n"
@@ -51,7 +51,7 @@ module.exports = (api, body, event) => {
 								gender = "Custom"
 						}
 						message += "Name: " + d.name + "\n"
-						if(d.vanity != undefined){
+						if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 							message += "Username: " + d.vanity + "\n"	
 						}
 						message += "Gender: " + gender + "\n"
@@ -60,7 +60,34 @@ module.exports = (api, body, event) => {
 					}
 				})
 			}catch(e){
-				if(!isNaN(info[1])){
+				try{
+					api.getUserInfo(parseInt(info[1]), (err, data) => {
+						if(err){
+							console.log(err)
+							api.sendMessage("Error occured", event.threadID, event.messageID)
+						}else{
+							let d = data[info[1]]
+							let gender = ""
+							switch(d.gender){
+								case 1:
+									gender = "Female"
+								break
+								case 2:
+									gender = "Male"
+								break
+								default:
+									gender = "Custom"
+							}
+							message += "Name: " + d.name + "\n"
+							if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
+								message += "Username: " + d.vanity + "\n"	
+							}
+							message += "Gender: " + gender + "\n"
+							message += "Profile Link: " + d.profileUrl
+							api.sendMessage(message, event.threadID, event.messageID)
+						}
+					})
+				}catch(e){
 					api.getUserID(info[1], (err, obj) => {
 						if(err){
 							console.log(err)
@@ -80,40 +107,13 @@ module.exports = (api, body, event) => {
 										gender = "Custom"
 								}
 								message += "Name: " + d.name + "\n"
-								if(d.vanity != undefined){
+								if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 									message += "Username: " + d.vanity + "\n"	
 								}
 								message += "Gender: " + gender + "\n"
 								message += "Profile Link: " + d.profileUrl
 								api.sendMessage(message, event.threadID, event.messageID)
 							})
-						}
-					})
-				}else{
-					api.getUserInfo(info[1], (err, data) => {
-						if(err){
-							console.log(err)
-							api.sendMessage("Error occured", event.threadID, event.messageID)
-						}else{
-							let d = data[info[1]]
-							let gender = ""
-							switch(d.gender){
-								case 1:
-									gender = "Female"
-								break
-								case 2:
-									gender = "Male"
-								break
-								default:
-									gender = "Custom"
-							}
-							message += "Name: " + d.name + "\n"
-							if(d.vanity != undefined){
-								message += "Username: " + d.vanity + "\n"	
-							}
-							message += "Gender: " + gender + "\n"
-							message += "Profile Link: " + d.profileUrl
-							api.sendMessage(message, event.threadID, event.messageID)
 						}
 					})
 				}
