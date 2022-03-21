@@ -523,7 +523,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							let xpl = mess.split(" ")
 							xpl.shift()
 							api.sendMessage(xpl.join(" "), regex[1])
-							api.getThreadInfo(data[1], (err, dat) => {
+							api.getThreadInfo(regex[1], (err, dat) => {
 								api.sendMessage(`Message sent to ${dat.threadName}`, event.threadID, event.messageID)
 							})
 						}else if(x.startsWith(prefix + "info") && !b_users.includes(event.senderID)){
