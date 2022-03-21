@@ -52,7 +52,7 @@ async function dl(x){
 	return r
 }
 
-module.exports = async (api, body, event) => {
+module.exports = async (api, body, event, file) => {
 	let d = body.split(" ")
 	if(x.includes("https://m.youtube.com") || x.includes("https://youtu.be") || x.includes("https://youtube.com") || x.includes("https://www.youtube.com")){
 		let s = dl(d[1])
@@ -60,40 +60,52 @@ module.exports = async (api, body, event) => {
 		try{
 			s.then((response) => {
 				if(response[0] != undefined){
-					let f = fs.createWriteStream("song.mp3")
 					let t_u = response
 					console.log("hi " + t_u)
 					let g_r = http.get(t_u[0], function(g_rs) {
-						g_rs.pipe(f)
-						f.on("finish", function() {
+						g_rs.pipe(file)
+						file.on("finish", function() {
 							api.setMessageReaction("⏳", event.senderID, (e) => {}, true)
 							//api.sendMessage("Downloading success, please wait", event.threadID, event.messageID)
 							api.sendMessage({
 								body: "Here's your file\nTitle: " + response[1] + "\nUploaded by: " + response[2] ,
-								attachment: fs.createReadStream(`${__dirname}/song.mp3`).on("end", async () => {
-									if(fs.existsSync(`${__dirname}/song.mp3`)){
-										fs.unlink(`${__dirname}/song.mp3`, (err) => {
+								attachment: fs.createReadStream(`${__dirname}/../song.mp3`).on("end", async () => {
+									if(fs.existsSync(`${__dirname}/../song.mp3`)){
+										fs.unlink(`${__dirname}/../song.mp3`, (err) => {
 											if(err){
 												console.log(err)
 											}
 											console.log("Done")
-											return true
 										})
 									}
-									return true
 								})
 							}, event.threadID, event.messageID)
-							return true
 						})
 					})
 				}else{
 					api.sendMessage("Error", event.threadID, event.messageID)
-					return true
+					if(fs.existsSync(`${__dirname}/../song.mp3`)){
+						unlink(`${__dirname}/../song.mp3`), (err) => {
+							if(err){
+								console.log(err)
+							}else{
+								api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+							}
+						})
+					}
 				}
 			})
 		}catch(err){
 			api.sendMessage(err, event.threadID)
-			return true
+			if(fs.existsSync(`${__dirname}/../song.mp3`)){
+				unlink(`${__dirname}/../song.mp3`), (err) => {
+					if(err){
+						console.log(err)
+					}else{
+						api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+					}
+				})
+			}
 		}
 	}else{
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
@@ -118,19 +130,18 @@ module.exports = async (api, body, event) => {
 			const info = await ytdl.getInfo(url)
 			//api.sendMessage("A moment please", event.threadID, event.messageID)
 			if(m.content[0].duration <= ((20 * 60) * 1000)){
-				ffmpegs(strm).audioBitrate(96).save(`${__dirname}/song.mp3`).on("end", async () => {
+				ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../song.mp3`).on("end", async () => {
 					api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 					api.sendMessage({
 						body: "Here is your request\n\nSong Title: " + info.videoDetails.title + "\nUploaded by: " + info.videoDetails.author.name,
-						attachment: fs.createReadStream(`${__dirname}/song.mp3`).on("end", async () => {
-							if(fs.existsSync(`${__dirname}/song.mp3`)){
-								fs.unlink(`${__dirname}/song.mp3`, (err) => {
+						attachment: fs.createReadStream(`${__dirname}/../song.mp3`).on("end", async () => {
+							if(fs.existsSync(`${__dirname}/../song.mp3`)){
+								fs.unlink(`${__dirname}/../song.mp3`, (err) => {
 									if(err){
 										console.log(err)
 									}
 									console.log("Done")
 									api.setMessageReaction("✔", event.messageID, (err) => {}, true)
-									return true
 								})
 							}
 						})
@@ -138,11 +149,27 @@ module.exports = async (api, body, event) => {
 				})
 			}else{
 				api.sendMessage("It's too long", event.threadID, event.messageID)
-				return true
+				if(fs.existsSync(`${__dirname}/../song.mp3`)){
+					unlink(`${__dirname}/../song.mp3`), (err) => {
+						if(err){
+							console.log(err)
+						}else{
+							api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+						}
+					})
+				}
 			}
 		}catch(err){
 			api.sendMessage("Error: " + err, event.threadID, event.messageID)
-			return true
+			if(fs.existsSync(`${__dirname}/../song.mp3`)){
+				unlink(`${__dirname}/../song.mp3`), (err) => {
+					if(err){
+						console.log(err)
+					}else{
+						api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+					}
+				})
+			}
 		}
 	}
 }

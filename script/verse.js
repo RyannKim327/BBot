@@ -33,7 +33,7 @@ module.exports = (api, body, event) => {
 		let result = ""
 		let total = r.length
 		for(let i = 0; i < total; i++){
-			result += "[ " + response[i].bookname + " " + response[i].chapter + ":" + response[i].verse + " ]\n" + response[i].text + "\n\n"
+			result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + response[i].text + "\n\n"
 		}
 		api.sendMessage(result, event.threadID, event.messageID)
 	})
