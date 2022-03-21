@@ -93,8 +93,8 @@ module.exports = (api, body, event) => {
 							console.log(err)
 							api.sendMessage("Error occured", event.threadID, event.messageID)
 						}else{
-							api.getUserInfo(obj.userID, (err, data) => {
-								let d = data[obj.userID]
+							api.getUserInfo(obj[0].userID, (err, data) => {
+								let d = data[obj[0].userID]
 								let gender = ""
 								switch(d.gender){
 									case 1:
