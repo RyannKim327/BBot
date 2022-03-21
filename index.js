@@ -279,8 +279,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 										}
 									}
 								}else if(x.startsWith(prefix + "music")){
-									if(!fs.existsSync(__dirname + "song.mp3")){
-										let file = fs.createWriteStream(__dirname + "song.mp3")
+									if(!fs.existsSync(__dirname + "/song.mp3")){
+										let file = fs.createWriteStream(__dirname + "/song.mp3")
 										music(api, mess, event, file)
 									}else{
 										api.sendMessage("Lemme finish first the earlier request", event.threadID, event.messageID)
