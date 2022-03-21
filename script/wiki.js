@@ -11,7 +11,7 @@ async function getWiki(q) {
 	return out
 }
 
-module.exports = (api, body, event) => {
+module.exports = async (api, body, event) => {
 	let d = body.split(" ")
 	try{
 		d.shift()
