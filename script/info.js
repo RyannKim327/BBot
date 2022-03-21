@@ -60,7 +60,7 @@ module.exports = (api, body, event) => {
 					}
 				})
 			}catch(e){
-				if(isNaN(info[1])){
+				if(!isNaN(info[1])){
 					api.getUserID(info[1], (err, obj) => {
 						if(err){
 							console.log(err)
