@@ -6,6 +6,7 @@ const axios = require("axios")
 const login = require("fca-unofficial")
 
 const filter = require("./script/filter")
+const info = require("./script/info")
 const morse = require("./script/morse")
 const music = require("./script/music")
 const quote = require("./script/quote")
@@ -209,78 +210,10 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								if(x.startsWith(prefix + "motivate")){
 									quote(api, x, event)
 								}else if(x.startsWith(prefix + "info")){
-									if(y.length <= 1){
-										api.sendMessage(fs.readFileSync("txt/abt.txt", "utf-8"), event.threadID, event.messageID)
-									}else{
-										let sp = mess.split(" ")
-										sp.shift()
-										let z = y.join(" ")
-										console.log("911")
-										console.log(event.mentions.data)
-										if(isNaN(z)){
-											api.getUserID(z, (err, data) => {
-												if(err){
-													console.log(err)
-												}else{
-													let ID = data.userID
-													api.getUserInfo(data.userID, (err, data) => {
-														if(err){
-															console.log(err)
-														}else{
-															let name = data[ID]
-															let info = "Name: " + name.name + "\n"
-															if(name.vanity != undefined){
-																info += "Username: " + name.vanity + "\n"
-															}
-															switch(name.gender){
-																case 1:
-																	info += "Gender: Female"
-																break
-																case 2:
-																	info += "Gender: Male"
-																break
-																default:
-																	info += "Gender: Custom"
-															}
-															info += "\nProfile Url: " + name.profileUrl
-															api.sendMessage(info, event.threadID, event.messageID)
-														}
-													})
-												}
-											})
-											
-											/*
-										}else if(event.mentions.length > 0){
-											api.sendMessage("hi", gc)*/
-										}else{
-											api.getUserInfo(sp[0], (err, data) => {
-												if(err){
-													console.log(err)
-												}else{
-													let name = data[z]
-													let info = "Name: " + name.name + "\n"
-													if(name.vanity != undefined){
-														info += "Username: " + name.vanity + "\n"
-													}
-													switch(name.gender){
-														case 1:
-															info += "Gender: Female"
-														break
-														case 2:
-															info += "Gender: Male"
-														break
-														default:
-															info += "Gender: Custom"
-													}
-													info += "\nProfile Url: " + name.profileUrl
-													api.sendMessage(info, event.threadID, event.messageID)
-												}
-											})
-										}
-									}
+									info(api, mess, event)
 								}else if(x.startsWith(prefix + "music")){
 									if(!fs.existsSync(__dirname + "/song.mp3")){
-										let file = fs.createWriteStream(__dirname + "/song.mp3")
+										let file = fs.createWriteStream(__dirname + "song.mp3")
 										music(api, mess, event, file)
 									}else{
 										api.sendMessage("Lemme finish first the earlier request", event.threadID, event.messageID)
@@ -527,33 +460,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								api.sendMessage(`Message sent to ${dat.threadName}`, event.threadID, event.messageID)
 							})
 						}else if(x.startsWith(prefix + "info") && !b_users.includes(event.senderID)){
-							api.getUserInfo(parseInt(event.messageReply.senderID),  (err, data) => {
-								if(err){
-									console.log(err)
-								}else{
-									let gender = ""
-									switch(data[event.messageReply.senderID]['gender']){
-										case 1:
-											gender = "Female"
-										break
-										case 2:
-											gender = "Male"
-										break
-										default:
-											gender = "Custom"
-									}
-									let message = "Name: " + data[event.messageReply.senderID]['name'] + "\n"
-									if(data[event.messageReply.senderID]['vanity'] != undefined){
-										info += "Username: " + data[event.messageReply.senderID]['vanity'] + "\n"
-									}
-									message += "Gender: " + gender + "\n"
-									if(data[event.messageReply.senderID]['nickname'] != undefined){
-										message += data[event.messageReply.senderID]['nickname']
-									}
-									message += "Profile Link: " + data[event.messageReply.senderID]['profileUrl']
-									api.sendMessage(message, event.threadID, event.messageID)
-								}
-							})
+							info(api, mess, event)
 						}
 					}else if(!selves.includes(event.senderID) && vip.includes(event.messageReply.senderID) && (x.includes("salamat") || x.includes("thank") || x.includes("tnx"))){
 						api.setMessageReaction("😻", event.messageID, (err) => {}, true)
