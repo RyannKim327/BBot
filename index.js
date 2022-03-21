@@ -183,7 +183,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								fs.writeFileSync("txt/thread.txt", threads, "utf-8")
 								api.sendMessage({
 								  body:"Good night guys",
-								  attachment: fs.createReadStream(__dirname + "/sleep.gif")
+								  attachment: fs.createReadStream(__dirname + "/img/sleep.gif")
 								}, event.threadID)
 								api.getThreadInfo(event.threadID, (err, data) => {
 									api.sendMessage("Added to off list:\nID: " + event.threadID + "\nThread name: " + data.threadName, gc)
@@ -260,7 +260,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 										api.setMessageReaction("😥", event.mesaageID, () => {}, true)
 										api.sendMessage({
 											body: "Kawawa naman",
-											attachment: fs.createReadStream(__dirname + "/edamage.jpg")
+											attachment: fs.createReadStream(__dirname + "/img/edamage.jpg")
 										}, event.threadID, event.mesaageID)
 									}else if(!selves.includes(event.senderID) && (y[z] == "kain" && (!x.includes("ka na") || !x.includes("kana")))){
 										api.getUserInfo(event.senderID, (err, data) => {
@@ -292,7 +292,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 										})
 									}else if((x.includes("suggest") || x.includes("suggestion") || x.includes("recommend"))){
 										if((x.includes("capstone") || x.includes("thesis") || x.includes("research")) && (x.includes("title"))){
-											api.sendMessage(fs.readFileSync("capstone.txt", "utf-8"), event.threadID, event.messageID)
+											api.sendMessage(fs.readFileSync("txt/capstone.txt", "utf-8"), event.threadID, event.messageID)
 										}
 									}else if( (x.includes("mahal kita") || x.includes("love you") || x.includes("i love")) && (x.includes("bot") || x.includes("bhiebot") || x.includes("bhie bot"))){
 										api.setMessageReaction("🤣", event.messageID, (err) => {}, true)
@@ -310,12 +310,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 										if(x.includes("april")){
 											api.sendMessage({
 												body: "Oo ang cute ni April, lalo na dito",
-												attachment: fs.createReadStream(__dirname + "/april.jpg")
+												attachment: fs.createReadStream(__dirname + "/img/april.jpg")
 											}, event.threadID, event.messageID)
 										}else if(cute.includes(event.senderID) && (x.includes("ako") || x.includes("ko"))){
 											api.sendMessage({
 												body: "Oo, ang cute mo dito.",
-												attachment: fs.createReadStream(__dirname + "/april.jpg")
+												attachment: fs.createReadStream(__dirname + "/img/april.jpg")
 											}, event.threadID, event.messageID)
 										}else if(x.includes("rheign kimmy") || x.includes("kimmy") || x.includes("rheign") || x.includes("ulan")){
 											api.sendMessage("Oo naman yes, walang duda kids can tell", event.threadID, event.messageID)
@@ -443,7 +443,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 												tag: `@${name.firstName}`,
 												id: event.senderID
 											}],
-											attachment: fs.createReadStream(__dirname + "/goodnight.gif")
+											attachment: fs.createReadStream(__dirname + "/img/goodnight.gif")
 										}, event.threadID, event.messageID)
 									}
 								})
