@@ -85,7 +85,7 @@ module.exports = async (api, body, event, file) => {
 				}else{
 					api.sendMessage("Error", event.threadID, event.messageID)
 					if(fs.existsSync(`${__dirname}/../song.mp3`)){
-						fs.unlink(`${__dirname}/../song.mp3`), (err) => {
+						fs.unlink(`${__dirname}/../song.mp3`, (err) => {
 							if(err){
 								console.log(err)
 							}else{
@@ -98,7 +98,7 @@ module.exports = async (api, body, event, file) => {
 		}catch(err){
 			api.sendMessage(err, event.threadID)
 			if(fs.existsSync(`${__dirname}/../song.mp3`)){
-				fs unlink(`${__dirname}/../song.mp3`), (err) => {
+				fs unlink(`${__dirname}/../song.mp3`, (err) => {
 					if(err){
 						console.log(err)
 					}else{
@@ -150,7 +150,7 @@ module.exports = async (api, body, event, file) => {
 			}else{
 				api.sendMessage("It's too long", event.threadID, event.messageID)
 				if(fs.existsSync(`${__dirname}/../song.mp3`)){
-					fs.unlink(`${__dirname}/../song.mp3`), (err) => {
+					fs.unlink(`${__dirname}/../song.mp3`, (err) => {
 						if(err){
 							console.log(err)
 						}else{
@@ -162,7 +162,7 @@ module.exports = async (api, body, event, file) => {
 		}catch(err){
 			api.sendMessage("Error: " + err, event.threadID, event.messageID)
 			if(fs.existsSync(`${__dirname}/../song.mp3`)){
-				fs.unlink(`${__dirname}/../song.mp3`), (err) => {
+				fs.unlink(`${__dirname}/../song.mp3`, (err) => {
 					if(err){
 						console.log(err)
 					}else{
