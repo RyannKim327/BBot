@@ -45,7 +45,14 @@ function empty(str, condition){
 }
 
 module.exports = (api, body, event) => {
-	let x = body.toLowerCase()
-	const data = x.match(/^√morse\s([to|from]+)\s([\W\w]+)/)
-	api.sendMessage(empty(data[2].replace(/^\r\n/, " "), data[1]), event.threadID, event.messageID)
+	if(event.type == "message_reply"){
+		let rBody = event.messageReply.body
+		let x = rBody.toLowerCase()
+		const data = x.match(/^√morse\s([to|from]+)/)
+		api.sendMessage(empty(x, data[1]), event.threadID, event.messageID)
+	}else{
+		let x = body.toLowerCase()
+		const data = x.match(/^√morse\s([to|from]+)\s([\W\w]+)/)
+		api.sendMessage(empty(data[2].replace(/^\r\n/, " "), data[1]), event.threadID, event.messageID)
+	}
 }
