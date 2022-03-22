@@ -86,7 +86,7 @@ module.exports = async (api, body, event, file) => {
 						//body: "Here is your request\n\nSong Title: " + info.videoDetails.title + "\nUploaded by: " + info.videoDetails.author.name,
 						body: "Song Request",
 						attachment: fs.createReadStream(`${__dirname}/../karaoke.mp4`).on("end", async () => {
-							/*if(fs.existsSync(`${__dirname}/../karaoke.mp4`)){
+							if(fs.existsSync(`${__dirname}/../karaoke.mp4`)){
 								fs.unlink(`${__dirname}/../karaoke.mp4`, (err) => {
 									if(err){
 										console.log(err)
@@ -103,9 +103,21 @@ module.exports = async (api, body, event, file) => {
 					res.pipe(file)
 					file.on("finish", () => {
 						try{
+							api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 							api.sendMessage({
 								body: "",
-								attachment: fs.createReadStrram(__dirname + "/../karaoke.mp4")
+								attachment: fs.createReadStrram(__dirname + "/../karaoke.mp4").on("end", async () => {
+									if(fs.existsSync(`${__dirname}/../karaoke.mp4`)){
+										fs.unlink(`${__dirname}/../karaoke.mp4`, (err) => {
+											if(err){
+												console.log(err)
+											}else{
+													console.log("Done")
+												api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+											}
+										})
+									}
+								})
 							}, event.threadID, event.messageID)
 						}catch(e){
 							api.sendMessage(e, event.threadID, event.messageID)
