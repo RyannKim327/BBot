@@ -69,6 +69,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				console.log(err)
 			}
 		})
+		console.log("Data: " + event)
 		//api.handleMessageRequests(
 		let gc_admin = []
 		api.getThreadInfo(event.threadID, (err, data) => {
