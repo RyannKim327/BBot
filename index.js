@@ -469,7 +469,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							})
 						}else if(x.startsWith(prefix + "info") && !b_users.includes(event.senderID)){
 							info(api, mess, event)
-						}else if(x startsWith(prefix + "morse")){
+						}else if(x.startsWith(prefix + "morse") && !b_users.includes(event.senderID)){
 							morse(api, x, event)
 						}
 					}else if(!selves.includes(event.senderID) && vip.includes(event.messageReply.senderID) && (x.includes("salamat") || x.includes("thank") || x.includes("tnx"))){
@@ -486,18 +486,18 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						api.setMessageReaction("😥", event.mesaageID, () => {}, true)
 						api.sendMessage({
 								body: "Kawawa naman",
-								attachment: fs.createReadStream(__dirname + "/edamage.jpg")
+								attachment: fs.createReadStream(__dirname + "/img/edamage.jpg")
 						}, event.threadID, event.messageReply.messageID)
 					}else if(4699051006857054 != event.threadID && !selves.includes(event.senderID) && (x.includes("cute") || x.includes("kyot")) && !x.includes("execute")){
 						if(x.includes("april")){
 							api.sendMessage({
 								body: "Oo ang cute ni April, lalo na dito",
-								attachment: fs.createReadStream(__dirname + "/april.jpg")
+								attachment: fs.createReadStream(__dirname + "/img/april.jpg")
 							}, event.threadID, event.messageID)
 						}else if(cute.includes(event.senderID) && (x.includes("ako") || x.includes("ko"))){
 							api.sendMessage({
 								body: "Oo, ang cute mo dito.",
-								attachment: fs.createReadStream(__dirname + "/april.jpg")
+								attachment: fs.createReadStream(__dirname + "/img/april.jpg")
 							}, event.threadID, event.messageID)
 						}else if(x.includes("rheign kimmy") || x.includes("kimmy") || x.includes("rheign") || x.includes("ulan")){
 							api.sendMessage("Oo naman yes, walang duda kids can tell", event.threadID, event.messageID)
