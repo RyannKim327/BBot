@@ -1,6 +1,6 @@
 const fs = require("fs")
 const axios = require("axios")
-
+const http = require("https")
 
 async function whatIs(x){
 	let o = await axios.get("https://api.dictionaryapi.dev/api/v2/entries/en/" + x).then((response) => {
