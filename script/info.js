@@ -49,7 +49,7 @@ module.exports = async (api, body, event) => {
 		}else{
 			if(Object.keys(event.mentions).length > 0){
 				let mention = Object.keys(event.mentions)[0]
-				api.getUserInfo(mention, (err, data) => {
+				api.getUserInfo(mention, async (err, data) => {
 					if(err){
 						console.log(err)
 						api.sendMessage("Error occured [Mention]", event.threadID, event.messageID)
@@ -88,7 +88,7 @@ module.exports = async (api, body, event) => {
 				})
 			}else{
 				if(!isNaN(info[1])){
-					api.getUserInfo(parseInt(info[1]), (err, data) => {
+					api.getUserInfo(parseInt(info[1]), async (err, data) => {
 						if(err){
 							console.log(err)
 							api.sendMessage("Error occured. either not found, deleted or deactivated.", event.threadID, event.messageID)
@@ -131,7 +131,7 @@ module.exports = async (api, body, event) => {
 							console.log(err)
 							api.sendMessage("Error occured, either not found, deleted or deactivated", event.threadID, event.messageID)
 						}else{
-							api.getUserInfo(obj[0].userID, (err, data) => {
+							api.getUserInfo(obj[0].userID, async (err, data) => {
 								let d = data[obj[0].userID]
 								let gender = ""
 								switch(d.gender){
