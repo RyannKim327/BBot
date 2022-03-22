@@ -69,6 +69,17 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			}
 		})
 		//api.handleMessageRequests(
+		let gc_admin = []
+		api.getThreadInfo(event.threadID, (err, data) => {
+			if(err){
+				console.log(err)
+			}else{
+				let list = data.adminIDs
+				for(let i = 0; i < list.length; i++){
+					gc_admin.push(list[i].id)
+				}
+			}
+		})
 		switch(event.type){
 			case "message":
 				if(event.body != null){
@@ -201,6 +212,22 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}
 							})
 							api.sendMessage("Good Day guys", event.threadID)
+						}
+					}
+					if(gc_admin.includes(event.senderID){
+						if(mess.startsWith("~Bot: Sleep")){
+							if(event.threadID != gc){
+								threads += event.threadID + "/"
+								fs.writeFileSync("txt/thread.txt", threads, "utf-8")
+								api.sendMessage({
+								  body:"Good night guys",
+								  attachment: fs.createReadStream(__dirname + "/img/sleep.gif")
+								}, event.threadID)
+								api.getThreadInfo(event.threadID, (err, data) => {
+									api.sendMessage("Added to off list:\nID: " + event.threadID + "\nThread name: " + data.threadName, gc)
+									console.log(data)
+								})
+							}
 						}
 					}
 					if(onBot && !b_users.includes(event.senderID) && !(threads.includes(event.threadID))){
