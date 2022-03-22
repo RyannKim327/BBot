@@ -19,7 +19,7 @@ catch(e){
 module.exports = async (api, body, event) => {
 	let message = ""
 	if(event.type == "message_reply"){
-		api.getUserInfo(event.messageReply.senderID, (err, data) => {
+		api.getUserInfo(event.messageReply.senderID, async (err, data) => {
 			if(err){
 				console.log(err)
 				api.sendMessage("Error occured", event.threadID, event.messageID)
