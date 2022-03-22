@@ -35,9 +35,9 @@ module.exports = async (api, body, event) => {
 						console.log(f)
 						api.sendMessage({
 							body: "",
-							attachment: fs.createReadStream(__dirname + "/wiki.png").on("end", async () => {
-								if(fs.existsSync(__dirname + "/wiki.png")){
-									fs.unlink(__dirname + "/wiki.png", (err) => {
+							attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", async () => {
+								if(fs.existsSync(__dirname + "/../wiki.png")){
+									fs.unlink(__dirname + "/../wiki.png", (err) => {
 										if(err){
 											console.log("error " + err)
 										}else{

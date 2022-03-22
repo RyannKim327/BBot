@@ -7,7 +7,7 @@ module.exports = (api, body, event) => {
 	xpl.shift()
 	let data = "http://api.qrserver.com/v1/create-qr-code/?150x150&data=" + xpl.join(" ")
 	let f = fs.createWriteStream("qr.jpg")
-	http.get(data, (r) => {
+	let res = http.get(data, (r) => {
 		r.pipe(f)
 		f.on("finish", () => {
 			api.sendMessage({

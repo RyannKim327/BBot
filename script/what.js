@@ -59,9 +59,9 @@ module.exports = (api, body, event) => {
 						f.on("finish", (err) => {
 							api.sendMessage({
 								body: r,
-								attachment: fs.createReadStream(__dirname + "/whatis.mp3").on("end", async () => {
-									if(fs.existsSync(__dirname + "/whatis.mp3")){
-										fs.unlink(__dirname + "/whatis.mp3", (err) => {
+								attachment: fs.createReadStream(__dirname + "/../whatis.mp3").on("end", async () => {
+									if(fs.existsSync(__dirname + "/  /whatis.mp3")){
+										fs.unlink(__dirname + "/../whatis.mp3", (err) => {
 											if(err){
 												console.log(err)
 											}else{
