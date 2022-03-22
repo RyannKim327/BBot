@@ -37,7 +37,7 @@ module.exports = async (api, body, event) => {
 						gender = "Custom"
 				}
 				let f = fs.createWriteStream("dp.jpg")
-				let id = await tool.findUid(event.messageReply.body)
+				let id = await tool.findUid(d.userID || event.messageReply.body)
 				console.log(id)
 				message += "Name: " + d.name + "\n"
 				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
@@ -45,7 +45,8 @@ module.exports = async (api, body, event) => {
 				}
 				message += "Gender: " + gender + "\n"
 				message += "Profile Link: " + d.profileUrl
-				let req = request(encodeUrl(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(f).on("close", () => {
+				let req = request(encodeUrl(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(f)
+				f.on("close", () => {
 					api.sendMessage({
 						body: message,
 						attachment: fs.createReadStream(__dirname + "/dp.jpg").on("end", async () => {
