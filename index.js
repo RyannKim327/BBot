@@ -10,6 +10,7 @@ const info = require("./script/info")
 const karaoke = require("./script/karaoke")
 const morse = require("./script/morse")
 const music = require("./script/music")
+const qr = require("./script/qr")
 const quote = require("./script/quote")
 const specials = require("./script/specials")
 const verse = require("./script/verse")
@@ -80,6 +81,76 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				}
 			}
 		})
+		/*if(vip.includes(event.senderID) || gc.includes(event.threadID)){
+			let body = event.body
+			let low = body.toLowerCase()
+			threads = read()
+			if(body == "<< admin >>"){
+				api.sendMessage("Here are your commands:\n~Bot: Sleep\n~Bot: Wake-up\n~Bot: Toggle\n~Off\n~On\n~Bot: Activate [ID]\n~Bot: Deactivate [ID]", event.threadID)
+			}else if(body == "<< status >>"){
+				let m = "I'm active. "
+				if(onBot){
+					if(threads.includes(event.threadID)){
+						m += "But the bot wasn't alive to this thread"
+					}else{
+						m += "Also enabled."
+					}
+				}else{
+					m += "But on sleep mode"
+				}
+				api.sendMessage(m, event.threadID)
+			}else if(body == "<< off listed >>"){
+				let mm = fs.readFileSync("txt/thread.txt", "utf-8").split("/")
+				for (let i = mm.length - 1; i >= 0; i--) {
+					api.getThreadInfo(parseInt(mm[i]), (err, data) => {
+						if(err){
+							console.log(err)
+						}else{
+							api.sendMessage("Thread ID: " + mm[i] + "\nThread Name: " + data.threadName, event.threadID)
+						}
+					})
+				}
+			}else if(body == "<< toggle >>"){
+				onBot = !onBot
+				if(!gc.includes(event.threadID)){
+					api.sendMessage("The bot turned " + ((onBot) ? "on" : "off"), event.threadID)
+				}
+				api.sendMessage("The bot turned " + ((onBot) ? "on" : "off"), gc)
+			}else if(body == "<< sleep >>" && !threads.includes(event.threadID)){
+				if(event.threadID != gc){
+					threads += event.threadID + "/"
+					fs.writeFileSync("txt/thread.txt", threads, "utf-8")
+					api.sendMessage({
+						body:"Good night guys",
+							attachment: fs.createReadStream(__dirname + "/img/sleep.gif")
+					}, event.threadID)
+					api.getThreadInfo(event.threadID, (err, data) => {
+						api.sendMessage("Added to off list:\nID: " + event.threadID + "\nThread name: " + data.threadName, gc)
+							console.log(data)
+						})
+				}
+			}else if(body == "<< wake-up >>" && threads.includes(event.threadID)){
+				threads = threads.replace(event.threadID + "/", "")
+				fs.writeFileSync("txt/thread.txt", threads, "utf-8")
+				api.getThreadInfo(event.threadID, (err, data) => {
+					if(err){
+						console.log(err)
+					}else{
+						api.sendMessage("Activated bot to:\nThread ID:" + event.threadID + "\nThread Name: " + data.threadName, gc)
+					}
+				})
+				api.sendMessage("Good Day guys", event.threadID)
+			}else if(body.startsWith("<< deactivate: ") && body.endsWith(">>")){
+				let reg = body.match(/^<<\sdeactivate:\s[0-9]\s>>/)
+				let d = x.split(" ")
+				threads += reg[1] + "/"
+				fs.writeFileSync("txt/thread.txt", threads, "utf-8")
+				api.getThreadInfo(reg[1], (err, data) => {
+					api.sendMessage("Added to off list:\nID: " + reg[1] + "\nThread name: " + data.threadName, gc)
+					console.log(data)
+				})
+			}
+		}*/
 		switch(event.type){
 			case "message":
 				if(event.body != null){
@@ -265,6 +336,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									what(api, mess, event)
 								}else if(x.startsWith(prefix + "morse")){
 									morse(api, x, event)
+								}else if(x.startsWith(prefix + "qr")){
+									qr(api, mess, event)
 								}/*else if(x.startsWith(prefix + "know")){
 									let data = mess.split(" ")
 									data.shift()
