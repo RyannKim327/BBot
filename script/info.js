@@ -48,8 +48,8 @@ module.exports = async (api, body, event) => {
 				file.on("close", () => {
 					api.sendMessage({
 						body: message,
-						attachment: fs.createReadStream(__dirname + "/dp.jpg").on("end", async () => {
-							fs.unlink(__dirname + "dp.jpg", (err) => {})
+						attachment: fs.createReadStream(__dirname + "/../dp.jpg").on("end", async () => {
+							fs.unlink(__dirname + "/../dp.jpg", (err) => {})
 						})
 					}, event.threadID, event.messageID)
 				})
