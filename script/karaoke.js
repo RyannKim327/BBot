@@ -79,7 +79,7 @@ module.exports = async (api, body, event, file) => {
 			const info = await ytdl.getInfo(url)
 			//api.sendMessage("A moment please", event.threadID, event.messageID)
 			if(m.content[0].duration <= ((20 * 60) * 1000)){
-				ffmpegs(strm).audioBitrate(64).save(`${__dirname}/../karaoke.mp4`).on("end", async () => {
+				/*ffmpegs(strm).audioBitrate(64).save(`${__dirname}/../karaoke.mp4`).on("end", async () => {
 					api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 					api.sendMessage({
 						//body: "Here is your request\n\nSong Title: " + info.videoDetails.title + "\nUploaded by: " + info.videoDetails.author.name,
@@ -94,9 +94,22 @@ module.exports = async (api, body, event, file) => {
 										api.setMessageReaction("✔", event.messageID, (err) => {}, true)
 									}
 								})
-							}*/
+							}*
 						})
 					}, event.threadID, event.messageID)
+				})*/
+				http.get(url, (res) => {
+					res.pipe(file)
+					file.on("finish", () => {
+						try{
+							api.sendMessage({
+								body: "",
+								attachment: fs.createReadStrram(__dirname + "/../karaoke.mp4")
+							}, event.threadID, event.messageID)
+						}catch(e){
+							api.sendMessage(e, event.threadID, event.messageID)
+						}
+					})
 				})
 			}else{
 				api.sendMessage("It's too long", event.threadID, event.messageID)
