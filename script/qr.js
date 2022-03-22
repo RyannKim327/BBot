@@ -1,12 +1,13 @@
 const fs = require("fs")
 const http = require("https")
 
-module.exports = async (api, body, event) => {
+module.exports = (api, body, event) => {
 	let xpl = body.split(" ")
+	api.sendMessage("h", event.threadID)
 	xpl.shift()
 	let data = "http://api.qrserver.com/v1/create-qr-code/?150x150&data=" + xpl.join(" ")
 	let f = fs.createWriteStream("qr.jpg")
-	await http.get(data, (r) => {
+	http.get(data, (r) => {
 		r.pipe(f)
 		f.on("finish", () => {
 			api.sendMessage({
