@@ -35,7 +35,7 @@ module.exports = async (api, body, event) => {
 					default:
 						gender = "Custom"
 				}
-				let id = await tools.findUid(event.messageReply.body)
+				let id = await tool.findUid(event.messageReply.body)
 				let file = fs.createWriteStream("dp.jpg")
 				message += "Name: " + d.name + "\n"
 				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
