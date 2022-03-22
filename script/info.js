@@ -31,7 +31,7 @@ module.exports = (api, body, event) => {
 	}else{
 		let info = body.split(" ")
 		if(info.length <= 1){
-			api.sendMessage(fs.readFileSync("../txt/abt.txt", "utf8"), event.threadID)
+			api.sendMessage(fs.readFileSync("txt/abt.txt", "utf8"), event.threadID)
 		}else{
 			if(Object.keys(event.mentions).length > 0){
 				let mention = Object.keys(event.mentions)[0]
