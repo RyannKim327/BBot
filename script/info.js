@@ -38,6 +38,7 @@ module.exports = async (api, body, event) => {
 				}
 				let f = fs.createWriteStream("dp.jpg")
 				let id = await tool.findUid(event.messageReply.senderID)
+console.log(id)
 				message += "Name: " + d.name + "\n"
 				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 					message += "Username: " + d.vanity + "\n"
