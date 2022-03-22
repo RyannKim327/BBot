@@ -456,7 +456,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				let mess = event.body
 				let x = mess.toLowerCase()
 				let y = x.split(" ")
-				if(event.body != undefined){
+				if(event.body != null){
 					if(x.startsWith(prefix)){
 						if(gc.includes(event.threadID) || vip.includes(event.senderID)){
 							let least = event.messageReply.body
