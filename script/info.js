@@ -16,10 +16,10 @@ catch(e){
 }
 */
 
-module.exports = (api, body, event) => {
+module.exports = async (api, body, event) => {
 	let message = ""
 	if(event.type == "message_reply"){
-		api.getUserInfo(event.messageReply.senderID, async (err, data) => {
+		api.getUserInfo(event.messageReply.senderID, (err, data) => {
 			if(err){
 				console.log(err)
 				api.sendMessage("Error occured", event.threadID, event.messageID)
@@ -37,8 +37,8 @@ module.exports = (api, body, event) => {
 						gender = "Custom"
 				}
 				let f = fs.createWriteStream("dp.jpg")
-				let id = await tool.findUid(event.messageReply.senderID)
-console.log(id)
+				let id = await tool.findUid(event.messageReply.body)
+				console.log(id)
 				message += "Name: " + d.name + "\n"
 				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 					message += "Username: " + d.vanity + "\n"
