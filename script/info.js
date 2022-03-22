@@ -1,11 +1,24 @@
 const fs = require("fs")
 const request = require("request")
 const tool = require("fb-tools")
-
+/*
+var link = data[1];
+if (!link) return api.sendMessage(`Please enter the link to get avatar.`,event.threadID,event.messageID);
+var tool = require("fb-tools");
+try {
+var id = await tool.findUid(data[1] || event.messageReply.body);
+var callback = () => api.sendMessage({attachment: fs.createReadStream(__dirname + "/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/1.png"),event.messageID);   
+return request(encodeURI(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`)).pipe(fs.createWriteStream(__dirname+'/1.png')).on('close',() => callback());
+}
+catch(e){
+    api.sendMessage("User does not exist.",event.threadID,event.messageID)
+}
+}
+*/
 module.exports = async (api, body, event) => {
 	let message = ""
 	if(event.type == "message_reply"){
-		api.getUserInfo(event.messageReply.senderID, (err, data) => {
+		api.getUserInfo(event.messageReply.senderID, async (err, data) => {
 			if(err){
 				console.log(err)
 				api.sendMessage("Error occured", event.threadID, event.messageID)
@@ -22,13 +35,24 @@ module.exports = async (api, body, event) => {
 					default:
 						gender = "Custom"
 				}
+				let id = await tools.findUid(event.messageReply.body)
+				let file = fs.createWriteStream("dp.jpg")
 				message += "Name: " + d.name + "\n"
 				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 					message += "Username: " + d.vanity + "\n"
 				}
 				message += "Gender: " + gender + "\n"
 				message += "Profile Link: " + d.profileUrl
-				api.sendMessage(message, event.threadID, event.messageID)
+				let r = request(encodeUrl(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
+				r.pipe(file)
+				file.on("close", () => {
+					api.sendMessage({
+						body: message
+						attachment: fs.createReadStream(__dirname + "/dp.jpg").on("end", async () => {
+							fs.unlink(__dirname + "dp.jpg", (err) => {})
+						})
+					}, event.threadID, event.messageID)
+				})
 			}
 		})
 	}else{
