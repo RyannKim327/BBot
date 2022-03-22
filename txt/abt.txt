@@ -5,6 +5,10 @@ Bhie Bot Commands List
 Prefix: √ (square root)
 
 √info | This command shows information about Bhie Bot. It's also shows about the commands and the use of the bot
+√info (reply method) | Checking someone's details from a thread if he/she is unwanted or unknown.
+√info @mention | Checking someone's details by mentioning them.
+√morse from <morse code> | A comversion or decrypting from morse code into roman
+√morse to <phrase or word> | A conversion from roman characters into morse code
 √music <ytlink> or <music name> | This command plays music from Youtube Music.
 √verse | Giving you a random bible verse.
 √verse of the day | Giving you a bible verse for that day
@@ -14,8 +18,7 @@ Prefix: √ (square root)
 √special | This command sends a surprise, yes, it is a surprise!
 √bang bang | This command sends a funny gifs.
 
-
-There's also a greeting once you've greet to me or to someone else.
+There's also a greeting once you've greet to me or to someone else. There are also filtered words specially for bad words. There are stilk hidden features that are under development. Use this bot for a responsible way. Thank you very much.
 
 The development is still on progress. Thank you for using me.
 
@@ -26,5 +29,9 @@ John Jeremy Antiguo
 John Roy Lapida Calimlim
 Earl Shine Sawir
 John Paul Caigas
+Jerson Carin
+fca-unofficial developers and contributors
+Facebook
+and all owners of the api's used in this bot.
 
 Truly Yours: BhieBot
