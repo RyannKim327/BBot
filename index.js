@@ -469,7 +469,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							})
 						}else if(x.startsWith(prefix + "info") && !b_users.includes(event.senderID)){
 							info(api, mess, event)
-							api.sendMessage("Test", event.threadID)
 						}else if(x.startsWith(prefix + "morse") && !b_users.includes(event.senderID)){
 							morse(api, x, event)
 						}
