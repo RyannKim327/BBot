@@ -20,7 +20,7 @@ module.exports = (api, body, event) => {
 							}
 						})
 					}
-				}
+				})
 			}, event.threadID, event.messageID)
 		})
 	})
