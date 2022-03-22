@@ -283,6 +283,16 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}
 							})
 							api.sendMessage("Good Day guys", event.threadID)
+						}else if(x.startsWith(prefix + "theme set")){
+							let color = mess.split(" ")
+							api.changeThreadColor(color[2], event.threadID, (err) => {
+								if(err) return console.log(err)
+							})
+						}else if(x.startsWith(prefix + "emoji set")){
+							let color = mess.split(" ")
+							api.changeThreadEmoji(color[2], event.threadID, (err) => {
+								if(err) return console.log(err)
+							})
 						}
 					}
 					if(gc_admin.includes(event.senderID)){
