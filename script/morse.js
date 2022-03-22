@@ -48,7 +48,7 @@ module.exports = (api, body, event) => {
 	if(event.type == "message_reply"){
 		let rBody = event.messageReply.body
 		let x = rBody.toLowerCase()
-		const data = x.match(/^√morse\s([to|from]+)/)
+		const data = body.match(/^√morse\s([to|from]+)/)
 		api.sendMessage(empty(x, data[1]), event.threadID, event.messageID)
 	}else{
 		let x = body.toLowerCase()
