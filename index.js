@@ -457,16 +457,18 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				let x = mess.toLowerCase()
 				let y = x.split(" ")
 				if(event.body != undefined){
-					if(x.startsWith(prefix) && (gc.includes(event.threadID) || vip.includes(event.senderID))){
-						let least = event.messageReply.body
-						let regex = least.match(/^Thread\sID:\s([0-9]+)/)
-						if(x.startsWith(prefix + "say")){
-							let xpl = mess.split(" ")
-							xpl.shift()
-							api.sendMessage(xpl.join(" "), regex[1])
-							api.getThreadInfo(regex[1], (err, dat) => {
-								api.sendMessage(`Message sent to ${dat.threadName}`, event.threadID, event.messageID)
-							})
+					if(x.startsWith(prefix)){
+						if(gc.includes(event.threadID) || vip.includes(event.senderID)){
+							let least = event.messageReply.body
+							let regex = least.match(/^Thread\sID:\s([0-9]+)/)
+							if(x.startsWith(prefix + "say")){
+								let xpl = mess.split(" ")
+								xpl.shift()
+								api.sendMessage(xpl.join(" "), regex[1])
+								api.getThreadInfo(regex[1], (err, dat) => {
+									api.sendMessage(`Message sent to ${dat.threadName}`, event.threadID, event.messageID)
+								})
+							}
 						}else if(x.startsWith(prefix + "info") && !b_users.includes(event.senderID)){
 							info(api, mess, event)
 						}else if(x.startsWith(prefix + "morse") && !b_users.includes(event.senderID)){
