@@ -214,7 +214,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							api.sendMessage("Good Day guys", event.threadID)
 						}
 					}
-					if(gc_admin.includes(event.senderID){
+					if(gc_admin.includes(event.senderID)){
 						if(mess.startsWith("~Bot: Sleep")){
 							if(event.threadID != gc){
 								threads += event.threadID + "/"
