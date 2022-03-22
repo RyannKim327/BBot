@@ -1,5 +1,6 @@
 const fs = require("fs")
 const request = require("request")
+const tool = require("fb-tools")
 /*
 var link = data[1];
 if (!link) return api.sendMessage(`Please enter the link to get avatar.`,event.threadID,event.messageID);
@@ -15,7 +16,7 @@ catch(e){
 }
 */
 
-module.exports = (api, body, event) => {
+module.exports = async (api, body, event) => {
 	let message = ""
 	if(event.type == "message_reply"){
 		api.getUserInfo(event.messageReply.senderID, (err, data) => {
@@ -36,7 +37,7 @@ module.exports = (api, body, event) => {
 						gender = "Custom"
 				}
 				let f = fs.createWriteStream("dp.jpg")
-				let id = event.messageReply.senderID
+				let id = await tool.findUid(event.messageReply.senderID)
 				message += "Name: " + d.name + "\n"
 				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 					message += "Username: " + d.vanity + "\n"
