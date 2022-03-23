@@ -65,6 +65,16 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			console.log(data.adminIDs)
 		}
 	})
+
+	let admin = []
+	api.getThreadInfo(gc, (err, data) => {
+		if(err) return console.log("Error [Thread ADMIN Data]: " + e)
+		const list = data.adminIDs
+		for(const index of list){
+			admin[index] = list[index].id
+		}
+		console.log("List: " + admin)
+	})
 	if(bhiebot){
 		api.sendMessage("BhieBot is now active", gc)
 		bhiebot = false
