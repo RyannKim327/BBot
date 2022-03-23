@@ -98,6 +98,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				for(let i = 0; i < list.length; i++){
 					gc_admin.push(list[i].id)
 				}
+console.log("List: " + gc_admin)
 			}
 		})
 		/*if(vip.includes(event.senderID) || gc.includes(event.threadID)){
