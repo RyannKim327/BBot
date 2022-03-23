@@ -35,7 +35,7 @@ let vids = true
 let bhiebot = true
 
 let pList = [
-	"sana",
+	"akala ko ikaw ay aken",
 	"sana all",
 	"mr lonely remix"
 ]
@@ -339,7 +339,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									for(const list of pList){
 										//music(api, "√music " + list, event)
 									
-										await Promise.all([music(api, "√music" + list, event)])
+										await Promise.all([music(api, "√music " + list, event)])
 									}
 								}else if(x.startsWith(prefix + "karaoke")){
 									if(!fs.existsSync(__dirname + "/karaoke.mp4")){
