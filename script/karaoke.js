@@ -61,7 +61,6 @@ module.exports = async (api, body, event, file) => {
 	}
 	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		try{
-			d.shift()
 			await yt.initalize()
 			const m = await yt.search(d)
 			console.log(m)
