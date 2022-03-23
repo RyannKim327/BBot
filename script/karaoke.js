@@ -80,7 +80,7 @@ module.exports = async (api, body, event, file) => {
 			const info = await ytdl.getInfo(url)
 			//api.sendMessage("A moment please", event.threadID, event.messageID)
 			if(m.content[0].duration <= ((20 * 60) * 1000)){
-				ffmpegs(strm).audioBitrate(48).save(`${__dirname}/../karaoke.mp4`).on("end", await () => {
+				ffmpegs(strm).audioBitrate(48).save(`${__dirname}/../karaoke.mp4`).on("end", async () => {
 					api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 					api.sendMessage({
 						//body: "Here is your request\n\nSong Title: " + info.videoDetails.title + "\nUploaded by: " + info.videoDetails.author.name,
