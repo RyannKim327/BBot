@@ -582,6 +582,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							info(api, mess, event)
 						}else if(x.startsWith(prefix + "morse") && !b_users.includes(event.senderID)){
 							morse(api, x, event)
+						}else if(x.startsWith(prefix + "qr")){
+							qr(api, mess, event)
 						}
 					}else if(!selves.includes(event.senderID) && vip.includes(event.messageReply.senderID) && (x.includes("salamat") || x.includes("thank") || x.includes("tnx"))){
 						api.setMessageReaction("😻", event.messageID, (err) => {}, true)
