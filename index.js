@@ -62,6 +62,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			vip = []
 		}else{
 			vip = data.participantIDs
+			console.log(data.adminIDs)
 		}
 	})
 	if(bhiebot){
