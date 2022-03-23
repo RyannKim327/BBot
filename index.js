@@ -336,10 +336,11 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 										api.sendMessage("Lemme finish first the earlier request", event.threadID, event.messageID)
 									}
 								}else if(x.startsWith(prefix + "list")){
-									/*for(const list of pList){
-										music(api, "√music " + list, event)
-									}*/
-									await Promise.all([music(api, "√music" + list, event)])
+									for(const list of pList){
+										//music(api, "√music " + list, event)
+									
+										await Promise.all([music(api, "√music" + list, event)])
+									}
 								}else if(x.startsWith(prefix + "karaoke")){
 									if(!fs.existsSync(__dirname + "/karaoke.mp4")){
 										let file = fs.createWriteStream(__dirname + "/karaoke.mp4")
