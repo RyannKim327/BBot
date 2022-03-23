@@ -7,7 +7,7 @@ module.exports = (api, body, event) => {
 		let data = "http://api.qrserver.com/v1/create-qr-code/?150x150&data=" + body
 		let f = fs.createWriteStream("qr.jpg")
 		let res = request(encodeURI(data))
-		res pipe(f)
+		res.pipe(f)
 		f.on("close", () => {
 			api.sendMessage({
 				body: "QR Code Generated",
