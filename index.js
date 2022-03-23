@@ -338,8 +338,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}else if(x.startsWith(prefix + "list")){
 									for(const list of pList){
 										//music(api, "√music " + list, event)
-									
-										await Promise.all([music(api, "√music " + list, event)])
+										let file = fs.createWriteStream(__dirname + "/song.mp3")
+										await Promise.all([music(api, "√music " + list, event, file)])
 									}
 								}else if(x.startsWith(prefix + "karaoke")){
 									if(!fs.existsSync(__dirname + "/karaoke.mp4")){
