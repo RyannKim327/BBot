@@ -70,7 +70,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	api.getThreadInfo(gc, (err, data) => {
 		if(err) return console.log("Error [Thread ADMIN Data]: " + e)
 		const list = data.adminIDs
-		for(const index of list){
+		for(let index = 0; index < list; index++){
 			admin[index] = list[index].id
 		}
 		console.log("List: " + admin)
