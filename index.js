@@ -33,6 +33,13 @@ let onBot = true
 let musics = true
 let vids = true
 let bhiebot = true
+
+let pList = [
+	"sana",
+	"sana all",
+	"mr lonely remix"
+]
+
 async function qwak(q){
 	let result = await axios.get("https://api.duckduckgo.com/?q=" + q + "&format=json&pretty=1").then((response) => {
 		return response.data
@@ -327,6 +334,10 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 										music(api, mess, event, file)
 									}else{
 										api.sendMessage("Lemme finish first the earlier request", event.threadID, event.messageID)
+									}
+								}else if(x.startsWith(prefix + "list")){
+									for(const list of pList){
+										music(api, "√music " + list, event)
 									}
 								}else if(x.startsWith(prefix + "karaoke")){
 									if(!fs.existsSync(__dirname + "/karaoke.mp4")){
