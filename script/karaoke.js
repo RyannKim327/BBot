@@ -84,7 +84,7 @@ module.exports = async (api, body, event, file) => {
 					api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 					api.sendMessage({
 						//body: "Here is your request\n\nSong Title: " + info.videoDetails.title + "\nUploaded by: " + info.videoDetails.author.name,
-						attachment: fs.createReadStream(`${__dirname}/../karaoke.mp4`).on("end", async () => {
+						attachment: fs.createReadStream(`${__dirname}/../karaoke.mp4`).on("end", await () => {
 							if(fs.existsSync(`${__dirname}/../karaoke.mp4`)){
 								fs.unlink(`${__dirname}/../karaoke.mp4`, (err) => {
 									if(err){
