@@ -57,7 +57,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	api.setOptions({listenEvents: true, selfListen: true})
 	var listenEmitter = api.listen(async (err, event) => {
 		if(err) return console.log("Error [Events]: " + err)
-		if(event.body == null) return console.log("Error [Empty Body]: " + event.body)
+		if(event.body == null && event.type == "message") return console.log("Error [Empty Body]: " + event.body)
 		api.markAsReadAll((err) => {
 			if(err) return console.log("Error [Mark as Read]: " + err)
 		})
