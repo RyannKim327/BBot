@@ -28,7 +28,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
 		if(event.body != null){
-			api.setMarkAsReadAll((err) => {
+			api.markAsReadAll((err) => {
 				if(err) return console.error("Error [Mark as Read All]: " + err)
 			})
 			let threadID = event.threadID
