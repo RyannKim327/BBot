@@ -233,7 +233,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							switch(user.gender){
 								case 1:
 									gender = "Ms."
-									kasarian = "Ginang"
+									kasarian = "Binibining"
 								break
 								case 2:
 									gender = "Mr."
@@ -241,7 +241,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								break
 								default:
 									gender = "Mr./Ms."
-									kasarian = "Ginoo/Ginang"
+									kasarian = "Ginoo/Binibining"
 							}
 							if((time >= 5 && time < 12) && !morning.includes(senderID) && (low_body.includes("morning") || low_body.includes("magandang umaga"))){
 								let msg = [
