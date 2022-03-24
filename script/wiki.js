@@ -16,7 +16,7 @@ module.exports = async (api, body, event) => {
 	d.shift()
 	let w = ""
 	try{
-		const r = await getWiki(d.join(" "))
+		let r = await getWiki(d.join(" "))
 		if(r == undefined || r.title == undefined){
 			throw new Error("Document not found")
 		}
