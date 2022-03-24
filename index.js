@@ -224,7 +224,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(low_body.startsWith(prefix + "wiki")){
 							wiki(api, body, event)
 						}
-					}else if(!myself.includes(senderID)){
+					}else if(!myself.includes(senderID) && event.type == "message"){
 						api.getUserInfo(senderID, (err, data) => {
 							if(err) return console.error("Error [Greetings User]: " + err)
 							let user = data[senderID]
