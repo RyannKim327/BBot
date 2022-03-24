@@ -75,6 +75,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				time -= 24
 			}
 			resetTime(time)
+			console.log(event.logMessageData)
 			let threadID = event.threadID
 			let senderID = event.senderID
 			let messageID = event.messageID
