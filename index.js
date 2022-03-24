@@ -134,7 +134,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								if(event.type == "message_reply"){
 									let data = event.messageReply.body
 									let regex = data.match(/^Thread\sID:\s[0-9]/)
-									say_active = regex[0]
+									say_active = regex[1]
 								}
 								if(say_active <= 0){
 									api.sendMessage("Say active thread is not set yet", threadID)
