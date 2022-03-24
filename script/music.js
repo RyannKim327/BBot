@@ -55,9 +55,6 @@ async function dl(x){
 module.exports = async (api, body, event, file) => {
 	let x = body.toLowerCase()
 	let d = body.split(" ")
-	if(!fs.existsSync(`${__dirname}/../song.mp3`)){
-		file = fs.createWriteStream(__dirname + "/../song.mp3")
-	}
 	if(x.includes("https://m.youtube.com") || x.includes("https://youtu.be") || x.includes("https://youtube.com") || x.includes("https://www.youtube.com")){
 		let s = dl(d[1])
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)

@@ -18,9 +18,9 @@ const bang = (api, event) => {
 					gender = "Mr./Ms."
 			}
 			api.sendMessage({
-				body: `A bang bang command for ${gender} @${name.name}`,
+				body: `A bang bang command for ${gender} ${name.name}`,
 				mentions: [{
-					tag: `@${name.name}`,
+					tag: `${name.name}`,
 					id: event.senderID
 				}],
 				attachment: [
