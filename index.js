@@ -41,7 +41,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	let vip = []
 	let admin = []
 	api.getThreadInfo(gc, (err, data) => {
-		if(err) return console.log("Error [Thread VIP Data]: " + )
+		if(err) return console.log("Error [Thread VIP Data]: " + err)
 		vip = data.participantIDs
 	})
 	api.getThreadInfo(gc, (err, data) => {
