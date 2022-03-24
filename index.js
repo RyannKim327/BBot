@@ -24,7 +24,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
 		if(event.body != null){
-			let threadD = event.threadID
+			let threadID = event.threadID
 			let senderID = event.senderID
 			let messageID = event.messageID
 			let body = event.body
