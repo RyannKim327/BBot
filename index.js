@@ -4,7 +4,7 @@ const fs = require("fs")
 
 const gc = process.env['gc']
 let vip = []
-let gc_admin  []
+let gc_admin = []
 
 let service = true
 let ban_users = ""
@@ -29,7 +29,9 @@ login({appState: JSON.parse("state")}, (err, api) => {
 			let messageID = event.messageID
 			let body = event.body
 			let low_body = body.toLowerCase()
-			api.sendMessage(low_body, gc)
+			if(threadID == gc){
+				api.sendMessage(low_body, gc)
+			}
 		}
 	})
 })
