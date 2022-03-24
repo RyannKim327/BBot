@@ -60,8 +60,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		const threadID = event.threadID
 		const messageID = event.messageID
 		const senderID = event.senderID
-		let body = event.body
-		let low_body = body.toLowerCase()
+		let input = event.body
+		let low_body = input.toLowerCase()
 		api.getThreadInfo(threadID, (err, data) =>{
 			if(err) return console.log("Error [Thread GC Admin Data]: " + err)
 			let list = data.adminIDs
@@ -70,7 +70,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			}  
 		})
 		if(low_body.startsWith(adminPrefix) && low_body.endsWith(adminPostfix)){
-			const command = body.replace(adminPrefix, "").replace(adminPostfix, "")
+			const command = input.replace(adminPrefix, "").replace(adminPostfix, "")
 			if(gc_admin.includes(senderID)){
 				if(command == "sleep"){
 					ban_thread += threadID + "/"
@@ -152,11 +152,11 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						say_active = regex[1]
 						api.sendMessage(`The Thread ID:${say_active} set as current say command active line. You may now send a message without using the reply method.`, threadID)
 					}else{
-						let thread = body.split(separator)
+						let thread = input.split(separator)
 						say_active = thread[1]
 					}
 					if(say_active > 0){
-						api.sendMessage(body, say_active)
+						api.sendMessage(input, say_active)
 						api.getThreadInfo(say_active, (err, data) => {
 							if(err) return console.log("Error [Thread Say]: " + err)
 							api.sendMessage("Message sent to " + data.threadName, threadID)
@@ -167,7 +167,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				}else if(event.type == "message"){
 					if(low_body.startsWith(prefix + "music")){
 						let file = fs.createWriteStream("song.mp3")
-						music(api, body, event, file)
+						music(api, input, event, file)
 					}else if(low_body.startsWith(prefix + "motivate")){
 						quote(api, low_body, event)
 					}else if(low_body.startsWith(prefix + "bang bang")){
@@ -175,18 +175,18 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					}else if(low_body.startsWith(prefix + "special")){
 						special.kolai(api, low_body, event)
 					}else if(low_body.startsWith(prefix + "verse")){
-						verse(api, body, event)
+						verse(api, input, event)
 					}else if(low_body.startsWith(prefix + "what is")){
-						what(api, body, event)
+						what(api, input, event)
 					}else if(low_body.startsWith(prefix + "wiki")){
-						wiki(api, body, event)
+						wiki(api, input, event)
 					}
 				}else if(low_body.startsWith(prefix + "info")){
-					info(api, body, event)
+					info(api, input, event)
 				}else if(low_body.startsWith(prefix + "morse")){
 					morse(api, low_body, event)
 				}else if(low_body.startsWith(prefix + "qr")){
-					qr(api, body, event)
+					qr(api, input, event)
 				}
 			}
 		}else if((low_body.includes("bhie") || low_body.includes("bhe")) && low_body.includes("bot")){
