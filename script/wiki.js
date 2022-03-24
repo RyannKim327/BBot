@@ -1,4 +1,4 @@
-const fws = require("fs")
+const fs = require("fs")
 const axios = require("axios")
 const http = require("https")
 
