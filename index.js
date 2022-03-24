@@ -282,7 +282,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									api.sendMessage({
 										body: `Good afternoon ${gender}`,
 										mentions: [{
-											tag: `${user.name}`
+											tag: `${user.name}`,
 											id: senderID
 										}]
 									}, threadID, messageID)
@@ -301,7 +301,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								api.sendMessage({
 									body: `Good night and sweet dreams ${gender} ${user.name}.`,
 									mentions[{
-										tag: `${user.name}`
+										tag: `${user.name}`,
 										id: senderID
 									}],
 									attachment: fs.createReadStream(__dirname + "/img/goodnight.gif")
