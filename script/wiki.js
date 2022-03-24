@@ -39,6 +39,8 @@ module.exports = async (api, body, event) => {
 			})
 		}
 		api.sendMessage(w, event.threadID, event.messageID)
+	}catch(e){
+		api.sendMessage(e, event.threadID, event.messageID)
 	}
 }
 /*
