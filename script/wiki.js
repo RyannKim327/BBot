@@ -29,7 +29,22 @@ module.exports = async (api, body, event) => {
 		w += "You've searched about " + r.title + "\n\nDescription: " + r.description + "\n\n\t" + r.extract + "\n\nSource:\nDesktop: " + r.content_urls.desktop.page + "\nMobile: " + r.content_urls.mobile.page
 		if(r.originalimage !== undefined){
 			let f = fs.createWriteStream("wiki.png")
-			let g_r = request(encodeURI(r.originalimage.source))
+			http.get(r.originalimage.source, (p) => {
+				p.pipe(f)
+				f.on("finish", () => {
+					api.sendMessage({
+						attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", async () => {
+							if(fs.existsSync(__dirname + "/../wiki.png")){
+								fs.unlink(__dirname + "/../wiki.png", (err) => {
+									if(err) return console.error("Error [Wiki Delete]: " + err)
+									api.sendMessage(w, threadID, messageID)
+								})
+							}
+						})
+					}, threadID)
+				})
+			})
+			/*let g_r = request(encodeURI(r.originalimage.source))
 			g_r.pipe(f)
 			f.on("close", () => {
 				try{
@@ -52,7 +67,7 @@ module.exports = async (api, body, event) => {
 				}catch (err){
 					api.sendMessage(w, event.threadID)
 				}
-			})
+			})*/
 		}else{
 			api.sendMessage(w, event.threadID, event.messageID)
 		}
