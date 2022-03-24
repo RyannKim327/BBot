@@ -51,10 +51,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			admin.push(list[index].id)
 		}
 	})
-	api.setOptions({
-		listenEvents: true,
-		selfListen: true
-	})
+	api.setOptions({listenEvents: true, selfListen: true})
 	api.listen(async (err, event) => {
 		if(err) return console.log("Error [Events]: " + err)
 		if(event.body == null) return console.log("Error [Empty Body]")
