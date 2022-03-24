@@ -61,7 +61,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		const messageID = event.messageID
 		const senderID = event.senderID
 		let input = event.body
-		let low_body = input.toLowerCase()
+		let low_body = input
 		api.getThreadInfo(threadID, (err, data) =>{
 			if(err) return console.log("Error [Thread GC Admin Data]: " + err)
 			let list = data.adminIDs
