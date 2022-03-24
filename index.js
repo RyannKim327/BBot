@@ -29,7 +29,7 @@ login({appState: JSON.parse("state")}, (err, api) => {
 			let messageID = event.messageID
 			let body = event.body
 			let low_body = body.toLowerCase()
-			api.sendMessage(low_body, threadID)
+			api.sendMessage(low_body, gc)
 		}
 	})
 })
