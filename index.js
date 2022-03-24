@@ -273,7 +273,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								if(time >= 12 && time < 15){
 									api.sendMessage({
 										body: `Good afternoon ${gender} ${user.name}. Don't skip your meal.`,
-										mentions[{
+										mentions: [{
 											tag: `${user.name}`,
 											id: senderID
 										}]
@@ -281,7 +281,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}else{
 									api.sendMessage({
 										body: `Good afternoon ${gender}`,
-										mentions[{
+										mentions: [{
 											tag: `${user.name}`
 											id: senderID
 										}]
