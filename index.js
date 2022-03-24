@@ -134,7 +134,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							api.sendMessage("Here's your admin commands:\n\n\n<< admin >>\n<< list >>\n<< toggle >>\n<< bot: sleep >>\n<< bot: wake-up >>\n<< bot: ban >>\n<< bot: unban >>\n<< status >>", threadID, messageID)
 						}else if(command == "status"){
 							let msg = ""
-							if(service){
+							if(!service){
 								msg += "BhieBot is not active in all threads, except the admin room."
 							}else{
 								msg += "BhieBot is active now" + ((ban_thread.includes(threadID)) ? " but not in this thread." : " even in this thread.")
