@@ -300,7 +300,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}else if((time >= 22 || time < 5) && night.includes(senderID) && (low_body.includes("goodnight") || low_body.includes("good night"))){
 								api.sendMessage({
 									body: `Good night and sweet dreams ${gender} ${user.name}.`,
-									mentions[{
+									mentions: [{
 										tag: `${user.name}`,
 										id: senderID
 									}],
