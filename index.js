@@ -10,7 +10,7 @@ let service = true
 let ban_users = ""
 let ban_thread = ""
 
-login({appState: JSON.parse("state")}, (err, api) => {
+login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
 	api.getThreadInfo(gc, (err, data) => {
 		if(err) return console.error("Error [Thread admin data]: " + err)
