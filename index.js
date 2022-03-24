@@ -160,7 +160,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						api.getThreadInfo(say_active, (err, data) => {
 							if(err) return console.log("Error [Thread Say]: " + err)
 							api.sendMessage("Message sent to " + data.threadName, threadID)
-						}
+						})
 					}else{
 						api.sendMessage("Undefined Thread ID", threadID, messageID)
 					}
