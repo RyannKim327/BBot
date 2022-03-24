@@ -139,7 +139,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}else{
 								msg += "BhieBot is active now" + ((ban_thread.includes(threadID)) ? " but not in this thread." : " even in this thread.")
 							}
-							api.sendMessage(mst, threadID, messageID)
+							api.sendMessage(msg, threadID, messageID)
 						}
 					}else if(event.type == "message_reply"){
 						let reply_senderID = event.messageReply.senderID
