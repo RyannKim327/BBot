@@ -17,7 +17,8 @@ module.exports = async (api, body, event) => {
 	let w = ""
 	try{
 		let r = await getWiki(d.join(" "))
-		if(r == undefined || r.title == undefined){
+		if(r === undefined || r.title === undefined){
+			api.sendMessage("Error: ", event.threadID, event.messageID)
 			throw new Error("Document not found")
 		}
 		w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
