@@ -36,7 +36,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	api.sendMessage("BhieBot service is now active", gc)
 	api.setOptions({
 		listenEvents: true,
-		selfListen: false
+		selfListen: true
 	})
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
@@ -89,6 +89,15 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								ban_thread = ban_thread.replace(threadID + "/", "")
 								api.sendMessage("Hi guys, I'm back.", threadID)
 								api.sendMessage(`You turned on the bot service for ${data.threadName}.`, gc)
+							})
+						}else if(command == "list"){
+							api.getThreadList(20, null, ["INBOX"], (err, data) => {
+								if(err) return console.error("Error [List of threads]: " + err)
+								for(let i = 0; i <= data.length; i++){
+									if(data[i].threadID != threadID && data[i].isGroup){
+										api.sendMessage(`Thread ID: ${data.threadID}\nThread name: ${data.name}`, threadID)
+									}
+								}
 							})
 						}
 					}else if(event.type == "message_reply"){
