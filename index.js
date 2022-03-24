@@ -52,9 +52,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		}
 	})
 	api.setOptions({listenEvents: true, selfListen: true})
-	api.listen(async (err, event) => {
+	var listenEmitter = api.listen(async (err, event) => {
 		if(err) return console.log("Error [Events]: " + err)
 		if(event.body == null) return console.log("Error [Empty Body]")
+		api.markAsReadAll((err) => {
+			if(err) return console.log("Error [Mark as Read]: " + err)
+		})
 		const threadID = event.threadID
 		const messageID = event.messageID
 		const senderID = event.senderID
