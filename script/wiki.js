@@ -13,9 +13,9 @@ async function getWiki(q) {
 
 module.exports = async (api, body, event) => {
 	let d = body.split(" ")
-	d.shift()
-	let w = ""
 	try{
+		d.shift()
+		let w = ""
 		let r = await getWiki(d.join(" "))
 		if(r === undefined || r.title === undefined){
 			api.sendMessage("Error: ", event.threadID, event.messageID)
@@ -24,7 +24,7 @@ module.exports = async (api, body, event) => {
 		w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
 		if(r.originalimage.source != undefined){
 			let f = fs.createWriteStream("wiki.jpg")
-			http.get(r.originalimage.source, (s) => {
+			let go = http.get(r.originalimage.source, (s) => {
 				s.pipe(f)
 				f.on("finish", () => {
 					api.sendMessage({
