@@ -8,7 +8,7 @@ let gc_admin = []
 
 let service = true
 let ban_users = ""
-let ban_thread  ""
+let ban_thread = ""
 
 login({appState: JSON.parse("state")}, (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
@@ -19,7 +19,7 @@ login({appState: JSON.parse("state")}, (err, api) => {
 	api.sendMessage("BhieBot service is now active", gc)
 	api.setOptions({
 		listenEvents: true,
-		selfListen: true
+		selfListen: false
 	})
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
