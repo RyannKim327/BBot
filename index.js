@@ -15,7 +15,7 @@ const wiki = require("./script/wiki")
 
 const prefix = "√"
 const adminPrefix = "<< "
-const adminPostfix = ">>"
+const adminPostfix = " >>"
 const separator = "|"
 
 const gc = process.env['gc']
@@ -61,7 +61,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		const messageID = event.messageID
 		const senderID = event.messageID
 		const body = event.body
-		const low_body = body.toLowerCase
+		const low_body = body.toLowerCase()
 		api.getThreadInfo(threadID, (err, data) =>{
 			if(err) return console.log("Error [Thread GC Admin Data]: " + err)
 			let list = data.adminIDs
@@ -70,7 +70,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			}  
 		})
 		if(low_body.startsWith(adminPrefix) && low_body.endsWith(adminPostfix)){
-			const command = body.replace("<< ", "").replace(" >>", "")
+			const command = body.replace(adminPrefix, "").replace(adminPostfix, "")
 			if(gc_admin.includes(senderID)){
 				if(command == "sleep"){
 					ban_thread += threadID + "/"
