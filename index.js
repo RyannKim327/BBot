@@ -58,9 +58,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		api.markAsReadAll((err) => {
 			if(err) return console.log("Error [Mark as Read]: " + err)
 		})
-		const threadID = event.threadID
-		const messageID = event.messageID
-		const senderID = event.senderID
+		let threadID = event.threadID
+		let messageID = event.messageID
+		let senderID = event.senderID
 		let input = event.body
 		let low_body = input
 		api.getThreadInfo(threadID, (err, data) =>{
