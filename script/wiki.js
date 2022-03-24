@@ -28,7 +28,7 @@ module.exports = async (api, body, event) => {
 				s.pipe(f)
 				f.on("finish", () => {
 					api.sendMessage({
-						body: "img",
+						body: "",
 						attachment: fs.createReadStream(__dirname + "/../wiki.jpg").on("end", async () => {
 							if(fs.existsSync(__dirname + "/../wiki.jpg")){
 								fs.unlink(__dirname + "/../wiki.jpg", (err) => {
