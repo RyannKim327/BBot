@@ -58,6 +58,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		if(err) return console.error("Error [Thread admin data]: " + err)
 		vip = data.participantIDs
 	})
+	const myself = api.getCurrentUserID()
 	api.sendMessage("BhieBot service is now active", gc)
 	api.setOptions({
 		listenEvents: true,
@@ -219,7 +220,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(low_body.startsWith(prefix + "wiki")){
 							wiki(api, body, event)
 						}
-					}else{
+					}else if(!myself.includes(senderID)){
 						api.getUserInfo(senderID, (err, data) => {
 							if(err) return console.error("Error [Greetings User]: " + err)
 							let user = data[senderID]
@@ -288,7 +289,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									}, threadID, messageID)
 								}
 								aftie += senderID + " "
-							}else if((time >= 18 && time < 22) && evening.includes(senderID) && (low_body.includes("goodeve") || low_body.includes("magandang gabi") || low_body.includes("evening"))){
+							}else if((time >= 18 && time < 22) && !evening.includes(senderID) && (low_body.includes("goodeve") || low_body.includes("magandang gabi") || low_body.includes("evening"))){
 								api.sendMessage({
 									body: `Good evening ${gender} ${user.name}. It's been a long day. It's time to chill and relax.`,
 									mentions: [{
@@ -297,7 +298,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									}]
 								}, threadID, messageID)
 								evening += senderID + " "
-							}else if((time >= 22 || time < 5) && night.includes(senderID) && (low_body.includes("goodnight") || low_body.includes("good night"))){
+							}else if((time >= 22 || time < 5) && !night.includes(senderID) && (low_body.includes("goodnight") || low_body.includes("good night"))){
 								api.sendMessage({
 									body: `Good night and sweet dreams ${gender} ${user.name}.`,
 									mentions: [{
