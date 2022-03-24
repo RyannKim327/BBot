@@ -45,7 +45,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		vip = data.participantIDs
 	})
 	api.getThreadInfo(gc, (err, data) => {
-		if(err) return console.log("Error [Thread ADMIN Data]: " + e)
+		if(err) return console.log("Error [Thread ADMIN Data]: " + err)
 		const list = data.adminIDs
 		for(let index = 0; index < list.length; index++){
 			admin.push(list[index].id)
