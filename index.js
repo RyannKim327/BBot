@@ -95,7 +95,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								if(err) return console.error("Error [List of threads]: " + err)
 								for(let i = 0; i <= data.length; i++){
 									if(data[i].threadID != threadID && data[i].isGroup){
-										api.sendMessage(`Thread ID: ${data.threadID}\nThread name: ${data.name}`, threadID)
+										api.sendMessage(`Thread ID: ${data[i].threadID}\nThread name: ${data[i].name}`, threadID)
 									}
 								}
 							})
