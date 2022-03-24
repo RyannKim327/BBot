@@ -27,6 +27,31 @@ let ban_thread = ""
 
 let say_active = 0
 
+let morning = ""
+let aftie = ""
+let evening = ""
+let night = ""
+
+function resetTime(time){
+	if(time >= 5 && time < 12){
+		aftie = ""
+		evening = ""
+		night = ""
+	}else if(time >= 12 && time < 18){
+		morning = ""
+		evening = ""
+		night = ""
+	}else if(time >= 18 && time < 22){
+		morning = ""
+		aftie = ""
+		night = ""
+	}else{
+		morning = ""
+		aftie = ""
+		evening = ""
+	}
+}
+
 login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
 	api.getThreadInfo(gc, (err, data) => {
@@ -44,6 +69,11 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			api.markAsReadAll((err) => {
 				if(err) return console.error("Error [Mark as Read All]: " + err)
 			})
+			let time = new Date().getHours() + 8
+			if(time > 24){
+				time -= 24
+			}
+			resetTime(time)
 			let threadID = event.threadID
 			let senderID = event.senderID
 			let messageID = event.messageID
@@ -99,6 +129,16 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									}
 								}
 							})
+						}else if(command == "admin"){
+							api.sendMessage("Here's your admin commands:\n\n\n<< admin >>\n<< list >>\n<< toggle >>\n<< bot: sleep >>\n<< bot: wake-up >>\n<< bot: ban >>\n<< bot: unban >>\n<< status >>", threadID, messageID)
+						}else if(command == "status"){
+							let msg = ""
+							if(service){
+								msg += "BhieBot is not active in all threads, except the admin room."
+							}else{
+								msg += "BhieBot is active now" + ((ban_thread.includes(threadID)) ? " but not in this thread." : " even in this thread.")
+							}
+							api.sendMessage(mst, threadID, messageID)
 						}
 					}else if(event.type == "message_reply"){
 						let reply_senderID = event.messageReply.senderID
@@ -133,7 +173,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 					}
 				}
-			}else if((service && !ban_users.includes(senderID) && ban_thread.includes(threadID)) || gc.includes(threadID) || vip.includes(senderID)){
+			}else if((service && !ban_users.includes(senderID) && !ban_thread.includes(threadID)) || gc.includes(threadID) || vip.includes(senderID)){
 				if(filter(low_body)){
 					api.setMessageReaction("🥲", messageID, (err) => {}, true)
 				}else{
@@ -179,6 +219,96 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(low_body.startsWith(prefix + "wiki")){
 							wiki(api, body, event)
 						}
+					}else{
+						api.getUserInfo(senderID, (err, data) => {
+							if(err) return console.error("Error [Greetings User]: " + err)
+							let user = data[senderID]
+							let gender = ""
+							let kasarian = ""
+							switch(user.gender){
+								case 1:
+									gender = "Ms."
+									kasarian = "Ginang"
+								break
+								case 2:
+									gender = "Mr."
+									kasarian = "Ginoo"
+								break
+								default:
+									gender = "Mr./Ms."
+									kasarian = "Ginoo/Ginang"
+							}
+							if((time >= 5 && time < 12) && !morning.includes(senderID) && (low_body.includes("morning") || low_body.includes("magandang umaga"))){
+								let msg = [
+									`Good morning ${gender} ${user.name}. Come on, let's have some coffee.`,
+									`A blessed morning to you ${gender} ${user.name}. Don't forget to take a heavy breakfast.`,
+									`Magandang umaga ${kasarian} ${user.name}. Isa nanamang araw para harapin, at sagupain ang hamon ng buhay.`,
+									`Isang mapagpalang araw para sa iyo ${kasarian} ${user.name}. Tara at magkape muna tayo.`
+								]
+								let lateMsg = [
+									`Late morning ${gender} ${user.name}. Lunch time is near. By the way, don't skip your meal.`,
+									`Good day ${gender} ${user.name}, you woke-up too late. Maybe you have a late night talk with a wrong person again.`,
+									`Magandang umaga sa iyo ${kasarian} ${user.name}, at puyat ka nanaman. Sana sa susunod ay matulog ka na ng mas maaga, para sabay naman tayong magkape.`,
+									`Magandang araw ${kasarian} ${user.name}. Sana tamang tao na ang kapuyatan mo. At wag kakalimutan, magluto ka na, malapit na ang tanghalian.`
+								]
+								if(time >= 5 && time < 10){
+									api.sendMessage({
+										body: msg[Math.floor(Math.random() * msg.length)],
+										mentions: [{
+											tag: `${user.name}`,
+											id: senderID
+										}]
+									}, threadID, messageID)
+								}else{
+									api.sendMessage({
+										body: lateMsg[Math.floor(Math.random() * lateMsg.length)],
+										mentions: [{
+											tag: `${user.name}`,
+											id: senderID
+										}]
+									}, threadID, messageID)
+								}
+								morning += senderID + " "
+							}else if((time >= 12 && time < 18) && !aftie.includes(senderID) && (low_body.includes("magandang hapon") || low_body.includes("afternoon") || low_body.includes("aftie"))){
+								if(time >= 12 && time < 15){
+									api.sendMessage({
+										body: `Good afternoon ${gender} ${user.name}. Don't skip your meal.`,
+										mentions[{
+											tag: `${user.name}`,
+											id: senderID
+										}]
+									}, threadID, messageID)
+								}else{
+									api.sendMessage({
+										body: `Good afternoon ${gender}`,
+										mentions[{
+											tag: `${user.name}`
+											id: senderID
+										}]
+									}, threadID, messageID)
+								}
+								aftie += senderID + " "
+							}else if((time >= 18 && time < 22) && evening.includes(senderID) && (low_body.includes("goodeve") || low_body.includes("magandang gabi") || low_body.includes("evening"))){
+								api.sendMessage({
+									body: `Good evening ${gender} ${user.name}. It's been a long day. It's time to chill and relax.`,
+									mentions: [{
+										tag: `${user.name}`,
+										id: senderID
+									}]
+								}, threadID, messageID)
+								evening += senderID + " "
+							}else if((time >= 22 || time < 5) && night.includes(senderID) && (low_body.includes("goodnight") || low_body.includes("good night"))){
+								api.sendMessage({
+									body: `Good night and sweet dreams ${gender} ${user.name}.`,
+									mentions[{
+										tag: `${user.name}`
+										id: senderID
+									}],
+									attachment: fs.createReadStream(__dirname + "/img/goodnight.gif")
+								}, threadID, messageID)
+								night += senderID + " "
+							}
+						})
 					}
 				}
 			}
