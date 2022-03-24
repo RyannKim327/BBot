@@ -205,8 +205,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(low_body.startsWith(prefix + "morse")){
 							morse(api, low_body, event)
 						}else if(low_body.startsWith(prefix + "music")){
-							let file = fs.createWriteStream("song.mp3")
-							music(api, body, event, file)
+							if(fs.existsSync(__dirname + "/song.mp3")){
+								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
+							}else{
+								let file = fs.createWriteStream("song.mp3")
+								music(api, body, event, file)
+							}
 						}else if(low_body.startsWith(prefix + "qr")){
 							qr(api, body, event)
 						}else if(low_body.startsWith(prefix + "quote")){
