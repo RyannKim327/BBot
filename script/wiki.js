@@ -12,7 +12,7 @@ async function getWiki(q) {
 }
 
 module.exports = async (api, body, event) => {
-	let d = body.shift(" ")
+	let d = body.split(" ")
 	d.shift()
 	let w = ""
 	try{
