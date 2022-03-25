@@ -39,9 +39,6 @@ module.exports = async (api, body, event) => {
 							if(fs.existsSync(__dirname + "/../wiki.png")){
 								await fs.unlink(__dirname + "/../wiki.png", (err) => {
 									if(err) return console.error("Error [Wiki img]: " + err)
-								}).catch((e) => {
-									console.error("Error [File Error]: " + e)
-									api.sendMessage(w, event.threadID, event.messageID)
 								})
 							}
 						})
