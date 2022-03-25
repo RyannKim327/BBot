@@ -71,7 +71,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			api.markAsReadAll((err) => {
 				if(err) return console.error("Error [Mark as Read All]: " + err)
 			})
-			let time = date("Asia/Manila")//new Date().getHours() + 8
+			let time = date("Asia/Manila").getHours()//new Date().getHours() + 8
 			/*if(time > 24){
 				time -= 24
 			}*/
