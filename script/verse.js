@@ -33,7 +33,7 @@ module.exports = (api, body, event) => {
 	let text = body.split(" ")
 	text.shift()
 	myFunction(text.join(" ")).then((r) => {
-		if(r = null){
+		if(r == null){
 			api.sendMessage("Invalid format, please try again.", event.threadID, event.messageID)
 		}else{
 			let result = ""
