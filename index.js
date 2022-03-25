@@ -2,6 +2,7 @@ const { keep_alive } = require("./keep_alive")
 const login = require("fca-unofficial")
 const fs = require("fs")
 
+const date = require('./script/date')
 const filter = require("./script/filter")
 const info = require("./script/info")
 const morse = require("./script/morse")
@@ -70,10 +71,10 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			api.markAsReadAll((err) => {
 				if(err) return console.error("Error [Mark as Read All]: " + err)
 			})
-			let time = new Date().getHours() + 8
-			if(time > 24){
+			let time = date("Asia/Manila")//new Date().getHours() + 8
+			/*if(time > 24){
 				time -= 24
-			}
+			}*/
 			resetTime(time)
 			console.log(event.logMessageData)
 			let threadID = event.threadID
