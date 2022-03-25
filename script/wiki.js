@@ -19,7 +19,7 @@ module.exports = async (api, body, event) => {
 		d.shift()
 		let w = ""
 		let r = await getWiki(d.join(" ")).then((res) => {
-			console.log("Log [Wiki test]: " + r)
+			console.log("Log [Wiki test]: " + res)
 		}).catch((err) => {
 			console.error("Error [Wiki test]: " + err)
 		})
