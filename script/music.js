@@ -47,7 +47,7 @@ async function dl(x){
 			})
 			return d_u
 		}else{
-			return null
+			return [null, ""]
 		}
 	})
 	return r
