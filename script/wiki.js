@@ -41,6 +41,9 @@ module.exports = async (api, body, event) => {
 									if(err) return console.error("Error [Wiki img]: " + err)
 								})
 							}
+						}).catch((e) => {
+							console.error("Error [Wiki file]: " + e)
+							api.sendMessage(w, event.threadID, event.messageID)
 						})
 					}, event.threadID)
 				})
