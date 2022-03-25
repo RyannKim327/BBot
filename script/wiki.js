@@ -1,6 +1,7 @@
 const fs = require("fs")
 const axios = require("axios")
 const http = require("https")
+const request = require("request")
 
 async function getWiki(q) {
 	let out = await axios.get("https://en.wikipedia.org/api/rest_v1/page/summary/" + q).then((response) => {
@@ -27,27 +28,26 @@ module.exports = async (api, body, event) => {
 			throw new Error("Document not found")
 		}
 		w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
-		if(r.originalimage.source != undefined){
+		if(r.originalimage !== undefined){
 			let f = fs.createWriteStream("wiki.png")
-			let go = http.get(r.originalimage.source, (s) => {
-				s.pipe(f)
-				f.on("finish", () => {
-					try{
-						api.sendMessage({
-							body: w,
-							attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", async () => {
-								if(fs.existsSync(__dirname + "/../wiki.png")){
-									fs.unlink(__dirname + "/../wiki.png", (err) => {
-										if(err) return console.error("Error [Wiki img]: " + err)
-									})
-								}
-							})
-						}, event.threadID)
-					}catch(e){
-						console.error("Error [Wiki finish]: " + e)
-						api.sendMessage(w, event.threadID)
-					}
-				})
+			let go = request(encodeURI(r.originalimage.source))
+			go.pipe(f)
+			f.on("finish", () => {
+				try{
+					api.sendMessage({
+						body: w,
+						attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", async () => {
+							if(fs.existsSync(__dirname + "/../wiki.png")){
+								fs.unlink(__dirname + "/../wiki.png", (err) => {
+									if(err) return console.error("Error [Wiki img]: " + err)
+								})
+							}
+						})
+					}, event.threadID)
+				}catch(e){
+					console.error("Error [Wiki finish]: " + e)
+					api.sendMessage(w, event.threadID)
+				}
 			})
 		}else{
 			api.sendMessage(w, event.threadID, event.messageID)
