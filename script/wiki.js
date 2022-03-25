@@ -13,12 +13,12 @@ async function getWiki(q) {
 	return out
 }
 
-module.exports = async (api, body, event) => {
+module.exports = (api, body, event) => {
 	let d = body.split(" ")
 	try{
 		d.shift()
 		let w = ""
-		let r = await getWiki(d.join(" "))
+		let r = getWiki(d.join(" "))
 		if(r === undefined){
 			api.sendMessage("Error: ", event.threadID, event.messageID)
 			throw new Error("Document not found")
