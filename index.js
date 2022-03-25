@@ -75,6 +75,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			/*if(time > 24){
 				time -= 24
 			}*/
+			console.log("Log [Time]: " + time)
 			resetTime(time)
 			console.log(event.logMessageData)
 			let threadID = event.threadID
