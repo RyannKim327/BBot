@@ -38,7 +38,7 @@ module.exports = async (api, body, event) => {
 			let f = fs.createWriteStream("wiki.png")
 			let go = request(encodeURI(r.originalimage.source))
 			go.pipe(f)
-			f.on("finish", () => {
+			f.on("close", () => {
 				try{
 					api.sendMessage({
 						body: w,
