@@ -41,7 +41,7 @@ async function dl(x){
 	let r = await s.then((response) => {
 		let slist = response
 		console.log(slist)
-		if(slist.t < 2000){
+		if(slist.t < 2500){
 			let d_u = conv(slist.vid, slist.token, slist.timeExpires).then((response) => {
 				return [response, slist.title, slist.a]
 			})
