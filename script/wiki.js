@@ -6,6 +6,7 @@ async function getWiki(q) {
 	let out = await axios.get("https://en.wikipedia.org/api/rest_v1/page/summary/" + q).then((response) => {
 		return response.data
 	}).catch((error) => {
+		console.error("Error [Wiki Axios]: " + error)
 		return null
 	})
 	return out
@@ -17,30 +18,36 @@ module.exports = async (api, body, event) => {
 		d.shift()
 		let w = ""
 		let r = await getWiki(d.join(" "))
-		if(r === undefined || r.title === undefined){
+		if(r === undefined || r == null || r.title === undefined){
 			api.sendMessage("Error: ", event.threadID, event.messageID)
 			throw new Error("Document not found")
 		}
 		w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
 		if(r.originalimage.source != undefined){
-			let f = fs.createWriteStream("wiki.jpg")
+			let f = fs.createWriteStream("wiki.png")
 			let go = http.get(r.originalimage.source, (s) => {
 				s.pipe(f)
 				f.on("finish", () => {
-					api.sendMessage({
-						body: "",
-						attachment: fs.createReadStream(__dirname + "/../wiki.jpg").on("end", async () => {
-							if(fs.existsSync(__dirname + "/../wiki.jpg")){
-								fs.unlink(__dirname + "/../wiki.jpg", (err) => {
-									if(err) return console.error("Error [Wiki img]: " + err)
-								})
-							}
-						})
-					}, event.threadID)
+					try{
+						api.sendMessage({
+							body: w,
+							attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", async () => {
+								if(fs.existsSync(__dirname + "/../wiki.png")){
+									fs.unlink(__dirname + "/../wiki.png", (err) => {
+										if(err) return console.error("Error [Wiki img]: " + err)
+									})
+								}
+							})
+						}, event.threadID)
+					}catch(e){
+						console.error("Error [Wiki finish]: " + e)
+						api.sendMessage(w, event.threadID)
+					}
 				})
 			})
+		}else{
+			api.sendMessage(w, event.threadID, event.messageID)
 		}
-		api.sendMessage(w, event.threadID, event.messageID)
 	}catch(e){
 		api.sendMessage(e, event.threadID, event.messageID)
 	}
