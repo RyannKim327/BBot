@@ -20,8 +20,10 @@ module.exports = async (api, body, event) => {
 		let w = ""
 		let r = await getWiki(d.join(" ")).then((res) => {
 			console.log("Log [Wiki test]: " + res)
+			return res
 		}).catch((err) => {
 			console.error("Error [Wiki test]: " + err)
+			return null
 		})
 		if(r === undefined){
 			api.sendMessage("Error: ", event.threadID, event.messageID)
