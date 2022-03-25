@@ -35,17 +35,17 @@ module.exports = async (api, body, event) => {
 				f.on("finish", () => {
 					api.sendMessage({
 						body: w,
-						attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", async () => {
-							try{
+						attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", () => {
+							//try{
 								if(fs.existsSync(__dirname + "/../wiki.png")){
-									await fs.unlink(__dirname + "/../wiki.png", (err) => {
+								fs.unlink(__dirname + "/../wiki.png", (err) => {
 										if(err) return console.error("Error [Wiki img]: " + err)
 									})
 								}
-							}catch(e){
+							/*}catch(e){
 								console.error("Error [Catch on fs]: " + e)
 								api.sendMessage(w, event.threadID, event.messageID)
-							}
+							}*/
 						})
 					}, event.threadID)
 				})
