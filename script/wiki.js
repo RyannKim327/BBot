@@ -41,10 +41,10 @@ module.exports = async (api, body, event) => {
 									await fs.unlink(__dirname + "/../wiki.png", (err) => {
 										if(err) return console.error("Error [Wiki img]: " + err)
 									})
-								}catch(e){
-									console.error("Error [Catch on fs]: " + e)
-									api.sendMessage(w, event.threadID, event.messageID)
 								}
+							}catch(e){
+								console.error("Error [Catch on fs]: " + e)
+								api.sendMessage(w, event.threadID, event.messageID)
 							}
 						})
 					}, event.threadID)
