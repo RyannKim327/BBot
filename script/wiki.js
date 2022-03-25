@@ -54,6 +54,9 @@ module.exports = async (api, body, event) => {
 					console.error("Error [Wiki finish]: " + e)
 					api.sendMessage(w, event.threadID)
 				}
+			}).catch((e) => {
+				console.error("Error [Wiki catch]: " + e)
+				api.sendMessage(w, event.threadID, event.messageID)
 			})
 		}else{
 			api.sendMessage(w, event.threadID, event.messageID)
