@@ -18,13 +18,7 @@ module.exports = async (api, body, event) => {
 	try{
 		d.shift()
 		let w = ""
-		let r = await getWiki(d.join(" ")).then((res) => {
-			console.log("Log [Wiki test]: " + res)
-			return res
-		}).catch((err) => {
-			console.error("Error [Wiki test]: " + err)
-			return null
-		})
+		let r = await getWiki(d.join(" "))
 		if(r === undefined){
 			api.sendMessage("Error: ", event.threadID, event.messageID)
 			throw new Error("Document not found")
@@ -36,27 +30,26 @@ module.exports = async (api, body, event) => {
 		w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
 		if(r.originalimage !== undefined){
 			let f = fs.createWriteStream("wiki.png")
-			let go = request(encodeURI(r.originalimage.source))
-			go.pipe(f)
-			f.on("close", () => {
-				try{
+			let go = http.get(r.originalimage.source, (s) => {
+				s.pipe(f)
+				f.on("finish", () => {
 					api.sendMessage({
 						body: w,
 						attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", async () => {
 							if(fs.existsSync(__dirname + "/../wiki.png")){
-								fs.unlink(__dirname + "/../wiki.png", (err) => {
+								await fs.unlink(__dirname + "/../wiki.png", (err) => {
 									if(err) return console.error("Error [Wiki img]: " + err)
+								}).catch((e) => {
+									console.error("Error [File Error]: " + e)
+									api.sendMessage(w, event.threadID, event.messageID)
 								})
 							}
 						})
 					}, event.threadID)
-				}catch(e){
-					console.error("Error [Wiki finish]: " + e)
-					api.sendMessage(w, event.threadID)
-				}
-			}).catch((e) => {
-				console.error("Error [Wiki catch]: " + e)
-				api.sendMessage(w, event.threadID, event.messageID)
+				}).catch((e) => {
+					console.error("Error [Wiki catch]: " + e)
+					api.sendMessage(w, event.threadID, event.messageID)
+				})
 			})
 		}else{
 			api.sendMessage(w, event.threadID, event.messageID)
