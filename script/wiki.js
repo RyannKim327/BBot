@@ -6,7 +6,7 @@ async function getWiki(q) {
 	let out = await axios.get("https://en.wikipedia.org/api/rest_v1/page/summary/" + q).then((response) => {
 		return response.data
 	}).catch((error) => {
-		return error
+		return null
 	})
 	return out
 }

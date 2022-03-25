@@ -6,7 +6,7 @@ async function whatIs(x){
 	let o = await axios.get("https://api.dictionaryapi.dev/api/v2/entries/en/" + x).then((response) => {
 		return response.data[0]
 	}).catch((err) => {
-		return "Error 123 " + err.message
+		return null //"Error 123 " + err.message
 	})
 	return o
 }
@@ -14,7 +14,8 @@ async function whatIs(x){
 module.exports = (api, body, event) => {
 	let w = body.split(" ")
 	w.shift()
-	let o = whatIs(w)
+	w.shift()
+	let o = whatIs(w.join(" "))
 	let r = ""
 	o.then((response) => {
 		r = "You've searched about the word \"" + response.word + "\"\n"

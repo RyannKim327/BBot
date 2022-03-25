@@ -41,13 +41,13 @@ async function dl(x){
 	let r = await s.then((response) => {
 		let slist = response
 		console.log(slist)
-		if(slist.t < 1500){
+		if(slist.t < 2000){
 			let d_u = conv(slist.vid, slist.token, slist.timeExpires).then((response) => {
 				return [response, slist.title, slist.a]
 			})
 			return d_u
 		}else{
-			return "There's an error"
+			return null
 		}
 	})
 	return r
@@ -61,9 +61,9 @@ module.exports = async (api, body, event, file) => {
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		try{
 			s.then((response) => {
-				if(response[0] != undefined){
+				if(response[0] != null || response[0] != undefined){
 					let t_u = response
-					console.log("hi " + t_u)
+					//console.log("hi " + t_u)
 					let g_r = http.get(t_u[0], function(g_rs) {
 						g_rs.pipe(file)
 						file.on("finish", function() {
