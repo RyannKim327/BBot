@@ -235,7 +235,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							specials.kolai(api, event)
 						}else if(low_body.startsWith(prefix + "verse")){
 							verse(api, body, event)
-						}else if(low_body.startsWith(prefix + "whatis") spl >= 2){
+						}else if(low_body.startsWith(prefix + "whatis") && spl >= 2){
 							what(api, body, event)
 						}else if(low_body.startsWith(prefix + "wiki") && spl >=){
 							wiki(api, body, event)
