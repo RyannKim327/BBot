@@ -4,8 +4,10 @@ const app = express();
 const host = process.env.HOST || "http://localhost"
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => res.send('BhieBot, BY: MPOP Reverse II'));
+app.get('/', (req, res) => {
+	res.send('Welcome, this is the developer of BhieBot.')
+});
 
-app.listen( port, () =>
+app.listen(port, () => {
 	console.log(`Your app is listening a ${host}:${port}`)
-);
+});
