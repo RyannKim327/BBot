@@ -36,7 +36,7 @@ module.exports = (api, body, event) => {
 				api.sendMessage("An error occured", event)
 			}else{
 				let result = ""
-				for(let i = 0; i < result.length; i++){
+				for(let i = 0; i < r.length; i++){
 					result += `[ ${r[i].bookname} ${r[i].chapter}:${r[i].verse} ]\n${r[i].text}\n\n`
 				}
 				console.log("LOG [Verse of the day]: " + result)
