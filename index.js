@@ -1,6 +1,7 @@
 const { keep_alive } = require("./keep_alive")
 const login = require("fca-unofficial")
 const fs = require("fs")
+const cron = require("node-cron")
 
 const date = require('./script/date')
 const filter = require("./script/filter")
@@ -61,6 +62,17 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	})
 	const myself = api.getCurrentUserID()
 	api.sendMessage("BhieBot service is now active", gc)
+	cron.schedule('* * * * *', () => {
+		/*api.getThreadList(20, null, ['INBOX'], (err, data) => {
+			if(err) return console.error("Error [Thread List Cron]: " + err)
+			for(let i = 0; i < data.length; i++){
+				if(data[i].isGroup){
+					verse(api, data[i]threadID)
+				}
+			}
+		})*/
+		verse(api, null, gc)
+	})
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true

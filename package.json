@@ -10,6 +10,7 @@
     "fs": "^0.0.1-security",
     "hackerearth-node": "^2.3.9",
     "https": "^1.0.0",
+    "node-cron": "^3.0.0",
     "request": "^2.88.2",
     "youtube-music-api": "^1.0.6",
     "ytdl-core": "^4.11.0"
