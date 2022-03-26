@@ -165,14 +165,14 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							api.getUserInfo(reply_senderID, (err, data) => {
 								if(err) return console.error("Error [User ban]: " + err)
 								ban_users += reply_senderID + "/"
-								let name = data[reply_senderID]['name']
+								let name = data[reply_senderID]
 								api.sendMessage({
-									body: `Bot features for ${name} is now turned off.`,
+									body: `Bot features for ${name.name} is now turned off.`,
 									mentions: [{
-										tag: `${name}`,
+										tag: `${name.name}`,
 										id: reply_senderID
 									}]
-									}, threadID)
+								}, threadID)
 							})
 						}else if(command == "bot: unban" && ban_users.includes(reply_senderID)){
 							api.getUserInfo(reply_senderID, (err, data) => {
