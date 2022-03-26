@@ -30,18 +30,32 @@ async function myFunction(x){
 }
 
 module.exports = (api, body, event) => {
-	let text = body.split(" ")
-	text.shift()
-	myFunction(text.join(" ")).then((r) => {
-		if(r == null){
-			api.sendMessage("Invalid format, please try again.", event.threadID, event.messageID)
-		}else{
-			let result = ""
-			let total = r.length
-			for(let i = 0; i < total; i++){
-				result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + r[i].text + "\n\n"
+	if(body == null){
+		myFunction("verse of the day").then((r) => {
+			if(r == null){
+				api.sendMessage("An error occured", event)
+			}else{
+				let result = ""
+				for(let i = 0; i < result.length; i++){
+					result += `[ ${r[i].bookname} ${r[i].chapter}:${r[i].verse} ]\n${r[i].text}\n\n`
+				}
+				console.log("LOG [Verse of the day]: " + result)
 			}
-			api.sendMessage(result, event.threadID, event.messageID)
-		}
-	})
+		})
+	}else{
+		let text = body.split(" ")
+		text.shift()
+		myFunction(text.join(" ")).then((r) => {
+			if(r == null){
+				api.sendMessage("Invalid format, please try again.", event.threadID, event.messageID)
+			}else{
+				let result = ""
+				let total = r.length
+				for(let i = 0; i < total; i++){
+					result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + r[i].text + "\n\n"
+				}
+				api.sendMessage(result, event.threadID, event.messageID)
+			}
+		})
+	}
 }
