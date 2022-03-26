@@ -243,6 +243,20 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					}else if(!myself.includes(senderID) && (body.startsWith("@Bhie Bot") || body.startsWith("BhieBot") || body.startsWith("Bhie Bot"))){
 						if(body == "@BhieBot"){
 							api.sendMessage("Bakit?", threadID, messageID)
+						}else if(low_lody.includes("cute") || low_body.includes("kyut") || low_body.includes("kyot")){
+							if(low_body.includes("ko") && cute.includes(senderID)){
+								api.sendMessage({
+									body: "Oo, ang cute mo, lalo na sa picture na to.",
+									attachment: fs.createReadStream(__dirname + "/img/april.jpg")
+								}, threadID, messageID)
+							}else if(low_body.includes("ba si april")){
+								api.sendMessage({
+									body: "Oo, ang cute nya, lalo na sa picture na to.",
+									attachment: fs.createReadStream(__dirname + "/img/april.jpg")
+								}, threadID, messageID)
+							}else{
+								api.sendMessage("Hindi eh, mas cute pa rin si Rheign.", threadID, messageID)
+							}
 						}else{
 							sim(api, low_body, event)
 						}
