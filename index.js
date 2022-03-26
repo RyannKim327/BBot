@@ -10,6 +10,7 @@ const morse = require("./script/morse")
 const music = require("./script/music")
 const qr = require("./script/qr")
 const quote = require("./script/quote")
+const sim = require("./script/sim")
 const specials = require("./script/specials")
 const verse = require("./script/verse")
 const what = require("./script/what")
@@ -238,6 +239,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							what(api, body, event)
 						}else if(low_body.startsWith(prefix + "wiki")){
 							wiki(api, body, event)
+						}
+					}else if(!myself.includes(senderID) && (body.startsWith("@BhieBot") || body.startsWith("BhieBot"))){
+						if(body == "@BhieBot"){
+							api.sendMessage("Bakit?", threadID, messageID)
+						}else{
+							sim(api, low_body, event)
 						}
 					}else if(!myself.includes(senderID) && event.type == "message"){
 						api.getUserInfo(senderID, (err, data) => {
