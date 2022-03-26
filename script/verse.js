@@ -35,7 +35,7 @@ module.exports = (api, body, event) => {
 			if(r == null){
 				api.sendMessage("An error occured", event)
 			}else{
-				let result = "Bible verse of the day (Test):\n\n"
+				let result = "Bible verse of the day:\n\n"
 				for(let i = 0; i < r.length; i++){
 					result += `[ ${r[i].bookname} ${r[i].chapter}:${r[i].verse} ]\n${r[i].text}\n\n`
 				}
