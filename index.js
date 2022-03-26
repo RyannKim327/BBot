@@ -240,7 +240,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(low_body.startsWith(prefix + "wiki")){
 							wiki(api, body, event)
 						}
-					}else if(!myself.includes(senderID) && (body.startsWith("@BhieBot") || body.startsWith("BhieBot"))){
+					}else if(!myself.includes(senderID) && (body.startsWith("@Bhie Bot") || body.startsWith("BhieBot") || body.startsWith("Bhie Bot"))){
 						if(body == "@BhieBot"){
 							api.sendMessage("Bakit?", threadID, messageID)
 						}else{
