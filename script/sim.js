@@ -1,7 +1,7 @@
 const axios = require("axios")
 
 async function s(message){
-	let result = await axios.get(`https://api-sv2.simsimi.net/v2/?text=${message}&lc=en&cf=false&name=BhieBot`).then((r) => {
+	let result = await axios.get("https://api-sv2.simsimi.net/v2/?text=" + message + "&lc=en&cf=false&name=BhieBot").then((r) => {
 		return r.data
 	}).catch((e) => {
 		console.error("Error [Simsimi]: " + e)
