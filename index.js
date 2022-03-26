@@ -195,7 +195,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					api.setMessageReaction("🥲", messageID, (err) => {}, true)
 				}else{
 					if(low_body.startsWith(prefix)){
-						if(low_body.startsWith(prefix + "say")){
+						const spl = low_body.split(" ").length
+						if(low_body.startsWith(prefix + "say") && spl >= 2){
 							if(vip.includes(senderID) || gc.includes(threadID)){
 								if(event.type == "message_reply"){
 									let data = event.messageReply.body
@@ -218,16 +219,16 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							specials.bang(api, event)
 						}else if(low_body.startsWith(prefix + "info")){
 							info(api, body, event)
-						}else if(low_body.startsWith(prefix + "morse")){
+						}else if(low_body.startsWith(prefix + "morse") && spl >= 3){
 							morse(api, low_body, event)
-						}else if(low_body.startsWith(prefix + "music")){
+						}else if(low_body.startsWith(prefix + "music") && spl >= 2){
 							if(fs.existsSync(__dirname + "/song.mp3")){
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
 							}else{
 								let file = fs.createWriteStream("song.mp3")
 								music(api, body, event, file)
 							}
-						}else if(low_body.startsWith(prefix + "qr")){
+						}else if(low_body.startsWith(prefix + "qr") && spl >= 2){
 							qr(api, body, event)
 						}else if(low_body.startsWith(prefix + "quote")){
 							quote(api, low_body, event)
@@ -235,9 +236,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							specials.kolai(api, event)
 						}else if(low_body.startsWith(prefix + "verse")){
 							verse(api, body, event)
-						}else if(low_body.startsWith(prefix + "whatis")){
+						}else if(low_body.startsWith(prefix + "whatis") spl >= 2){
 							what(api, body, event)
-						}else if(low_body.startsWith(prefix + "wiki")){
+						}else if(low_body.startsWith(prefix + "wiki") && spl >=){
 							wiki(api, body, event)
 						}
 					}else if(!myself.includes(senderID) && (body.startsWith("@Bhie Bot") || body.startsWith("BhieBot") || body.startsWith("Bhie Bot"))){
