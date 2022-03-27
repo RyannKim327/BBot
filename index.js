@@ -76,7 +76,7 @@ login({appState: JSON.parse(process.env['state'])}, async (err, api) => {
 		})
 	})
 	let ne = await getTopNews()
-	console.log("Log [News test]: " + ne)
+	console.log("Log [News test]: " + Object.keys(ne)[0])
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true
