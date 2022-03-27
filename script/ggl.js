@@ -21,7 +21,7 @@ module.exports = async (api, body, event) => {
 		let output = res.knowledge_panel
 		console.log("Log [Info]: " + output.title)
 		api.sendMessage(`Result [Information]:\n${output.title}\n${output.description}`, event.threadID, event.messageID)
-	}else if(res.translation.target_language != "N/A"){
+	}else if(res.translation.target_language != undefined){
 		let output = res.translation
 		api.sendMessage(`Result [Translate]:\nTranslation from ${output.source_language} to ${output.target_language}\nOriginal: ${output.source_text}\nTranslated: ${output.target_text}`, event.threadID, event.messageID)
 	}else if(res.dictionary.word != "N/A"){
