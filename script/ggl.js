@@ -19,6 +19,7 @@ module.exports = async (api, body, event) => {
 	let res = await search(data.join(" "))
 	if(res.knowledge_panel != null){
 		let output = res.knowledge_panel
+		console.log("Log [Info]: " + output)
 		api.sendMessage(`Result [Information]:\n${output.title}\n${output.description}`, event.threadID, event.messageID)
 	}else if(res.translation != null){
 		let output = res.translation
