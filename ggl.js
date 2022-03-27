@@ -1,5 +1,6 @@
 const ggl = require("googlethis")
 const fs = require("fs")
+const http = require("https")
 
 async function search(query){
 	const opts = {
@@ -17,7 +18,7 @@ module.exports = async (api, body, event) => {
 	let data = body.split(" ")
 	data.shift()
 	let res = await search(data.join(" "))
-	if(res.knowledge_panel.title != "N/A"){
+	if(res.knowledge_panel.title != "N/A" && res.knowledge_panel.description != "N/A"){
 		let output = res.knowledge_panel
 		console.log("Log [Info]: " + output.title)
 		api.sendMessage(`Result [Information]:\n${output.title}\n${output.description}`, event.threadID, event.messageID)
@@ -28,17 +29,19 @@ module.exports = async (api, body, event) => {
 		let output = res.dictionary
 		let definitions = ""
 		let examples = ""
-		const define = output.definitions
-		const ex = output.examples
-		for(let i = 0; i < define.length; i++){
-		  definitions += (i + 1) + ": " + define[i] + "\n"
+		let defines = output.definitions
+		for(let i = 0; i < defines.length; i++){
+		  definitions += (i + 1) + ": " + defines[i] + "\n"
 		}
-		for(let i = 0; i < ex.length; i++){
-		  examples += (i + 1) + ": " + ex[i] + "\n"
+		if(output.examples != undefined){
+			let ex = output.examples
+			for(let i = 0; i < ex.length; i++){
+		 	 examples += (i + 1) + ": " + ex[i] + "\n"
+			}
 		}
 		if(output.audio != null){
 			let file = fs.createWriteStream(`${output.word}.mp3`)
-			http.get(ouput.audio, (p) => {
+			http.get(output.audio, (p) => {
 				p.pipe(file)
 				file.on("finish", () => {
 					api.sendMessage({
@@ -58,7 +61,7 @@ module.exports = async (api, body, event) => {
 		}
 	}else{
 		let output = res.results[0]
-		api.sendMessage(`Result [Results]:\n${output.title}\n~${output.description}`, event.threadID, event.messageID)
+		api.sendMessage(`Result [Results]:\n${output.title}\n~${output.description}\nSource: ${output.url}`, event.threadID, event.messageID)
 	}
 }
 
