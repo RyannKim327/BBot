@@ -23,7 +23,7 @@ module.exports = async (api, body, event) => {
 		api.sendMessage(`Result [Information]:\n${output.title}\n${output.description}`, event.threadID, event.messageID)
 	}else if(res.translation.target_text != "N/A"){
 		let output = res.translation
-		api.sendMessage(`Result [Translate]:\nTranslation from ${output.source_language} to ${output.target_language}\nOriginal: ${source_text}\nTranslated: ${output.target_text}`, event.threadID, event.messageID)
+		api.sendMessage(`Result [Translate]:\nTranslation from ${output.source_language} to ${output.target_language}\nOriginal: ${output.source_text}\nTranslated: ${output.target_text}`, event.threadID, event.messageID)
 	}else if(res.dictionary.word != "N/A"){
 		let output = res.dictionary
 		let definitions = ""
