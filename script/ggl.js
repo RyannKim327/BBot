@@ -28,12 +28,12 @@ module.exports = async (api, body, event) => {
 		let output = res.dictionary
 		let definitions = ""
 		let examples = ""
-		if(output.definitions != undefined)
+		//if(output.definitions != undefined)
 			let defines = output.definitions
 			for(let i = 0; i < defines.length; i++){
 			  definitions += (i + 1) + ": " + defines[i] + "\n"
 			}
-		}
+		//}
 		if(output.examples != undefined){
 			let ex = output.examples
 			for(let i = 0; i < ex.length; i++){
