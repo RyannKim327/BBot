@@ -2,7 +2,7 @@ const { keep_alive } = require("./keep_alive")
 const login = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("node-cron")
-const getTopNews = require("googlethis")
+const news = require("googlethis")
 
 const date = require('./script/date')
 const filter = require("./script/filter")
@@ -75,7 +75,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			}
 		})
 	})
-	let ne = await getTopNews()
+	let ne = await news.getTopNews()
 	console.log("Log [News test]: " + ne)
 	api.setOptions({
 		listenEvents: true,
