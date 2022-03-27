@@ -17,13 +17,13 @@ module.exports = async (api, body, event) => {
 	let data = body.split(" ")
 	data.shift()
 	let res = await search(data.join(" "))
-	if(res.knowledge_panel != undefined){
+	if(res.knowledge_panel != null){
 		let output = res.knowledge_panel
 		api.sendMessage(`Result [Information]:\n${output.title}\n${output.description}`, event.threadID, event.messageID)
-	}else if(res.translation != undefined){
+	}else if(res.translation != null){
 		let output = res.translation
 		api.sendMessage(`Result [Translate]:\nTranslation from ${output.source_language} to ${output.target_language}\nOriginal: ${source_text}\nTranslated: ${output.target_text}`, event.threadID, event.messageID)
-	}else if(res.dictionary != undefined){
+	}else if(res.dictionary != null){
 		let output = res.dictionary
 		let definitions = ""
 		let eamples = ""
