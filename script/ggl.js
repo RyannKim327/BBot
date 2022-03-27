@@ -29,9 +29,9 @@ module.exports = async (api, body, event) => {
 		let definitions = ""
 		let examples = ""
 		if(output.definitions != undefined)
-			let define = output.definitions
-			for(let i = 0; i < define.length; i++){
-			  definitions += (i + 1) + ": " + define[i] + "\n"
+			let defines = output.definitions
+			for(let i = 0; i < defines.length; i++){
+			  definitions += (i + 1) + ": " + defines[i] + "\n"
 			}
 		}
 		if(output.examples != undefined){
