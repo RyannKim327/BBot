@@ -1,4 +1,4 @@
-Hello I am BhieBot, your friendly bot lived in cloud space. But before you aks for my service, please only one reauest, don't use my service in any kind of abuse or spamming. Here are the basic commands that might help you.
+Hello I am BhieBot, your friendly bot lived in cloud space. But before you ask for my service, please only one request, don't use my service in any kind of abuse or spamming. Here are the basic commands that might help you.
 
 Prefix: √ [Square root, not check sign]
 
@@ -100,3 +100,17 @@ There are still hidden features for this bot, also the auto response.
 For the group admin, if the topic is serious, and you want to turn off the bot, kindly type "<< sleep >>" without any quotation marks.
 
 Thank you.
+
+Credits:
+- Salvador
+- John Jeremy Antiguo
+- Earl Shine Sawir
+- John Paul Caigas
+- John Roy Lapida Calimlim
+- Jerson Carin
+- LuanRT (googlethis)
+- Mart Anthony Salazar
+- Schmavery (Facebook chat api)
+- VangBanLaNhat (fca-unoffifial)
+- Testers (groups)
+- and all owners of the api used for this project
