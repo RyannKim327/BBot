@@ -18,7 +18,7 @@ module.exports = async (api, body, event) => {
 	let data = body.split(" ")
 	data.shift()
 	let res = await search(data.join(" "))
-	if(res.knowledge_panel.title != "N/A"){
+	if(res.knowledge_panel.title != "N/A" && res.knowledge_panel.description != "N/A"){
 		let output = res.knowledge_panel
 		console.log("Log [Info]: " + output.title)
 		api.sendMessage(`Result [Information]:\n${output.title}\n${output.description}`, event.threadID, event.messageID)
@@ -29,12 +29,10 @@ module.exports = async (api, body, event) => {
 		let output = res.dictionary
 		let definitions = ""
 		let examples = ""
-		//if(output.definitions != undefined)
-			let defines = output.definitions
-			for(let i = 0; i < defines.length; i++){
-			  definitions += (i + 1) + ": " + defines[i] + "\n"
-			}
-		//}
+		let defines = output.definitions
+		for(let i = 0; i < defines.length; i++){
+		  definitions += (i + 1) + ": " + defines[i] + "\n"
+		}
 		if(output.examples != undefined){
 			let ex = output.examples
 			for(let i = 0; i < ex.length; i++){
