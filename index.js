@@ -76,7 +76,7 @@ login({appState: JSON.parse(process.env['state'])}, async (err, api) => {
 		})
 	})
 	let ne = await getTopNews()
-	console.log("Log [News test]: " + ne[Math.floor(Math.random() * ne.length)].headline_stories)
+	console.log("Log [News test]: " + ne.headline_stories[0])
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true
