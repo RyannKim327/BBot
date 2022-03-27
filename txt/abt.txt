@@ -1,37 +1,102 @@
-Hello, I am BhieBot, your virtual friend from non existed world. By the way, here's the command you may use on me:
+Hello I am BhieBot, your friendly bot lived in cloud space. But before you aks for my service, please only one reauest, don't use my service in any kind of abuse or spamming. Here are the basic commands that might help you.
 
-Bhie Bot Commands List
+Prefix: √ [Square root, not check sign]
 
-Prefix: √ (square root)
+1. Info
+- This command has different functions based on its arguments and its messaging type.
+1.1 Facebook ID
+- Using info with Facebook id will give you the informatio of a Facebook user with an id.
+~ Sample: √info 1234567890
+1.2 Facebook Username
+- Like using Facebook ID method, but using a username
+~ Sample: √info mark.zuckerberg
+1.3 Info (in reply message)
+- Get the Facebook information of a member or sender of a particular message by replying on it.
+~ Sample: √info
+1.4 Mention
+- Get the Facebook information by mentioning them.
+~ Sample: √info @Bhie Bot
+~ Where @Bhie Bot is a mentioned name
+1.5 Info (not in reply)
+- This command shows this list or tutorials.
+~ Sample: √info
 
-√info | This command shows information about Bhie Bot. It's also shows about the commands and the use of the bot
-√info (reply method) | Checking someone's details from a thread if he/she is unwanted or unknown.
-√info @mention | Checking someone's details by mentioning them.
-√morse from <morse code> | A comversion or decrypting from morse code into roman
-√morse to <phrase or word> | A conversion from roman characters into morse code
-√music <ytlink> or <music name> | This command plays music from Youtube Music.
-√verse | Giving you a random bible verse.
-√verse of the day | Giving you a bible verse for that day
-√verse <chapter and verse> | For a specific bible verse, use - for range and ; for multiple verses. (Format: John 3:16-17; Jude 1:3)
-√whatis <word> | Giving a definition and audio if possible.
-√motivate | This command sends random motivational quotes.
-√special | This command sends a surprise, yes, it is a surprise!
-√bang bang | This command sends a funny gifs.
+2. Google
+- This is still under development, so don't expect too much.
+2.1 Define
+- Define a word or phrase or something you won't understand.
+~ Sample: √google define language
+2.2 Translate
+- Translating a word or phrase(detected) to a specific language.
+~ Sample: √google translate hello in tagalog
+2.3 Default
+- This has no added syntax or adding default, just use the prefix + google keyword then something you want to know.
+~ Sample: √google facebook
 
-There's also a greeting once you've greet to me or to someone else. There are also filtered words specially for bad words. There are stilk hidden features that are under development. Use this bot for a responsible way. Thank you very much.
+3. Morse
+- This is an encryption from roman characters into morse code.
+3.1 From
+- This is the decryption from morse code to roman characters.
+~ Sample: √morse from ... --- ...
+3.2 To
+- This is to encrypt fron roman characters to morse code.
+~ Sample: √morse to SOS
 
-The development is still on progress. Thank you for using me.
+4.Music
+- This command will search only musics or songs fron YouTube Music. If there's an error, try to add the singer name on it.
+~ Sample: √music sana all
 
+5. QR
+- This will send you a picture of a qr code that contains on what you've sent.
+5.1 Default
+- This is not literally adding a syntax or something, just using the basic form of it.
+~ Sample: √qr Hello World
+5.2 Message Reply (Message Reply Mode)
+- This must only call the prefix + keyword by replying in a message.
+~ Sample: √qr
+~ In reply
 
-Credits:
-Salvador
-John Jeremy Antiguo
-John Roy Lapida Calimlim
-Earl Shine Sawir
-John Paul Caigas
-Jerson Carin
-fca-unofficial developers and contributors
-Facebook
-and all owners of the api's used in this bot.
+6. Quote
+- This will send you different quotations from different personality or character.
+6.1 Anime
+- This with send you a quote from an anime character.
+~ Sample: √quote anime
+6.2 Default
+- This is not adding any kind of syntax literally. This command will send you random quote from some famous personalities.
+~ Sample: √quote
 
-Truly Yours: BhieBot
+7. Verse
+- Bibld verse, this feature has also sending a bible verse (of the day) every 7:30 in the morning as a greeting and giving good vibes to all.
+7.1 Default
+- This will send you a random verse(s)
+~ Sample: √verse
+7.2 Verse of the day
+- This will send you a bible verse (of the day) [server based].
+~ Sample: √verse of the day
+7.3 Chapter
+- This will send you all the verses on a particular chapter in the bible.
+~ Sample: √verse Genesis 1
+7.4 Verse
+- This will send what you've request verse of the bible.
+~ Sample: √verse Isa.7:14
+7.5 Range
+- This is not adding a keyword range literally, but to use hypen ( - ) and send the range of the verse.
+~ Sample: John 3:16-19
+7.6 Multiple
+- This is not adding a keyword multiple literally, but to use semi-color ( ; ) and send a multiple verse/ chapter of the bible.
+~ Sample: √verse John 3:16-19;Rev 13:16-18
+~ All formats excluding verse of the day and default are accepted to this as format.
+
+8. What is
+- This is to define a word
+~ Sample: √whatis language
+
+9. Wiki
+- A wikipedia based information
+~ Sample: √wiki Odin
+
+There are still hidden features for this bot, also the auto response.
+
+For the group admin, if the topic is serious, and you want to turn off the bot, kindly type "<< sleep >>" without any quotation marks.
+
+Thank you.
