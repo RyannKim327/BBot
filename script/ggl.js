@@ -61,7 +61,7 @@ module.exports = async (api, body, event) => {
 		}
 	}else{
 		let output = res.results[0]
-		api.sendMessage(`Result [Results]:\n${output.title}\n~${output.description}`, event.threadID, event.messageID)
+		api.sendMessage(`Result [Results]:\n${output.title}\n~${output.description}\nSource: ${output.url}`, event.threadID, event.messageID)
 	}
 }
 
