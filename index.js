@@ -57,7 +57,7 @@ function resetTime(time){
 	}
 }
 
-login({appState: JSON.parse(process.env['state'])}, (err, api) => {
+login({appState: JSON.parse(process.env['state'])}, async (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
 	api.getThreadInfo(gc, (err, data) => {
 		if(err) return console.error("Error [Thread admin data]: " + err)
