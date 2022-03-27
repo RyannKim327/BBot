@@ -29,13 +29,13 @@ module.exports = async (api, body, event) => {
 		let definitions = ""
 		let examples = ""
 		if(output.definitions != undefined)
-			const define = output.definitions
+			let define = output.definitions
 			for(let i = 0; i < define.length; i++){
 			  definitions += (i + 1) + ": " + define[i] + "\n"
 			}
 		}
 		if(output.examples != undefined){
-			const ex = output.examples
+			let ex = output.examples
 			for(let i = 0; i < ex.length; i++){
 		 	 examples += (i + 1) + ": " + ex[i] + "\n"
 			}
