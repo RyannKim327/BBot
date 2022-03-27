@@ -241,7 +241,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							wiki(api, body, event)
 						}
 					}else if(!myself.includes(senderID) && (body.startsWith("@Bhie Bot") || body.startsWith("BhieBot") || body.startsWith("Bhie Bot"))){
-						if(body == "@BhieBot"){
+						if(body == "BhieBot" || body == "@Bhie Bot"){
 							api.sendMessage("Bakit?", threadID, messageID)
 						}else if(low_body.includes("cute") || low_body.includes("kyut") || low_body.includes("kyot")){
 							if(low_body.includes("ko") && cute.includes(senderID)){
