@@ -43,7 +43,7 @@ module.exports = async (api, body, event) => {
 		}
 		if(output.audio != null){
 			let file = fs.createWriteStream(`${output.word}.mp3`)
-			http.get(ouput.audio, (p) => {
+			http.get(output.audio, (p) => {
 				p.pipe(file)
 				file.on("finish", () => {
 					api.sendMessage({
