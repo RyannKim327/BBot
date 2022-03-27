@@ -27,14 +27,18 @@ module.exports = async (api, body, event) => {
 	}else if(res.dictionary != undefined){
 		let output = res.dictionary
 		let definitions = ""
-		let eamples = ""
-		const define = output.definitions
-		const ex = output.examples
-		for(let i = 0; i < define.length; i++){
-		  definitions += (i + 1) + ": " + define[i] + "\n"
+		let examples = ""
+		if(output.definitions != undefined)
+			const define = output.definitions
+			for(let i = 0; i < define.length; i++){
+			  definitions += (i + 1) + ": " + define[i] + "\n"
+			}
 		}
-		for(let i = 0; i < ex.length; i++){
-		  examples += (i + 1) + ": " + ex[i] + "\n"
+		if(output.examples != undefined){
+			const ex = output.examples
+			for(let i = 0; i < ex.length; i++){
+		 	 examples += (i + 1) + ": " + ex[i] + "\n"
+			}
 		}
 		if(output.audio != null){
 			let file = fs.createWriteStream(`${output.word}.mp3`)
