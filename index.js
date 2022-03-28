@@ -169,14 +169,14 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 							api.sendMessage(msg, threadID, messageID)
 						}else if (command == "tuned") {
-              say_tuned = !say_tuned
-              say_thread = threadID
-              api.sendMessage("Say tuned: " + say_tuned, say_thread)
-						}else if(say_tuned && say_active > 0 && !low_body.startsWith(prefix)){
+							say_tuned = !say_tuned
+							say_thread = threadID
+							api.sendMessage("Say tuned: " + say_tuned, say_thread)
+						}else if(say_tuned && say_active > 0 && !low_body.startsWith(prefix) && !low_body.startsWith(adminPrefix)){
 							api.sendMessage(body, say_active)
 							api.getThreadInfo(say_active, (err, data) => {
 								if (err) return console.error("Error [Auto send thread]: " + err)
-								api.sendMessage(`A message sent to: ${data.threadName}\nMessage: ${body}`, threadID)
+								api.sendMessage(`A message sent to: ${data.threadName}\nMessage: ${body}`, say_thread)
 							})
 						}
 					}else if(event.type == "message_reply"){
