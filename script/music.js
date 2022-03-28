@@ -66,7 +66,7 @@ module.exports = async (api, body, event, file) => {
 					let g_r = http.get(t_u[0], (g_rs) => {
 						g_rs.pipe(file)
 						file.on("finish", () => {
-							api.setMessageReaction("⏳", event.senderID, (e) => {}, true)
+							api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 							//api.sendMessage("Downloading success, please wait", event.threadID, event.messageID)
 							api.sendMessage({
 								body: "Here's your file\nTitle: " + response[1] + "\nUploaded by: " + response[2] ,
@@ -77,7 +77,7 @@ module.exports = async (api, body, event, file) => {
 												console.log("Error [FS Unlink]: " + err)
 											}
 											console.log("Done")
-											api.setMessageReaction("✔", event.senderID, (e) => {}, true)
+											api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 										})
 									}
 								})
