@@ -30,6 +30,8 @@ let ban_users = ""
 let ban_thread = ""
 
 let say_active = 0
+let say_tuned = false
+let say_thread = 0
 
 let morning = ""
 let aftie = ""
@@ -90,7 +92,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			}*/
 			console.log("Log [Time]: " + time)
 			resetTime(time)
-			console.log(event.logMessageData)
 			let threadID = event.threadID
 			let senderID = event.senderID
 			let messageID = event.messageID
@@ -103,6 +104,17 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					gc_admin.push(list[i].id)
 				}
 			})
+			if(say_tuned && say_thread > 0){
+			  api.getThreadInfo(threadID, (err, data) => {
+			    if(err) return console.error("Error [Thread stay tuned]: " + err)
+			    if(say_active == threadID && senderID != myself){
+			      api.getUserInfo(senderID, (error, info) => {
+			        const user = info[senderID]
+			        api.sendMessage(`From ${user.name}:\n${body}`, say_thread)
+			      })
+			    }
+			  })
+			}
 			if(low_body.startsWith(adminPrefix) && low_body.endsWith(adminPostfix)){
 				let command = low_body.replace(adminPrefix, "").replace(adminPostfix, "")
 				if(command == "sleep" && gc_admin.includes(senderID) && !ban_thread.includes(threadID) && !gc.includes(threadID)){
@@ -187,6 +199,10 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									}]
 								}, threadID)
 							})
+						}else if(command == "tuned"){
+						  say_tuned = !say_tuned
+						  say_thread = threadID
+						  api.sendMessage("Say tuned: " + say_tuned, say_thread)
 						}
 					}
 				}
