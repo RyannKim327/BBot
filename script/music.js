@@ -8,13 +8,12 @@ const ffmpegs = require('fluent-ffmpeg')
 ffmpegs.setFfmpegPath(ffmpeg.path)
 const yt = new YoutubeMusicApi()
 
-
 async function conv(v, t, e) {
 	const headers = {
 		'Content-Type': 'application/x-www-form-urlencoded',
 		'X-Requested-Key': 'de0cfuirtgf67a'
 	}
-	results = await axios.post("https://backend.svcenter.xyz/api/convert-by-45fc4be8916916ba3b8d61dd6e0d6994", "v_id=" + v + "&ftype=mp3&fquality=96&token=" + t + "&timeExpire=" + e + "&client=yt5s.com", {
+	results = await axios.post("https://backend.svcenter.xyz/api/convert-by-45fc4be8916916ba3b8d61dd6e0d6994", "v_id=" + v + "&ftype=mp3&fquality=128&token=" + t + "&timeExpire=" + e + "&client=yt5s.com", {
 		headers: headers
 	}).then((response) => {
 		return response.data.d_url
@@ -47,7 +46,7 @@ async function dl(x){
 			})
 			return d_u
 		}else{
-			return [null, ""]
+			return [null, "", ""]
 		}
 	})
 	return r
@@ -61,12 +60,12 @@ module.exports = async (api, body, event, file) => {
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		try{
 			s.then((response) => {
-				if(response[0] != null || response[0] != undefined){
+				if(response[0] != undefined){
 					let t_u = response
 					//console.log("hi " + t_u)
-					let g_r = http.get(t_u[0], function(g_rs) {
+					let g_r = http.get(t_u[0], (g_rs) => {
 						g_rs.pipe(file)
-						file.on("finish", function() {
+						file.on("finish", () => {
 							api.setMessageReaction("⏳", event.senderID, (e) => {}, true)
 							//api.sendMessage("Downloading success, please wait", event.threadID, event.messageID)
 							api.sendMessage({
@@ -75,7 +74,7 @@ module.exports = async (api, body, event, file) => {
 									if(fs.existsSync(`${__dirname}/../song.mp3`)){
 										fs.unlink(`${__dirname}/../song.mp3`, (err) => {
 											if(err){
-												console.log(err)
+												console.log("Error [FS Unlink]: " + err)
 											}
 											console.log("Done")
 										})
