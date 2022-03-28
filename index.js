@@ -172,6 +172,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
               say_tuned = !say_tuned
               say_thread = threadID
               api.sendMessage("Say tuned: " + say_tuned, say_thread)
+						}else if(say_tuned && say_active > 0 && !low_body.startsWith(prefix)){
+							api.sendMessage(body, say_active)
+							api.getThreadInfo(say_active, (err, data) => {
+								if (err) return console.error("Error [Auto send thread]: " + err)
+								api.sendMessage(`A message sent to: ${data.threadName}\nMessage: ${body}`, threadID)
+							})
 						}
 					}else if(event.type == "message_reply"){
 						let reply_senderID = event.messageReply.senderID
@@ -227,7 +233,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									api.getThreadInfo(say_active, (err, data) => {
 										if(err) return console.error("Error [Thread say]: " + err)
 										api.sendMessage(msg.join(" "), say_active)
-										api.sendMessage(`Your message: ${msg.join(" ")}, is sent to ${data.threadName} successfully.`, threadID)
+										api.sendMessage(`A message sent to: ${data.threadName}\nMessage: ${msg.join(" ")}`, threadID)
 									})
 								}
 							}
