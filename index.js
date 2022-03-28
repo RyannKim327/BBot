@@ -110,7 +110,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			    if(say_active == threadID && senderID != myself){
 			      api.getUserInfo(senderID, (error, info) => {
 			        const user = info[senderID]
-			        api.sendMessage(`From ${user.name}:\n${body}`, say_thread)
+			        api.sendMessage(`From ${user.name} of ${data.threadName}:\n${body}`, say_thread)
 			      })
 			    }
 			  })
