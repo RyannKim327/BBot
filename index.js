@@ -2,7 +2,6 @@ const { keep_alive } = require("./keep_alive")
 const login = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("node-cron")
-const { getTopNews } = require("googlethis")
 
 const date = require('./script/date')
 const filter = require("./script/filter")
@@ -57,7 +56,7 @@ function resetTime(time){
 	}
 }
 
-login({appState: JSON.parse(process.env['state'])}, async (err, api) => {
+login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
 	api.getThreadInfo(gc, (err, data) => {
 		if(err) return console.error("Error [Thread admin data]: " + err)
@@ -75,8 +74,6 @@ login({appState: JSON.parse(process.env['state'])}, async (err, api) => {
 			}
 		})
 	})
-	let ne = await getTopNews()
-	console.log("Log [News test]: " + ne.headline_stories[0])
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true
@@ -329,7 +326,7 @@ login({appState: JSON.parse(process.env['state'])}, async (err, api) => {
 									}, threadID, messageID)
 								}else{
 									api.sendMessage({
-										body: `Good afternoon ${gender}`,
+										body: `Good afternoon ${gender} ${user.name}`,
 										mentions: [{
 											tag: `${user.name}`,
 											id: senderID
