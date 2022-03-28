@@ -77,6 +77,7 @@ module.exports = async (api, body, event, file) => {
 												console.log("Error [FS Unlink]: " + err)
 											}
 											console.log("Done")
+											api.setMessageReaction("✔", event.senderID, (e) => {}, true)
 										})
 									}
 								})
