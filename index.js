@@ -168,6 +168,10 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								msg += "BhieBot is active now" + ((ban_thread.includes(threadID)) ? " but not in this thread." : " even in this thread.")
 							}
 							api.sendMessage(msg, threadID, messageID)
+						}else if (command == "tuned") {
+              say_tuned = !say_tuned
+              say_thread = threadID
+              api.sendMessage("Say tuned: " + say_tuned, say_thread)
 						}
 					}else if(event.type == "message_reply"){
 						let reply_senderID = event.messageReply.senderID
@@ -199,10 +203,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									}]
 								}, threadID)
 							})
-						}else if(command == "tuned"){
-						  say_tuned = !say_tuned
-						  say_thread = threadID
-						  api.sendMessage("Say tuned: " + say_tuned, say_thread)
 						}
 					}
 				}
