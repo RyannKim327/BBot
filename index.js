@@ -206,7 +206,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 					}
 				}
-			}else if(say_tuned && say_active > 0 && !low_body.startsWith(prefix) && !low_body.startsWith(adminPrefix)){
+			}else if(say_tuned && say_active > 0 && senderID != myself && !low_body.startsWith(prefix) && !low_body.startsWith(adminPrefix)){
 				api.sendMessage(body, say_active)
 				api.getThreadInfo(say_active, (err, data) => {
 					if (err) return console.error("Error [Auto send thread]: " + err)
