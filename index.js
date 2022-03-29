@@ -18,7 +18,7 @@ const verse = require("./script/verse")
 const what = require("./script/what")
 const wiki = require("./script/wiki")
 
-const prefix = "√"
+const prefix = "bhiebot: "
 const adminPrefix = "<< "
 const adminPostfix = " >>"
 
@@ -217,9 +217,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				if(filter(low_body)){
 					api.setMessageReaction("🥲", messageID, (err) => {}, true)
 				}else{
-					if(low_body.startsWith(prefix)){
+					if(low_body.startsWith(prefix) && low_body.includes(":")){
 						const spl = low_body.split(" ").length
-						if(low_body.startsWith(prefix + "say") && spl >= 2){
+						if(low_body.startsWith(prefix + "say") && spl >= 3){
 							if(vip.includes(senderID) || gc.includes(threadID)){
 								if(event.type == "message_reply"){
 									let data = event.messageReply.body
@@ -230,6 +230,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									api.sendMessage("Say active thread is not set yet", threadID)
 								}else{
 									let msg = body.split(" ")
+									msg.shift()
 									msg.shift()
 									api.getThreadInfo(say_active, (err, data) => {
 										if(err) return console.error("Error [Thread say]: " + err)
@@ -242,28 +243,28 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							specials.bang(api, event)
 						}else if(low_body.startsWith(prefix + "info")){
 							info(api, body, event)
-						}else if(low_body.startsWith(prefix + "morse") && spl >= 3){
+						}else if(low_body.startsWith(prefix + "morse") && spl >= 4){
 							morse(api, low_body, event)
-						}else if(low_body.startsWith(prefix + "music") && spl >= 2){
+						}else if(low_body.startsWith(prefix + "music") && spl >= 3){
 							if(fs.existsSync(__dirname + "/song.mp3")){
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
 							}else{
 								let file = fs.createWriteStream("song.mp3")
 								music(api, body, event, file)
 							}
-						}else if(low_body.startsWith(prefix + "qr") && spl >= 2){
+						}else if(low_body.startsWith(prefix + "qr") && spl >= 3){
 							qr(api, body, event)
 						}else if(low_body.startsWith(prefix + "quote")){
 							quote(api, low_body, event)
-						}else if(low_body.startsWith(prefix + "solve") && spl >= 2){
-						  solve(api, body, event)
+						}else if(low_body.startsWith(prefix + "solve") && spl >= 3){
+							solve(api, body, event)
 						}else if(low_body.startsWith(prefix + "special")){
 							specials.kolai(api, event)
 						}else if(low_body.startsWith(prefix + "verse")){
 							verse(api, body, event)
-						}else if(low_body.startsWith(prefix + "whatis") && spl >= 2){
+						}else if(low_body.startsWith(prefix + "what is") && spl >= 4){
 							what(api, body, event)
-						}else if(low_body.startsWith(prefix + "wiki") && spl >= 2){
+						}else if(low_body.startsWith(prefix + "wiki") && spl >= 3){
 							wiki(api, body, event)
 						}else if(low_body.startsWith(prefix + "google")){
 							ggl(api, body, event)
@@ -282,7 +283,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									body: "Oo, ang cute nya, lalo na sa picture na to.",
 									attachment: fs.createReadStream(__dirname + "/img/april.jpg")
 								}, threadID, messageID)
-							}else if(low_body.includes("ba si") && (low_body.includes("rheign") || low_body.includes("kimmy"))){
+							}else if(low_body.includes("ba si") && (low_body.includes("Rheign") || low_body.includes("kimmy"))){
 								api.sendMessage("Walang duda, kids can tell.", threadID, messageID)
 							}else{
 								api.sendMessage("Hindi eh, mas cute pa rin si Rheign.", threadID, messageID)
