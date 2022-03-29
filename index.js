@@ -168,7 +168,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								msg += "BhieBot is active now" + ((ban_thread.includes(threadID)) ? " but not in this thread." : " even in this thread.")
 							}
 							api.sendMessage(msg, threadID, messageID)
-						}else if (command == "tuned") {
+						}else if (command == "tuned" && (gc.includes(threadID) || vip.includes(threadID))) {
 							say_tuned = !say_tuned
 							say_thread = threadID
 							api.sendMessage("Say tuned: " + say_tuned, say_thread)
@@ -206,7 +206,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 					}
 				}
-			}else if(say_tuned && say_active > 0 && senderID != myself && !low_body.startsWith(prefix) && !low_body.startsWith(adminPrefix)){
+			}else if(say_tuned && say_active > 0 && say_thread == threadID && senderID != myself && !low_body.startsWith(prefix) && !low_body.startsWith(adminPrefix)){
 				api.sendMessage(body, say_active)
 				api.getThreadInfo(say_active, (err, data) => {
 					if (err) return console.error("Error [Auto send thread]: " + err)
