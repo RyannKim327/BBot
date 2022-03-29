@@ -282,7 +282,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									body: "Oo, ang cute nya, lalo na sa picture na to.",
 									attachment: fs.createReadStream(__dirname + "/img/april.jpg")
 								}, threadID, messageID)
-							}else if(low_body("ba si") && (low_body.includes("Rheign") || low_body("kimmy"))){
+							}else if(low_body.includes("ba si") && (low_body.includes("Rheign") || low_body.includes("kimmy"))){
 								api.sendMessage("Walang duda, kids can tell.", threadID, messageID)
 							}else{
 								api.sendMessage("Hindi eh, mas cute pa rin si Rheign.", threadID, messageID)
