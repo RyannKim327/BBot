@@ -18,7 +18,7 @@ const verse = require("./script/verse")
 const what = require("./script/what")
 const wiki = require("./script/wiki")
 
-const prefix = "bhiebot: "
+const prefix = "BhieBot: "
 const adminPrefix = "<< "
 const adminPostfix = " >>"
 
@@ -217,9 +217,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				if(filter(low_body)){
 					api.setMessageReaction("🥲", messageID, (err) => {}, true)
 				}else{
-					if(low_body.startsWith(prefix) && low_body.includes(":")){
+					if(body.startsWith(prefix) && low_body.includes(":")){
 						const spl = low_body.split(" ").length
-						if(low_body.startsWith(prefix + "say") && spl >= 3){
+						if(body.startsWith(prefix + "say") && spl >= 3){
 							if(vip.includes(senderID) || gc.includes(threadID)){
 								if(event.type == "message_reply"){
 									let data = event.messageReply.body
@@ -239,34 +239,34 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									})
 								}
 							}
-						}else if(low_body.startsWith(prefix + "bang bang")){
+						}else if(body.startsWith(prefix + "bang bang")){
 							specials.bang(api, event)
-						}else if(low_body.startsWith(prefix + "info")){
+						}else if(body.startsWith(prefix + "info")){
 							info(api, body, event)
-						}else if(low_body.startsWith(prefix + "morse") && spl >= 4){
+						}else if(body.startsWith(prefix + "morse") && spl >= 4){
 							morse(api, low_body, event)
-						}else if(low_body.startsWith(prefix + "music") && spl >= 3){
+						}else if(body.startsWith(prefix + "music") && spl >= 3){
 							if(fs.existsSync(__dirname + "/song.mp3")){
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
 							}else{
 								let file = fs.createWriteStream("song.mp3")
 								music(api, body, event, file)
 							}
-						}else if(low_body.startsWith(prefix + "qr") && spl >= 3){
+						}else if(body.startsWith(prefix + "qr") && spl >= 3){
 							qr(api, body, event)
-						}else if(low_body.startsWith(prefix + "quote")){
+						}else if(body.startsWith(prefix + "quote")){
 							quote(api, low_body, event)
-						}else if(low_body.startsWith(prefix + "solve") && spl >= 3){
+						}else if(body.startsWith(prefix + "solve") && spl >= 3){
 							solve(api, body, event)
-						}else if(low_body.startsWith(prefix + "special")){
+						}else if(body.startsWith(prefix + "special")){
 							specials.kolai(api, event)
-						}else if(low_body.startsWith(prefix + "verse")){
+						}else if( body.startsWith(prefix + "verse")){
 							verse(api, body, event)
-						}else if(low_body.startsWith(prefix + "what is") && spl >= 4){
+						}else if(body.startsWith(prefix + "what is") && spl >= 4){
 							what(api, body, event)
-						}else if(low_body.startsWith(prefix + "wiki") && spl >= 3){
+						}else if(body.startsWith(prefix + "wiki") && spl >= 3){
 							wiki(api, body, event)
-						}else if(low_body.startsWith(prefix + "google")){
+						}else if(body.startsWith(prefix + "google")){
 							ggl(api, body, event)
 						}
 					}else if(!myself.includes(senderID) && (body.startsWith("@Bhie Bot") || body.startsWith("BhieBot") || body.startsWith("Bhie Bot"))){
