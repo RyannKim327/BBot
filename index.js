@@ -12,6 +12,7 @@ const music = require("./script/music")
 const qr = require("./script/qr")
 const quote = require("./script/quote")
 const sim = require("./script/sim")
+const solve = require("./script/solve")
 const specials = require("./script/specials")
 const verse = require("./script/verse")
 const what = require("./script/what")
@@ -254,6 +255,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							qr(api, body, event)
 						}else if(low_body.startsWith(prefix + "quote")){
 							quote(api, low_body, event)
+						}else if(low_body.startsWith(prefix + "solve") && spl >= 2){
+						  solve(api, body, event)
 						}else if(low_body.startsWith(prefix + "special")){
 							specials.kolai(api, event)
 						}else if(low_body.startsWith(prefix + "verse")){
