@@ -25,6 +25,7 @@ module.exports = (api, body, event) => {
 	}else{
 		let xpl = body.split(" ")
 		xpl.shift()
+		xpl.shift()
 		let data = "http://api.qrserver.com/v1/create-qr-code/?150x150&data=" + xpl.join(" ")
 		let f = fs.createWriteStream("qr.jpg")
 		let res = request(encodeURI(data))

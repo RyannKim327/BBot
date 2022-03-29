@@ -17,6 +17,7 @@ module.exports = async (api, body, event) => {
 	let d = body.split(" ")
 	try{
 		d.shift()
+		d.shift()
 		let w = ""
 		let r = await getWiki(d.join(" "))
 		if(r === undefined){

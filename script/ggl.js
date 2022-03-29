@@ -17,6 +17,7 @@ async function search(query){
 module.exports = async (api, body, event) => {
 	let data = body.split(" ")
 	data.shift()
+	data.shift()
 	let res = await search(data.join(" "))
 	if(res.knowledge_panel.title != "N/A" && res.knowledge_panel.description != "N/A"){
 		let output = res.knowledge_panel

@@ -15,6 +15,7 @@ module.exports = (api, body, event) => {
 	let w = body.split(" ")
 	w.shift()
 	w.shift()
+	w.shift()
 	let o = whatIs(w.join(" "))
 	let r = ""
 	o.then((response) => {

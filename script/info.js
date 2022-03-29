@@ -44,7 +44,7 @@ module.exports = async (api, body, event) => {
 		})
 	}else{
 		let info = body.split(" ")
-		if(info.length <= 1){
+		if(info.length <= 2){
 			api.sendMessage(fs.readFileSync("txt/abt.txt", "utf8"), event.threadID)
 		}else{
 			if(Object.keys(event.mentions).length > 0){
@@ -87,13 +87,13 @@ module.exports = async (api, body, event) => {
 					}
 				})
 			}else{
-				if(!isNaN(info[1])){
-					api.getUserInfo(parseInt(info[1]), async (err, data) => {
+				if(!isNaN(info[2])){
+					api.getUserInfo(parseInt(info[2]), async (err, data) => {
 						if(err){
 							console.log(err)
 							api.sendMessage("Error occured. either not found, deleted or deactivated.", event.threadID, event.messageID)
 						}else{
-							let d = data[info[1]]
+							let d = data[info[2]]
 							let gender = ""
 							switch(d.gender){
 								case 1:
@@ -126,7 +126,7 @@ module.exports = async (api, body, event) => {
 						}
 					})
 				}else{
-					api.getUserID(info[1], (err, obj) => {
+					api.getUserID(info[2], (err, obj) => {
 						if(err){
 							console.log(err)
 							api.sendMessage("Error occured, either not found, deleted or deactivated", event.threadID, event.messageID)

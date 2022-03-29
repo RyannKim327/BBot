@@ -56,7 +56,7 @@ module.exports = async (api, body, event, file) => {
 	let x = body.toLowerCase()
 	let d = body.split(" ")
 	if(x.includes("https://m.youtube.com") || x.includes("https://youtu.be") || x.includes("https://youtube.com") || x.includes("https://www.youtube.com")){
-		let s = dl(d[1])
+		let s = dl(d[2])
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		try{
 			s.then((response) => {
@@ -112,6 +112,7 @@ module.exports = async (api, body, event, file) => {
 	}else{
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		try{
+			d.shift()
 			d.shift()
 			await yt.initalize()
 			const m = await yt.search(d.join(" ").replace(/[^\w\s]/gi, ''))

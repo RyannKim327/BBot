@@ -30,7 +30,7 @@ async function anime(){
 
 module.exports = (api, body, event) => {
 	let c = body.split(" ")
-	if(c[1] === "anime"){
+	if(c[2] === "anime"){
 		let q = anime()
 		q.then((response) => {
 			api.getUserInfo(event.senderID, (err, data) => {
@@ -39,9 +39,9 @@ module.exports = (api, body, event) => {
 				}else{
 					const name = data[event.senderID]
 					api.sendMessage({
-						body: `A quotation for you my dear @${name.firstName}\nFrom: ${response.character}\nIn the anime: ${response.anime}\n~ ${response.quote}`,
+						body: `A quotation for you my dear ${name.firstName}\nFrom: ${response.character}\nIn the anime: ${response.anime}\n~ ${response.quote}`,
 						mentions: [{
-							tag: `@${name.firstName}`,
+							tag: `${name.firstName}`,
 							id: event.senderID
 						}]
 					}, event.threadID, event.messageID)
@@ -56,9 +56,9 @@ module.exports = (api, body, event) => {
 				}else{
 					const name = data[event.senderID]
 					api.sendMessage({
-						body: `A quotation for you my dear @${name.firstName}\nFrom: ${response.quote_author}\n~ ${response.quote_body}`,
+						body: `A quotation for you my dear ${name.firstName}\nFrom: ${response.quote_author}\n~ ${response.quote_body}`,
 						mentions: [{
-							tag: `@${name.firstName}`,
+							tag: `${name.firstName}`,
 							id: event.senderID
 						}]
 					}, event.threadID, event.messageID)
