@@ -272,7 +272,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(body.startsWith(prefix + "wiki") && spl >= 3){
 							wiki(api, body, event)
 						}
-					}else if(body.startsWith("@Bhie Bot")){
+					}else if(senderID != myself && body.startsWith("@Bhie Bot")){
 						if(body == "@Bhie Bot"){
 							api.sendMessage("Bakit?", threadID, messageID)
 						}else if(low_body.includes("cute") || low_body.includes("kyut") || low_body.includes("kyot")){
