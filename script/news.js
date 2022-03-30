@@ -10,7 +10,7 @@ module.exports = async (api, body, event) => {
 	let b = Math.floor(Math.random() * a)
 	let c = news[b]
 	let d = "Title: " + c.title + "\nBy: " + c.by + "\nPublished: " + c.published + "\nSource: " + c.url
-	if(image == undefined){
+	if(c.image == undefined){
 		api.sendMessage(d, event.threadID, event.messageID)
 	}else{
 		let e = fs.createWriteStream("news.jpg")
