@@ -9,6 +9,7 @@ const ggl = require("./script/ggl")
 const info = require("./script/info")
 const morse = require("./script/morse")
 const music = require("./script/music")
+const news = require("./script/news")
 const qr = require("./script/qr")
 const quote = require("./script/quote")
 const sim = require("./script/sim")
@@ -243,6 +244,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							specials.bang(api, event)
 						}else if(body.startsWith(prefix + "info")){
 							info(api, body, event)
+						}else if(body.startsWith(prefix + "google")){
+							ggl(api, body, event)
 						}else if(body.startsWith(prefix + "morse") && spl >= 4){
 							morse(api, low_body, event)
 						}else if(body.startsWith(prefix + "music") && spl >= 3){
@@ -252,6 +255,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								let file = fs.createWriteStream("song.mp3")
 								music(api, body, event, file)
 							}
+						}else if(body.startsWith(prefix + "whats up")){
+						 	news(api, body, event)
 						}else if(body.startsWith(prefix + "qr") && spl >= 3){
 							qr(api, body, event)
 						}else if(body.startsWith(prefix + "quote")){
@@ -266,10 +271,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							what(api, body, event)
 						}else if(body.startsWith(prefix + "wiki") && spl >= 3){
 							wiki(api, body, event)
-						}else if(body.startsWith(prefix + "google")){
-							ggl(api, body, event)
 						}
-					}else if(!myself.includes(senderID) && (body.startsWith("@Bhie Bot") || body.startsWith("BhieBot") || body.startsWith("Bhie Bot"))){
+					}else if((body.startsWith("@Bhie Bot") || body.startsWith("BhieBot") || body.startsWith("Bhie Bot"))){
 						if(body == "Bhie Bot" || body == "BhieBot" || body == "@Bhie Bot"){
 							api.sendMessage("Bakit?", threadID, messageID)
 						}else if(low_body.includes("cute") || low_body.includes("kyut") || low_body.includes("kyot")){
