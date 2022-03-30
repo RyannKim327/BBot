@@ -69,7 +69,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	const myself = api.getCurrentUserID()
 	api.sendMessage("BhieBot service is now active", gc)
 	cron.schedule('30 23 * * *', () => {
-		api.getThreadList(20, null, ['INBOX'], (err, data) => {
+		api.getThreadList(5, null, ['INBOX'], (err, data) => {
 			if(err) return console.error("Error [Thread List Cron]: " + err)
 			for(let i = 0; i < data.length; i++){
 				if(data[i].isGroup && 4699051006857054 != data[i].threadID){
@@ -107,15 +107,19 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				}
 			})
 			if(say_tuned && say_thread > 0){
-			  api.getThreadInfo(threadID, (err, data) => {
-			    if(err) return console.error("Error [Thread stay tuned]: " + err)
-			    if(say_active == threadID && senderID != myself){
-			      api.getUserInfo(senderID, (error, info) => {
-			        const user = info[senderID]
-			        api.sendMessage(`From ${user.name} of ${data.threadName}:\n${body}`, say_thread)
-			      })
-			    }
-			  })
+				api.getThreadInfo(threadID, (err, data) => {
+					if(err) return console.error("Error [Thread stay tuned]: " + err)
+						if(say_active == threadID && senderID != myself){
+							api.getUserInfo(senderID, (error, info) => {
+								const user = info[senderID]
+								if(event.attachment.length > 0){
+									api.sendMessage(`An Attachment was sent from ${user.name} of ${data.threadName}.`, say_thread)
+								}else{
+									api.sendMessage(`From ${user.name} of ${data.threadName}:\n${body}`, say_thread)
+								}
+							})
+						}
+				})
 			}
 			if(low_body.startsWith(adminPrefix) && low_body.endsWith(adminPostfix)){
 				let command = low_body.replace(adminPrefix, "").replace(adminPostfix, "")
