@@ -3,8 +3,8 @@ const fs = require("fs")
 const http = require("https")
 
 module.exports = async (api, body, event) => {
-	let news = await ggl.getTopNews().headline_stories
-	console.log(news)
+	let news = await ggl.getTopNews()
+	console.log(news.headline_stories)
 	//let a = news.length
 	//let b = Math.floor(Math.random() * a)
 	/*let c = news//[b]
