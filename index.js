@@ -130,7 +130,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						if(command == "toggle"){
 							service = !service
 							if(!gc.includes(threadID)){
-								api.sendMessage("Bot service turned " ((service) ? "on" : "off") + " to all threads.", threadID)
+								api.sendMessage("Bot service turned " + ((service) ? "on" : "off") + " to all threads.", threadID)
 							}
 							api.sendMessage("Bot service turned " + ((service) ? "on" : "off") + " to all threads.", gc)
 						}else if(command == "bot: sleep" && !ban_thread.includes(threadID)){
