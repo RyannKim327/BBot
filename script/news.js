@@ -19,11 +19,11 @@ module.exports = async (api, body, event) => {
 			e.on("finish", () => {
 				api.sendMessage({
 					body: d,
-					attachment: fs.crreateReadStream(__dirname + "/../news.jpg").on("end", async () => {
+					attachment: fs.createReadStream(__dirname + "/../news.jpg").on("end", async () => {
 						if(fs.existsSync(__dirname + "/../news.jpg")){
 							fs.unlink(__dirname + "/../news.jpg", (err) => {
 								if(err){
-									coonsole.error("Error [FS News]: " + err)
+									console.error("Error [FS News]: " + err)
 								}
 							})
 						}
