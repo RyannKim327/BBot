@@ -3,10 +3,10 @@ const fs = require("fs")
 const http = require("https")
 
 module.exports = async (api, body, event) => {
-	let news = await ggl.getTopNews().headline_stories
-	/*let a = news.length
+	let news = await ggl.getTopNews()
+	let a = news.length
 	let b = Math.floor(Math.random() * a)
-	*/let c = news
+	let c = news[b].headline_stories
 	let d = "Title: " + c.title + "\nBy: " + c.by + "\nPublished: " + c.published + "\nSource: " + c.url
 	if(image == undefined){
 		api.sendMessage(d, event.threadID, event.messageID)
