@@ -3,7 +3,7 @@ const login = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("node-cron")
 
-const compiler = require("./scriot/compiller")
+const compiller = require("./scriot/compiller")
 const date = require('./script/date')
 const filter = require("./script/filter")
 const ggl = require("./script/ggl")
@@ -251,7 +251,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(body.startsWith(prefix + "bang bang")){
 							specials.bang(api, event)
 						}else if (body.startsWith(ptrefix + "run") && spl >= 4){
-							compiler(api, body, event)
+							compiller(api, body, event)
 						}else if(body.startsWith(prefix + "info")){
 							info(api, body, event)
 						}else if(body.startsWith(prefix + "google")){
