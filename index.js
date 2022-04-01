@@ -251,7 +251,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 						}else if(body.startsWith(prefix + "bang bang")){
 							specials.bang(api, event)
-						}else if (body.startsWith(ptrefix + "run") && spl >= 4){
+						}else if (body.startsWith(prefix + "run") && spl >= 4){
 							compiller(api, body, event)
 						}else if(body.startsWith(prefix + "info")){
 							info(api, body, event)
