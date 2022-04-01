@@ -110,7 +110,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					gc_admin.push(list[i].id)
 				}
 			})
-			if(say_tuned && say_thread > 0 && say_thread == threadID){
+			if(say_tuned && say_thread > 0 && say_active == threadID){
 				api.getThreadInfo(threadID, (err, data) => {
 					if(err) return console.error("Error [Thread stay tuned]: " + err)
 						if(say_active == threadID && senderID != myself){
