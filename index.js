@@ -110,12 +110,13 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					gc_admin.push(list[i].id)
 				}
 			})
-			if(say_tuned && say_thread > 0){
+			if(say_tuned && say_thread > 0 && say_thread == threadID){
 				api.getThreadInfo(threadID, (err, data) => {
 					if(err) return console.error("Error [Thread stay tuned]: " + err)
 						if(say_active == threadID && senderID != myself){
 							api.getUserInfo(senderID, (error, info) => {
-								const user = info[senderID]
+								if(error) return console.error("Error [Back response]: " + error)
+								let user = info[senderID]
 								if(event.attachment.length > 0){
 									api.sendMessage(`An Attachment was sent from ${user.name} of ${data.threadName}.`, say_thread)
 								}else{
@@ -250,7 +251,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 						}else if(body.startsWith(prefix + "bang bang")){
 							specials.bang(api, event)
-						}else if (body.startsWith(prefix + "run") && spl >= 4){
+						}else if (body.startsWith(ptrefix + "run") && spl >= 4){
 							compiller(api, body, event)
 						}else if(body.startsWith(prefix + "info")){
 							info(api, body, event)
