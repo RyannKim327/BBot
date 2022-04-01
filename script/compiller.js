@@ -36,7 +36,7 @@ async function func(language, code){
 		json: prog
 	}, (err, res, body) => {
 		if(err && res.statusCode != 200){
-			console.error("Error [JDoodle]: " + err(
+			console.error("Error [JDoodle]: " + err)
 			return null
 		}else{
 			return body
