@@ -117,7 +117,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							api.getUserInfo(senderID, (error, info) => {
 								if(error) return console.error("Error [Back response]: " + error)
 								let user = info[senderID]
-								if(event.attachment.length > 0){
+								if(event.attachments.length > 0){
 									api.sendMessage(`An Attachment was sent from ${user.name} of ${data.threadName}.`, say_thread)
 								}else{
 									api.sendMessage(`From ${user.name} of ${data.threadName}:\n${body}`, say_thread)
