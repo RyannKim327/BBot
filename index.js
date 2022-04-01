@@ -78,6 +78,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			}
 		})
 	})
+	cron.schedule('30 * * * *', () => {
+		console.log("Command Executed")
+	})
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true
@@ -112,7 +115,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						if(say_active == threadID && senderID != myself){
 							api.getUserInfo(senderID, (error, info) => {
 								const user = info[senderID]
-								if(event.attachments.length > 0){
+								if(event.attachment.length > 0){
 									api.sendMessage(`An Attachment was sent from ${user.name} of ${data.threadName}.`, say_thread)
 								}else{
 									api.sendMessage(`From ${user.name} of ${data.threadName}:\n${body}`, say_thread)
