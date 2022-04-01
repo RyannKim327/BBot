@@ -1,4 +1,4 @@
-const request = required("request")
+const request = require("request")
 
 /*
 var request = require('request');
