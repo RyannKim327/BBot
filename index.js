@@ -3,7 +3,7 @@ const login = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("node-cron")
 
-const compiller = require("./scriot/compiller")
+const compiller = require("./script/compiller")
 const date = require('./script/date')
 const filter = require("./script/filter")
 const ggl = require("./script/ggl")
