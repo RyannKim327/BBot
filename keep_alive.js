@@ -14,7 +14,7 @@ app.listen(port, () => {
 const unnamed = require("unnamed-js")
 
 const server = unnamed({
-	port: 3000,
+	port: process.env.PORT | 3000,
 	init: () => {
 		console.log("Credits to Mart Anthony Salazar")
 	}
