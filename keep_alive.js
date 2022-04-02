@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const app = express();
 
 const host = process.env.HOST || "http://localhost"
@@ -10,4 +10,16 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
 	console.log(`Your app is listening a ${host}:${port}`)
-});
+});*/
+const unnamed = require("unnamed-js")
+
+const server = unnamed({
+	port: 3000,
+	init: () => {
+		console.log("Credits to Mart Anthony Salazar")
+	}
+})
+
+server.GET("/", (a, b) => {
+	b.send("Sample")
+})
