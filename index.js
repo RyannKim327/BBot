@@ -73,11 +73,13 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		api.getThreadList(20, null, ['INBOX'], (err, data) => {
 			if(err) return console.error("Error [Thread List Cron]: " + err)
 			let i = 0
-			while(i < 5){
-				if(data[i].isGroup && data.threadName != null && 4699051006857054 != data[i].threadID){
+			let j = 0
+			while(j < 5 && i < data.length){
+				if(data[i].isGroup && data[i].threadName != null && !includes(data[i]) && 4699051006857054 != data[i].threadID){
 					verse(api, data[i].threadID, null)
-					i++
+					j++
 				}
+				i++
 			}
 		})
 	})
