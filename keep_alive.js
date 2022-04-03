@@ -21,5 +21,5 @@ const server = unnamed({
 })
 
 server.GET("/", (a, b) => {
-	b.send("Sample")
+	b.send("BhieBot server side using UnnamedJS.")
 })

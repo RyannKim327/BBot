@@ -46,7 +46,10 @@ Prefix: BhieBot:
 
 4.Music
 - This command will search only musics or songs fron YouTube Music. If there's an error, try to add the singer name on it.
-~ Sample: BhieBot: music sana all
+~ Sample: BhieBot: sing sana all
+4.1 Music with url
+- This command will send you an audio message with a song using YouTube link.
+~ Sample: BhieBot sing https://youtu.be/GVWYywwcQp8
 
 5. QR
 - This will send you a picture of a qr code that contains on what you've sent.

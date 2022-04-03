@@ -263,7 +263,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							ggl(api, body, event)
 						}else if(body.startsWith(prefix + "morse") && spl >= 4){
 							morse(api, low_body, event)
-						}else if(body.startsWith(prefix + "music") && spl >= 3){
+						}else if(body.startsWith(prefix + "sing") && spl >= 3){
 							if(fs.existsSync(__dirname + "/song.mp3")){
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
 							}else{
@@ -322,7 +322,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								break
 								case 2:
 									gender = "Mr."
-									kasarian = "Ginoo"
+									kasarian = "Ginoong"
 								break
 								default:
 									gender = "Mr./Ms."
