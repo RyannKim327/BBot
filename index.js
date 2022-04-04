@@ -88,7 +88,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	})
 	api.setOptions({
 		listenEvents: true,
-		selfListen: true
+		selfListen: true,
+		handleMatches: true
 	})
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
