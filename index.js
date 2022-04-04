@@ -86,6 +86,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	cron.schedule('30 * * * *', () => {
 		console.log("Command Executed")
 	})
+	console.log("Log: " + event.logMessageType)
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true
