@@ -86,7 +86,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	cron.schedule('30 * * * *', () => {
 		console.log("Command Executed")
 	})
-	console.log("Log: " + event.logMessageType)
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true
@@ -94,6 +93,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
 		if(event.body != null){
+			console.log("Log [Message Type]: " + event.logMessageType)
 			api.markAsReadAll((err) => {
 				if(err) return console.error("Error [Mark as Read All]: " + err)
 			})
