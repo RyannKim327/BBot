@@ -1,7 +1,8 @@
 const fs = require("fs")
 
 module.exports = (api, event) => {
-	if(event.type === "event"){
+	if(event.type == "event"){
+		console.log("Test")
 		switch(event.logMessageType){
 			case "log:subscribe":
 				api.getThreadInfo(event.threadID, (err, data) => {

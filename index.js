@@ -90,12 +90,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	})
 	api.setOptions({
 		listenEvents: true,
-		selfListen: true,
-		handleMatches: true
+		selfListen: true
 	})
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
 		if(event.body != null){
+			joined(api, event)
 			console.log("Log [Message Type]: " + event.logMessageType)
 			api.markAsReadAll((err) => {
 				if(err) return console.error("Error [Mark as Read All]: " + err)
@@ -118,7 +118,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					gc_admin.push(list[i].id)
 				}
 			})
-			joined(api, event)
 			if(say_tuned && say_thread > 0 && say_active == threadID){
 				api.getThreadInfo(threadID, (err, data) => {
 					if(err) return console.error("Error [Thread stay tuned]: " + err)
