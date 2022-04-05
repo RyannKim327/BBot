@@ -1,6 +1,6 @@
 const fs = require("fs")
 
-module.exports = (api, event) => {
+module.exports = async (api, event) => {
 	console.log("Test")
 	if(event.type == "event"){
 		console.log("Working event")
