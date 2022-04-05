@@ -94,7 +94,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	})
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
-		joined(api, event)
+		//joined(api, event)
 		if(event.body != null){
 			console.log("Log [Message Type]: " + event.logMessageType)
 			api.markAsReadAll((err) => {
