@@ -9,7 +9,7 @@ module.exports = (api, event) => {
 				api.getThreadInfo(event.threadID, async (err, data) => {
 					if(err) return console.error("Error [Log Subscribe]: " + err)
 					if(data.isGroup){
-						const joiner = event.logMessageData.addedParticipants
+						const joiner = await event.logMessageData.addedParticipants
 						const me = api.getCurrentUserID()
 						let messages = {
 							body: "",
