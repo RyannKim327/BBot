@@ -92,7 +92,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		listenEvents: true,
 		selfListen: true
 	})
-	api.listen(async (err, event) => {
+	api.listen( (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
 		joined(api, event)
 		if(event.body != null){
