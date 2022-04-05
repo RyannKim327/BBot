@@ -10,14 +10,14 @@ module.exports = (api, event) => {
 					if(err) return console.error("Error [Log Subscribe]: " + err)
 					if(data.isGroup){
 						const joiner = await event.logMessageData.addedParticipants
-						const me = api.getCurrentUserID()
+						const me = await api.getCurrentUserID()
 						let messages = {
 							body: "",
 							mentions: []
 						}
 						for(newbies of joiner){
 							if(newbies == me){
-								api.sendMessage(fs.readFileSync("txt/abt.txt"), event.threadID)
+								api.sendMessage(fs.readFileSync("txt/abt.txt", "utf-8"), event.threadID)
 								break
 							}
 							const id = newbies.userFbId
