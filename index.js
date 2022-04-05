@@ -77,7 +77,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			let i = 0
 			let j = 0
 			while(j < 5 && i < data.length){
-				if(data[i].isGroup && data[i].threadName != null && 4699051006857054 != data[i].threadID){
+				if(data[i].isGroup && !gc.includes(data[i].threadID) && data[i].threadName != null && 4699051006857054 != data[i].threadID){
 					verse(api, data[i].threadID, null)
 					j++
 				}
