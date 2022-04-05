@@ -6,7 +6,7 @@ module.exports = (api, event) => {
 		console.log("Working event")
 		switch(event.logMessageType){
 			case "log:subscribe":
-				api.getThreadInfo(event.threadID, (err, data) => {
+				api.getThreadInfo(event.threadID, async (err, data) => {
 					if(err) return console.error("Error [Log Subscribe]: " + err)
 					if(data.isGroup){
 						const joiner = event.logMessageData.addedParticipants
@@ -21,7 +21,7 @@ module.exports = (api, event) => {
 								break
 							}
 							const id = newbies.userFbId
-							api.getUserInfo(id, (err, user_data) => {
+							api.getUserInfo(id, async (err, user_data) => {
 								if(err) return console.err("Error [User joiner]: " + err)
 								let g = ""
 								let user = user_data[id]
