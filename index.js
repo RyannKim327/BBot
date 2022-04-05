@@ -3,6 +3,8 @@ const login = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("node-cron")
 
+const joined = require("./extra/joined")
+
 const compiller = require("./script/compiller")
 const date = require('./script/date')
 const filter = require("./script/filter")
@@ -116,6 +118,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					gc_admin.push(list[i].id)
 				}
 			})
+			joined(api, event)
 			if(say_tuned && say_thread > 0 && say_active == threadID){
 				api.getThreadInfo(threadID, (err, data) => {
 					if(err) return console.error("Error [Thread stay tuned]: " + err)

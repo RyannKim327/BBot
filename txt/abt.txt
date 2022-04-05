@@ -21,7 +21,7 @@ Prefix: BhieBot:
 ~ Where @Bhie Bot is a mentioned name
 1.5 Info (not in reply)
 - This command shows this list or tutorials.
-~ Sample: BhoeBot: info
+~ Sample: BhieBot: info
 
 2. Google
 - This is still under development, so don't expect too much.
