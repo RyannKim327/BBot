@@ -3,6 +3,7 @@ const fs = require("fs")
 module.exports = (api, event) => {
 	console.log("Test")
 	if(event.type == "event"){
+		console.log("Working event")
 		switch(event.logMessageType){
 			case "log:subscribe":
 				api.getThreadInfo(event.threadID, (err, data) => {
