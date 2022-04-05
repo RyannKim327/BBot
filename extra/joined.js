@@ -1,12 +1,12 @@
 const fs = require("fs")
 
-module.exports = async (api, event) => {
+module.exports = (api, event) => {
 	console.log("Test")
 	if(event.type == "event"){
 		console.log("Working event")
 		switch(event.logMessageType){
 			case "log:subscribe":
-				await api.getThreadInfo(event.threadID, (err, data) => {
+				api.getThreadInfo(event.threadID, (err, data) => {
 					if(err) return console.error("Error [Log Subscribe]: " + err)
 					if(data.isGroup){
 						const joiner = event.logMessageData.addedParticipants
@@ -46,7 +46,7 @@ module.exports = async (api, event) => {
 				})
 			break
 			case "log:unsubscribe":
-				
+				console.log("Exit")
 			break
 		}
 	}
