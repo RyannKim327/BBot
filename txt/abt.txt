@@ -1,104 +1,104 @@
-Hello I am BhieBot, your friendly bot lived in cloud space. But before you ask for my service, please only one request, don't use my service in any kind of abuse or spamming. Here are the basic commands that might help you.
+Hello I am No-Bhie Bot, your friendly bot lived in cloud space. But before you ask for my service, please only one request, don't use my service in any kind of abuse or spamming. Here are the basic commands that might help you.
 
 Note: Prefix also the commands are all case sensitive.
 
-Prefix: BhieBot:
+Prefix: NoBhie:
 
 1. Info
 - This command has different functions based on its arguments and its messaging type.
 1.1 Facebook ID
 - Using info with Facebook id will give you the informatio of a Facebook user with an id.
-~ Sample: BhieBot: info 1234567890
+~ Sample: NoBhie: info 1234567890
 1.2 Facebook Username
 - Like using Facebook ID method, but using a username
-~ Sample: BhieBot: info mark.zuckerberg
+~ Sample: NoBhie: info mark.zuckerberg
 1.3 Info (in reply message)
 - Get the Facebook information of a member or sender of a particular message by replying on it.
-~ Sample: BhieBot: info
+~ Sample: NoBhie: info
 1.4 Mention
 - Get the Facebook information by mentioning them.
-~ Sample: BhieBot: info @Bhie Bot
-~ Where @Bhie Bot is a mentioned name
+~ Sample: NoBhie: info @No-Bhie Bot
+~ Where @No-Bhie Bot is a mentioned name
 1.5 Info (not in reply)
 - This command shows this list or tutorials.
-~ Sample: BhieBot: info
+~ Sample: NoBhie: info
 
 2. Google
 - This is still under development, so don't expect too much.
 2.1 Define
 - Define a word or phrase or something you won't understand.
-~ Sample: BhieBot: google define language
+~ Sample: NoBhie: google define language
 2.2 Translate
 - Translating a word or phrase(detected) to a specific language.
-~ Sample: BhieBot: google translate hello in tagalog
+~ Sample: NoBhie: google translate hello in tagalog
 2.3 Default
 - This has no added syntax or adding default, just use the prefix + google keyword then something you want to know.
-~ Sample: BhieBot: google facebook
+~ Sample: NoBhie: google facebook
 
 3. Morse
 - This is an encryption from roman characters into morse code.
 3.1 From
 - This is the decryption from morse code to roman characters.
-~ Sample: BhieBot: morse from ... --- ...
+~ Sample: NoBhie: morse from ... --- ...
 3.2 To
 - This is to encrypt fron roman characters to morse code.
-~ Sample: BhieBot: morse to SOS
+~ Sample: NoBhie: morse to SOS
 
 4.Music
 - This command will search only musics or songs fron YouTube Music. If there's an error, try to add the singer name on it.
-~ Sample: BhieBot: sing sana all
+~ Sample: NoBhie: sing sana all
 4.1 Music with url
 - This command will send you an audio message with a song using YouTube link.
-~ Sample: BhieBot sing https://youtu.be/GVWYywwcQp8
+~ Sample: NoBhie: sing https://youtu.be/GVWYywwcQp8
 
 5. QR
 - This will send you a picture of a qr code that contains on what you've sent.
 5.1 Default
 - This is not literally adding a syntax or something, just using the basic form of it.
-~ Sample: BhieBot: qr Hello World
+~ Sample: NoBhie: qr Hello World
 5.2 Message Reply (Message Reply Mode)
 - This must only call the prefix + keyword by replying in a message.
-~ Sample: BhieBot: qr
+~ Sample: NoBhie: qr
 ~ In reply
 
 6. Quote
 - This will send you different quotations from different personality or character.
 6.1 Anime
 - This with send you a quote from an anime character.
-~ Sample: BhieBot: quote anime
+~ Sample: NoBhie: quote anime
 6.2 Default
 - This is not adding any kind of syntax literally. This command will send you random quote from some famous personalities.
-~ Sample: BhieBot: quote
+~ Sample: NoBhie: quote
 
 7. Verse
 - Bibld verse, this feature has also sending a bible verse (of the day) every 7:30 in the morning as a greeting and giving good vibes to all.
 7.1 Default
 - This will send you a random verse(s)
-~ Sample: BhieBot: verse
+~ Sample: NoBhie: verse
 7.2 Verse of the day
 - This will send you a bible verse (of the day) [server based].
-~ Sample: BhieBot: verse of the day
+~ Sample: NoBhie: verse of the day
 7.3 Chapter
 - This will send you all the verses on a particular chapter in the bible.
-~ Sample: BhieBot: verse Genesis 1
+~ Sample: NoBhie: verse Genesis 1
 7.4 Verse
 - This will send what you've request verse of the bible.
-~ Sample: BhieBot: verse Isa.7:14
+~ Sample: NoBhie: verse Isa.7:14
 7.5 Range
 - This is not adding a keyword range literally, but to use hypen ( - ) and send the range of the verse.
-~ Sample: BhieBot: verse John 3:16-19
+~ Sample: NoBhie: verse John 3:16-19
 7.6 Multiple
 - This is not adding a keyword multiple literally, but to use semi-color ( ; ) and send a multiple verse/ chapter of the bible.
-~ Sample: BhieBot: verse John 3:16-19;Rev 13:16-18
+~ Sample: NoBhie: verse John 3:16-19;Rev 13:16-18
 ~ All formats excluding verse of the day and default are accepted to this as format.
 
 8. What is
 - This is to define a word
-~ Sample: BhieBot: what is language
+~ Sample: NoBhie: what is language
 
 9. Wiki
 - A wikipedia based information
-~ Sample: BhieBot: wiki Odin
+~ Sample: NoBhie: wiki Odin
 
 There are still hidden features for this bot, also the auto response.
 
