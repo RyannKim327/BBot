@@ -71,14 +71,13 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	})
 	const myself = api.getCurrentUserID()
 	api.sendMessage("BhieBot service is now active", gc)
-	cron.schedule('22 01 * * *', () => {
+	cron.schedule('30 23 * * *', () => {
 		api.getThreadList(20, null, ['INBOX'], (err, data) => {
 			if(err) return console.error("Error [Thread List Cron]: " + err)
 			let i = 0
 			let j = 0
-			while( i < data.length){
+			while(j < 5 && i < data.length){
 				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID){
-				//if(data[i].threadID == gc){
 					verse(api, data[i].threadID, null)
 					j++
 				}
