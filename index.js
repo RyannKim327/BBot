@@ -76,14 +76,14 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			if(err) return console.error("Error [Thread List Cron]: " + err)
 			let i = 0
 			let j = 0
-			//while( i < data.length){
-				//if(data[i].isGroup && !gc.includes(data[i].threadID) && data[i].threadName != null && 4699051006857054 != data[i].threadID){
-				if(data[i].threadID == gc){
+			while( i < data.length){
+				if(data[i].isGroup && gc != data[i].threadID && data[i].threadName != null && 4699051006857054 != data[i].threadID){
+				//if(data[i].threadID == gc){
 					verse(api, data[i].threadID, null)
-					//j++
+					j++
 				}
-				//i++
-			//}
+				i++
+			}
 		})
 	})
 	cron.schedule('20 * * * *', () => {
