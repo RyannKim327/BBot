@@ -48,11 +48,11 @@ module.exports = (api, body, event) => {
 	if(event.type == "message_reply"){
 		let rBody = event.messageReply.body
 		let x = rBody.toLowerCase()
-		const data = body.match(/NoBhie:\smorse\s([to|from]+)/)
-		api.sendMessage(empty(x.replace(/^\r\n/, " "), data[1]), event.threadID, event.messageID)
+		let data = body.match(/NoBhie:\smorse\s([to|from]+)/)
+		api.sendMessage(empty(x.replace(/^\r\n/, " "), data[0]), event.threadID, event.messageID)
 	}else{
 		let x = body.toLowerCase()
-		const data = x.match(/NoBhie:\smorse\s([to|from]+)\s([\w\s\r\n]+)/)
-		api.sendMessage(empty(data[2].replace(/^\r\n/, " "), data[1]), event.threadID, event.messageID)
+		let data = x.match(/NoBhie:\smorse\s([to|from]+)\s([\w\s\r\n]+)/)
+		api.sendMessage(empty(data[1].replace(/^\r\n/, " "), data[0]), event.threadID, event.messageID)
 	}
 }
