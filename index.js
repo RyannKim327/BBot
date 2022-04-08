@@ -259,13 +259,13 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 						}else if(body.startsWith(prefix + "bang bang")){
 							specials.bang(api, event)
-						}else if (body.startsWith(prefix + "run") && spl >= 4){
+						}else if (body.startsWith(prefix + "run") && spl >= 2){
 							compiller(api, body, event)
 						}else if(body.startsWith(prefix + "info")){
 							info(api, body, event)
 						}else if(body.startsWith(prefix + "google")){
 							ggl(api, body, event)
-						}else if(body.startsWith(prefix + "morse") && spl >= 4){
+						}else if(body.startsWith(prefix + "morse") && spl >= 3){
 							morse(api, low_body, event)
 						}else if(body.startsWith(prefix + "sing") && spl >= 3){
 							if(fs.existsSync(__dirname + "/song.mp3")){
@@ -276,7 +276,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 						}else if(body.startsWith(prefix + "whats up")){
 						 	news(api, body, event)
-						}else if(body.startsWith(prefix + "qr") && spl >= 2){
+						}else if(body.startsWith(prefix + "qr")){
 							qr(api, body, event)
 						}else if(body.startsWith(prefix + "quote")){
 							quote(api, low_body, event)
