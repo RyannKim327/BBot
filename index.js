@@ -100,11 +100,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			api.markAsReadAll((err) => {
 				if(err) return console.error("Error [Mark as Read All]: " + err)
 			})
-			let time = date("Asia/Manila").getHours()//new Date().getHours() + 8
-			/*if(time > 24){
-				time -= 24
-			}*/
-			console.log("Log [Time]: " + time)
+			let time = date("Asia/Manila").getHours()
+			let mins = date("Asia/Manila").getMinutes()
+			console.log(`Log[Time]: ${time} : ${mins}`)
 			resetTime(time)
 			let threadID = event.threadID
 			let senderID = event.senderID
@@ -276,7 +274,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 						}else if(body.startsWith(prefix + "whats up")){
 						 	news(api, body, event)
-						}else if(body.startsWith(prefix + "qr") && spl >= 3){
+						}else if(body.startsWith(prefix + "qr") && spl >= 2){
 							qr(api, body, event)
 						}else if(body.startsWith(prefix + "quote")){
 							quote(api, low_body, event)
@@ -403,6 +401,17 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								night += senderID + " "
 							}
 						})
+					}else if(myself != senderID && event.type == "message_reply"){
+						if(event.messageReply.senderID == myself){
+							if(low_body.includes("thank") || low_body.includes("tnx")){
+								let bool_num = Math.floor(Math.random() * 10)
+								if((bool_num % 2) == 0){
+									api.setMessageReaction("💗", messageID, (err) => {}, true)
+								}else{
+									api.sendMessage("You're welcome", threadID, messageID)
+								}
+							}
+						}
 					}
 				}
 			}
