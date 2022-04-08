@@ -45,7 +45,7 @@ function empty(str, condition){
 }
 
 module.exports = (api, body, event) => {
-	const data = body.match(/^NoBhie:\smorse\s([to|from]+)\s([\W\w\s]+)/)
+	const data = body.match(/NoBhie:\smorse\s([to|from]+)\s([\W\w\s]+)/)
 	console.log("NoBhie 0: " + data[0])
 	console.log("NoBhie 1: " + data[1])
 	console.log("NoBhie 2: " + data[2])
