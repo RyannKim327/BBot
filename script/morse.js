@@ -45,19 +45,14 @@ function empty(str, condition){
 }
 
 module.exports = (api, body, event) => {
-	const data = body.match(/NoBhie:\smorse\s([to|from]+)\s([\W\w\s]+)/)
-	console.log("NoBhie 0: " + data[0])
-	console.log("NoBhie 1: " + data[1])
-	console.log("NoBhie 2: " + data[2])
-	/*
 	if(event.type == "message_reply"){
 		let rBody = event.messageReply.body
 		let x = rBody.toLowerCase()
-		const data = body.match(/^NoBhie:\smorse\s([to|from]+)/)
+		const data = body.match(/NoBhie:\smorse\s([to|from]+)/)
 		api.sendMessage(empty(x.replace(/^\r\n/, " "), data[1]), event.threadID, event.messageID)
 	}else{
 		let x = body.toLowerCase()
-		const data = x.match(/^NoBhie:\smorse\s([to|from]+)\s([\W\w\s]+)/)
+		const data = x.match(/NoBhie:\smorse\s([to|from]+)\s([\w\s\r\n]+)/)
 		api.sendMessage(empty(data[2].replace(/^\r\n/, " "), data[1]), event.threadID, event.messageID)
-	}*/
+	}
 }
