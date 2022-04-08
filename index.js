@@ -266,7 +266,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(body.startsWith(prefix + "google")){
 							ggl(api, body, event)
 						}else if(body.startsWith(prefix + "morse") && spl >= 3){
-							morse(api, low_body, event)
+							morse(api, body, event)
 						}else if(body.startsWith(prefix + "sing") && spl >= 3){
 							if(fs.existsSync(__dirname + "/song.mp3")){
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
