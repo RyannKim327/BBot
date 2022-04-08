@@ -220,6 +220,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									}]
 								}, threadID)
 							})
+						}else if(command == "bot: unsent"){
+							
 						}
 					}
 				}
