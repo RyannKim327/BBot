@@ -220,8 +220,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									}]
 								}, threadID)
 							})
-						}else if(command == "bot: unsent"){
-							
+						}else if(command == "bot: unsend"){
+							api.unsendMessage(event.messageReply.messageID, (err) => {
+								if(err){
+									console.log("Error [Unsend]: " + err);
+								}
+							})
 						}
 					}
 				}
