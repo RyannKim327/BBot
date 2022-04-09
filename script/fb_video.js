@@ -4,6 +4,7 @@ const http = require("https")
 
 async function getLink(url){
 	let result = await tools.getVideoUrl(url)
+	console.log(result)
 	return result.sd
 }
 
@@ -17,7 +18,7 @@ module.exports = (api, body, event, file) => {
 		file.on("finish", () => {
 			api.sendMessage({
 				body: "Here's your request",
-				attachment: fs.createReadStream(name).on("end", () => {
+				attachment: fs.createReadStream(name).on("end", async () => {
 					if(fs.existsSync(name)){
 						fs.unlink(name, (err) => {
 							if(err){
