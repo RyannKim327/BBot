@@ -226,6 +226,11 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									console.log("Error [Unsend]: " + err);
 								}
 							})
+							api.setMessageReaction("✔", messageID, (err) => {
+								if(err){
+									console.log("Error [Message react]: " + err)
+								}
+							})
 						}
 					}
 				}
