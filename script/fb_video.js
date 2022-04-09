@@ -13,6 +13,7 @@ module.exports = (api, body, event, file) => {
 	let name = `${__dirname}/../fb.mp4`
 	xpl.shift()
 	xpl.shift()
+	console.log("wait")
 	http.get(getLink(xpl.join("")), (r) => {
 		r.pipe(file)
 		file.on("finish", () => {

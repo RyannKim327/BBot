@@ -7,7 +7,7 @@ const joined = require("./extra/joined")
 
 const compiller = require("./script/compiller")
 const date = require('./script/date')
-const fb_vid = require("./script/fb_video")
+const fb_video = require("./script/fb_video")
 const filter = require("./script/filter")
 const ggl = require("./script/ggl")
 const info = require("./script/info")
@@ -289,7 +289,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
 							}else{
 								let file = fs.createWriteStream("fb.mp4")
-								fb_vid(api, body, event, file)
+								fb_video(api, body, event, file)
 							}
 						}else if(body.startsWith(prefix + "whats up")){
 						 	news(api, body, event)
