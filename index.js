@@ -230,7 +230,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								if(err){
 									console.log("Error [Message react]: " + err)
 								}
-							})
+							}, true)
 						}
 					}
 				}
