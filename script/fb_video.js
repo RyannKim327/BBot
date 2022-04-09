@@ -8,13 +8,13 @@ async function getLink(url){
 	return result.sd
 }
 
-module.exports = (api, body, event, file) => {
+module.exports = async (api, body, event, file) => {
 	let xpl = body.split(" ")
 	let name = `${__dirname}/../fb.mp4`
 	xpl.shift()
 	xpl.shift()
 	console.log("wait")
-	http.get(getLink(xpl.join("")), (r) => {
+	http.get(await getLink(xpl.join("")), (r) => {
 		r.pipe(file)
 		file.on("finish", () => {
 			api.sendMessage({
