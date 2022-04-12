@@ -1,12 +1,12 @@
 const weatherjs = require("weather-js")
 
 async function func(city){
-	let result = weatherjs.find{
+	let result = weatherjs.find){
 		search: city,
 		degreeType: "C"
 	}, (err, r) => {
 		return r
-	}
+	})
 	return result
 }
 
