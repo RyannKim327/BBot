@@ -20,6 +20,7 @@ const sim = require("./script/sim")
 const solve = require("./script/solve")
 const specials = require("./script/specials")
 const verse = require("./script/verse")
+const weather = require(".script/weather")
 const what = require("./script/what")
 const wiki = require("./script/wiki")
 
@@ -303,6 +304,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							specials.kolai(api, event)
 						}else if( body.startsWith(prefix + "verse")){
 							verse(api, body, event)
+						}else if(body.startsWith(prefix + "status")){
+							weather(api, body, event)
 						}else if(body.startsWith(prefix + "what is") && spl >= 4){
 							what(api, body, event)
 						}else if(body.startsWith(prefix + "wiki") && spl >= 3){
