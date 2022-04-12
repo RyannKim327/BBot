@@ -5,6 +5,7 @@ async function func(city){
 		search: city,
 		degreeType: "C"
 	}, (err, r) => {
+console.log(r)
 		return r.data
 	})
 	return result
@@ -19,7 +20,7 @@ module.exports = (api, body, event) => {
 		data.shift()
 		let r = func(data.join(" "))
 		let d = r[0]
-		let m = "Location: " + d.location.name + "\n"
+		let m = ""// "Location: " + d.location.name + "\n"
 		m += "Temperature: " + d.current.temperature + "\n"
 		m += "Sky: " + d.current.skytext + "\n"
 		m += "Observation time: " + d.current.date + " " + d.current.observationtime
