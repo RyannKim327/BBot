@@ -1,26 +1,31 @@
 const weatherjs = require("weather-js")
 
 async function func(city){
-	let result = weatherjs.find({
+	let result;
+	weatherjs.find({
 		search: city,
-		degreeType: "C"
+		degreeType: 'C'
 	}, (err, r) => {
-console.log(r)
-		return r.data
+		if(err){
+			console.log("Error [Weather]: " + err)
+			result = null
+		}else{
+			result = r
+		}
 	})
 	return result
 }
 
-module.exports = (api, body, event) => {
-	let data = body.split(" ")
+module.exports = async (api, body, event) => {
+	let data = split(" ")
 	if(data.length <= 2){
 		api.sendMessage("This feature requires the city of area you want to know", event.threadID, event.messageID)
 	}else{
 		data.shift()
 		data.shift()
-		let r = func(data.join(" "))
+		let r = await func(data.join(" "))
 		let d = r[0]
-		let m = ""// "Location: " + d.location.name + "\n"
+		let m = "Location: " + d.location.name + "\n"
 		m += "Temperature: " + d.current.temperature + "\n"
 		m += "Sky: " + d.current.skytext + "\n"
 		m += "Observation time: " + d.current.date + " " + d.current.observationtime
