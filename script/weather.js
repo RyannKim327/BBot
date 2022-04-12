@@ -17,7 +17,7 @@ async function func(city){
 }
 
 module.exports = async (api, body, event) => {
-	let data = split(" ")
+	let data = body.split(" ")
 	if(data.length <= 2){
 		api.sendMessage("This feature requires the city of area you want to know", event.threadID, event.messageID)
 	}else{
