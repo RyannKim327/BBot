@@ -20,7 +20,7 @@ const sim = require("./script/sim")
 const solve = require("./script/solve")
 const specials = require("./script/specials")
 const verse = require("./script/verse")
-const weather = require(".script/weather")
+const weather = require("./script/weather")
 const what = require("./script/what")
 const wiki = require("./script/wiki")
 
