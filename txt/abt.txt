@@ -44,7 +44,7 @@ Prefix: NoBhie:
 - This is to encrypt fron roman characters to morse code.
 ~ Sample: NoBhie: morse to SOS
 
-4.Music
+4. Music
 - This command will search only musics or songs fron YouTube Music. If there's an error, try to add the singer name on it.
 ~ Sample: NoBhie: sing sana all
 4.1 Music with url
@@ -100,6 +100,10 @@ Prefix: NoBhie:
 - A wikipedia based information
 ~ Sample: NoBhie: wiki Odin
 
+10. Weather
+- A simple weather forcast for a mentioned area
+~ Sample: NoBhie: status Manila
+
 There are still hidden features for this bot, also the auto response.
 
 For the group admin, if the topic is serious, and you want to turn off the bot, kindly type "<< sleep >>" without any quotation marks.
@@ -115,6 +119,7 @@ Credits:
 - Jerson Carin
 - LuanRT (googlethis)
 - Mart Anthony Salazar
+- Lester Navarra
 - Schmavery (Facebook chat api)
 - VangBanLaNhat (fca-unoffifial)
 - Testers (groups)
