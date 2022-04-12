@@ -11,6 +11,7 @@ module.exports = async (api, body, event) => {
 			search: data.join(" "),
 			degreeType: 'C'
 		}, (err, r) => {
+			if(err) return console.error("Error [Weather]: " + err)
 			let d = r[0]
 			let m = "Location: " + d.location.name + "\n"
 			m += "Temperature: " + d.current.temperature + "\n"
