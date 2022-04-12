@@ -5,7 +5,7 @@ async function func(city){
 		search: city,
 		degreeType: "C"
 	}, (err, r) => {
-		return r
+		return r.data
 	})
 	return result
 }
