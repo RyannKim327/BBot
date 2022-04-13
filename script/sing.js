@@ -27,7 +27,7 @@ module.exports = async (api, body, event, file) => {
 			})
 			f.on("proccess", (info) => {
 				api.setMessageReaction("⏳", event.messageID, (err) => {}, true)
-			}
+			})
 			f.on("end", () => {
 				let name = __dirname + "/../sing.mp3"
 				let message = ""
@@ -45,7 +45,7 @@ module.exports = async (api, body, event, file) => {
 						}
 					})
 				}, event.threadID, event.messageID)
-			}
+			})
 		}else{
 			api.sendMessage("Too long", event.threadID, event.messageID)
 		}
