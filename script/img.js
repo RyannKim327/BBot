@@ -19,10 +19,13 @@ async function revImg(attach){
 module.exports = async (api, body, event) => {
 	if(event.type == "message_reply"){
 		if(event.messageReply.attachments.length > 0 && event.messageReply.attachments[0].type == "photo"){
+			console.log("Log [URL]: " + event.messageReply.attachments[0].url)
 			let r = await revImg(event.messageReply.attachments[0].url)
 			let d = r[0]
 			let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
 			api.sendMessage(m, event.threadID, event.messageID)
+		}else{
+			api.sendMessage("Something went wrong", event.threadID, event.MessageID)
 		}
 	}else{
 		let d = body.split(" ")
