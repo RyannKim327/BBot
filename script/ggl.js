@@ -57,7 +57,7 @@ module.exports = async (api, body, event) => {
 							})
 						}, event.threadID, event.messageID)
 					})
-				}
+				})
 			}else{
 				api.sendMessage(`Result [Dictionary]:\n${output.word} (${output.phonetic})\n\nDefinitions:\n${definitions}\n\nExamples:\n${examples}`, event,threadID, event.messageID)
 			}
