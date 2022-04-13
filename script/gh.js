@@ -2,7 +2,7 @@ const fs = require("fs")
 const request = require("request")
 
 module.exports = async (api, body, event) => {
-	let data = body(" ")[2]
+	let data = body.split(" ")[2]
 	let url = "https://github-readme-stats.vercel.app/api?username=" + data + "&show_icons=true&theme=radical"
 	let file = fs.createWriteStream("gh.gif")
 	let r = request(encodeURI(url))
