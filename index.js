@@ -17,6 +17,7 @@ const news = require("./script/news")
 const qr = require("./script/qr")
 const quote = require("./script/quote")
 const sim = require("./script/sim")
+const sing = require("./script/sing")
 const solve = require("./script/solve")
 const specials = require("./script/specials")
 const verse = require("./script/verse")
@@ -278,6 +279,13 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							ggl(api, body, event)
 						}else if(body.startsWith(prefix + "morse") && spl >= 3){
 							morse(api, body, event)
+						}else if(body.startsWith(prefix + "test")){
+							if(fs.existsSync(__dirname + "/sing.mp3")){
+								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
+							}else{
+								let file = fs.createWriteStream("sing.mp3")
+								music(api, body, event, file)
+							}
 						}else if(body.startsWith(prefix + "sing") && spl >= 3){
 							if(fs.existsSync(__dirname + "/song.mp3")){
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
