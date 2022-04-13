@@ -11,7 +11,7 @@ module.exports = async (api, body, event, file) => {
 	}else{
 		//let lyrics = await yt2.getLyrics(result.songs[0].id)
 		console.log("Log [Duration]: " + result.songs[0].duration)
-		if(result.songs[0].duration <= (30 * 60)){
+		//if(result.songs[0].duration <= (30 * 60)){
 			const ytInfo = await yt2.getDetails(result.songs[0].id)
 			let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.channel_name}`
 			let f = yt2.download(result.songs[0].id, {
@@ -46,9 +46,9 @@ module.exports = async (api, body, event, file) => {
 					})
 				}, event.threadID, event.messageID)
 			})
-		}else{
-			api.sendMessage("Too long", event.threadID, event.messageID)
-		}
+		//}else{
+		//	api.sendMessage("Too long", event.threadID, event.messageID)
+		//}
 	}
 }
 
