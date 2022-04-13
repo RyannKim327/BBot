@@ -10,8 +10,7 @@ async function img(query){
 
 async function revImg(attach){
 	let result = await google.search(attach, {
-		ris: true,
-		safe: true
+		ris: true
 	})
 	return result
 }
