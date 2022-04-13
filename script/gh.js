@@ -16,6 +16,6 @@ module.exports = async (api, body, event) => {
 					})
 				}
 			})
-		}, event.threadID, messageID)
+		}, event.threadID, event.messageID)
 	})
 }
