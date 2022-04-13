@@ -14,7 +14,7 @@ module.exports = async (api, body, event, file) => {
 		console.log("Log [Duration]: " + result.songs[0].duration)
 		//if(result.songs[0].duration <= (30 * 60)){
 			const ytInfo = await yt2.getDetails(result.songs[0].id)
-			let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.channel_name}`
+			let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.metadata.channel_name}`
 			let f = yt2.download(result.songs[0].id, {
 				format: 'mp4',
 				quality: 'tiny',
@@ -33,7 +33,7 @@ module.exports = async (api, body, event, file) => {
 				let name = __dirname + "/../sing.mp3"
 				let message = ""
 				//if(lyrics != undefined){
-				//	message += lyrics + "\n\n"
+					message += lyrics + "\n\n"
 				//}
 				message += info
 				api.sendMessage({
