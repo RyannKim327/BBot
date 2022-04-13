@@ -9,9 +9,9 @@ module.exports = async (api, body, event) => {
 	r.pipe(file)
 	file.on("close", () => {
 		api.sendMessage({
-			attachment: fs.createReadStream(__dirname + "/../gh.gif").on("end", async () => {
-				if(fs.existsSync(__dirname + "/../gh.gif")){
-					fs.unlink(__dirname + "/../gh.gif", (err) => {
+			attachment: fs.createReadStream(__dirname + "/gh.gif").on("end", async () => {
+				if(fs.existsSync(__dirname + "/gh.gif")){
+					fs.unlink(__dirname + "/gh.gif", (err) => {
 						if(err) return console.error("Error [Github]: " + err)
 					})
 				}
