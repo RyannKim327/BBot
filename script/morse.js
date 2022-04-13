@@ -48,11 +48,15 @@ module.exports = (api, body, event) => {
 	if(event.type == "message_reply"){
 		let rBody = event.messageReply.body
 		let x = rBody.toLowerCase()
-		let data = body.match(/NoBhie:\smorse\s([to|from]+)/)
+		let data = body.match(/NoBhie:\smorse\s([to|from])/)
 		api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
 	}else{
-		let data = body.match(/NoBhie:\smorse\s([to|from]+)\s([\w\s\r\n]+)/)
-		let x = data[2].toLowerCase()
-		api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
+		let data = body.match(/NoBhie:\smorse\s([to|from])\s([\w\s\r\n]+)/)
+		if(data.length > 2){
+			let x = data[2].toLowerCase()
+			api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
+		}else{
+			api.sendMessage(`Morse code Command: The format for this code is NoBhie: morse [from|to] <word|phrase>.`, event.threadID, event.messageID)
+		}
 	}
 }
