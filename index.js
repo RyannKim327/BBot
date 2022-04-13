@@ -9,6 +9,7 @@ const compiller = require("./script/compiller")
 const date = require('./script/date')
 const filter = require("./script/filter")
 const ggl = require("./script/ggl")
+const img = require("./script/img")
 const info = require("./script/info")
 const morse = require("./script/morse")
 const music = require("./script/music")
@@ -272,6 +273,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							specials.bang(api, event)
 						}else if (body.startsWith(prefix + "run") && spl >= 2){
 							compiller(api, body, event)
+						}else if(body.startsWith(prefix + "img")){
+							img(api, body, event)
 						}else if(body.startsWith(prefix + "info")){
 							info(api, body, event)
 						}else if(body.startsWith(prefix + "google")){
