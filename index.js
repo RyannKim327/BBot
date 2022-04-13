@@ -7,10 +7,8 @@ const joined = require("./extra/joined")
 
 const compiller = require("./script/compiller")
 const date = require('./script/date')
-const fb_video = require("./script/fb_video")
 const filter = require("./script/filter")
 const ggl = require("./script/ggl")
-const gh = require("./script/gh")
 const info = require("./script/info")
 const morse = require("./script/morse")
 const music = require("./script/music")
@@ -278,8 +276,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							info(api, body, event)
 						}else if(body.startsWith(prefix + "google")){
 							ggl(api, body, event)
-						}else if(body.startsWith(prefix + "github")){
-							gh(api, body, event)
 						}else if(body.startsWith(prefix + "morse") && spl >= 3){
 							morse(api, body, event)
 						}else if(body.startsWith(prefix + "test")){
@@ -295,13 +291,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}else{
 								let file = fs.createWriteStream("song.mp3")
 								music(api, body, event, file)
-							}
-						}else if(body.startsWith(prefix + "fb")){
-							if(fs.existsSync(__dirname + "/fb.mp4")){
-								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
-							}else{
-								let file = fs.createWriteStream("fb.mp4")
-								fb_video(api, body, event, file)
 							}
 						}else if(body.startsWith(prefix + "whats up")){
 						 	news(api, body, event)
