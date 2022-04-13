@@ -15,7 +15,7 @@ module.exports = async (api, body, event, file) => {
 			const ytInfo = await yt2.getDetails(result.songs[0].id)
 			let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.channel_name}`
 			let f = yt2.download(result.songs[0].id, {
-				format: 'mp3',
+				format: 'mp4',
 				quality: 'tiny',
 				type: 'audio',
 				audioQuality: 'lowest',
