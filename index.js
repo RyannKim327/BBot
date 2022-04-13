@@ -271,7 +271,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 						}else if(body.startsWith(prefix + "bang bang")){
 							specials.bang(api, event)
-						}else if (body.startsWith(prefix + "run") && spl >= 2){
+						}else if (body.startsWith(prefix + "run")){
 							compiller(api, body, event)
 						}else if(body.startsWith(prefix + "img")){
 							img(api, body, event)
@@ -279,7 +279,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							info(api, body, event)
 						}else if(body.startsWith(prefix + "google")){
 							ggl(api, body, event)
-						}else if(body.startsWith(prefix + "morse") && spl >= 3){
+						}else if(body.startsWith(prefix + "morse")){
 							morse(api, body, event)
 						}else if(body.startsWith(prefix + "test")){
 							if(fs.existsSync(__dirname + "/sing.mp3")){
@@ -288,7 +288,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								let file = fs.createWriteStream("sing.mp3")
 								sing(api, body, event, file)
 							}
-						}else if(body.startsWith(prefix + "sing") && spl >= 3){
+						}else if(body.startsWith(prefix + "sing")){
 							if(fs.existsSync(__dirname + "/song.mp3")){
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
 							}else{
@@ -301,7 +301,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							qr(api, body, event)
 						}else if(body.startsWith(prefix + "quote")){
 							quote(api, low_body, event)
-						}else if(body.startsWith(prefix + "solve") && spl >= 3){
+						}else if(body.startsWith(prefix + "solve")){
 							solve(api, body, event)
 						}else if(body.startsWith(prefix + "special")){
 							specials.kolai(api, event)
@@ -309,9 +309,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							verse(api, body, event)
 						}else if(body.startsWith(prefix + "status")){
 							weather(api, body, event)
-						}else if(body.startsWith(prefix + "what is") && spl >= 4){
+						}else if(body.startsWith(prefix + "what is")){
 							what(api, body, event)
-						}else if(body.startsWith(prefix + "wiki") && spl >= 3){
+						}else if(body.startsWith(prefix + "wiki")){
 							wiki(api, body, event)
 						}
 					}else if(senderID != myself && body.startsWith("@No-Bhie Bot")){
