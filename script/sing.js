@@ -1,4 +1,5 @@
 const yt = require("youtubei.js")
+const fs = rewuire("fs")
 
 module.exports = async (api, body, event, file) => {
 	const yt2 = await new yt()
