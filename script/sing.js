@@ -14,6 +14,9 @@ module.exports = async (api, body, event, file) => {
 		console.log("Log [Duration]: " + result.songs[0].duration)
 		//if(result.songs[0].duration <= (30 * 60)){
 			const ytInfo = await yt2.getDetails(result.songs[0].id)
+			if(ytInfo.title == undefined){
+				return api.sendMessage("Something went wrong", event.threadID, event.messageID)
+			}
 			let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.metadata.channel_name}`
 			let f = yt2.download(result.songs[0].id, {
 				format: 'mp4',
