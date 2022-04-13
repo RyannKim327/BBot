@@ -11,11 +11,11 @@ module.exports = async (api, body, event, file) => {
 		api.sendMessage("Something went wrong", event.threadID, event.messageID)
 	}else{
 		//let lyrics = await yt2.getLyrics(result.songs[0].id)
-		console.log("Log [Duration]: " + result.videos[0].duration)
+		console.log("Log [Duration]: " + result.songs[0].duration)
 		//if(result.songs[0].duration <= (30 * 60)){
-			const ytInfo = await yt2.getDetails(result.videos[0].id)
+			const ytInfo = await yt2.getDetails(result.songs[0].id)
 			let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.metadata.channel_name}`
-			let f = yt2.download(result.videos[0].id, {
+			let f = yt2.download(result.songs[0].id, {
 				format: 'mp4',
 				quality: 'tiny',
 				type: 'audio',
