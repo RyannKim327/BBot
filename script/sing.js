@@ -1,5 +1,5 @@
 const yt = require("youtubei.js")
-const fs = rewuire("fs")
+const fs = require("fs")
 
 module.exports = async (api, body, event, file) => {
 	const yt2 = await new yt()
@@ -42,6 +42,7 @@ module.exports = async (api, body, event, file) => {
 						if(fs.existsSync(name)){
 							fs.unlink(name, (err) => {
 								if(err) return console.error("Error [Sing]: " + err)
+								api.setMessageReaction("✔", event.messageID, (err) => {}, true)
 							})
 						}
 					})
