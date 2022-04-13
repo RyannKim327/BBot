@@ -52,7 +52,7 @@ module.exports = (api, body, event) => {
 		api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
 	}else{
 		if(body.split(" ").length > 3){
-			let data = body.match(/NoBhie:\smorse\s([to|from]+)\s([\w\s\r\n]+)/)
+			let data = body.match(/NoBhie:\smorse\s([to|from]+)\s([\w\W\s\r\n]+)/)
 			let x = data[2].toLowerCase()
 			api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
 		}else{
