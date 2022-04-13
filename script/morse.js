@@ -46,17 +46,21 @@ function empty(str, condition){
 
 module.exports = (api, body, event) => {
 	if(event.type == "message_reply"){
-		let rBody = event.messageReply.body
-		let x = rBody.toLowerCase()
-		let data = body.match(/NoBhie:\smorse\s([to|from]+)/)
-		api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
+		if(body.split(" ").length > 2){
+			let rBody = event.messageReply.body
+			let x = rBody.toLowerCase()
+			let data = body.match(/NoBhie:\smorse\s([to|from]+)/)
+			api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
+		}else{
+			api.sendMessage(`Morse code reply: This features requires to be followed by this format:\nNoBhie: [from|to]`, event.threadID, event.messageID)
+		}
 	}else{
 		if(body.split(" ").length > 3){
 			let data = body.match(/NoBhie:\smorse\s([to|from]+)\s([\w\W\s\r\n]+)/)
 			let x = data[2].toLowerCase()
 			api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
 		}else{
-			api.sendMessage(`Morse code Command:\nThe format for this code is\nNoBhie: morse [from|to] <word|phrase>.`, event.threadID, event.messageID)
+			api.sendMessage(`Morse code Command: The format for this code is\nNoBhie: morse [from|to] <word|phrase>.`, event.threadID, event.messageID)
 		}
 	}
 }
