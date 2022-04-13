@@ -6,7 +6,7 @@ module.exports = async (api, body, event, file) => {
 	data.shift()
 	data.shift()
 	let result = await yt2.search(data.join(" "), {client: 'YTMUSIC'})
-	if(result.songs[0].id == undefuned){
+	if(result.songs[0].id == undefined){
 		api.sendMessage("Something went wrong", event.threadID, event.messageID)
 	}else{
 		let lyrics = await yt2.getLyrics(result.songs[0].id)
