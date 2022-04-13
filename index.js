@@ -10,6 +10,7 @@ const date = require('./script/date')
 const fb_video = require("./script/fb_video")
 const filter = require("./script/filter")
 const ggl = require("./script/ggl")
+const gh = require("./script/gh")
 const info = require("./script/info")
 const morse = require("./script/morse")
 const music = require("./script/music")
@@ -277,6 +278,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							info(api, body, event)
 						}else if(body.startsWith(prefix + "google")){
 							ggl(api, body, event)
+						}else if(body.startsWith(prefix + "github")){
+							gh(api, body, event)
 						}else if(body.startsWith(prefix + "morse") && spl >= 3){
 							morse(api, body, event)
 						}else if(body.startsWith(prefix + "test")){
