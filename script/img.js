@@ -23,7 +23,7 @@ module.exports = async (api, body, event) => {
 			let d = r[0]
 			console.log(d)
 			//let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
-			api.sendMessage(d, event.threadID, event.messageID)
+			api.sendMessage(r, event.threadID, event.messageID)
 		}else{
 			api.sendMessage("Something went wrong", event.threadID, event.MessageID)
 		}
