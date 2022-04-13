@@ -284,7 +284,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
 							}else{
 								let file = fs.createWriteStream("sing.mp3")
-								music(api, body, event, file)
+								sing(api, body, event, file)
 							}
 						}else if(body.startsWith(prefix + "sing") && spl >= 3){
 							if(fs.existsSync(__dirname + "/song.mp3")){
