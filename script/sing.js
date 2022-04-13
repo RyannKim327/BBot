@@ -9,7 +9,7 @@ module.exports = async (api, body, event, file) => {
 	if(result.songs[0].id == undefined){
 		api.sendMessage("Something went wrong", event.threadID, event.messageID)
 	}else{
-		let lyrics = await yt2.getLyrics(result.songs[0].id)
+		//let lyrics = await yt2.getLyrics(result.songs[0].id)
 		console.log("Log [Duration]: " + result.songs[0].duration)
 		if(result.songs[0].duration <= (30 * 60)){
 			const ytInfo = await yt2.getDetails(result.songs[0].id)
@@ -31,9 +31,9 @@ module.exports = async (api, body, event, file) => {
 			f.on("end", () => {
 				let name = __dirname + "/../sing.mp3"
 				let message = ""
-				if(lyrics != undefined){
-					message += lyrics + "\n\n"
-				}
+				//if(lyrics != undefined){
+				//	message += lyrics + "\n\n"
+				//}
 				message += info
 				api.sendMessage({
 					body: message,
