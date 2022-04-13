@@ -66,9 +66,7 @@ module.exports = async (api, body, event) => {
 			api.sendMessage(`Result [Results]:\n${output.title}\n~${output.description}\nSource: ${output.url}`, event.threadID, event.messageID)
 		}
 	}else{
-		api.sendMessage(`Google Command:
-		Test
-		`, event.threadID, event.messageID)
+		api.sendMessage(`Google Command: The format use for this is NoBhie: google <query>.`, event.threadID, event.messageID)
 	}
 }
 
