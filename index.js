@@ -5,6 +5,7 @@ const cron = require("node-cron")
 
 const joined = require("./extra/joined")
 
+const chat = require("./script/chat")
 const compiller = require("./script/compiller")
 const date = require('./script/date')
 const filter = require("./script/filter")
@@ -424,7 +425,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									`Good night and sweet dreams ${gender} ${user.name}. Dn't forget to pray before you sleep`,
 									`Ikaw ay matulog na para bukas ${kasarian} ${user.name} ay may lakas upang harapin at sagupain muli ang bawat hamon ng buhay`
 								]
-								.sendMessage({
+								api.sendMessage({
 									body: g_night[Math.floor(Math.random() * g_night.length)],
 									mentions: [{
 										tag: `${user.name}`,
@@ -435,6 +436,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								night += senderID + " "
 							}
 						})
+						if(body.startsWith("NoBhie")){
+							chat(api, body, event)
+						}
 					}else if(myself != senderID && event.type == "message_reply"){
 						if(event.messageReply.senderID == myself){
 							if(low_body.includes("thank") || low_body.includes("tnx")){
@@ -445,6 +449,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									api.sendMessage("You're welcome", threadID, messageID)
 								}
 							}
+						}else{
+							chat(api, body, event)
 						}
 					}
 				}
