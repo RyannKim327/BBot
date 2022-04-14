@@ -3,7 +3,7 @@ const weatherjs = require("weather-js")
 module.exports = async (api, body, event) => {
 	let data = body.split(" ")
 	if(data.length <= 2){
-		api.sendMessage("This feature requires the city of area you want to know. Try to follow this format:\nNoBhie: status Manila", event.threadID, event.messageID)
+		api.sendMessage("Weather Command: This feature requires the city of area you want to know. Try to follow this format:\nNoBhie: status Manila", event.threadID, event.messageID)
 	}else{
 		data.shift()
 		data.shift()
