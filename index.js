@@ -406,7 +406,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}
 								aftie += senderID + " "
 							}else if((time >= 18 && time < 22) && !evening.includes(senderID) && (low_body.includes("goodeve") || low_body.includes("good eve") || low_body.includes("magandang gabi") || low_body.includes("evening"))){
-								let g_eve [
+								let g_eve = [
 									`Good evening ${gender} ${user.name}. Its been a long day for you. Take some rest for a while.`,
 									`Magandang gabi din sa iyo ${kasarian} ${user.name}. Isa nanamang nakakapagod na araw. Pahinga ka muna, at magluto na, gabi na.`,
 									`Oras na para magluto ${kasarian} ${user.name}. Saka wag kakalimutang magpahinga.`
