@@ -14,7 +14,7 @@ async function bot(message){
 			const reply = await chatbot.chat({
 				Message: message
 			})
-			return msg.channel.send(reply)
+			return reply
 		}
 	}
 	return response
