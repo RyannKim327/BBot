@@ -1,34 +1,18 @@
 const chatbot = require("djs-chatbot")
-
-async function bot(message){
-	/*client.on("message", async msg => {
-		const reply = await chatbot.chat({
-			Message: message
-		})
-		return msg.channel.send(reply)
-	})
-	return client*/
-	let response = {
-		name: "NoBhie",
-		run: async (client, msg) => {
-			const reply = await chatbot.chat({
-				Message: message
-			})
-			return reply
-		}
-	}
-	return response
-}
+const bot = new chatbot({
+	name: "NoBhie",
+	gender: "Female AI"
+})
 
 module.exports = async (api, body, event) => {
 	if(event.type == "message_reply"){
-		let msg = await bot(body)
+		let msg = await bot.chat(body)
 		api.sendMessage(msg, event.threadID, event.messageID)
 	}else{
 		if(body.startsWith("NoBhie")){
 			let data = body.split(" ")
 			data.shift()
-			let msg = await bot(data.join(" "))
+			let msg = await bot.chat(data.join(" "))
 			api.sendMessage(msg, event.threadID, event.messageID)
 		}
 	}
