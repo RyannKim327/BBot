@@ -51,7 +51,7 @@ module.exports = async (api, body, event) => {
 				api.sendMessage(w, event.threadID, event.messageID)
 			}
 		}else{
-			api.sendMessage(`Wikipedia Command:\nThis command must have article. Try to follow this format:\nNoBhie: wiki Odin`, event.threadID, event.messageID)
+			api.sendMessage(`Wikipedia Command: This command must have article. Try to follow this format:\nNoBhie: wiki <query>`, event.threadID, event.messageID)
 		}
 	}catch(e){
 	api.sendMessage(e, event.threadID, event.messageID)
