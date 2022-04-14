@@ -32,7 +32,6 @@ module.exports = async (api, body, event) => {
 			})
 		})
 	}
-	
 	//console.log(news)
 }
 
