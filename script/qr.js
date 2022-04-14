@@ -46,7 +46,7 @@ module.exports = (api, body, event) => {
 				}, event.threadID, event.messageID)
 			})
 		}else{
-			api.sendMessage(`QR Code Command:\nThis command contains of 2 features, the first one is by executing the command in message reply, and the other one is by using a format in normal message. The format for QR Code Command is:\nNoBhie: qr <query>.`, event.threadID, event.messageID)
+			api.sendMessage(`QR Code Command: This command contains of 2 features, the first one is by executing the command in message reply, and the other one is by using a format in normal message. The format for QR Code Command is:\nNoBhie: qr <query>.`, event.threadID, event.messageID)
 		}
 	}
 }
