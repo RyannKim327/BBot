@@ -406,8 +406,13 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}
 								aftie += senderID + " "
 							}else if((time >= 18 && time < 22) && !evening.includes(senderID) && (low_body.includes("goodeve") || low_body.includes("good eve") || low_body.includes("magandang gabi") || low_body.includes("evening"))){
+								let g_eve [
+									`Good evening ${gender} ${user.name}. Its been a long day for you. Take some rest for a while.`,
+									`Magandang gabi din sa iyo ${kasarian} ${user.name}. Isa nanamang nakakapagod na araw. Pahinga ka muna, at magluto na, gabi na.`,
+									`Oras na para magluto ${kasarian} ${user.name}. Saka wag kakalimutang magpahinga.`
+								]
 								api.sendMessage({
-									body: `Good evening ${gender} ${user.name}. It's been a long day. It's time to chill and relax.`,
+									body: g_eve[Math.floor(Math.random() * g_eve.length)]
 									mentions: [{
 										tag: `${user.name}`,
 										id: senderID
@@ -415,8 +420,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}, threadID, messageID)
 								evening += senderID + " "
 							}else if((time >= 22 || time < 5) && !night.includes(senderID) && (low_body.includes("goodnight") || low_body.includes("good night"))){
-								api.sendMessage({
-									body: `Good night and sweet dreams ${gender} ${user.name}.`,
+								let g_night = [
+									`Good night and sweet dreams ${gender} ${user.name}. Dn't forget to pray before you sleep`,
+									`Ikaw ay matulog na para bukas ${kasarian} ${user.name} ay may lakas upang harapin at sagupain muli ang bawat hamon ng buhay`
+								]
+								.sendMessage({
+									body: lateMsg[Math.floor(Math.random() * lateMsg.length)],
 									mentions: [{
 										tag: `${user.name}`,
 										id: senderID
