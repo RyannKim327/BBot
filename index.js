@@ -448,9 +448,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								}else{
 									api.sendMessage("You're welcome", threadID, messageID)
 								}
+							}else{
+								chat(api, body, event)
 							}
-						}else{
-							chat(api, body, event)
 						}
 					}
 				}
