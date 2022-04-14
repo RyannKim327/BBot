@@ -425,7 +425,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									`Ikaw ay matulog na para bukas ${kasarian} ${user.name} ay may lakas upang harapin at sagupain muli ang bawat hamon ng buhay`
 								]
 								.sendMessage({
-									body: lateMsg[Math.floor(Math.random() * lateMsg.length)],
+									body: g_night[Math.floor(Math.random() * g_night.length)],
 									mentions: [{
 										tag: `${user.name}`,
 										id: senderID
