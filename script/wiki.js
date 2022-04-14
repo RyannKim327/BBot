@@ -19,41 +19,42 @@ module.exports = async (api, body, event) => {
 		d.shift()
 		d.shift()
 		if(d.length > 0){
-			throw new Error(`Wikipedia Command:\nThis command must have article. Try to follow this format:\nNoBhie: wiki Odin`)
-		}
-		let w = ""
-		let r = await getWiki(d.join(" "))
-		if(r === undefined){
-			api.sendMessage("Error: ", event.threadID, event.messageID)
-			throw new Error("Document not found")
-		}
-		if(r.title === undefined){
-			api.sendMessage("Error: ", event.threadID, event.messageID)
-			throw new Error("Document not found")
-		}
-		w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
-		if(r.originalimage !== undefined){
-			let f = fs.createWriteStream("wiki.png")
-			let go = http.get(r.originalimage.source, (s) => {
-				s.pipe(f)
-				f.on("finish", () => {
-					api.sendMessage({
-						attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", () => {
+			let w = ""
+			let r = await getWiki(d.join(" "))
+			if(r === undefined){
+				api.sendMessage("Error: ", event.threadID, event.messageID)
+				throw new Error("Document not found")
+			}
+			if(r.title === undefined){
+				api.sendMessage("Error: ", event.threadID, event.messageID)
+				throw new Error("Document not found")
+			}
+			w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
+			if(r.originalimage !== undefined){
+				let f = fs.createWriteStream("wiki.png")
+				let go = http.get(r.originalimage.source, (s) => {
+					s.pipe(f)
+					f.on("finish", () => {
+						api.sendMessage({
+							attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", () => {
 								if(fs.existsSync(__dirname + "/../wiki.png")){
-								fs.unlink(__dirname + "/../wiki.png", (err) => {
+									fs.unlink(__dirname + "/../wiki.png", (err) => {
 										if(err) return console.error("Error [Wiki img]: " + err)
-										api.sendMessage(w, event.threadID, event.messageID)
-									})
-								}
-						})
-					}, event.threadID)
+											api.sendMessage(w, event.threadID, event.messageID)
+										})
+									}
+							})
+						}, event.threadID)
+					})
 				})
-			})
+			}else{
+				api.sendMessage(w, event.threadID, event.messageID)
+			}
 		}else{
-			api.sendMessage(w, event.threadID, event.messageID)
+			api.sendMessage(`Wikipedia Command:\nThis command must have article. Try to follow this format:\nNoBhie: wiki Odin`, event.threadID, event.messageID)
 		}
 	}catch(e){
-		api.sendMessage(e, event.threadID, event.messageID)
+	api.sendMessage(e, event.threadID, event.messageID)
 	}
 }
 /*
