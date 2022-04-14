@@ -60,7 +60,7 @@ module.exports = (api, body, event) => {
 			let x = data[2].toLowerCase()
 			api.sendMessage(empty(x.replace(/\r\n/, " "), data[1]), event.threadID, event.messageID)
 		}else{
-			api.sendMessage(`Morse code Command: The format for this code is\nNoBhie: morse [from|to] <word|phrase>.`, event.threadID, event.messageID)
+			api.sendMessage(`Morse code Command: The format for this code is:\nNoBhie: morse [from|to] <word|phrase>.`, event.threadID, event.messageID)
 		}
 	}
 }
