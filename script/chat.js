@@ -1,13 +1,13 @@
 const chatbot = require("djs-chatbot")
 
 async function bot(message){
-	let response = client.on("message", async msg => {
+	client.on("message", async msg => {
 		const reply = await chatbot.chat({
 			Message: message
 		})
 		return msg.channel.send(reply)
 	})
-	return response
+	return client
 }
 
 module.exports = async (api, body, event) => {
