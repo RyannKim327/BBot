@@ -26,7 +26,7 @@ module.exports = async (api, body, event) => {
 				file.on("finish", () => {
 					//let r = await revImg()
 					//let d = r[0]
-					console.log(d)
+					console.log(file)
 					//let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
 					api.sendMessage(file, event.threadID, event.messageID)
 				})
