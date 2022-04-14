@@ -23,7 +23,7 @@ module.exports = async (api, body, event) => {
 			let file = fs.createWriteStream("file.jpg")
 			http.get(event.messageReply.attachments[0].url, (s) => {
 				s.pipe(file)
-				file.on("finish", () => {
+				file.on("finish", async () => {
 					let r = await revImg(fs.createReadStream(__dirname + "/../file.jpg"))
 					let d = r[0]
 					console.log(fs.createReadStream(__dirname + "/../file.jpg"))
