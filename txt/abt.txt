@@ -92,7 +92,7 @@ Prefix: NoBhie:
 ~ Sample: NoBhie: verse John 3:16-19;Rev 13:16-18
 ~ All formats excluding verse of the day and default are accepted to this as format.
 
-8. What is
+8. Dictionary
 - This is to define a word
 ~ Sample: NoBhie: what is language
 
