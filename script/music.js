@@ -177,6 +177,6 @@ module.exports = async (api, body, event, file) => {
 			}
 		}
 	}else{
-		api.sendMessage(`This command must have the YouTube link or music title. Try to folow this format:\nNoBhie: sing <youtube link|music name>`, event.threadID, event.messageID)
+		api.sendMessage(`Sing Command: This command must have the YouTube link or music title. Try to folow this format:\nNoBhie: sing <youtube link|music name>`, event.threadID, event.messageID)
 	}
 }
