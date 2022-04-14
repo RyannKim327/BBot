@@ -18,6 +18,9 @@ module.exports = async (api, body, event) => {
 	try{
 		d.shift()
 		d.shift()
+		if(d.length > 0){
+			throw new Error(`Wikipedia Command:\nThis command must have article. Try to follow this format:\nNoBhie: wiki Odin`)
+		}
 		let w = ""
 		let r = await getWiki(d.join(" "))
 		if(r === undefined){
