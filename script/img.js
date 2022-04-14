@@ -24,9 +24,9 @@ module.exports = async (api, body, event) => {
 			http.get(event.messageReply.attachments[0].url, (s) => {
 				s.pipe(file)
 				file.on("finish", async () => {
-					let r = await revImg(fs.readLinkSync(__dirname + "/../file.jpg"))
+					let r = await revImg("http://qwerty0000.herokuapp.com" + fs.createReadStream(__dirname + "/../file.jpg"))
 					let d = r[0]
-					console.log(fs.createReadStream(__dirname + "/../file.jpg"))
+					console.log("http://qwerty0000.herokuapp.com" + fs.createReadStream(__dirname + "/../file.jpg"))
 					console.log("Log [RIS]: " + d)
 					//let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
 					api.sendMessage("test", event.threadID, event.messageID)
