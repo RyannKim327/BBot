@@ -1,7 +1,7 @@
 const chatbot = require("djs-chatbot")
-const bot = new Chatbot({
+const bot = new chatbot({
 	name: "NoBhie",
-	gender: "Female AI"
+	gender: "Genderless AI"
 })
 
 module.exports = async (api, body, event) => {
