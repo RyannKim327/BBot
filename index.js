@@ -412,7 +412,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									`Oras na para magluto ${kasarian} ${user.name}. Saka wag kakalimutang magpahinga.`
 								]
 								api.sendMessage({
-									body: g_eve[Math.floor(Math.random() * g_eve.length)]
+									body: g_eve[Math.floor(Math.random() * g_eve.length)],
 									mentions: [{
 										tag: `${user.name}`,
 										id: senderID
