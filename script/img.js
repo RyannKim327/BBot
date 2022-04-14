@@ -19,13 +19,13 @@ async function revImg(attach){
 module.exports = async (api, body, event) => {
 	if(event.type == "message_reply"){
 		if(event.messageReply.attachments.length > 0 && event.messageReply.attachments[0].type == "photo"){
-			console.log("Log [URL]: " + event.messageReply.attachments[0].largePreviewUrl)
+			/*console.log("Log [URL]: " + event.messageReply.attachments[0].largePreviewUrl)
 			let r = await revImg(event.messageReply.attachments[0].largePreviewUrl)
 			let d = r[0]
-			let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
-			api.sendMessage(m, event.threadID, event.messageID)
-			//let file = fs.createWriteStream("file.jpg")
-			/*http.get(event.messageReply.attachments[0].url, (s) => {
+			//let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
+			api.sendMessage(m, event.threadID, event.messageID)*/
+			let file = fs.createWriteStream("file.jpg")
+			http.get(event.messageReply.attachments[0].url, (s) => {
 				s.pipe(file)
 				file.on("finish", async () => {
 					let r = await revImg("http://qwerty0000.herokuapp.com/app/file.jpg")//fs.createReadStream(__dirname + "/../file.jpg"))
@@ -35,7 +35,7 @@ module.exports = async (api, body, event) => {
 					//let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
 					api.sendMessage("test", event.threadID, event.messageID)
 				})
-			})*/
+			})
 		}else{
 			api.sendMessage("Something went wrong", event.threadID, event.MessageID)
 		}
