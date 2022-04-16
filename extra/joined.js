@@ -1,4 +1,5 @@
 const fs = require("fs")
+const yt = require("youtubei.js")
 
 module.exports = async (api, event) => {
 	console.log("Test")
@@ -44,6 +45,51 @@ module.exports = async (api, event) => {
 			break
 			case "log:unsubscribe":
 				console.log("Exit")
+				let thread = await api.getThreadInfo(event.threadID)
+				if(thread.isGroup){
+					let me = api.getCurrentUserID()
+					let left = event.logMessageData.leftParticipantFbId
+					if(me != left){
+						let user = await api.getUserInfo(left)
+						let g = ""
+						switch(user.gender){
+							case 1:
+								g = "Ms."
+							break
+							case 2:
+								g = "Mr."
+							break
+							default:
+								g = "Mr./Ms."
+						}
+						const yt2 = new yt()
+						let result = await yt2.search("goodbye air supply", {
+							client: "YTMUSIC"
+						})
+						let file = fs.createWriteStream("removegc.mp3")
+						let f = yt.download(result.songs[0].id, {
+							format: "mp4",
+							quality: "tiny",
+							type: "audio",
+							audioQuality: "lowest",
+							audioBitrate: "550"
+						})
+						f.pipe(file)
+						f.on("end", () => {
+							let nameDir = __dirname + "/../removegc.mp3"
+							api.sendMessage({
+								body: `Farewell to you ${g} ${user.name}, the whole ${thread.threadName} will missed you.`,
+								attachment: fs.createReadStream(nameDir).on("end", () => {
+									if(fs.existsSync(nameDir)){
+										fs.unlink(nameDir, (err) => {
+											console.error("Error [Left]: " + err)
+										})
+									}
+								})
+							}, event.threadID)
+						})
+					}
+				}
 			break
 		}
 	}
