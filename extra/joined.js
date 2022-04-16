@@ -45,6 +45,7 @@ module.exports = async (api, event) => {
 			break
 			case "log:unsubscribe":
 				console.log("Exit")
+				const yt2 = await new yt()
 				if(thread.isGroup){
 					me = api.getCurrentUserID()
 					let left = event.logMessageData.leftParticipantFbId
@@ -61,10 +62,7 @@ module.exports = async (api, event) => {
 							default:
 								g = "Mr./Ms."
 						}
-						const yt2 = await new yt()
-						let result = await yt2.search("goodbye air supply", {
-							client: "YTMUSIC"
-						})
+						let result = await yt2.search("goodbye air supply", { client: "YTMUSIC" })
 						let file = fs.createWriteStream("removegc.mp3")
 						let f = yt.download(result.songs[0].id, {
 							format: "mp4",
