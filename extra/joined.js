@@ -7,10 +7,10 @@ module.exports = (api, event) => {
 		switch(event.logMessageType){
 			case "log:subscribe":
 				console.log("Log [Subs]")
-				api.getThreadInfo(event.threadID, (err, data) => {
+				api.getThreadInfo(event.threadID, async (err, data) => {
 					if(err) return console.error("Error [Log Subscribe]: " + err)
 					if(data.isGroup){
-						const joiner = event.logMessageData.addedParticipants
+						const joiner = await event.logMessageData.addedParticipants
 						const me = api.getCurrentUserID()
 						let messages = {
 							body: "",
