@@ -5,10 +5,10 @@ module.exports = async (api, event) => {
 	console.log("Test")
 	if(event.type == "event"){
 		console.log("Working event")
+		let thread = await api.getThreadInfo(event.threadID)
 		switch(event.logMessageType){
 			case "log:subscribe":
 				console.log("Log [Subs]")
-				let thread = await api.getThreadInfo(event.threadID)
 				if(thread.isGroup){
 					const joiner = await event.logMessageData.addedParticipants
 					const me = api.getCurrentUserID()
@@ -45,7 +45,6 @@ module.exports = async (api, event) => {
 			break
 			case "log:unsubscribe":
 				console.log("Exit")
-				thread = await api.getThreadInfo(event.threadID)
 				if(thread.isGroup){
 					me = api.getCurrentUserID()
 					let left = event.logMessageData.leftParticipantFbId
