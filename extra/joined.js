@@ -21,7 +21,7 @@ module.exports = (api, event) => {
 								break
 							}
 							const id = newbies.userFbId
-							api.getUserInfo(id, async (err, user_data) => {
+							api.getUserInfo(id, (err, user_data) => {
 								if(err) return console.err("Error [User joiner]: " + err)
 								let g = ""
 								let user = user_data[id]
