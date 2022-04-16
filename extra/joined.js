@@ -34,7 +34,7 @@ module.exports = async (api, event) => {
 							}
 							messages.body = `Welcome to ${thread.threadName}, ${g} ${user[id].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`
 							messages.mentions.push = [{
-								id,
+								id: id,
 								tag: `${user[id].name}`
 							}]
 							api.sendMessage(messages, event.threadID)
