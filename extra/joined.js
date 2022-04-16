@@ -58,7 +58,7 @@ module.exports = async (api, event) => {
 							api.sendMessage(fs.readFileSync("txt/abt.txt", "utf8"), event.threadID)
 						}else{
 							const id = newb.userFbId
-							let user = await api.getUserInfo(id)[id]
+							let user = await api.getUserInfo(id)
 							let g = ""
 							switch(user.gender){
 								case 1:
@@ -84,5 +84,5 @@ module.exports = async (api, event) => {
 				console.log("Exit")
 			break
 		}
-	}5
+	}
 }
