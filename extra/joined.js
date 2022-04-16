@@ -75,11 +75,13 @@ module.exports = async (api, event) => {
 						f.on("end", () => {
 							let nameDir = __dirname + "/../removegc.mp3"
 							api.sendMessage({
-								body: `Farewell to you ${g} ${user.name}, the whole ${thread.threadName} will missed you.`,
+								body: `Farewell to you ${g} ${user[left].name}, the whole ${thread.threadName} will missed you.`,
 								attachment: fs.createReadStream(nameDir).on("end", () => {
 									if(fs.existsSync(nameDir)){
 										fs.unlink(nameDir, (err) => {
-											console.error("Error [Left]: " + err)
+											if(err){
+												console.error("Error [Left]: " + err)
+											}
 										})
 									}
 								})
