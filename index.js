@@ -5,7 +5,7 @@ const cron = require("node-cron")
 
 const joined = require("./extra/joined")
 
-const chat = require("./script/chat")
+//const chat = require("./script/chat")
 const compiller = require("./script/compiller")
 const date = require('./script/date')
 const filter = require("./script/filter")
@@ -436,9 +436,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								night += senderID + " "
 							}
 						})
-						if(body.startsWith("NoBhie")){
+						/*if(body.startsWith("NoBhie")){
 							chat(api, body, event)
-						}
+						}*/
 					}else if(myself != senderID && event.type == "message_reply"){
 						if(event.messageReply.senderID == myself){
 							if(low_body.includes("thank") || low_body.includes("tnx")){
