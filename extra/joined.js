@@ -45,13 +45,13 @@ module.exports = async (api, event) => {
 			break
 			case "log:unsubscribe":
 				console.log("Exit")
-				let thread = await api.getThreadInfo(event.threadID)
+				//let thread = await api.getThreadInfo(event.threadID)
 				if(thread.isGroup){
-					let me = api.getCurrentUserID()
+					me = api.getCurrentUserID()
 					let left = event.logMessageData.leftParticipantFbId
 					if(me != left){
-						let user = await api.getUserInfo(left)
-						let g = ""
+						user = await api.getUserInfo(left)
+						g = ""
 						switch(user.gender){
 							case 1:
 								g = "Ms."
