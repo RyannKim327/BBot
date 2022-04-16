@@ -11,7 +11,7 @@ module.exports = async (api, event) => {
 					if(err) return console.error("Error [Log Subscribe]: " + err)
 					if(data.isGroup){
 						const joiner = await event.logMessageData.addedParticipants
-						const me = await api.geturrentUserID()
+						const me = await api.getCurrentUserID()
 						let messages = {
 							body: "",
 							mentions: []
