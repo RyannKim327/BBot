@@ -61,7 +61,7 @@ module.exports = async (api, event) => {
 							default:
 								g = "Mr./Ms."
 						}
-						const yt2 = new yt()
+						const yt2 = await new yt()
 						let result = await yt2.search("goodbye air supply", {
 							client: "YTMUSIC"
 						})
