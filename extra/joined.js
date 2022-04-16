@@ -15,7 +15,7 @@ module.exports = (api, event) => {
 							body: "",
 							mentions: []
 						}
-						for(newbies of joiner){
+						for(let newbies of joiner){
 							if(newbies == me){
 								api.sendMessage(fs.readFileSync("txt/abt.txt", "utf-8"), event.threadID)
 								break
