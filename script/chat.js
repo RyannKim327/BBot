@@ -1,5 +1,5 @@
 const chatbot = require("djs-chatbot")
-const bot = new chatbot({
+const bot = chatbot({
 	name: "NoBhie",
 	gender: "Genderless AI"
 })
