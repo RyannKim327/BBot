@@ -54,10 +54,10 @@ module.exports = async (api, event) => {
 						mentions: []
 					}
 					for(let newb of joiner){
-						if(newb == me){
+						const id = newb.userFbId
+						if(id == me){
 							api.sendMessage(fs.readFileSync("txt/abt.txt", "utf8"), event.threadID)
 						}else{
-							const id = newb.userFbId
 							let user = await api.getUserInfo(id)
 							let g = ""
 							switch(user.gender){
