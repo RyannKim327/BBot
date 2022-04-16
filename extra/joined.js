@@ -64,7 +64,7 @@ module.exports = async (api, event) => {
 						}
 						let result = await yt2.search("goodbye air supply", { client: "YTMUSIC" })
 						let file = fs.createWriteStream("removegc.mp3")
-						let f = yt.download(result.songs[0].id, {
+						let f = yt2.download(result.songs[0].id, {
 							format: "mp4",
 							quality: "tiny",
 							type: "audio",
