@@ -1,16 +1,17 @@
 const fs = require("fs")
 
-module.exports = (api, event) => {
+module.exports = async (api, event) => {
 	console.log("Test")
 	if(event.type == "event"){
 		console.log("Working event")
 		switch(event.logMessageType){
 			case "log:subscribe":
+				console.log("Log [Subs]")
 				api.getThreadInfo(event.threadID, async (err, data) => {
 					if(err) return console.error("Error [Log Subscribe]: " + err)
 					if(data.isGroup){
 						const joiner = await event.logMessageData.addedParticipants
-						const me = await api.getCurrentUserID()
+						const me = await api.geturrentUserID()
 						let messages = {
 							body: "",
 							mentions: []
