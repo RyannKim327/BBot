@@ -21,7 +21,6 @@ const sim = require("./script/sim")
 const sing = require("./script/sing")
 const solve = require("./script/solve")
 const specials = require("./script/specials")
-const test = require("./script/test")
 const verse = require("./script/verse")
 const weather = require("./script/weather")
 const what = require("./script/what")
@@ -251,7 +250,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				}else{
 					if(body.startsWith(prefix) && low_body.includes(":")){
 						const spl = low_body.split(" ").length
-						test(api, body, event)
 						if(body.startsWith(prefix + "say") && spl >= 3){
 							if(vip.includes(senderID) || gc.includes(threadID)){
 								if(event.type == "message_reply"){
@@ -284,7 +282,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							ggl(api, body, event)
 						}else if(body.startsWith(prefix + "morse")){
 							morse(api, body, event)
-						}else if(body.startsWith(prefix + "test")){
+						}else if(body.startsWith(prefix + "play")){
 							if(fs.existsSync(__dirname + "/sing.mp3")){
 								api.sendMessage("Lemme finish the earlier request. Thanks.", threadID, messageID)
 							}else{
