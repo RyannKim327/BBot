@@ -104,6 +104,10 @@ Prefix: NoBhie:
 - A simple weather forcast for a mentioned area
 ~ Sample: NoBhie: status Manila
 
+11. Play
+- Same with the sing command, but it only has one query which is the title of the song. This feature is under development and debugging, so crash and errors might be happene anytime.
+~ Sample: NoBhie: play Yellow Coldplay
+
 There are still hidden features for this bot, also the auto response.
 
 For the group admin, if the topic is serious, and you want to turn off the bot, kindly type "<< sleep >>" without any quotation marks.
