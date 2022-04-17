@@ -10,50 +10,42 @@ module.exports = async (api, body, event, file) => {
 	if(result.songs[0].id == undefined){
 		api.sendMessage("Something went wrong", event.threadID, event.messageID)
 	}else{
-		//let lyrics = await yt2.getLyrics(result.songs[0].id)
 		console.log("Log [Duration]: " + result.songs[0].duration)
-		//if(result.songs[0].duration <= (30 * 60)){
-			const ytInfo = await yt2.getDetails(result.songs[0].id)
-			if(ytInfo.title == undefined){
-				return api.sendMessage("Something went wrong", event.threadID, event.messageID)
-			}
-			let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.metadata.channel_name}`
-			let f = yt2.download(result.songs[0].id, {
-				format: 'mp4',
-				quality: 'tiny',
-				type: 'audio',
-				audioQuality: 'lowest',
-				audioBitrate: '550'
-			})
-			f.pipe(file)
-			f.on("start", () => {
-				api.setMessageReaction("🔁", event.messageID, (err) => {}, true)
-			})
-			f.on("proccess", (info) => {
-				api.setMessageReaction("⏳", event.messageID, (err) => {}, true)
-			})
-			f.on("end", () => {
-				let name = __dirname + "/../sing.mp3"
-				let message = ""
-				//if(lyrics != undefined){
-					//message += lyrics + "\n\n"
-				//}
-				message += info
-				api.sendMessage({
-					body: message,
-					attachment: fs.createReadStream(name).on("end", async () => {
-						if(fs.existsSync(name)){
-							fs.unlink(name, (err) => {
-								if(err) return console.error("Error [Sing]: " + err)
-								api.setMessageReaction("✔", event.messageID, (err) => {}, true)
-							})
-						}
-					})
-				}, event.threadID, event.messageID)
-			})
-		//}else{
-		//	api.sendMessage("Too long", event.threadID, event.messageID)
-		//}
+		const ytInfo = await yt2.getDetails(result.songs[0].id)
+		if(ytInfo.title == undefined){
+			return api.sendMessage("Something went wrong", event.threadID, event.messageID)
+		}
+		let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.metadata.channel_name}`
+		let f = yt2.download(result.songs[0].id, {
+			format: 'mp4',
+			quality: 'tiny',
+			type: 'audio',
+			audioQuality: 'lowest',
+			audioBitrate: '550'
+		})
+		f.pipe(file)
+		f.on("start", () => {
+			api.setMessageReaction("🔁", event.messageID, (err) => {}, true)
+		})
+		f.on("proccess", (info) => {
+			api.setMessageReaction("⏳", event.messageID, (err) => {}, true)
+		})
+		f.on("end", () => {
+			let name = __dirname + "/../sing.mp3"
+			let message = ""
+			message += info
+			api.sendMessage({
+				body: message,
+				attachment: fs.createReadStream(name).on("end", async () => {
+					if(fs.existsSync(name)){
+						fs.unlink(name, (err) => {
+							if(err) return console.error("Error [Sing]: " + err)
+							api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+						})
+					}
+				})
+			}, event.threadID, event.messageID)
+		})
 	}
 }
 
