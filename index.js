@@ -4,7 +4,7 @@ const fs = require("fs")
 const cron = require("node-cron")
 
 const joined = require("./extra/joined")
-
+const bday = require("./extra/bday")
 //const chat = require("./script/chat")
 const compiller = require("./script/compiller")
 const date = require('./script/date')
@@ -75,6 +75,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	})
 	const myself = api.getCurrentUserID()
 	api.sendMessage("BhieBot service is now active", gc)
+	bday(api)
 	cron.schedule('30 23 * * *', () => {
 		api.getThreadList(20, null, ['INBOX'], (err, data) => {
 			if(err) return console.error("Error [Thread List Cron]: " + err)
