@@ -312,7 +312,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					if (err) return console.error("Error [Auto send thread]: " + err)
 					api.sendMessage(`A message sent to: ${data.threadName}\nMessage: ${body}`, say_thread)
 				})
-			}else if((json.status && body.startsWith(prefix) && !json.ban.includes(senderID) && !json.off.includes(threadID)) || gc.includes(threadID) || json.test.includes(senderID) || vip.includes(senderID)){
+			}else if((json.status && body.startsWith(prefix) && !json.ban.includes(senderID) && !json.off.includes(threadID)) /* || gc.includes(threadID) */ || json.test.includes(senderID) || vip.includes(senderID)){
 				if(filter(low_body) && !vip.includes(senderID)){
 					api.setMessageReaction("🥲", messageID, (err) => {}, true)
 				}else{
