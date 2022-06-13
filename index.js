@@ -51,6 +51,11 @@ function resetTime(time, json){
 	fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 }
 
+async function activate(){
+	console.log("Activate")
+	setTimeout(activate, 20000)
+}
+
 login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
 	/*api.getThreadInfo(api.getCurrentUserID(), (err, data) => {
@@ -75,11 +80,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			}
 		})
 	})
-	cron.schedule('5 * * * *', () => {
+	/*cron.schedule('5 * * * *', () => {
 		let time = date("Asia/Manila").getHours()
 		let mins = date("Asia/Manila").getMinutes()
 		console.log("Command Executed " + time + ":" + mins)
-	})
+	})*/
+	activate()
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true
@@ -138,7 +144,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						json.off += threadID + ", "
 						api.sendMessage("Be right back guys. Please ask my VIPs to activate me to this thread", threadID)
 						api.sendMessage(`An admin turned off the bot service on ${data.threadName}.`, gc)
-						fs.writeFileSync("prefs/pref.txt", JSON.stringify(json), "utf8")
+						fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 					})
 				}else if(vip.includes(senderID)){
 					if(event.type == "message"){
@@ -420,7 +426,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						json.greet.evening += senderID + " "
 					}else if((time >= 22 || time < 5) && !night.includes(senderID) && (low_body.includes("goodnight") || low_body.includes("good night"))){
 						let g_night = [
-							`Good night and sweet dreams ${gender} ${user.name}. Dn't forget to pray before you sleep`,
+							`Good night and sweet dreams ${gender} ${user.name}. Don't forget to pray before you sleep`,
 							`Ikaw ay matulog na para bukas ${kasarian} ${user.name} ay may lakas upang harapin at sagupain muli ang bawat hamon ng buhay`
 						]
 						api.sendMessage({

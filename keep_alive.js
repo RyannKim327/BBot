@@ -10,7 +10,7 @@ app.listen(port, () => {
 
 app.get('/', (req, res) => {
 	//res.send('Welcome, this is the developer of JC Rios')
-	res.sendFile(__dirname + "/index.html")
+	res.sendFile(__dirname + "/a.html")
 });
 
 /*
