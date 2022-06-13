@@ -1,12 +1,22 @@
 const weatherjs = require("weather-js")
+const ggl = require("googlethis")
 
-module.exports = async (api, body, event) => {
-	let data = body.split(" ")
-	if(data.length <= 2){
-		api.sendMessage("Weather Command: This feature requires the city of area you want to know. Try to follow this format:\nNoBhie: status <City>", event.threadID, event.messageID)
-	}else{
-		data.shift()
-		data.shift()
+async function search(location){
+	let result = await ggl.search(location, {
+		page: 0,
+		safe: true,
+		additional_parameters: {
+			hl: "en"
+		}
+	})
+	return result
+}
+
+module.exports = async (api, event, regex) => {
+	let data = event.body.match(regex)
+	let weather = await search("weather " + data[1])
+	console.log(weather.weather)
+	if(weather.weather == undefined || weather.weather.temperature == undefined){
 		weatherjs.find({
 			search: data.join(" "),
 			degreeType: 'C'
@@ -19,5 +29,17 @@ module.exports = async (api, body, event) => {
 			m += "Observation time: " + d.current.date + " " + d.current.observationtime
 			api.sendMessage(m, event.threadID, event.messageID)
 		})
+	}else{
+		let output = weather.weather
+		let m = "Location: " + output.location
+		m += "\nForecast: " + output.forecast
+		m += "\nTemperature: " + output.temperature + "°F" + " (" + ((output.temperature - 32) * 5/9) + "°C)"
+		if(output.precipitation != undefined)
+			m += "\nPrecipitation: " + output.precipitation
+		if(output.humidity != undefined)
+			m += "\nHumidity: " + output.humidity
+		if(output.wind != undefined)
+			m += "\nWind speed: " + output.wind
+		api.sendMessage(m, event.threadID, event.messageID)
 	}
 }

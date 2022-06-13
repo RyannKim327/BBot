@@ -1,130 +1,21 @@
-Hello I am No-Bhie Bot, your friendly bot lived in cloud space. But before you ask for my service, please only one request, don't use my service in any kind of abuse or spamming. Here are the basic commands that might help you.
+Hello, I am JC Rios, you may call me JC. If you have amy questions, just ask me, and I'll try to give you any answers.
 
-Note: Prefix also the commands are all case sensitive.
+JC Rios is a simple bot made with nodejs. Please let me know if you having any trouble or issues regarding to me or my service, to fix it as soon as possible.
 
-Prefix: NoBhie:
-
-1. Info
-- This command has different functions based on its arguments and its messaging type.
-1.1 Facebook ID
-- Using info with Facebook id will give you the informatio of a Facebook user with an id.
-~ Sample: NoBhie: info 1234567890
-1.2 Facebook Username
-- Like using Facebook ID method, but using a username
-~ Sample: NoBhie: info mark.zuckerberg
-1.3 Info (in reply message)
-- Get the Facebook information of a member or sender of a particular message by replying on it.
-~ Sample: NoBhie: info
-1.4 Mention
-- Get the Facebook information by mentioning them.
-~ Sample: NoBhie: info @No-Bhie Bot
-~ Where @No-Bhie Bot is a mentioned name
-1.5 Info (not in reply)
-- This command shows this list or tutorials.
-~ Sample: NoBhie: info
-
-2. Google
-- This is still under development, so don't expect too much.
-2.1 Define
-- Define a word or phrase or something you won't understand.
-~ Sample: NoBhie: google define language
-2.2 Translate
-- Translating a word or phrase(detected) to a specific language.
-~ Sample: NoBhie: google translate hello in tagalog
-2.3 Default
-- This has no added syntax or adding default, just use the prefix + google keyword then something you want to know.
-~ Sample: NoBhie: google facebook
-
-3. Morse
-- This is an encryption from roman characters into morse code.
-3.1 From
-- This is the decryption from morse code to roman characters.
-~ Sample: NoBhie: morse from ... --- ...
-3.2 To
-- This is to encrypt fron roman characters to morse code.
-~ Sample: NoBhie: morse to SOS
-
-4. Music
-- This command will search only musics or songs fron YouTube Music. If there's an error, try to add the singer name on it.
-~ Sample: NoBhie: sing sana all
-4.1 Music with url
-- This command will send you an audio message with a song using YouTube link.
-~ Sample: NoBhie: sing https://youtu.be/GVWYywwcQp8
-
-5. QR
-- This will send you a picture of a qr code that contains on what you've sent.
-5.1 Default
-- This is not literally adding a syntax or something, just using the basic form of it.
-~ Sample: NoBhie: qr Hello World
-5.2 Message Reply (Message Reply Mode)
-- This must only call the prefix + keyword by replying in a message.
-~ Sample: NoBhie: qr
-~ In reply
-
-6. Quote
-- This will send you different quotations from different personality or character.
-6.1 Anime
-- This with send you a quote from an anime character.
-~ Sample: NoBhie: quote anime
-6.2 Default
-- This is not adding any kind of syntax literally. This command will send you random quote from some famous personalities.
-~ Sample: NoBhie: quote
-
-7. Verse
-- Bibld verse, this feature has also sending a bible verse (of the day) every 7:30 in the morning as a greeting and giving good vibes to all.
-7.1 Default
-- This will send you a random verse(s)
-~ Sample: NoBhie: verse
-7.2 Verse of the day
-- This will send you a bible verse (of the day) [server based].
-~ Sample: NoBhie: verse of the day
-7.3 Chapter
-- This will send you all the verses on a particular chapter in the bible.
-~ Sample: NoBhie: verse Genesis 1
-7.4 Verse
-- This will send what you've request verse of the bible.
-~ Sample: NoBhie: verse Isa.7:14
-7.5 Range
-- This is not adding a keyword range literally, but to use hypen ( - ) and send the range of the verse.
-~ Sample: NoBhie: verse John 3:16-19
-7.6 Multiple
-- This is not adding a keyword multiple literally, but to use semi-color ( ; ) and send a multiple verse/ chapter of the bible.
-~ Sample: NoBhie: verse John 3:16-19;Rev 13:16-18
-~ All formats excluding verse of the day and default are accepted to this as format.
-
-8. Dictionary
-- This is to define a word
-~ Sample: NoBhie: what is language
-
-9. Wiki
-- A wikipedia based information
-~ Sample: NoBhie: wiki Odin
-
-10. Weather
-- A simple weather forcast for a mentioned area
-~ Sample: NoBhie: status Manila
-
-11. Play
-- Same with the sing command, but it only has one query which is the title of the song. This feature is under development and debugging, so crash and errors might be happene anytime.
-~ Sample: NoBhie: play Yellow Coldplay
-
-There are still hidden features for this bot, also the auto response.
-
-For the group admin, if the topic is serious, and you want to turn off the bot, kindly type "<< sleep >>" without any quotation marks.
-
-Thank you.
-
-Credits:
-- Salvador
-- John Jeremy Antiguo
-- Earl Shine Sawir
-- John Paul Caigas
-- John Roy Lapida Calimlim
-- Jerson Carin
-- LuanRT (googlethis)
-- Mart Anthony Salazar
-- Lester Navarra
-- Schmavery (Facebook chat api)
-- VangBanLaNhat (fca-unoffifial)
-- Testers (groups)
-- and all owners of the api used for this project
+* Credits *
+- Salvador (Facebook Bot Idea) -
+- John Jeremy Antiguo (Guide) -
+- Earl Shine Sawir (Guide on how to host) -
+- John Paul Caigas (Guide on how to host (2)) -
+- John Roy Lapida Calimlim (Ideas) -
+- Mart Anthony Salazar -
+- Jerson Carin (RegEx) -
+- Rovie Francisco (RegEx Default Expressions with meanings) -
+- LuanRT (GoogleThis) (YoutubeiJS) -
+- Lester Navarra (Scrapped Guitar Tabs) -
+- Schmavery (Facebook chat API) -
+- VangBanLaNhat (FCA Unofficial) -
+- Testers (Groups and people) -
+- NPM Documentations -
+- RapidApi -
+- And to all owners and developers of api used -

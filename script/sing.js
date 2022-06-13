@@ -1,22 +1,42 @@
 const yt = require("youtubei.js")
 const fs = require("fs")
 
-module.exports = async (api, body, event, file) => {
+module.exports = async (api, event, file, name, regex) => {
+	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 	const yt2 = await new yt()
-	let data = body.split(" ")
-	data.shift()
-	data.shift()
-	let result = await yt2.search(data.join(" "))
-	if(result.songs[0].id == undefined){
-		api.sendMessage("Something went wrong", event.threadID, event.messageID)
-	}else{
-		console.log("Log [Duration]: " + result.songs[0].duration)
-		const ytInfo = await yt2.getDetails(result.songs[0].id)
-		if(ytInfo.title == undefined){
-			return api.sendMessage("Something went wrong", event.threadID, event.messageID)
+	let body = event.body.match(regex)[1]
+	let result = await yt2.search(body)
+	if(result.videos.length <= 0){
+		api.sendMessage("Nothing found", event.threadID, event.messageID)
+		if(fs.existsSync(__dirname + "/../" + name)){
+			fs.unlink(__dirname + "/../" + name, (err) => {
+				if(err) return console.error("Error [Sing FS]: " + err)
+				api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+			})
 		}
-		let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.metadata.channel_name}`
-		let f = yt2.download(result.songs[0].id, {
+	}else if(result.videos[0] == undefined){
+		api.sendMessage("Something went wrong", event.threadID, event.messageID)
+		if(fs.existsSync(__dirname + "/../" + name)){
+			fs.unlink(__dirname + "/../" + name, (err) => {
+				if(err) return console.error("Error [Sing FS]: " + err)
+				api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+			})
+		}
+	}else{
+		//console.log("Log [Duration]: " + result.videos[0].duration)
+		const ytInfo = await yt2.getDetails(result.videos[0].id)
+		if(ytInfo.title == undefined){
+			api.sendMessage("Something went wrong", event.threadID, event.messageID)
+			let name = __dirname + "/../" + name
+			if(fs.existsSync(name2)){
+				fs.unlink(name2, (err) => {
+					if(err) return console.error("Error [Sing]: " + err)
+					api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+				})
+			}
+		}
+		let info = ""
+		let f = yt2.download(result.videos[0].id, {
 			format: 'mp4',
 			quality: 'tiny',
 			type: 'audio',
@@ -31,21 +51,42 @@ module.exports = async (api, body, event, file) => {
 			api.setMessageReaction("⏳", event.messageID, (err) => {}, true)
 		})
 		f.on("end", () => {
-			let name = __dirname + "/../sing.mp3"
-			let message = ""
-			message += info
-			api.sendMessage({
-				body: message,
-				attachment: fs.createReadStream(name).on("end", async () => {
-					if(fs.existsSync(name)){
-						fs.unlink(name, (err) => {
-							if(err) return console.error("Error [Sing]: " + err)
-							api.setMessageReaction("✔", event.messageID, (err) => {}, true)
-						})
-					}
-				})
-			}, event.threadID, event.messageID)
+			let name2 = __dirname + "/../" + name
+			api.getUserInfo(event.senderID, (err, user) => {
+				if(err) console.error("Error [Music Link]: " + err)
+				let gender = ""
+				switch(user.gender){
+					case 1:
+						gender = "Ms."
+					break
+					case 2:
+						gender = "Mr."
+					break
+					default:
+						gender = "Mr./Ms."
+				}
+				let username = user[event.senderID]['name']
+				info = `Here's your request ${gender} ${username}. A song entitled ${ytInfo.title}, uploaded by ${ytInfo.metadata.channel_name} on a platform called youtube.`
+				let message = ""
+				message += info
+				api.sendMessage({
+					body: message,
+					mentions: [{
+						tag: username,
+						id: event.senderID
+					}],
+					attachment: fs.createReadStream(name2).on("end", async () => {
+						if(fs.existsSync(name2)){
+							fs.unlink(name2, (err) => {
+								if(err) return console.error("Error [Sing]: " + err)
+								api.setMessageReaction("✔", event.messageID, (err) => {}, true)
+							})
+						}
+					})
+				}, event.threadID, event.messageID)
+			})
 		})
+		//let info = `Title: ${ytInfo.title}\nUploaded by: ${ytInfo.metadata.channel_name}`
 	}
 }
 

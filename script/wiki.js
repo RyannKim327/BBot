@@ -14,14 +14,17 @@ async function getWiki(q) {
 }
 
 module.exports = async (api, body, event) => {
-	let d = body.split(" ")
+	let d = body
 	try{
-		d.shift()
-		d.shift()
 		if(d.length > 0){
 			let w = ""
-			let r = await getWiki(d.join(" "))
-			if(r === undefined){
+			let r = await getWiki(d).then((r) => {
+				return r
+			}).catch((e) => {
+				console.error("Error [Wiki]: " + e)
+				return null
+			})
+			if(r === undefined || r == null){
 				api.sendMessage("Error: ", event.threadID, event.messageID)
 				throw new Error("Document not found")
 			}
@@ -31,14 +34,14 @@ module.exports = async (api, body, event) => {
 			}
 			w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
 			if(r.originalimage !== undefined){
-				let f = fs.createWriteStream("wiki.png")
+				let f = fs.createWriteStream("temp/wiki.png")
 				let go = http.get(r.originalimage.source, (s) => {
 					s.pipe(f)
 					f.on("finish", () => {
 						api.sendMessage({
-							attachment: fs.createReadStream(__dirname + "/../wiki.png").on("end", () => {
-								if(fs.existsSync(__dirname + "/../wiki.png")){
-									fs.unlink(__dirname + "/../wiki.png", (err) => {
+							attachment: fs.createReadStream(__dirname + "/../temp/wiki.png").on("end", () => {
+								if(fs.existsSync(__dirname + "/../temp/wiki.png")){
+									fs.unlink(__dirname + "/../temp/wiki.png", (err) => {
 										if(err) return console.error("Error [Wiki img]: " + err)
 											api.sendMessage(w, event.threadID, event.messageID)
 										})
@@ -50,11 +53,9 @@ module.exports = async (api, body, event) => {
 			}else{
 				api.sendMessage(w, event.threadID, event.messageID)
 			}
-		}else{
-			api.sendMessage(`Wikipedia Command: This command must have article. Try to follow this format:\nNoBhie: wiki <query>`, event.threadID, event.messageID)
 		}
 	}catch(e){
-	api.sendMessage(e, event.threadID, event.messageID)
+		api.sendMessage(e, event.threadID, event.messageID)
 	}
 }
 /*

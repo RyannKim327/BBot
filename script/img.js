@@ -1,49 +1,67 @@
 const google = require("googlethis")
 const fs = require("fs")
 const http = require("https")
+const request = require("request")
+const wiki = require("./wiki")
 
 async function img(query){
-	let result = await google.image(query, {
+	let res = await google.image(query, {
 		safe: true
 	})
-	return result
+	return res
 }
 
-async function revImg(attach){
-	let result = await google.search(attach, {
-		ris: true
+async function revImg(img){
+	let r = await google.search(img, {
+		ris: true,
+		safe: true
 	})
-	return result
+	return r.results
 }
 
-module.exports = async (api, body, event) => {
+module.exports = async (api, event, regex) => {
 	if(event.type == "message_reply"){
 		if(event.messageReply.attachments.length > 0 && event.messageReply.attachments[0].type == "photo"){
-			/*console.log("Log [URL]: " + event.messageReply.attachments[0].largePreviewUrl)
-			let r = await revImg(event.messageReply.attachments[0].largePreviewUrl)
-			let d = r[0]
-			//let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
-			api.sendMessage(m, event.threadID, event.messageID)*/
-			let file = fs.createWriteStream("file.jpg")
-			http.get(event.messageReply.attachments[0].url, (s) => {
-				s.pipe(file)
-				file.on("finish", async () => {
-					let r = await revImg("http://qwerty0000.herokuapp.com/app/file.jpg")//fs.createReadStream(__dirname + "/../file.jpg"))
-					let d = r[0]
-					console.log("http://qwerty0000.herokuapp.com" + fs.createReadStream(__dirname + "/../file.jpg"))
-					console.log("Log [RIS]: " + d)
-					//let m = `Result (Reverse Image Search)\nTitle: ${d.title}\nDescriptio : ${d.description}\nSource: ${d.url}`
-					api.sendMessage("test", event.threadID, event.messageID)
-				})
-			})
+			let res = await revImg(encodeURIComponent(event.messageReply.attachments[0].url))
+			console.log("Log [RIS]: " + res)
+			if(res.length > 0){
+				let d = res[Math.floor(Math.random() * res.length)]
+				console.log(res)
+				api.sendMessage({
+					body: `Result: [Reverse Image Search]\nI found ${res.length} results, and this is one of them.\nTitle: ${d.title}\n~ ${d.description}\nReference: ${d.url}`,
+					url: d.url
+				},event.threadID, event.messageReply.messageID)
+			}else{
+				api.sendMessage("No results found", event.threadID, event.messageReply.messageID)
+			}
 		}else{
-			api.sendMessage("Something went wrong", event.threadID, event.MessageID)
+			api.sendMessage("Google Reverse Image Search:\nThere must have image replied to this command.\nFile formats: (jpg, jpeg, png).", event.threadID, event.messageID)
 		}
 	}else{
-		let d = body.split(" ")
-		d.shift()
-		d.shift()
-		let r = await img(d.join(" "))
-		
+		let d = event.body.match(regex)
+		let r = await img(d[1])
+		console.log(r)
+		let file
+		let e = r[Math.floor(Math.random() * r.length)]
+		let req = request(e.url)
+		file = fs.createWriteStream(event.messageID + "_img.png")
+		req.pipe(file)
+		file.on("finish", () => {
+			api.sendMessage({
+				body: `Result: [Image Search]\nTitle: ${e.origin.title}\nSource: ${e.origin.source}`,
+				attachment: fs.createReadStream(__dirname + "/../" + event.messageID + "_img.png").on("end", async () => {
+					const name = __dirname + "/../" + event.messageID + "_img.png"
+					if(fs.existsSync(name)){
+						fs.unlink(name, (err) => {
+							if(err) console.log("Error [IMG]: " + err)
+						})
+					}
+				})
+			}, event.threadID, event.messageID)	
+		})
+		if(e.origin.source.includes(".lwikipedia.org")){
+			let url = e.origin.source.split("/")
+			wiki(api, url[url.length - 1], event)
+		}
 	}
 }

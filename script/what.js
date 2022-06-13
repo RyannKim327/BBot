@@ -11,13 +11,10 @@ async function whatIs(x){
 	return o
 }
 
-module.exports = (api, body, event) => {
-	let w = body.split(" ")
-	w.shift()
-	w.shift()
-	w.shift()
+module.exports = (api, body, event, prefix) => {
+	let w = body
 	if(w.length > 0){
-		let o = whatIs(w.join(" "))
+		let o = whatIs(w)
 		let r = ""
 		o.then((response) => {
 			r = "You've searched about the word \"" + response.word + "\"\n"
@@ -56,15 +53,15 @@ module.exports = (api, body, event) => {
 				let p = response.phonetics
 				for(let i = 0; i < p.length; i++){
 					if(p[i].audio.includes("https://")){
-						let f = fs.createWriteStream("whatis.mp3")
+						let f = fs.createWriteStream("temp/whatis.mp3")
 						let g = http.get(p[i].audio, (rs) => {
 							rs.pipe(f)
 							f.on("finish", (err) => {
 								api.sendMessage({
 									body: r,
-									attachment: fs.createReadStream(__dirname + "/../whatis.mp3").on("end", async () => {
-										if(fs.existsSync(__dirname + "/../whatis.mp3")){
-											fs.unlink(__dirname + "/../whatis.mp3", (err) => {
+									attachment: fs.createReadStream(__dirname + "/../temp/whatis.mp3").on("end", async () => {
+										if(fs.existsSync(__dirname + "/../temp/whatis.mp3")){
+											fs.unlink(__dirname + "/../temp/whatis.mp3", (err) => {
 												if(err){
 													console.log(err)
 												}else{
@@ -87,10 +84,10 @@ module.exports = (api, body, event) => {
 				api.sendMessage(r, event.threadID, event.messageID)
 			}
 		}).catch((err) => {
-			api.sendMessage("Word is not found", event.threadID, event.messageID)
+			//api.sendMessage("Word is not found", event.threadID, event.messageID)
 			console.log("Error " + err)
 		})
 	}else{
-		api.sendMessage(`Dictionary Command: This command must have the word you want to know. Try to follow this format:\nNoBhie: what is <word>`, event.threadID, event.messageID)
+		api.sendMessage(`Dictionary Command: This command must have the word you want to know. Try to follow this format:\n${prefix} what is <word>`, event.threadID, event.messageID)
 	}
 }

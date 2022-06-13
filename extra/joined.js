@@ -2,7 +2,6 @@ const fs = require("fs")
 const yt = require("youtubei.js")
 
 module.exports = async (api, event) => {
-	console.log("Test")
 	if(event.type == "event"){
 		console.log("Working event")
 		let thread = await api.getThreadInfo(event.threadID)
@@ -33,12 +32,29 @@ module.exports = async (api, event) => {
 								default:
 									g = "Mr./Ms."
 							}
-							messages.body = `Welcome to ${thread.threadName}, ${g} ${user[id].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`
-							messages.mentions.push = [{
-								id: id,
-								tag: `${user[id].name}`
-							}]
-							api.sendMessage(messages, event.threadID)
+							let mess = ""
+							let json = JSON.parse(fs.readFileSync("prefs/pref.json", "utf8"))
+							if(json.pin.message[event.threadID] != undefined){
+								api.getUserInfo(json.pin.sender[event.threadID], (err, _user) => {
+									let name = _user[json.pin.sender[event.threadID]]['name']
+									mess = "\n\nPinned message: " + json.pin.message[event.threadID] + "\n~ " + name
+									messages.body = `Welcome to ${thread.threadName}, ${g} ${user[id].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`
+									messages.mentions.push = [{
+										id: id,
+										tag: user[id].name,
+										fromIndex: 9
+									}]
+									api.sendMessage(messages, event.threadID)
+								})
+							}else{
+								messages.body = `Welcome to ${thread.threadName}, ${g} ${user[id].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`
+								messages.mentions.push = [{
+									id: id,
+									tag: user[id].name,
+									fromIndex: 9
+								}]
+								api.sendMessage(messages, event.threadID)
+							}
 						}
 					}
 				}
@@ -62,8 +78,17 @@ module.exports = async (api, event) => {
 							default:
 								g = "Mr./Ms."
 						}
-						let result = await yt2.search("goodbye air supply", { client: "YTMUSIC" })
-						let file = fs.createWriteStream("removegc.mp3")
+						let songs = [
+							"goodbye air supply",
+							"farewell to you my friend",
+							"bye bye bye nsync",
+							"thanks to you mariah carey",
+							"bye bye na rivermaya",
+							"graduation song remix",
+							"grand march"
+						]
+						let result = await yt2.search(songs[Math.floor(Math.random() * songs.length)], { client: "YTMUSIC" })
+						let file = fs.createWriteStream(event.threadID + "_removegc.mp3")
 						let f = yt2.download(result.songs[0].id, {
 							format: "mp4",
 							quality: "tiny",
@@ -73,7 +98,7 @@ module.exports = async (api, event) => {
 						})
 						f.pipe(file)
 						f.on("end", () => {
-							let nameDir = __dirname + "/../removegc.mp3"
+							let nameDir = __dirname + `/../${event.threadID}_removegc.mp3`
 							api.sendMessage({
 								body: `Farewell to you ${g} ${user[left].name}, the whole ${thread.threadName} will missed you.`,
 								attachment: fs.createReadStream(nameDir).on("end", () => {

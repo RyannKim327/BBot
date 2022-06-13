@@ -1,0 +1,18 @@
+Here are your admin commands:
+
+1. << admin >>
+- Check admin commands.
+2. << list >>
+- Thread lists.
+3. << toggle >>
+- Turn off or on the bot service.
+4. << bot: sleep >>
+- Turn off on a particular thread.
+5. << bot: wake-up >>
+- Turn on on a particular thread.
+6. << bot: ban >>
+- Ban user for abuse (Reply mode).
+7. << bot: unban >>
+- Unban user.
+8. << status >>
+- Check if bot is active or not
