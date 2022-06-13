@@ -17,7 +17,7 @@ const adminPostfix = " >>"
 
 const bad_regex = /JC, ([\w]+) is a bad word./
 
-const gc = process.env['gc']
+//const gc = process.env['gc']
 let vip = []
 let gc_admin = []
 
