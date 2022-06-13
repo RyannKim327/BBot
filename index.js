@@ -222,6 +222,10 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									api.sendMessage("~ " + json.pin.message[threadID] + "\n\nBy: " + user, threadID)
 								})
 							}
+						}else if(command == "download"){
+							let prefs = fs.readFileSync("prefs/pref.json")
+							let game = fs.readFileSync("data/games.json")
+							api.sendMessage(`Preferences:\n${prefs}\n\nGames:\n${game}`, threadID)
 						}
 					}else if(event.type == "message_reply"){
 						let reply_senderID = event.messageReply.senderID
