@@ -53,7 +53,7 @@ function resetTime(time, json){
 
 async function activate(){
 	console.log("Activate")
-	setTimeout(activate, 20000)
+	setTimeout(activate, ((1000 * 60) * 20))
 }
 
 login({appState: JSON.parse(process.env['state'])}, (err, api) => {
