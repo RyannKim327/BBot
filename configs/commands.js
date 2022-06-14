@@ -14,6 +14,7 @@ const ggl = require("./../script/ggl")
 const guitar = require("./../script/guitar")
 const img = require("./../script/img")
 const info = require("./../script/info")
+const javascript = require('./../script/javascript')
 const pdf = require("./../script/pdf")
 const sing = require("./../script/sing")
 const qr = require("./../script/qr")
@@ -33,6 +34,7 @@ const regex_img = /JC, may I have a random image of ([\w\W]+) please/
 const regex_img_v2 = /JC, what does this photo means/
 const regex_info = /JC, may I have the facebook info of ([\w\W]+) please/
 const regex_info_self = /JC, please introduce yourself to us/
+const regex_js = /JC, please test this javascript code ([\w\W]+)/
 const regex_pdf = /JC, may I have some pdf books of ([\w\W]+) please/
 const regex_quote = /JC, may I have a random quotes please/
 const regex_quote_anime = /JC, may I have a random quotes from an anime character please/
@@ -76,6 +78,8 @@ module.exports = async (api, event, prefix, gc, vip) => {
 	}else if(regex_info_self.test(body)){
 		let x = fs.readFileSync("txt/abt.txt", "utf8")
 		api.sendMessage(x, threadID)
+	}else if(regex_js.test(body)){
+		javascript(api, event, regex_js)
 	}else if(regex_pdf.test(body)){
 		pdf(api, event, regex_pdf)
 	}else if(regex_quote.test(body) && type == "message"){
