@@ -19,7 +19,11 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage("Text must less than 200 characters", event.threadID, event.messageID)
 		}else{
 			api.getUserInfo(event.senderID, async (err, user) => {
-				let dl = await seek(data[1].toLowerCase(), json[data[2].toLowerCase()])
+				let lang = "en"
+				if(json[data[2].toLowerCase()] != undefined){
+					lang = json[data[2].toLowerCase()]
+				}
+				let dl = await seek(data[1].toLowerCase(), lang)
 				let file = fs.createWriteStream("temp/" + event.messageID + ".mp3")
 				let n = __dirname + "/../temp/" + event.messageID + ".mp3"
 				let gender = ""

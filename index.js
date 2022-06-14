@@ -233,9 +233,18 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								})
 							}
 						}else if(command == "download"){
-							let prefs = fs.readFileSync("prefs/pref.json")
-							let game = fs.readFileSync("data/games.json")
-							api.sendMessage(`Preferences:\n${prefs}\n\nGames:\n${game}`, threadID)
+							let prefs = fs.readFileSync("prefs/pref.json", "utf8")
+							let game = fs.readFileSync("data/games.json", "utf8")
+							let lang = fs.readFileSync("data/tts.json", "utf8")
+							api.sendMessage(`Preferences:\n${prefs}\n\nGames:\n${game}\n\nLanguages:\n${lang}`, threadID)
+						}else if(command.startsWith("add language: ")){
+							let a = command.split(": ")
+							a.shift()
+							let b = a.split(" : ")
+							let c = JSON.parse(fs.readFileSync("data/tts.json", "utf8"))
+							c[b[0]] = b[1]
+							fs.writeFileSync("data/tts.json", JSON.stringify(c), "utf8")
+							api.sendMessage("New language added", threadID)
 						}
 					}else if(event.type == "message_reply"){
 						let reply_senderID = event.messageReply.senderID
