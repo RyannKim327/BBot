@@ -40,7 +40,7 @@ module.exports = async (api, body, event) => {
 					f.on("finish", () => {
 						try{
 							api.sendMessage({
-								body: w
+								body: w,
 								attachment: fs.createReadStream(__dirname + "/../temp/wiki.png").on("end", () => {
 									if(fs.existsSync(__dirname + "/../temp/wiki.png")){
 										fs.unlink(__dirname + "/../temp/wiki.png", (err) => {
