@@ -15,7 +15,7 @@ const prefix = "JC"
 const adminPrefix = "<< "
 const adminPostfix = " >>"
 
-const regex_admin = /<< ([\w\W]+) >>/
+const regex_admin = /^<< ([\w\W]+) >>$/
 const bad_regex = /JC, ([\w]+) is a bad word./
 
 const gc = process.env['gc']
