@@ -155,17 +155,17 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						if(command == "toggle"){
 							json.status = !json.status
 							if(!json.status){
-								if(!gc.includes(threadID)){
+								if(!myself.includes(threadID)){
 									api.sendMessage("Bot service turned off to all threads.", threadID)
 								}
 							}else{
-								if(!gc.includes(threadID)){
+								if(!myself.includes(threadID)){
 									api.sendMessage("Bot service turned on to all threads.", threadID)
 								}
 								json.test = ""
 							}
 							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
-							api.sendMessage("Bot service turned " + ((json.status) ? "off" : "on") + " to all threads.", gc)
+							api.sendMessage("Bot service turned " + ((json.status) ? "on" : "off") + " to all threads.", myself)
 						}else if(command == "bot: sleep" && !ban_thread.includes(threadID)){
 							api.getThreadInfo(threadID, (err, data) => {
 								if(err) return console.error("Error [Thread Sleep]: " + err)
