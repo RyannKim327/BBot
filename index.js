@@ -3,9 +3,9 @@ const login = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("node-cron")
 
-const joined = require("./extra/joined")
-const bday = require("./extra/bday")
-const commands = require("./extra/commands")
+const joined = require("./configs/joined")
+const bday = require("./configs/bday")
+const commands = require("./configs/commands")
 
 const date = require('./script/date')
 const filter = require("./script/filter")
@@ -15,6 +15,7 @@ const prefix = "JC"
 const adminPrefix = "<< "
 const adminPostfix = " >>"
 
+const regex_admin = /<< ([\w\W]+) >>/
 const bad_regex = /JC, ([\w]+) is a bad word./
 
 const gc = process.env['gc']
@@ -136,9 +137,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					}
 				})
 			}
-			if(low_body.startsWith(adminPrefix) && low_body.endsWith(adminPostfix)){
-				let command = low_body.replace(adminPrefix, "").replace(adminPostfix, "")
-				if(command == "sleep" && gc_admin.includes(senderID) && !ban_thread.includes(threadID) && !gc.includes(threadID)){
+			if(regex_admin.test(body)){
+				let command = body.match(regex_admin)[1]
+				if(command == "queries"){
+					let q = fs.readFileSync("txt/queries.txt", "utf8")
+					api.sendMessage(q, threadID)
+				}else if(command == "sleep" && gc_admin.includes(senderID) && !ban_thread.includes(threadID) && !gc.includes(threadID)){
 					api.getThreadInfo(threadID, (err, data) => {
 						if(err) return console.error("Error [Admin Off]: " + err)
 						json.off += threadID + ", "

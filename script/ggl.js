@@ -35,7 +35,6 @@ module.exports = async (api, event) => {
 	if(data.length > 0){
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		let res = await search(data.join(" "))
-		//console.log(res)
 		if(res.did_you_mean != undefined)
 			api.sendMessage("You mean: " + res.did_you_mean, event.threadID, event.messageID)
 		if(res.knowledge_panel.title != "N/A" && res.knowledge_panel.lyrics == undefined && (res.knowledge_panel.description != "N/A" || res.featured_snippet.description != "N/A")){
@@ -52,16 +51,6 @@ module.exports = async (api, event) => {
 			obj.forEach((r) => {
 				if(r != "title" && r != "description" && r != "type" && r != "url"){
 					if(Array.isArray(output[r])){
-						/*
-							if(output.ratings != undefined){
-								let ratings = output.ratings
-								let temp = "\nRatings: "
-								for(let rate in ratings){
-									temp += ratings[rate].name + "(" + ratings[rate].rating + "), "
-								}
-								m += temp
-							}
-						*/
 						m += "\n-~-~-~-~-~\n" + r.replace(/_/gi, " ").toUpperCase() + ":\n"
 						let rate = output[r]
 						for(let i in rate) {
@@ -70,9 +59,6 @@ module.exports = async (api, event) => {
 								m += y.toUpperCase() + ": " + rate[i][y] + "\n" //+ ": " + rate[i].rating + "\n"
 							})
 						}
-							//let n = r[i]
-							//m += "Name: " + n.name+ "( " + n.rating + " )\n"
-						
 					}else{
 						m += "\n-~-~-~-~-~\n" + r.replace(/_/gi, " ").toUpperCase() + ": " + output[r]
 					}
@@ -167,43 +153,7 @@ module.exports = async (api, event) => {
 		}
 		api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 	}else{
-		api.sendMessage(`Yes? Do you have any issues about me?`, event.threadID, event.messageID)
+		api.sendMessage(`Yes? Do you have any issues about me? Or something you want to ask? Kindly execute << queries >> if you need something you want me to do.`, event.threadID, event.messageID)
 	}
 }
-
-/*
-{
-   //...
-   "dictionary":{
-      "word":"a·maz·ing",
-      "phonetic":"/əˈmāziNG/",
-      "audio":"https://ssl.gstatic.com/dictionary/static/sounds/20200429/amazing--_us_1.mp3",
-      "definitions":[
-         "causing great surprise or wonder; astonishing.",
-         "startlingly impressive."
-      ],
-      "examples":[
-         "\"an amazing number of people registered\"",
-         "\"she makes the most amazing cakes\""
-      ]
-   }
-}
-
-{
-   //...
-   "translation": {
-      "source_language":"English - detected",
-      "target_language":"German",
-      "source_text":"this is a test",
-      "target_text":"das ist ein Test"
-   }
-}
-*/
-
-
-
-
-
-
-
 

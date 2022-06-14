@@ -59,7 +59,7 @@ module.exports = async (api, event, regex) => {
 				})
 			}, event.threadID, event.messageID)	
 		})
-		if(e.origin.source.includes(".lwikipedia.org")){
+		if(e.origin.source.includes("wikipedia.org")){
 			let url = e.origin.source.split("/")
 			wiki(api, url[url.length - 1], event)
 		}

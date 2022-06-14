@@ -1,0 +1,49 @@
+Good day, Here are my list of queries you may used to execute a command.
+
+
+- Message Commands
+Guitar chords: JC, may I have the guitar chords of <song title> please
+
+Random image: JC, may I have a random image of <anything> please
+
+Facebook information: JC, may I have the facebook info of <facebook name, id or username> please
+
+Bot self introduction: JC, please introduce yourself to us
+
+PDF File request: JC, may I have some pdf books of <book name, title or documentations> please
+
+Random Quotes: JC, may I have a random quotes please
+Random Quotes from an anime character: JC, may I have a random quotes from an anime character please
+Random Quotes with specific use: JC, may I have a random quotes about <something or anything> please
+
+QR Code Generator: JC, generate a QR Code of <text or sentence or paragraphs> please
+
+Play a song: JC, play the song <song name or title with/without singer name> please
+
+How to Pronounce: JC, how to pronounce <text less than 200 characters> in (english|tagalog|korean|japanese)
+
+Random bible verse: JC, may I have a random bible verse please
+Bible verse of the day (Server based): JC, what is your bible verse for this day
+Specific bible verse: JC, may I have <bookname with chapter and/or verse with - as range and/or ; as separator> in the bible please
+
+Weather update: JC, may I know the weather update in <location> please
+
+
+- Message Reply -
+Source of image: JC, what does this photo means
+Generate a QR Code: JC, generate a QR Code for this text please
+How to pronounce: JC, how to pronounce these words in (english|tagalog|korean|japanese)
+
+
+Playing games
+Roll a die: JC, play roll a die
+- This can be thru message or message reply
+
+Fibbonacci Sequecing game: JC, play fibbonacci game
+- This is for message only and not works on message reply
+
+Guess the word: JC, play guess the word
+- This is a guessing word game with description to test your mind.
+
+
+JC still response once the text starts with JC, so expect every google based result if your query is undefined or invalid.
