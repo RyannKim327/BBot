@@ -240,7 +240,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}else if(command.startsWith("add language: ")){
 							let a = command.split(": ")
 							a.shift()
-							let b = a.split(" : ")
+							let b = a.join("").split(", ")
 							let c = JSON.parse(fs.readFileSync("data/tts.json", "utf8"))
 							c[b[0]] = b[1]
 							fs.writeFileSync("data/tts.json", JSON.stringify(c), "utf8")
