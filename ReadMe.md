@@ -34,16 +34,16 @@
 1. Savador
 2. John Jeremy Antiguo
 3. Earl Shine Sawir
-3. John Paul Caigas
-4. John Roy Lapida Calimlim
-5. Mart Anthony Salazar
-6. Lester Navarra
-7. Jerson Carin
-8. Rovie Francisco
-9. LuanRT
-10. Schemavery
-11. VanBanLaNhat
-12. RapidApi
-13. Node Package Manager JS
-14. To all api used to this projects
-15. And to all testers and groups
+4. John Paul Caigas
+5. John Roy Lapida Calimlim
+6. Mart Anthony Salazar
+7. Lester Navarra
+8. Jerson Carin
+9. Rovie Francisco
+10. LuanRT
+11. Schemavery
+12. VanBanLaNhat
+13. RapidApi
+14. Node Package Manager JS
+15. To all api used to this projects
+16. And to all testers and groups

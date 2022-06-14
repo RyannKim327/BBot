@@ -38,24 +38,29 @@ module.exports = async (api, body, event) => {
 				let go = http.get(r.originalimage.source, (s) => {
 					s.pipe(f)
 					f.on("finish", () => {
-						api.sendMessage({
-							attachment: fs.createReadStream(__dirname + "/../temp/wiki.png").on("end", () => {
-								if(fs.existsSync(__dirname + "/../temp/wiki.png")){
-									fs.unlink(__dirname + "/../temp/wiki.png", (err) => {
-										if(err) return console.error("Error [Wiki img]: " + err)
-											api.sendMessage(w, event.threadID, event.messageID)
-										})
-									}
-							})
-						}, event.threadID)
+						try{
+							api.sendMessage({
+								body: w
+								attachment: fs.createReadStream(__dirname + "/../temp/wiki.png").on("end", () => {
+									if(fs.existsSync(__dirname + "/../temp/wiki.png")){
+										fs.unlink(__dirname + "/../temp/wiki.png", (err) => {
+											if(err) return console.error("Error [Wiki img]: " + err)
+												//api.sendMessage(w, event.threadID, event.messageID)
+											})
+										}
+								})
+							}, event.threadID)
+						}catch(e){
+							api.sendMessage(w, event.threadID)
+						}
 					})
 				})
 			}else{
-				api.sendMessage(w, event.threadID, event.messageID)
+				api.sendMessage(w, event.threadID)
 			}
 		}
 	}catch(e){
-		api.sendMessage(e, event.threadID, event.messageID)
+		api.sendMessage(e, event.threadID)
 	}
 }
 /*
