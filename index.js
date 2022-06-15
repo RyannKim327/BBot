@@ -236,7 +236,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							let prefs = fs.readFileSync("prefs/pref.json", "utf8")
 							let game = fs.readFileSync("data/games.json", "utf8")
 							let lang = fs.readFileSync("data/tts.json", "utf8")
-							api.sendMessage(`Preferences:\n${prefs}\n\nGames:\n${game}\n\nLanguages:\n${lang}`, threadID)
+							api.sendMessage(prefs, threadID)
+							api.sendMessage(game, threadID)
+							api.sendMessage(lang, threadID)
 						}else if(command.startsWith("add language: ")){
 							let a = command.split(": ")
 							a.shift()
