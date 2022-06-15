@@ -86,7 +86,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		let mins = date("Asia/Manila").getMinutes()
 		console.log("Command Executed " + time + ":" + mins)
 	})*/
-	activate()
+	//activate()
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true
