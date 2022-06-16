@@ -26,7 +26,7 @@ module.exports = async (api, body, event) => {
 			if(a.originalimage != undefined){
 				let file = fs.createWriteStream("temp/" + body + ".png")
 				let name = __dirname + "/../temp/" + body + ".png"
-				try{
+				//try{
 					http.get(a.originalimage.source, (r) => {
 						r.pipe(file)
 						file.on("finish", () => {
@@ -43,12 +43,10 @@ module.exports = async (api, body, event) => {
 								//api.sendMessage(data, event.threadID)
 							})
 						})
-					}).catch((e) => {
-						api.sendMessage(data, event.threadID)
 					})
-				}catch(e){
+				/*}catch(e){
 					api.sendMessage(data, event.threadID)
-				}
+				}*/
 			}
 		}
 	}
