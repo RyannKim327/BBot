@@ -38,6 +38,8 @@ module.exports = async (api, body, event) => {
 											if(e) return console.error("Error [Wiki]: " + e)
 										})
 									}
+								}).catch((e) => {
+									api.sendMessage(data, event.threadID)
 								})
 							}, event.threadID)
 						})
