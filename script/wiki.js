@@ -40,7 +40,9 @@ module.exports = async (api, body, event) => {
 									}
 								})
 							}, event.threadID, (err, m) => {
-								//api.sendMessage(data, event.threadID)
+								if(e){
+									api.sendMessage(data, event.threadID)
+								}
 							})
 						})
 					})
