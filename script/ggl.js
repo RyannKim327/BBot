@@ -51,7 +51,7 @@ module.exports = async (api, event) => {
 			obj.forEach((r) => {
 				if(r != "title" && r != "description" && r != "type" && r != "url"){
 					if(Array.isArray(output[r])){
-						m += "\n-~-~-~-~-~\n" + r.replace(/_/gi, " ").toUpperCase() + ":\n"
+						m += "\n-+-+-+-+-+-\n" + r.replace(/_/gi, " ").toUpperCase() + ":\n"
 						let rate = output[r]
 						for(let i in rate) {
 							let x = Object.keys(rate[i])
@@ -60,12 +60,12 @@ module.exports = async (api, event) => {
 							})
 						}
 					}else{
-						m += "\n-~-~-~-~-~\n" + r.replace(/_/gi, " ").toUpperCase() + ": " + output[r]
+						m += "\n-+-+-+-+-+-\n" + r.replace(/_/gi, " ").toUpperCase() + ": " + output[r]
 					}
 				}
 			})
 			if(output.url != undefined && output.url != "N/A"){
-				m += "\n-~-~-~-~-~\nSource: " + output.url
+				m += "\n-+-+-+-+-+-\nSource: " + output.url
 				let wiki = output.url.split("/")
 				if(output.url.includes("en.m.wikipedia.org")){
 					const pedia = require("./wiki")
@@ -137,8 +137,17 @@ module.exports = async (api, event) => {
 		}else{
 			let r = res.results
 			if(r.length > 0){
-				for(i = 0; i < 3; i++){
-					let output = r[i]
+				let rand = []
+				for(let i = 0; i < 3; i++){
+					let j = Math.floor(Math.random() * r.length)
+					if(rand.includes(j)){
+						i--
+					}else{
+						rand[i] = j
+					}
+				}
+				for(let i = 0; i < rand.length; i++){
+					let output = r[rand[i]]
 					if(output.title != undefined || output != undefined){
 						api.sendMessage({
 							body: `Result [Results]:\n${output.title}\n~${output.description}\nSource: ${output.url}`,
