@@ -136,18 +136,22 @@ module.exports = async (api, event) => {
 			api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 		}else{
 			let r = res.results
-			for(i = 0; i < 3; i++){
-				let output = r[i]
-				if(output.title != undefined || output != undefined){
-					api.sendMessage({
-						body: `Result [Results]:\n${output.title}\n~${output.description}\nSource: ${output.url}`,
-						url: output.url
-					}, event.threadID, event.messageID)
-					let wiki = output.url.split("/")
-					if(output.url.includes("en.m.wikipedia.org")){
-						pedia(api, wiki[wiki.length - 1], event)
+			if(r.length > 0){
+				for(i = 0; i < 3; i++){
+					let output = r[i]
+					if(output.title != undefined || output != undefined){
+						api.sendMessage({
+							body: `Result [Results]:\n${output.title}\n~${output.description}\nSource: ${output.url}`,
+							url: output.url
+						}, event.threadID, event.messageID)
+						let wiki = output.url.split("/")
+						if(output.url.includes("en.m.wikipedia.org")){
+							pedia(api, wiki[wiki.length - 1], event)
+						}
 					}
 				}
+			}else{
+				api.seneMessage("There is no results found, or might be a server error.", event.threadID)
 			}
 			console.log(r)
 		}
