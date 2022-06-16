@@ -14,50 +14,41 @@ async function getWiki(q) {
 }
 
 module.exports = async (api, body, event) => {
-	let d = body
-	try{
-		if(d.length > 0){
-			let w = ""
-			let r = await getWiki(d).then((r) => {
-				return r
-			}).catch((e) => {
-				console.error("Error [Wiki]: " + e)
-				return null
-			})
-			if(r === undefined || r == null){
-				api.sendMessage("Error: ", event.threadID, event.messageID)
-				throw new Error("Document not found")
-			}
-			if(r.title === undefined){
-				api.sendMessage("Error: ", event.threadID, event.messageID)
-				throw new Error("Document not found")
-			}
-			w += `You've search about ${r.title}\n~${r.description}\n\n${r.extract}\n\nReferences\nMobile: ${r.content_urls.mobile.page}\nDesktop: ${r.content_urls.desktop.page}`
-			if(r.originalimage !== undefined){
-				let f = fs.createWriteStream("temp/wiki.png")
-				let go = http.get(r.originalimage.source, (s) => {
-					s.pipe(f)
-					f.on("finish", () => {
-						api.sendMessage({
-							attachment: fs.createReadStream(__dirname + "/../temp/wiki.png").on("end", () => {
-								if(fs.existsSync(__dirname + "/../temp/wiki.png")){
-									fs.unlink(__dirname + "/../temp/wiki.png", (err) => {
-										if(err) return console.error("Error [Wiki img]: " + err)
-										api.sendMessage(w, event.threadID)
-									})
-								}
-							})
-						}, event.threadID)
+	if(body.length > 0){
+		let data = ""
+		let a = await getWiki(body)
+		if(a == undefined || a == null){
+			api.sendMessage("An error occured", event.threadID)
+		}else if(a.title == undefined || a.title == "N/A"){
+			api.sendMessage("Document not found", event.threadID)
+		}else{
+			data += `Title: ${a.title}\n- ${a.description}\n    ${a.extract}\n\nReference: ${a.content_urls.mobile.page}`
+			if(a.originalimage != undefined){
+				let file = fs.createWriteStream("temp/" + body + ".png")
+				let name = __dirname + "/../temp/" + body + ".png"
+				try{
+					http.get(a.originalimage.source, (r) => {
+						r.pipe(file)
+						file.on("finish", () => {
+							api.sendMessage({
+								body: data,
+								attachment: fs.createReadStream(name).on("end", () => {
+									if(fs.existsSync(name)){
+										fs.unlink(name, (e) => {
+											if(e) return console.error("Error [Wiki]: " + e)
+										})
+									}
+								})
+							}, event.threadID)
+						})
+					}).catch((e) => {
+						api.sendMessage(data, event.threadID)
 					})
-				}).catch((e) => {
-					api.sendMessage(w, event.threadID)
-				})
-			}else{
-				api.sendMessage(w, event.threadID)
+				}catch(e){
+					api.sendMessage(data, event.threadID)
+				}
 			}
 		}
-	}catch(e){
-		api.sendMessage(e, event.threadID)
 	}
 }
 /*
