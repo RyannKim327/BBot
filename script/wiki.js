@@ -39,17 +39,18 @@ module.exports = async (api, body, event) => {
 					s.pipe(f)
 					f.on("finish", () => {
 						api.sendMessage({
-							body: w,
 							attachment: fs.createReadStream(__dirname + "/../temp/wiki.png").on("end", () => {
 								if(fs.existsSync(__dirname + "/../temp/wiki.png")){
 									fs.unlink(__dirname + "/../temp/wiki.png", (err) => {
 										if(err) return console.error("Error [Wiki img]: " + err)
-										api.sendMessage(w, event.threadID, event.messageID)
+										api.sendMessage(w, event.threadID)
 									})
 								}
 							})
 						}, event.threadID)
 					})
+				}).catch((e) => {
+					api.sendMessage(w, event.threadID)
 				})
 			}else{
 				api.sendMessage(w, event.threadID)
