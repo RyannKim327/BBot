@@ -3,7 +3,7 @@ const fs = require("fs")
 
 async function word(){
 	let result = await axios.get("https://random-words-api.vercel.app/word").then((r) => {
-		return r.data
+		return r.data[0]
 	}).catch((e) => {
 		console.error("Error [Random Word]: " + e)
 		return null
@@ -15,8 +15,7 @@ module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	if(json.random.data[event.senderID] == undefined){
 		let x = await word()
-		let y = x.word
-		let w = y.toLowerCase()
+		let w = x.word
 		let a = []
 		let b = ""
 		for(let i = 0; i < w.length; i++){
@@ -30,8 +29,8 @@ module.exports = async (api, event, regex) => {
 		for(let i = 0; i < a.length; i++){
 			b += w[a[i]]
 		}
-		json.random.data[event.senderID] = w
-		api.sendMessage("Here's your random word: " + b + "\n\nSend a message using the format: JC: the word is <word>", event.threadID)
+		json.random.data[event.senderID] = w.toLowerCase()
+		api.sendMessage("Here's your random word: " + b.toLowerCase() + "\n\nSend a message using the format: JC: the word is <word>", event.threadID)
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}else{
 		let d = event.body.match(regex)[1]
