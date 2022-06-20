@@ -11,7 +11,7 @@ const date = require('./script/date')
 const filter = require("./script/filter")
 const verse = require("./script/verse")
 
-const prefix = "JC,"
+const prefix = "J"
 const adminPrefix = "<< "
 const adminPostfix = " >>"
 
