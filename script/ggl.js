@@ -160,7 +160,7 @@ module.exports = async (api, event) => {
 					}
 				}
 			}else{
-				api.seneMessage("There is no results found, or might be a server error.", event.threadID)
+				api.sendMessage("There is no results found, or might be a server error.", event.threadID)
 			}
 			console.log(r)
 		}
