@@ -40,7 +40,7 @@ module.exports = async (api, event, regex) => {
 		}
 		if(data == json.random.data[event.senderID]){
 			json.random.score[event.senderID] += 1
-			api.sendMessage("You've got it.\n\nYour current score is: " + json.random.score[event.sebderID], event.threadID)
+			api.sendMessage("You've got it.\n\nYour current score is: " + json.random.score[event.senderID], event.threadID)
 		}else{
 			json.random.score[event.senderID] -= 1
 			let r_word = json.random.data[event.senderID]
