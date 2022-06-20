@@ -1,4 +1,4 @@
-Hello, I am JC Rios, you may call me JC. If you have amy questions, just ask me, and I'll try to give you any answers.
+Hello, I am JC Rios, you may call me JC. If you have any questions, just ask me, and I'll try to give you any answers.
 
 JC Rios is a simple bot made with nodejs. Please let me know if you having any trouble or issues regarding to me or my service, to fix it as soon as possible.
 

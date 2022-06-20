@@ -24,35 +24,36 @@ const tell = require("./../script/tell")
 const verse = require("./../script/verse")
 const weather = require("./../script/weather")
 
-const regex_game_dice = /JC, play roll a die/
-const regex_game_fibbo = /JC, play fibbonacci game/
-const regex_game_fibbo_ans = /JC, the hidden number is ([0-9]+)/
-const regex_game_random_word = /JC, play random word/
-const regex_game_random_word_ans = /JC, the word is ([\w\W]+)/
-const regex_game_word = /JC, play guess the word/
-const regex_game_word_ans = /JC, its ([\w\W]+)/
-	
-const regex_guitar = /JC, may I have the guitar chords of ([\w\W]+) please/
-const regex_img = /JC, may I have a random image of ([\w\W]+) please/
-const regex_img_v2 = /JC, what does this photo means/
-const regex_info = /JC, may I have the facebook info of ([\w\W]+) please/
-const regex_info_self = /JC, please introduce yourself to us/
-const regex_js = /JC, please test this javascript code ([\w\W]+)/
-const regex_pdf = /JC, may I have some pdf books of ([\w\W]+) please/
-const regex_quote = /JC, may I have a random quotes please/
-const regex_quote_anime = /JC, may I have a random quotes from an anime character please/
-const regex_quote_about = /JC, may I have a random quotes about ([\w\W]+) please/
-const regex_qr_reply = /JC, generate a QR Code for this text please/
-const regex_qr = /JC, generate a QR Code of ([\w\W]+) please/
-const regex_sing = /JC, play the song ([\w\W]+) please/
-const regex_speech = /JC, how to pronounce ([\w\W\s\n\r]+) in ([\w]+)/
-const regex_speech_reply = /JC, how to pronounce these words in ([\w]+)/
-const regex_verse = /JC, may I have a random bible verse please/
-const regex_verse_of_the_day = /JC, what is your bible verse for this day/
-const regex_verse_v2 = /JC, may I have ([\w\W]+) in the bible please/
-const regex_weather = /JC, may I know the weather update in ([\w\W]+) please/
-	
 module.exports = async (api, event, prefix, gc, vip) => {
+	
+	const regex_game_dice = new RegExp(prefix + " play roll a die")
+	const regex_game_fibbo = new RegExp(prefix + " play fibbonacci game")
+	const regex_game_fibbo_ans = new RegExp(prefix + " the hidden number is ([0-9]+)")
+	const regex_game_random_word = new RegExp(prefix + " play random word")
+	const regex_game_random_word_ans = new RegExp(prefix + " the word is ([\\w\\W]+)")
+	const regex_game_word = new RegExp(prefix + " play guess the word")
+	const regex_game_word_ans = new RegExp(prefix + " its ([\\w\\W]+)")
+	
+	const regex_guitar = new RegExp(prefix + " may I have the guitar chords of ([\\w\\W]+) please")
+	const regex_img = new RegExp(prefix + " may I have a random image of ([\\w\\W]+) please")
+	const regex_img_v2 = new RegExp(prefix + " what does this photo means")
+	const regex_info = new RegExp(prefix + " may I have the facebook info of ([\\w\\W]+) please")
+	const regex_info_self = new RegExp(prefix + " please introduce yourself to us")
+	const regex_js = new RegExp(prefix + " please test this javascript code ([\\w\\W]+)")
+	const regex_pdf = new RegExp(prefix + " may I have some pdf books of ([\\w\\W]+) please")
+	const regex_quote = new RegExp(prefix + " may I have a random quotes please")
+	const regex_quote_anime = new RegExp(prefix + " may I have a random quotes from an anime character please")
+	const regex_quote_about = new RegExp(prefix + " may I have a random quotes about ([\\w\\W]+) please")
+	const regex_qr_reply = new RegExp(prefix + " generate a QR Code for this text please")
+	const regex_qr = new RegExp(prefix + " generate a QR Code of ([\\w\\W]+) please")
+	const regex_sing = new RegExp(prefix + " play the song ([\\w\\W]+) please")
+	const regex_speech = new RegExp(prefix + " how to pronounce ([\\w\\W\\s\\n\\r]+) in ([\\w]+)")
+	const regex_speech_reply = new RegExp(prefix + " how to pronounce these words in ([\\w]+)")
+	const regex_verse = new RegExp(prefix + " may I have a random bible verse please")
+	const regex_verse_of_the_day = new RegExp(prefix + " what is your bible verse for this day")
+	const regex_verse_v2 = new RegExp(prefix + " may I have ([\\w\\W]+) in the bible please")
+	const regex_weather = new RegExp(prefix + " may I know the weather update in ([\\w\\W]+) please")
+	
 	let {
 		body,
 		messageID,
