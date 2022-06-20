@@ -34,7 +34,8 @@ module.exports = async (api, event, regex) => {
 		api.sendMessage(`Here's your random word: ${b}\n\nSend a message using the format: JC: the word is <word>`, event.threadID)
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}else{
-		let d = event.body.match(regex)
+		let d = event.body.match(regex)[1]
+		
 		let data = d.toLowerCase()
 		if(json.random.score[event.senderID] == undefined){
 			json.random.score[event.senderID] = 0
@@ -44,7 +45,8 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage("You've got it", event.threadID)
 		}else{
 			json.random.score[event.senderID] -= 1
-			api.sendMessage(`Wrong, the correct answer is ${json.random.data[event.senderID]}, event.threadID)
+			let r_word = json.random.data[event.senderID]
+			api.sendMessage(`Wrong, the correct answer is ${r_word}, event.threadID)
 		}
 		json.random.data[event.senderID] = undefined
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
