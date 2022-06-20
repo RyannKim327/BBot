@@ -24,7 +24,8 @@ const tell = require("./../script/tell")
 const verse = require("./../script/verse")
 const weather = require("./../script/weather")
 
-module.exports = async (api, event, prefix, gc, vip) => {
+module.exports = async (api, event, pre, gc, vip) => {
+	const prefix = pre + ","
 	
 	const regex_game_dice = new RegExp(prefix + " play roll a die")
 	const regex_game_fibbo = new RegExp(prefix + " play fibbonacci game")
