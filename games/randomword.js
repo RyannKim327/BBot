@@ -30,7 +30,7 @@ module.exports = async (api, event, regex) => {
 			b += w[a[i]]
 		}
 		json.random.data[event.senderID] = w.toLowerCase()
-		api.sendMessage("Here's your random word: " + b.toLowerCase() + "\n\nSend a message using the format: JC: the word is <word>", event.threadID)
+		api.sendMessage("Here's your random word: " + b.toLowerCase() + "\n\nSend a message using the format: JC, the word is <word>", event.threadID)
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}else{
 		let d = event.body.match(regex)[1]
@@ -40,11 +40,11 @@ module.exports = async (api, event, regex) => {
 		}
 		if(data == json.random.data[event.senderID]){
 			json.random.score[event.senderID] += 1
-			api.sendMessage("You've got it", event.threadID)
+			api.sendMessage("You've got it.\n\nYour current score is: " + json.random.score[event.sebderID], event.threadID)
 		}else{
 			json.random.score[event.senderID] -= 1
 			let r_word = json.random.data[event.senderID]
-			api.sendMessage(`Wrong, the correct answer is ${r_word}`, event.threadID)
+			api.sendMessage(`Wrong, the correct answer is ${r_word}\n\nYour current score is ${json.random.score[event.senderID]}`, event.threadID)
 		}
 		json.random.data[event.senderID] = undefined
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
