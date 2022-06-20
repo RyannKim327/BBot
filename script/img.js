@@ -57,7 +57,11 @@ module.exports = async (api, event, regex) => {
 						})
 					}
 				})
-			}, event.threadID, event.messageID)	
+			}, event.threadID, (e, m) => {
+				if(e){
+					api.sendMessage("Error [Image Search]:" + e, event.threadID)
+				}
+			}, event.messageID)	
 		})
 		if(e.origin.source.includes("wikipedia.org")){
 			let url = e.origin.source.split("/")
