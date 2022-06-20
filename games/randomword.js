@@ -8,6 +8,7 @@ async function word(){
 		console.error("Error [Random Word]: " + e)
 		return null
 	})
+	return result
 }
 
 module.exports = async (api, event, regex) => {
