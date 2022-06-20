@@ -8,6 +8,7 @@ const news = require("./../script/news")
 
 const dice = require("./../games/dice")
 const fibbo = require("./../games/fibbo")
+const random_word = require("./../games/randomword")
 const word = require("./../games/word")
 
 const ggl = require("./../script/ggl")
@@ -26,6 +27,8 @@ const weather = require("./../script/weather")
 const regex_game_dice = /JC, play roll a die/
 const regex_game_fibbo = /JC, play fibbonacci game/
 const regex_game_fibbo_ans = /JC, the hidden number is ([0-9]+)/
+const regex_game_random_word = /JC, play random word/
+const regex_game_random_word_ans = /JC, the word is ([\w\W]+)/
 const regex_game_word = /JC, play guess the word/
 const regex_game_word_ans = /JC, its ([\w\W]+)/
 	
@@ -65,6 +68,8 @@ module.exports = async (api, event, prefix, gc, vip) => {
 		dice(api, event)
 	}else if((regex_game_fibbo.test(body) && json_games.fibbo.digit[senderID] == undefined) || (regex_game_fibbo_ans.test(body) && json_games.fibbo.digit[senderID] != undefined)){
 		fibbo(api, event, regex_game_fibbo_ans)
+	}else if((regex_game_random_word.test(body) && json_games.random.data[senderID] == undefined) || (regex_game_random_word_ans.test(body) && json_games.random.data[senderID] != undefined)){
+		random_word(api, event, regex_game_random_word_ans)
 	}else if((regex_game_word.test(body) && json_games.word.data[senderID] == undefined) || (regex_game_word_ans.test(body) && json_games.word.data[senderID] != undefined)){
 		word(api, event, regex_game_word_ans)
 	}else if(regex_guitar.test(body) && type == "message"){
