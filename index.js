@@ -106,7 +106,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			api.markAsReadAll((err) => {
 				if(err) return console.error("Error [Mark as Read All]: " + err)
 			})
-			api.getThreadHistory(threadID, 50, null, (e, h) => {
+			api.getThreadHistory(threadID, 10, null, (e, h) => {
 				console.log(h)
 			})
 			let morning = json.greet.morning
