@@ -15,6 +15,7 @@ module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	if(json.riddles.ans[event.senderID] == undefined){
 		let data = await riddle()
+		json.ingame[event.senderID] = true
 		json.riddles.ans[event.senderID] = data.answer.toLowerCase()
 		if(json.riddles.score[event.senderID] == undefined){
 			json.riddles.score[event.senderID] = 0
@@ -32,6 +33,7 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage("Wrong answer, the correct answer is " + json.riddles.ans[event.senderID] + "\n\nCurrent score: " + json.riddles.score[event.senderID], event.threadID)
 		}
 		json.riddles.ans[event.senderID] = undefined
+		json.ingame[event.senderID] = undefined
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}
 }
