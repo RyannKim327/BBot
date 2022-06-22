@@ -30,7 +30,7 @@ module.exports = async (api, event, regex) => {
 			b += w[a[i]]
 		}
 		json.random.data[event.senderID] = w.toLowerCase()
-		api.sendMessage("Here's your random word: " + b.toLowerCase() + "\n\nSend a message using the format: JC, the word is <word>", event.threadID)
+		api.sendMessage("Here's your random word: " + b.toLowerCase() + "\n\nSend a message using the format: JC, the answer is <word>", event.threadID)
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}else{
 		let d = event.body.match(regex)[1]

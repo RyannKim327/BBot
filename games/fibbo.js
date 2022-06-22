@@ -37,7 +37,7 @@ module.exports = (api, event, regex) => {
 		}
 		json.fibbo.digit[event.senderID] = result[position]
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
-		message += "\n\nFormat: JC, the hidden number is <number>"
+		message += "\n\nFormat: JC, the answer is <number>"
 		api.sendMessage(message, event.threadID)
 	}
 }

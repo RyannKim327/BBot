@@ -29,11 +29,12 @@ module.exports = async (api, event, pre, gc, vip) => {
 	
 	const regex_game_dice = new RegExp(prefix + " play roll a die")
 	const regex_game_fibbo = new RegExp(prefix + " play fibbonacci game")
-	const regex_game_fibbo_ans = new RegExp(prefix + " the hidden number is ([0-9]+)")
+	//const regex_game_fibbo_ans = new RegExp(prefix + " the hidden number is ([0-9]+)")
 	const regex_game_random_word = new RegExp(prefix + " play random word")
-	const regex_game_random_word_ans = new RegExp(prefix + " the word is ([\\w\\W]+)")
+	//const regex_game_random_word_ans = new RegExp(prefix + " the word is ([\\w\\W]+)")
 	const regex_game_word = new RegExp(prefix + " play guess the word")
-	const regex_game_word_ans = new RegExp(prefix + " its ([\\w\\W]+)")
+	//const regex_game_word_ans = new RegExp(prefix + " its ([\\w\\W]+)")
+	const regex_game_ans = new RegExp(prefix + " the answer is ([\\w\\W]+)")
 	
 	const regex_guitar = new RegExp(prefix + " may I have the guitar chords of ([\\w\\W]+) please")
 	const regex_img = new RegExp(prefix + " may I have a random image of ([\\w\\W]+) please")
@@ -68,12 +69,12 @@ module.exports = async (api, event, pre, gc, vip) => {
 
 	if(regex_game_dice.test(body)){
 		dice(api, event)
-	}else if((regex_game_fibbo.test(body) && json_games.fibbo.digit[senderID] == undefined) || (regex_game_fibbo_ans.test(body) && json_games.fibbo.digit[senderID] != undefined)){
-		fibbo(api, event, regex_game_fibbo_ans)
-	}else if((regex_game_random_word.test(body) && json_games.random.data[senderID] == undefined) || (regex_game_random_word_ans.test(body) && json_games.random.data[senderID] != undefined)){
-		random_word(api, event, regex_game_random_word_ans)
-	}else if((regex_game_word.test(body) && json_games.word.data[senderID] == undefined) || (regex_game_word_ans.test(body) && json_games.word.data[senderID] != undefined)){
-		word(api, event, regex_game_word_ans)
+	}else if((regex_game_fibbo.test(body) && json_games.fibbo.digit[senderID] == undefined) || (regex_game_ans.test(body) && json_games.fibbo.digit[senderID] != undefined)){
+		fibbo(api, event, regex_game_ans)
+	}else if((regex_game_random_word.test(body) && json_games.random.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.random.data[senderID] != undefined)){
+		random_word(api, event, regex_game_ans)
+	}else if((regex_game_word.test(body) && json_games.word.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.word.data[senderID] != undefined)){
+		word(api, event, regex_game_ans)
 	}else if(regex_guitar.test(body) && type == "message"){
 		guitar(api, event, regex_guitar)
 	}else if(regex_img.test(body) && type == "message"){

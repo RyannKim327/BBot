@@ -40,7 +40,7 @@ module.exports = async (api, event, regex) => {
 					word.data[event.senderID] = undefined
 				}
 			}
-			fs.unlink(__dirname + "/../" + event.threadID + "_word.txt", (e) => {})
+			//fs.unlink(__dirname + "/../" + event.threadID + "_word.txt", (e) => {})
 			fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 		/*}else{
 			api.sendMessage("This is not for you.", event.threadID)
@@ -113,6 +113,6 @@ module.exports = async (api, event, regex) => {
 		word.trials[event.senderID] = 3
 		//fs.writeFileSync(event.threadID + "_word.txt", words, "utf8")
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
-		api.sendMessage(`- Word Game -\nHere's your clue: ${output}\nDefinition: ${r.definition}\n\nFormat: JC, its <answer>`, event.threadID)
+		api.sendMessage(`- Word Game -\nHere's your clue: ${output}\nDefinition: ${r.definition}\n\nFormat: JC, the answer is <answer>`, event.threadID)
 	}
 }
