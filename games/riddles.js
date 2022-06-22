@@ -8,6 +8,7 @@ async function riddle(){
 		console.error("Error [Riddles]: " + e)
 		return null
 	})
+	return output
 }
 
 module.exports = async (api, event, regex) => {
