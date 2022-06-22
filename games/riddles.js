@@ -16,7 +16,7 @@ module.exports = async (api, event, regex) => {
 	if(json.riddles.ans[event.senderID] == undefined){
 		let data = await riddle()
 		json.ingame[event.senderID] = true
-		json.riddles.ans[event.senderID] = data.answer.toLowerCase()
+		json.riddles.ans[event.senderID] = data.answer.replace(/([^\w\s]+)/g, "").toLowerCase()
 		if(json.riddles.score[event.senderID] == undefined){
 			json.riddles.score[event.senderID] = 0
 		}
@@ -24,7 +24,7 @@ module.exports = async (api, event, regex) => {
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}else{
 		let data = event.body.match(regex)[1]
-		let ans = data.toLowerCase()
+		let ans = data.replace(/([^\w\s]+)/, "").toLowerCase()
 		if(ans == json.riddles.ans[event.senderID]){
 			json.riddles.score[event.senderID] += 1
 			api.sendMessage("You've got it.\n\nCurrent score: " + json.riddles.score[event.senderID], event.threadID)
