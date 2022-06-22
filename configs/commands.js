@@ -9,6 +9,7 @@ const news = require("./../script/news")
 const dice = require("./../games/dice")
 const fibbo = require("./../games/fibbo")
 const random_word = require("./../games/randomword")
+const riddles = require("./../games/riddles")
 const word = require("./../games/word")
 
 const ggl = require("./../script/ggl")
@@ -29,11 +30,9 @@ module.exports = async (api, event, pre, gc, vip) => {
 	
 	const regex_game_dice = new RegExp(prefix + " play roll a die")
 	const regex_game_fibbo = new RegExp(prefix + " play fibbonacci game")
-	//const regex_game_fibbo_ans = new RegExp(prefix + " the hidden number is ([0-9]+)")
 	const regex_game_random_word = new RegExp(prefix + " play random word")
-	//const regex_game_random_word_ans = new RegExp(prefix + " the word is ([\\w\\W]+)")
+	const regex_game_riddles = new RegExp(prefix + " play riddles")
 	const regex_game_word = new RegExp(prefix + " play guess the word")
-	//const regex_game_word_ans = new RegExp(prefix + " its ([\\w\\W]+)")
 	const regex_game_ans = new RegExp(prefix + " the answer is ([\\w\\W]+)")
 	
 	const regex_guitar = new RegExp(prefix + " may I have the guitar chords of ([\\w\\W]+) please")
@@ -75,6 +74,8 @@ module.exports = async (api, event, pre, gc, vip) => {
 		random_word(api, event, regex_game_ans)
 	}else if((regex_game_word.test(body) && json_games.ingame[senderID] == undefined && json_games.word.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.word.data[senderID] != undefined)){
 		word(api, event, regex_game_ans)
+	}else if((regex_game_riddles.test(body) && json_games.ingame[senderID] == undefined && json_games.riddles.ans[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.riddles.ans[senderID] != undefined)){
+		riddles(api, event, regex_games_ans)
 	}else if(regex_guitar.test(body) && type == "message"){
 		guitar(api, event, regex_guitar)
 	}else if(regex_img.test(body) && type == "message"){

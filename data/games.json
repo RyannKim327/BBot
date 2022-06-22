@@ -17,5 +17,9 @@
 	"random": {
 		"data": {},
 		"score": {}
+	},
+	"riddles": {
+		"ans": {},
+		"score": {}
 	}
 }
