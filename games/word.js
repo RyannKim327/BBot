@@ -28,6 +28,7 @@ module.exports = async (api, event, regex) => {
 				word.score[event.senderID] += 1
 				word.trials[event.senderID] = 0
 				word.data[event.senderID] = undefined
+				json.ingame[event.senderID] = undefined
 				api.sendMessage("You've got it\n\nYour score: " + word.score[event.senderID] , event.threadID, event.messageID)
 			}else{
 				if(word.trials[event.senderID] > 1){
@@ -38,6 +39,7 @@ module.exports = async (api, event, regex) => {
 					word.score[event.senderID] -= 1
 					api.sendMessage("Wrong, the correct answer is: " + got + "\n\nYour score: " +  (word.score[event.senderID]), event.threadID, event.messageID)
 					word.data[event.senderID] = undefined
+					json.ingame[event.senderID] = undefined
 				}
 			}
 			//fs.unlink(__dirname + "/../" + event.threadID + "_word.txt", (e) => {})
@@ -109,6 +111,7 @@ module.exports = async (api, event, regex) => {
 				output += "*"
 			}
 		}
+		json.ingame[event.senderID] = true
 		word.data[event.senderID] = words
 		word.trials[event.senderID] = 3
 		//fs.writeFileSync(event.threadID + "_word.txt", words, "utf8")

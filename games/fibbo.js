@@ -13,6 +13,7 @@ module.exports = (api, event, regex) => {
 			json.fibbo.score[event.senderID] -= 1
 			api.sendMessage("Wrong, the correct answer is: " + json.fibbo.digit[event.senderID] + "\n\nYour score: " + json.fibbo.score[event.senderID], event.threadID)
 		}
+		json.ingame[event.senderID] = undefined
 		json.fibbo.digit[event.senderID] = undefined
 		//fs.unlink(__dirname + "/../" + event.threadID + "_fibbonacci.txt", (e) => {})
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
@@ -35,6 +36,7 @@ module.exports = (api, event, regex) => {
 		if(json.fibbo.score[event.senderID] == undefined){
 			json.fibbo.score[event.senderID] = 0
 		}
+		json.ingame[event.senderID] = true
 		json.fibbo.digit[event.senderID] = result[position]
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 		message += "\n\nFormat: JC, the answer is <number>"

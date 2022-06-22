@@ -69,11 +69,11 @@ module.exports = async (api, event, pre, gc, vip) => {
 
 	if(regex_game_dice.test(body)){
 		dice(api, event)
-	}else if((regex_game_fibbo.test(body) && json_games.fibbo.digit[senderID] == undefined) || (regex_game_ans.test(body) && json_games.fibbo.digit[senderID] != undefined)){
+	}else if((regex_game_fibbo.test(body) && json_games.ingame[senderID] == undefined && json_games.fibbo.digit[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.fibbo.digit[senderID] != undefined)){
 		fibbo(api, event, regex_game_ans)
-	}else if((regex_game_random_word.test(body) && json_games.random.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.random.data[senderID] != undefined)){
+	}else if((regex_game_random_word.test(body) && json_games.ingame[senderID] == undefined && json_games.random.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.random.data[senderID] != undefined)){
 		random_word(api, event, regex_game_ans)
-	}else if((regex_game_word.test(body) && json_games.word.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.word.data[senderID] != undefined)){
+	}else if((regex_game_word.test(body) && json_games.ingame[senderID] == undefined && json_games.word.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.word.data[senderID] != undefined)){
 		word(api, event, regex_game_ans)
 	}else if(regex_guitar.test(body) && type == "message"){
 		guitar(api, event, regex_guitar)

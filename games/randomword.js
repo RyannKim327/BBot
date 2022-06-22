@@ -29,6 +29,7 @@ module.exports = async (api, event, regex) => {
 		for(let i = 0; i < a.length; i++){
 			b += w[a[i]]
 		}
+		json.ingame[event.senderID] = true
 		json.random.data[event.senderID] = w.toLowerCase()
 		api.sendMessage("Here's your random word: " + b.toLowerCase() + "\n\nSend a message using the format: JC, the answer is <word>", event.threadID)
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
@@ -46,6 +47,7 @@ module.exports = async (api, event, regex) => {
 			let r_word = json.random.data[event.senderID]
 			api.sendMessage(`Wrong, the correct answer is ${r_word}\n\nYour current score is ${json.random.score[event.senderID]}`, event.threadID)
 		}
+		json.ingame[event.senderID] = undefined
 		json.random.data[event.senderID] = undefined
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}
