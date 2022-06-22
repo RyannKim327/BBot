@@ -75,7 +75,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	}else if((regex_game_word.test(body) && json_games.ingame[senderID] == undefined && json_games.word.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.word.data[senderID] != undefined)){
 		word(api, event, regex_game_ans)
 	}else if((regex_game_riddles.test(body) && json_games.ingame[senderID] == undefined && json_games.riddles.ans[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.riddles.ans[senderID] != undefined)){
-		riddles(api, event, regex_games_ans)
+		riddles(api, event, regex_game_ans)
 	}else if(regex_guitar.test(body) && type == "message"){
 		guitar(api, event, regex_guitar)
 	}else if(regex_img.test(body) && type == "message"){
