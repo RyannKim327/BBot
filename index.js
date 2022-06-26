@@ -7,6 +7,7 @@ const joined = require("./configs/joined")
 const bday = require("./configs/bday")
 const commands = require("./configs/commands")
 
+const covid = require("./script/covid")
 const date = require('./script/date')
 const filter = require("./script/filter")
 const verse = require("./script/verse")
@@ -74,6 +75,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			let j = 0
 			while(j < 10 && i < data.length){
 				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID){
+					covid(api, data[i].threadID)
 					verse(api, data[i].threadID, null)
 					j++
 				}
