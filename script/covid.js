@@ -16,7 +16,7 @@ function ns (y){
 
 async function cov(){
 	let result = await axios.get("https://disease.sh/v3/covid-19/countries/ph").then((r) => {
-		r.data
+		return r.data
 	}).catch((e) => {
 		console.error("Error [Api Covid]: " + e)
 		return null
