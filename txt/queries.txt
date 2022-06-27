@@ -1,7 +1,8 @@
 Good day, Here are my list of queries you may used to execute a command.
 
 
-- Message Commands
+Message Commands:
+
 Guitar chords: JC, may I have the guitar chords of <song title> please
 
 Random image: JC, may I have a random image of <anything> please
@@ -20,7 +21,7 @@ QR Code Generator: JC, generate a QR Code of <text or sentence or paragraphs> pl
 
 Play a song: JC, play the song <song name or title with/without singer name> please
 
-How to Pronounce: JC, how to pronounce <text less than 200 characters> in (english|tagalog|korean|japanese)
+How to Pronounce: JC, how to pronounce <text less than 200 characters> in <language>
 
 Random bible verse: JC, may I have a random bible verse please
 Bible verse of the day (Server based): JC, what is your bible verse for this day
@@ -29,10 +30,11 @@ Specific bible verse: JC, may I have <bookname with chapter and/or verse with - 
 Weather update: JC, may I know the weather update in <location> please
 
 
-- Message Reply -
+Message Reply:
+
 Source of image: JC, what does this photo means
 Generate a QR Code: JC, generate a QR Code for this text please
-How to pronounce: JC, how to pronounce these words in (english|tagalog|korean|japanese)
+How to pronounce: JC, how to pronounce these words in <language>
 
 
 Playing games
@@ -45,5 +47,32 @@ Fibbonacci Sequecing game: JC, play fibbonacci game
 Guess the word: JC, play guess the word
 - This is a guessing word game with description to test your mind.
 
+Guess the rumbled word: JC, play random word
+- This is to re-arrange the rumbled words to guess the exact word.
+
 
 JC still response once the text starts with JC, so expect every google based result if your query is undefined or invalid.
+
+Credits:
+ * Salvador
+ * John Jeremy Antiguo
+ * Earl Shine Sawir
+ * John Paul Caigas
+ * John Roy Lapida Calimlim
+ * Lester Navarra
+ * Schmavery
+ * VangBanLaNhat
+ * Jerson Carin
+ * Rovie Francisco
+ * LuanRT
+ * Mart Anthony Salazar
+ * We don't die, We BOTiply
+ * Android Modificators
+ * B Squad
+ * DroidModifs
+ * Testers
+ * NPMJS Libaries Documentations
+ * RapidAPI
+ * And to all who give ideas for the features for this project.
+ 
+- JC Rios

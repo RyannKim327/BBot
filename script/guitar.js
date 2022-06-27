@@ -21,7 +21,7 @@ async function tabs(url){
 
 module.exports = async (api, event, regex) => {
 	let q = event.body.match(regex)
-	api.setMessageReaction("🔎", event.messageID, () => {}, true)
+	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 	let s = await search(q[1] + " tabs ultimate guitar")
 	//console.log(s)
 	let d = s.results
