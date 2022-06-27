@@ -171,7 +171,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 							api.sendMessage("Bot service turned " + ((json.status) ? "on" : "off") + " to all threads.", myself)
-						}else if(command == "bot: sleep" && !ban_thread.includes(threadID)){
+						}else if(command == "bot: sleep" && !json.off.includes(threadID)){
 							api.getThreadInfo(threadID, (err, data) => {
 								if(err) return console.error("Error [Thread Sleep]: " + err)
 								json.off += threadID + ", "
@@ -182,7 +182,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								api.sendMessage(`You turned off the bot service for ${data.threadName}.`, gc)
 								fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 							})
-						}else if(command == "bot: wake-up" && ban_thread.includes(threadID)){
+						}else if(command == "bot: wake-up" && json.off.includes(threadID)){
 							api.getThreadInfo(threadID, (err, data) => {
 								if(err) return console.error("Error [Thread Wake-up]: " + err)
 								json.off = json.off.replace(threadID + ", ", "")
