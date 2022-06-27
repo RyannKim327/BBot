@@ -152,7 +152,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						if(err) return console.error("Error [Admin Off]: " + err)
 						json.off += threadID + ", "
 						api.sendMessage("Be right back guys. Please ask my VIPs to activate me to this thread", threadID)
-						api.sendMessage(`An admin turned off the bot service on ${data.threadName}.`, gc)
+						api.sendMessage(`An admin turned off the bot service on ${data.threadName}.`, myself)
 						fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 					})
 				}else if(vip.includes(senderID)){
@@ -179,7 +179,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 									body: "Good night guys.",
 									attachment: fs.createReadStream(`${__dirname}/img/sleep.gif`)
 								}, threadID)
-								api.sendMessage(`You turned off the bot service for ${data.threadName}.`, gc)
+								api.sendMessage(`You turned off the bot service for ${data.threadName}.`, myself)
 								fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 							})
 						}else if(command == "bot: wake-up" && json.off.includes(threadID)){
@@ -187,7 +187,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 								if(err) return console.error("Error [Thread Wake-up]: " + err)
 								json.off = json.off.replace(threadID + ", ", "")
 								api.sendMessage("Hi guys, I'm back.", threadID)
-								api.sendMessage(`You turned on the bot service for ${data.threadName}.`, gc)
+								api.sendMessage(`You turned on the bot service for ${data.threadName}.`, myself)
 								fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 							})
 						}else if(command == "list"){
