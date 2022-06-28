@@ -92,7 +92,7 @@ module.exports = async (api, event, regex) => {
 						console.log(err)
 						api.sendMessage("Error occured. either not found, deleted or deactivated.", event.threadID, event.messageID)
 					}else{
-						let d = data[info[2]]
+						let d = data[info[1]]
 						let gender = ""
 						switch(d.gender){
 							case 1:
