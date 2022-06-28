@@ -10,7 +10,7 @@ const news = require("./../script/news")
 const dice = require("./../games/dice")
 const fibbo = require("./../games/fibbo")
 const random_word = require("./../games/randomword")
-const riddles = require("./../games/ridles")
+const riddles = require("./../script/ridles")
 const word = require("./../games/word")
 
 const ggl = require("./../script/ggl")
