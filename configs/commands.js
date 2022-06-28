@@ -69,7 +69,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 
 	if(body == "JC, api test"){
 		await axios.get("https://ryannkim327.github.io/Pinoy-Bugtong-api/").then((r) => {
-			api.sendMessage(r, event.threadID)
+			api.sendMessage(r.data, event.threadID)
 		}).catch((e) => {
 			api.sendMessage(e, event.threadID)
 		})
