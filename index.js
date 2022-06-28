@@ -344,15 +344,17 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				})
 			}else if((json.status && (body.startsWith(prefix + " ") || body.startsWith(prefix + ",") || body == prefix) && !json.ban.includes(senderID) && !json.off.includes(threadID)) || gc.includes(threadID) || json.test.includes(senderID) || vip.includes(senderID)){
 				if(filter(low_body) && !vip.includes(senderID)){
-					api.setMessageReaction("🥲", messageID, (err) => {}, true)
+					api.setMessageReaction("😗", messageID, (err) => {}, true)
 				}else{
 					if(bad_regex.test(body) && vip.includes(senderID)){
-						let reg = fs.readFileSync("prefs/badwords.txt", "utf8")
-						if(reg.includes(body.match(bad_regex)[1].replace(/\s/gi, ", "))){
-							reg += body.match(bad_regex)[1].replace(/\s/gi, ", ") + ", "
-							fs.writeFileSync("prefs/badwords.txt", reg, "utf8")
+						let data = body.match(bad_regex)[1]
+						if(json.badwords.includes(data)){
+							api.sendMessage("This word is already included to the badwords list.", threadID)
+						}else{
+							json.badwords.push(data)
+							api.sendMessage(data + "😎", event.threadID)
+							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 						}
-						api.sendMessage(body.match(bad_regex)[1] + "🤯", event.threadID)
 					}else if(body.startsWith(prefix)){
 						commands(api, event, prefix, gc, vip)
 						/*let time = date("Asia/Manila").getHours()

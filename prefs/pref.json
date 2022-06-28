@@ -1,6 +1,14 @@
 {
 	"status": true,
 	"ban": "",
+	"badwords": [
+		"tanga",
+		"bobo",
+		"gago",
+		"yawa",
+		"ulaga",
+		"ulol"
+	],
 	"off": "",
 	"test": "",
 	"pin": {
