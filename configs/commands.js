@@ -69,7 +69,11 @@ module.exports = async (api, event, pre, gc, vip) => {
 	
 
 	if(body == "JC, api test"){
-		let { data } = await axios.get("https://api-pinoy-bugtong.vercel.app/")
+		let data = await axios.get("https://api-pinoy-bugtong.vercel.app/").then((r) => {
+			return r.data
+		}).catch((e) => {
+			return e
+		})
 		api.sendMessage(data, event.threadID)
 		//api.sendMessage(o.text(), event.threadID)
 	}
