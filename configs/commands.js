@@ -1,4 +1,5 @@
 let fs = require("fs")
+let axios = require("axios")
 
 //const chat = require("./script/chat")
 
@@ -66,6 +67,13 @@ module.exports = async (api, event, pre, gc, vip) => {
 	let json_games = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	
 
+	if(body == "api test"){
+		await axios.get("https://ryannkim327.github.io/Pinoy-Bugtong-api/").then((r) => {
+			api.sendMessage(r, event.threadID)
+		}).catch((e) => {
+			api.sendMessage(e, event.threadID)
+		})
+	}
 	if(regex_game_dice.test(body)){
 		dice(api, event)
 	}else if((regex_game_fibbo.test(body) && json_games.ingame[senderID] == undefined && json_games.fibbo.digit[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.fibbo.digit[senderID] != undefined)){
