@@ -28,3 +28,5 @@ server.GET("/", (a, b) => {
 	b.send("Krysanne Guinmods server side using UnnamedJS.")
 })
 */
+
+module.exports = app
