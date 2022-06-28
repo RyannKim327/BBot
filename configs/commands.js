@@ -70,8 +70,9 @@ module.exports = async (api, event, pre, gc, vip) => {
 
 	if(body == "JC, api test"){
 		let { data } = await axios.get("https://ryannkim327.github.io/Pinoy-Bugtong-api/")
-		let $ = await cheerio.load(data)
+		let $ = cheerio.load(data)
 		let o = $("p[id='result']").attr("id")
+		api.sendMessage(data, event.threadID)
 		api.sendMessage(o, event.threadID)
 	}
 	else if(regex_game_dice.test(body)){
