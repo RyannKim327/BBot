@@ -2,7 +2,7 @@ const axios = require("axios")
 const fs = require("fs")
 
 async function riddle(){
-	let output = await axios.get("https://riddles-api.vercel.app/random").then((r) => {
+	let output = await axios.get("https://api-pinoy-bugtong.vercel.app").then((r) => {
 		return r.data
 	}).catch((e) => {
 		console.error("Error [Riddles]: " + e)
@@ -16,11 +16,11 @@ module.exports = async (api, event, regex) => {
 	if(json.riddles.ans[event.senderID] == undefined){
 		let data = await riddle()
 		json.ingame[event.senderID] = true
-		json.riddles.ans[event.senderID] = data.answer.replace(/([^\w\s]+)/g, "").toLowerCase()
+		json.riddles.ans[event.senderID] = data.s.replace(/([^\w\s]+)/g, "").toLowerCase()
 		if(json.riddles.score[event.senderID] == undefined){
 			json.riddles.score[event.senderID] = 0
 		}
-		api.sendMessage("Here's your riddle:\n\n" + data.riddle + "\n\nJust send a message using the format: JC, the answer is <answer>", event.threadID)
+		api.sendMessage("Here's your riddle:\n\n" + data.b + "\n\nJust send a message using the format: JC, the answer is <answer>", event.threadID)
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}else{
 		let data = event.body.match(regex)[1]
