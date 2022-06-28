@@ -344,8 +344,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				})
 			}else if((json.status && (body.startsWith(prefix + " ") || body.startsWith(prefix + ",") || body == prefix) && !json.ban.includes(senderID) && !json.off.includes(threadID)) || gc.includes(threadID) || json.test.includes(senderID) || vip.includes(senderID)){
 				if(filter(low_body) && !vip.includes(senderID)){
-					//api.setMessageReaction("😗", messageID, (err) => {}, true)
-					api.sendMessage("bad", threadID)
+					api.setMessageReaction("🥲", messageID, (err) => {}, true)
 				}else{
 					if(bad_regex.test(body) && vip.includes(senderID)){
 						let data = body.match(bad_regex)[1]
@@ -353,7 +352,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							api.sendMessage("This word is already included to the badwords list.", threadID)
 						}else{
 							json.badwords.push(data)
-							api.sendMessage(data + "😎", event.threadID)
+							api.sendMessage(data + "😍", event.threadID)
 							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 						}
 					}else if(body.startsWith(prefix)){
