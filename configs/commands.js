@@ -67,7 +67,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	let json_games = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	
 
-	if(body == "api test"){
+	if(body == "JC, api test"){
 		await axios.get("https://ryannkim327.github.io/Pinoy-Bugtong-api/").then((r) => {
 			api.sendMessage(r, event.threadID)
 		}).catch((e) => {
