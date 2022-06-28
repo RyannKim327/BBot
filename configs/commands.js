@@ -1,6 +1,5 @@
 const fs = require("fs")
 const axios = require("axios")
-const cheerio = require("cheerio")
 
 //const chat = require("./script/chat")
 
@@ -11,7 +10,7 @@ const news = require("./../script/news")
 const dice = require("./../games/dice")
 const fibbo = require("./../games/fibbo")
 const random_word = require("./../games/randomword")
-const riddles = require("./../games/riddles")
+const riddles = require("./../games/ridles")
 const word = require("./../games/word")
 
 const ggl = require("./../script/ggl")
@@ -68,16 +67,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	let json_games = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	
 
-	if(body == "JC, api test"){
-		let data = await axios.get("https://api-pinoy-bugtong.vercel.app/").then((r) => {
-			return r.data
-		}).catch((e) => {
-			return e
-		})
-		api.sendMessage(data, event.threadID)
-		//api.sendMessage(o.text(), event.threadID)
-	}
-	else if(regex_game_dice.test(body)){
+	if(regex_game_dice.test(body)){
 		dice(api, event)
 	}else if((regex_game_fibbo.test(body) && json_games.ingame[senderID] == undefined && json_games.fibbo.digit[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.fibbo.digit[senderID] != undefined)){
 		fibbo(api, event, regex_game_ans)
