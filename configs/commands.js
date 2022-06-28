@@ -71,7 +71,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	if(body == "JC, api test"){
 		let { data } = await axios.get("https://ryannkim327.github.io/Pinoy-Bugtong-api/")
 		let $ = cheerio.load(data)
-		let o = $("p")
+		let o = $("p").attr("id")
 		api.sendMessage(data, event.threadID)
 		api.sendMessage(o.text(), event.threadID)
 	}
