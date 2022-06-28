@@ -344,7 +344,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				})
 			}else if((json.status && (body.startsWith(prefix + " ") || body.startsWith(prefix + ",") || body == prefix) && !json.ban.includes(senderID) && !json.off.includes(threadID)) || gc.includes(threadID) || json.test.includes(senderID) || vip.includes(senderID)){
 				if(filter(low_body) && !vip.includes(senderID)){
-					api.setMessageReaction("😗", messageID, (err) => {}, true)
+					//api.setMessageReaction("😗", messageID, (err) => {}, true)
+					api.sendMessage("bad", threadID)
 				}else{
 					if(bad_regex.test(body) && vip.includes(senderID)){
 						let data = body.match(bad_regex)[1]
