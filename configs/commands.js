@@ -69,9 +69,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	
 
 	if(body == "JC, api test"){
-		let { data } = await axios.get("https://pinoy-bugtong-api.vercel.app/")
-		let $ = cheerio.load(data)
-		let o = $("p").attr("id")
+		let { data } = await axios.get("https://api-pinoy-bugtong.vercel.app/")
 		api.sendMessage(data, event.threadID)
 		//api.sendMessage(o.text(), event.threadID)
 	}
