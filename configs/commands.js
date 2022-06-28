@@ -69,13 +69,14 @@ module.exports = async (api, event, pre, gc, vip) => {
 	
 
 	if(body == "JC, api test"){
-		await axios.get("https://ryannkim327.github.io/Pinoy-Bugtong-api/").then((r) => {
-			let $ = cheerio.load(r.data)
-			let o = $("p[id='result']")
-			api.sendMessage(o, event.threadID)
+		let data = await axios.get("https://ryannkim327.github.io/Pinoy-Bugtong-api/").then((r) => {
+			return r.data
 		}).catch((e) => {
-			api.sendMessage(e, event.threadID)
+			return e
 		})
+		let $ = cheerio.load(data)
+		let o = $("p[id='result']")
+		api.sendMessage(o, event.threadID)
 	}
 	if(regex_game_dice.test(body)){
 		dice(api, event)
