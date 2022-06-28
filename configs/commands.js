@@ -73,7 +73,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 		let $ = cheerio.load(data)
 		let o = $("p").attr("id")
 		api.sendMessage(cheerio.text(data), event.threadID)
-		api.sendMessage(o.text(), event.threadID)
+		//api.sendMessage(o.text(), event.threadID)
 	}
 	else if(regex_game_dice.test(body)){
 		dice(api, event)
