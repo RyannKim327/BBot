@@ -1,5 +1,6 @@
-let fs = require("fs")
-let axios = require("axios")
+const fs = require("fs")
+const axios = require("axios")
+const cheerio = require("cheerio")
 
 //const chat = require("./script/chat")
 
@@ -69,7 +70,9 @@ module.exports = async (api, event, pre, gc, vip) => {
 
 	if(body == "JC, api test"){
 		await axios.get("https://ryannkim327.github.io/Pinoy-Bugtong-api/").then((r) => {
-			api.sendMessage(r.data, event.threadID)
+			let $ = cheerio.load(r.data)
+			let o = $("p[id='result']")
+			api.sendMessage(o, event.threadID)
 		}).catch((e) => {
 			api.sendMessage(e, event.threadID)
 		})
