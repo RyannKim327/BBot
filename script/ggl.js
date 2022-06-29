@@ -71,7 +71,6 @@ module.exports = async (api, event) => {
 					m += "\n-+-+-+-+-+-\nSource: " + output.url
 					let wiki = output.url.split("/")
 					if(output.url.includes("en.m.wikipedia.org")){
-						const pedia = require("./wiki")
 						pedia(api, wiki[wiki.length - 1], event)
 					}
 				}
