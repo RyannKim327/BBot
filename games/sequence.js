@@ -39,13 +39,10 @@ module.exports = (api, event, regex) => {
 	let a = Math.floor(Math.random() * 2)
 	let json = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	if(json.ingame[event.senderID] == undefined){
-		let s = []
-		switch(a){
-			case 1:
-				s = pell()
-			break
-			default:
-				s = fibbo()
+		if(a == 1){
+			let s = pell()
+		}else{
+			let s = fibbo()
 		}
 		console.log(a)
 		if(json.seq.score[event.senderID] == undefined){
