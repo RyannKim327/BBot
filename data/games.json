@@ -5,9 +5,9 @@
 	"dice": {
 		"score": {}
 	},
-	"fibbo": {
+	"seq": {
 		"score": {},
-		"digit": {}
+		"data": {}
 	},
 	"word": {
 		"data": {},

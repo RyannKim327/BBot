@@ -8,9 +8,9 @@ const news = require("./../script/news")
 
 
 const dice = require("./../games/dice")
-const fibbo = require("./../games/fibbo")
 const random_word = require("./../games/randomword")
 const riddles = require("./../games/riddles")
+const seq = require("./../games/sequence")
 const word = require("./../games/word")
 
 const ggl = require("./../script/ggl")
@@ -30,7 +30,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	const prefix = pre + ","
 	
 	const regex_game_dice = new RegExp(prefix + " play roll a die", "i")
-	const regex_game_fibbo = new RegExp(prefix + " play fibbonacci game", "i")
+	const regex_game_seq = new RegExp(prefix + " play sequencing game", "i")
 	const regex_game_random_word = new RegExp(prefix + " play random word", "i")
 	const regex_game_riddles = new RegExp(prefix + " play riddles", "i")
 	const regex_game_word = new RegExp(prefix + " play guess the word", "i")
@@ -69,8 +69,8 @@ module.exports = async (api, event, pre, gc, vip) => {
 
 	if(regex_game_dice.test(body)){
 		dice(api, event)
-	}else if((regex_game_fibbo.test(body) && json_games.ingame[senderID] == undefined && json_games.fibbo.digit[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.fibbo.digit[senderID] != undefined)){
-		fibbo(api, event, regex_game_ans)
+	}else if((regex_game_seq.test(body) && json_games.ingame[senderID] == undefined && json_games.seq.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.seq.data[senderID] != undefined)){
+		seq(api, event, regex_game_ans)
 	}else if((regex_game_random_word.test(body) && json_games.ingame[senderID] == undefined && json_games.random.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.random.data[senderID] != undefined)){
 		random_word(api, event, regex_game_ans)
 	}else if((regex_game_word.test(body) && json_games.ingame[senderID] == undefined && json_games.word.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] == true && json_games.word.data[senderID] != undefined)){
