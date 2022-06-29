@@ -41,7 +41,7 @@ Playing games
 Roll a die: JC, play roll a die
 - This can be thru message or message reply
 
-Fibbonacci Sequecing game: JC, play fibbonacci game
+Fibbonacci Sequecing game: JC, play sequencing game
 - This is for message only and not works on message reply
 
 Guess the word: JC, play guess the word
