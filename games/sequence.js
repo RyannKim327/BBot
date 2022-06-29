@@ -26,7 +26,7 @@ function pell(){
 	for(let i = 2; i < 10; i++){
 		let c = r[i - 2]
 		let d = r[i - 1]
-		b = (d + d) + e
+		b = (d + d) + c
 		r[i] = b
 	}
 	for(let i = 0; i < r.length; i++){
