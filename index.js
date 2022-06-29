@@ -329,7 +329,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							api.sendMessage(data + "😍", event.threadID)
 							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 						}
-					}else if(body.startsWith(prefix)){
+					}else if(low_body.startsWith(low_pref)){
 						commands(api, event, prefix, gc, vip)
 						/*let time = date("Asia/Manila").getHours()
 						let mins = date("Asia/Manila").getMinutes()*/
