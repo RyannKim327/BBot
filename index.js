@@ -316,12 +316,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 					}
 				}
-			}else if(event.type == "message" && say_tuned && say_active > 0 && say_thread == threadID && senderID != myself && !low_body.startsWith(prefix) && !low_body.startsWith(adminPrefix)){
-				api.sendMessage(body, say_active)
-				api.getThreadInfo(say_active, (err, data) => {
-					if (err) return console.error("Error [Auto send thread]: " + err)
-					api.sendMessage(`A message sent to: ${data.threadName}\nMessage: ${body}`, say_thread)
-				})
 			}else if((json.status && (low_body.startsWith(low_pref + " ") || low_body.startsWith(low_pref + ", ") || low_body == low_pref) && !json.ban.includes(senderID) && !json.off.includes(threadID)) || gc.includes(threadID) || json.test.includes(senderID) || vip.includes(senderID)){
 				if(filter(low_body) && !vip.includes(senderID)){
 					api.setMessageReaction("🥲", messageID, (err) => {}, true)
