@@ -47,6 +47,7 @@ module.exports = (api, event, regex) => {
 			default:
 				s = fibbo()
 		}
+		console.log(a)
 		if(json.seq.score[event.senderID] == undefined){
 			json.seq.score[event.senderID] = 0
 		}
