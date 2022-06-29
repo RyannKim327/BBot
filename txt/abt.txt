@@ -1,21 +1,21 @@
 Hello, I am JC Rios, you may call me JC. If you have any questions, just ask me, and I'll try to give you any answers.
 
-JC Rios is a simple bot made with nodejs. Please let me know if you having any trouble or issues regarding to me or my service, to fix it as soon as possible.
+JC Rios is a simple bot, with talk like a human feature, made with nodejs. Please let me know if you having any trouble or issues regarding to me or my service, to fix it as soon as possible.
 
 * Credits *
-- Salvador (Facebook Bot Idea) -
-- John Jeremy Antiguo (Guide) -
-- Earl Shine Sawir (Guide on how to host) -
-- John Paul Caigas (Guide on how to host (2)) -
-- John Roy Lapida Calimlim (Ideas) -
-- Mart Anthony Salazar -
-- Jerson Carin (RegEx) -
-- Rovie Francisco (RegEx Default Expressions with meanings) -
-- LuanRT (GoogleThis) (YoutubeiJS) -
-- Lester Navarra (Scrapped Guitar Tabs) -
-- Schmavery (Facebook chat API) -
-- VangBanLaNhat (FCA Unofficial) -
-- Testers (Groups and people) -
-- NPM Documentations -
-- RapidApi -
-- And to all owners and developers of api used -
+- Salvador (Facebook Bot Idea)
+- John Jeremy Antiguo (Guide)
+- Earl Shine Sawir (Guide on how to host)
+- John Paul Caigas (Guide on how to host (2))
+- John Roy Lapida Calimlim (Ideas)
+- Mart Anthony Salazar
+- Jerson Carin (RegEx)
+- Rovie Francisco (RegEx Default Expressions with meanings)
+- LuanRT (GoogleThis) (YoutubeiJS)
+- Lester Navarra (Scrapped Guitar Tabs)
+- Schmavery (Facebook chat API)
+- VangBanLaNhat (FCA Unofficial)
+- Testers (Groups and people)
+- NPM Documentations
+- RapidApi
+- And to all owners and developers of api used

@@ -35,11 +35,11 @@ module.exports = (api, event, regex) => {
 			if(r == null){
 				api.sendMessage("An error occured", event)
 			}else{
-				let result = "Bible verse of the day:\n\n"
+				let result = "⊱ ──── ༺❀༻ ──── ⊰\n\n"
 				for(let i = 0; i < r.length; i++){
 					result += `[ ${r[i].bookname} ${r[i].chapter}:${r[i].verse} ]\n${r[i].text}\n\n`
 				}
-				console.log("LOG [Verse of the day]: " + result)
+				result += "⊱ ─ { Bible verse of the day } ─ ⊰"
 				api.sendMessage(result, event)
 			}
 		})
