@@ -71,6 +71,7 @@ module.exports = async (api, event) => {
 					m += "\n-+-+-+-+-+-\nSource: " + output.url
 					let wiki = output.url.split("/")
 					if(output.url.includes("en.m.wikipedia.org")){
+						console.log("Wiki")
 						pedia(api, wiki[wiki.length - 1], event)
 					}
 				}
