@@ -13,19 +13,16 @@ const filter = require("./script/filter")
 const verse = require("./script/verse")
 
 const prefix = "JC"
+const low_pref = prefix.toLowerCase()
 const adminPrefix = "<< "
 const adminPostfix = " >>"
 
 const regex_admin = /^<< ([\w\W]+) >>$/
-const bad_regex = /JC, ([\w]+) is a bad word./
+const bad_regex = /JC, ([\w]+) is a bad word/i
 
 const gc = process.env['gc']
 let vip = []
 let gc_admin = []
-
-let say_active = 0
-let say_tuned = false
-let say_thread = 0
 
 function resetTime(time, json){
 	let morning = json.greet.morning
@@ -49,7 +46,6 @@ function resetTime(time, json){
 		json.greet.afternoon = ""
 		json.greet.evening = ""
 	}
-	//console.log(JSON.stringify(json))
 	fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 }
 
@@ -126,22 +122,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					gc_admin.push(list[i].id)
 				}
 			})
-			if(say_tuned && say_thread > 0 && say_active == threadID){
-				api.getThreadInfo(threadID, (err, data) => {
-					if(err) return console.error("Error [Thread stay tuned]: " + err)
-					if(say_active == threadID && senderID != myself){
-						api.getUserInfo(senderID, (error, info) => {
-							if(error) return console.error("Error [Back response]: " + error)
-							let user = info[senderID]
-							if(event.attachments.length > 0){
-								api.sendMessage(`An Attachment was sent from ${user.name} of ${data.threadName}.`, say_thread)
-							}else{
-								api.sendMessage(`From ${user.name} of ${data.threadName}:\n${body}`, say_thread)
-							}
-						})
-					}
-				})
-			}
 			if(regex_admin.test(body)){
 				let command = body.match(regex_admin)[1]
 				if(command == "queries"){
@@ -342,7 +322,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					if (err) return console.error("Error [Auto send thread]: " + err)
 					api.sendMessage(`A message sent to: ${data.threadName}\nMessage: ${body}`, say_thread)
 				})
-			}else if((json.status && (body.startsWith(prefix + " ") || body.startsWith(prefix + ",") || body == prefix) && !json.ban.includes(senderID) && !json.off.includes(threadID)) || gc.includes(threadID) || json.test.includes(senderID) || vip.includes(senderID)){
+			}else if((json.status && (low_body.startsWith(low_pref + " ") || low_body.startsWith(low_pref + ", ") || low_body == low_pref) && !json.ban.includes(senderID) && !json.off.includes(threadID)) || gc.includes(threadID) || json.test.includes(senderID) || vip.includes(senderID)){
 				if(filter(low_body) && !vip.includes(senderID)){
 					api.setMessageReaction("🥲", messageID, (err) => {}, true)
 				}else{
