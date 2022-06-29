@@ -6,7 +6,7 @@ function fibbo(){
 	let r = [1]
 	let t = a
 	let o = ""
-	for(let i = 1; i < 15- i++){
+	for(let i = 1; i < 15; i++){
 		let j = r[i - 1] + t
 		t = r[r - 1]
 		r[i] = t
