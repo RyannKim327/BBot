@@ -5,7 +5,7 @@ module.exports = async (api, event) => {
 	if(event.type == "event"){
 		console.log("Working event")
 		let thread = await api.getThreadInfo(event.threadID)
-		let json = JSON.parse(fs.readFileSync("prfs/pref.json", "utf8"))
+		let json = JSON.parse(fs.readFileSync("prefs/pref.json", "utf8"))
 		switch(event.logMessageType){
 			case "log:subscribe":
 				console.log("Log [Subs]")
