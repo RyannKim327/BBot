@@ -9,9 +9,7 @@ module.exports = async (api, event) => {
 		switch(event.logMessageType){
 			case "log:subscribe":
 				console.log("Log [Subs]")
-				if(json.leave.includes(event.threadID)){
-					api.sendMessage("Walang iwanan kapatid, dito ka lang.", event.threadID)
-				}else{
+				if(!json.leave.includes(event.threadID)){
 					if(thread.isGroup){
 						const joiner = await event.logMessageData.addedParticipants
 						const me = api.getCurrentUserID()
@@ -70,7 +68,13 @@ module.exports = async (api, event) => {
 				if(thread.isGroup){
 					if(json.leave.includes(event.threadID)){
 						let left = event.logMessageData.leftParticipantFbId
-						api.addUserToGroup(left, event.threadID, (e) => {})
+						api.addUserToGroup(left, event.threadID, (e) => {
+							if(e){
+								api.sendMessage(e, event.threadID)
+							}else{
+								api.sendMessage("Walang iwanan kapatid, dito ka lang.", event.threadID)
+							}
+						})
 					}else{
 						me = api.getCurrentUserID()
 						let left = event.logMessageData.leftParticipantFbId
