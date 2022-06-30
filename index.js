@@ -154,6 +154,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					let random_names = Object.keys(random)
 					let random_score = Object.values(random)
 					
+					console.log(seq_names)
+					
 					let no_value = 0
 					
 					if(seq_names.length > 0){
@@ -174,7 +176,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 						
 						for(let a = 0; a < seq_names.length; a++){
-							api.getUserInfo(seq_names[a], (err, data) => {
+							await api.getUserInfo(seq_names[a], (err, data) => {
 								let n = data[seq_names[a]]['name']
 								msg += "Name: " + n + "\nScore: " + seq_score[a] + "\n\n"
 							})
