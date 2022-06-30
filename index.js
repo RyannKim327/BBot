@@ -177,10 +177,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						
 						for(let a = 0; a < seq_names.length; a++){
 							let id = parseInt(seq_names[a])
-							api.getUserInfo(id, (err, data) => {
-								let n = data[id]['name']
-								msg += "Name: " + n + "\nScore: " + seq_score[a] + "\n\n"
-							})
+							let data = await api.getUserInfo(id)
+							let n = data[id]['name']
+							msg += "Name: " + n + "\nScore: " + seq_score[a] + "\n\n"
 						}
 						no_value++
 						api.sendMessage(msg, threadID)
@@ -203,12 +202,11 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							}
 						}
 						
-						for(let a = 0; a < word_names.length; a++){
+						for(let a = 0; a < wore_names.length; a++){
 							let id = parseInt(word_names[a])
-							api.getUserInfo(id, (err, data) => {
-								let n = data[id]['name']
-								msg += "Name: " + n + "\nScore: " + word_score[a] + "\n\n"
-							})
+							let data = await api.getUserInfo(id)
+							let n = data[id]['name']
+							msg += "Name: " + n + "\nScore: " + word_score[a] + "\n\n"
 						}
 						no_value++
 						api.sendMessage(msg, threadID)
@@ -233,10 +231,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						
 						for(let a = 0; a < random_names.length; a++){
 							let id = parseInt(random_names[a])
-							api.getUserInfo(id, (err, data) => {
-								let n = data[id]['name']
-								msg += "Name: " + n + "\nScore: " + random_score[a] + "\n\n"
-							})
+							let data = await api.getUserInfo(id)
+							let n = data[id]['name']
+							msg += "Name: " + n + "\nScore: " + random_score[a] + "\n\n"
 						}
 						no_value++
 						api.sendMessage(msg, threadID)
@@ -261,10 +258,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						
 						for(let a = 0; a < riddles_names.length; a++){
 							let id = parseInt(riddles_names[a])
-							api.getUserInfo(id, (err, data) => {
-								let n = data[id]['name']
-								msg += "Name: " + n + "\nScore: " + riddles_score[a] + "\n\n"
-							})
+							let data = await api.getUserInfo(id)
+							let n = data[id]['name']
+							msg += "Name: " + n + "\nScore: " + riddles_score[a] + "\n\n"
 						}
 						no_value++
 						api.sendMessage(msg, threadID)
