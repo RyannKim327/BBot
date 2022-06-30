@@ -176,7 +176,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 						
 						for(let a = 0; a < seq_names.length; a++){
-							await api.getUserInfo(seq_names[a], (err, data) => {
+							api.getUserInfo(parseInt(seq_names[a]), (err, data) => {
 								let n = data[seq_names[a]]['name']
 								msg += "Name: " + n + "\nScore: " + seq_score[a] + "\n\n"
 							})
@@ -203,7 +203,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 						
 						for(let a = 0; a < word_names.length; a++){
-							api.getUserInfo(word_names[a], (err, data) => {
+							api.getUserInfo(parseInt(word_names[a]), (err, data) => {
 								let n = data[word_names[a]]['name']
 								msg += "Name: " + n + "\nScore: " + word_score[a] + "\n\n"
 							})
@@ -230,7 +230,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 						
 						for(let a = 0; a < random_names.length; a++){
-							api.getUserInfo(random_names[a], (err, data) => {
+							api.getUserInfo(parseInt(random_names[a]), (err, data) => {
 								let n = data[random_names[a]]['name']
 								msg += "Name: " + n + "\nScore: " + randon_score[a] + "\n\n"
 							})
@@ -257,7 +257,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						}
 						
 						for(let a = 0; a < riddles_names.length; a++){
-							api.getUserInfo(riddles_names[a], (err, data) => {
+							api.getUserInfo(parseInt(riddles_names[a]), (err, data) => {
 								let n = data[riddles_names[a]]['name']
 								msg += "Name: " + n + "\nScore: " + riddles_score[a] + "\n\n"
 							})
