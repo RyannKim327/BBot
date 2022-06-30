@@ -135,6 +135,138 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 						api.sendMessage(`An admin turned off the bot service on ${data.threadName}.`, myself)
 						fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 					})
+				}else if(command == "game leaderboards"){
+					let game = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
+					let seq = game.seq.score
+					let word = game.word.score
+					let riddles = game.riddles.score
+					let random = game.random.score
+					
+					let seq_names = Object.keys(seq)
+					let seq_score = Object.values(seq)
+					
+					let word_names = Object.keys(word)
+					let word_score = Object.values(word)
+					
+					let riddles_names = Object.keys(riddles)
+					let riddles_score = Object.values(riddles)
+					
+					let random_names = Object.keys(random)
+					let random_score = Object.values(random)
+					
+					let no_value = 0
+					
+					if(seq_names.length > 0){
+						let msg = "Leaderboards for Sequencing game:\n"
+						
+						for(let a = 0; a < seq_names.length; a++){
+							for(let b = 0; b < a; b++){
+								if(seq_score[a] > seq_score[b]){
+									let name = seq_names[a]
+									seq_names[a] = seq_names[b]
+									seq_names[b] = names
+									
+									let score = seq_score[a]
+									seq_score[a] = seq_score[b]
+									seq_score[b] = score
+								}
+							}
+						}
+						
+						for(let a = 0; a < seq_names.length; a++){
+							api.getUserInfo(seq_names[a], (err, data) => {
+								let n = data[seq_names[a]]['name']
+								msg += "Name: " + n + "\nScore: " + seq_score[a] + "\n\n"
+							})
+						}
+						no_value++
+						api.sendMessage(msg, threadID)
+					}
+					
+					if(word_names.length > 0){
+						let msg = "Leaderboards for What is the word game:\n"
+						
+						for(let a = 0; a < word_names.length; a++){
+							for(let b = 0; b < a; b++){
+								if(word_score[a] > word_score[b]){
+									let name = word_names[a]
+									word_names[a] = word_names[b]
+									word_names[b] = names
+									
+									let score = word_score[a]
+									word_score[a] = word_score[b]
+									word_score[b] = score
+								}
+							}
+						}
+						
+						for(let a = 0; a < word_names.length; a++){
+							api.getUserInfo(word_names[a], (err, data) => {
+								let n = data[word_names[a]]['name']
+								msg += "Name: " + n + "\nScore: " + word_score[a] + "\n\n"
+							})
+						}
+						no_value++
+						api.sendMessage(msg, threadID)
+					}
+					
+					if(random_names.length > 0){
+						let msg = "Leaderboards for Guess the word game:\n"
+						
+						for(let a = 0; a < random_names.length; a++){
+							for(let b = 0; b < a; b++){
+								if(random_score[a] > random_score[b]){
+									let name = random_names[a]
+									random_names[a] = random_names[b]
+									random_names[b] = names
+									
+									let score = random_score[a]
+									random_score[a] = random_score[b]
+									random_score[b] = score
+								}
+							}
+						}
+						
+						for(let a = 0; a < random_names.length; a++){
+							api.getUserInfo(random_names[a], (err, data) => {
+								let n = data[random_names[a]]['name']
+								msg += "Name: " + n + "\nScore: " + randon_score[a] + "\n\n"
+							})
+						}
+						no_value++
+						api.sendMessage(msg, threadID)
+					}
+					
+					if(riddles_names.length > 0){
+						let msg = "Leaderboards for Pinoy Riddles game:\n"
+						
+						for(let a = 0; a < riddles_names.length; a++){
+							for(let b = 0; b < a; b++){
+								if(riddles_score[a] > riddles_score[b]){
+									let name = riddles_names[a]
+									riddles_names[a] = riddles_names[b]
+									riddles_names[b] = names
+									
+									let score = riddles_score[a]
+									riddles_score[a] = riddles_score[b]
+									riddles_score[b] = score
+								}
+							}
+						}
+						
+						for(let a = 0; a < riddles_names.length; a++){
+							api.getUserInfo(riddles_names[a], (err, data) => {
+								let n = data[riddles_names[a]]['name']
+								msg += "Name: " + n + "\nScore: " + riddles_score[a] + "\n\n"
+							})
+						}
+						no_value++
+						api.sendMessage(msg, threadID)
+					}
+					
+					if(no_value <= 0){
+						api.sendMessage("There's no data or any leaderboards on the database", threadID)
+					}
 				}else if(vip.includes(senderID)){
 					if(event.type == "message"){
 						if(command == "toggle"){
