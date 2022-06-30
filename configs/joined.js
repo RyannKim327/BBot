@@ -68,7 +68,7 @@ module.exports = async (api, event) => {
 				if(thread.isGroup){
 					if(json.leave.includes(event.threadID)){
 						let left = event.logMessageData.leftParticipantFbId
-						api.addUserToGroup(left, event.threadID, (e) => {
+						api.addUserToGroup(parseInt(left), event.threadID, (e) => {
 							if(e){
 								api.sendMessage(e, event.threadID)
 							}else{
