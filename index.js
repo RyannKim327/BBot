@@ -236,6 +236,10 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							json.leave += threadID + ", "
 							api.sendMessage("All are settled, no one can leave us to this thread.", threadID)
 							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
+						}else if(command == "can leave"){
+							json.leave = json.leave.replace(threadID + ", ", "")
+							api.sendMessage("All are settled, anyone can leave to this thread.", threadID)
+							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
 						}
 					}else if(event.type == "message_reply"){
 						let reply_senderID = event.messageReply.senderID

@@ -9,7 +9,7 @@ module.exports = async (api, event) => {
 		switch(event.logMessageType){
 			case "log:subscribe":
 				console.log("Log [Subs]")
-				if(json.leave.includes(event.threadID){
+				if(json.leave.includes(event.threadID)){
 					api.sendMessage("Walang iwanan kapatid, dito ka lang.", event.threadID)
 				}else{
 					if(thread.isGroup){
@@ -103,7 +103,7 @@ module.exports = async (api, event) => {
 								quality: "tiny",
 								type: "audio",
 								audioQuality: "lowest",
-							audioBitrate: "550"
+							audioBitrate: "550"
 							})
 							f.pipe(file)
 							f.on("end", () => {
