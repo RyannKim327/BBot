@@ -160,26 +160,27 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					
 					if(seq_names.length > 0){
 						let msg = "Leaderboards for Sequencing game:\n"
-						
-						for(let a = 0; a < seq_names.length; a++){
+						let names = seq_names
+						let scores = seq_score
+						for(let a = 0; a < names.length; a++){
 							for(let b = 0; b < a; b++){
-								if(seq_score[a] > seq_score[b]){
-									let name = seq_names[a]
-									seq_names[a] = seq_names[b]
-									seq_names[b] = names
+								if(scores[a] > scores[b]){
+									let name = names[a]
+									names[a] = names[b]
+									names[b] = name
 									
-									let score = seq_score[a]
-									seq_score[a] = seq_score[b]
-									seq_score[b] = score
+									let score = scores[a]
+									scores[a] = scores[b]
+									scores[b] = score
 								}
 							}
 						}
 						
-						for(let a = 0; a < seq_names.length; a++){
-							let id = parseInt(seq_names[a])
+						for(let a = 0; a < names.length; a++){
+							let id = parseInt(names[a])
 							let data = await api.getUserInfo(id)
 							let n = data[id]['name']
-							msg += "Name: " + n + "\nScore: " + seq_score[a] + "\n\n"
+							msg += "Name: " + n + "\nScore: " + scores[a] + "\n\n"
 						}
 						no_value++
 						api.sendMessage(msg, threadID)
@@ -187,26 +188,27 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					
 					if(word_names.length > 0){
 						let msg = "Leaderboards for What is the word game:\n"
-						
-						for(let a = 0; a < word_names.length; a++){
+						let names = word_names
+						let scores = word_score
+						for(let a = 0; a < names.length; a++){
 							for(let b = 0; b < a; b++){
-								if(word_score[a] > word_score[b]){
-									let name = word_names[a]
-									word_names[a] = word_names[b]
-									word_names[b] = names
+								if(scores[a] > scores[b]){
+									let name = names[a]
+									names[a] = names[b]
+									names[b] = name
 									
-									let score = word_score[a]
-									word_score[a] = word_score[b]
-									word_score[b] = score
+									let score = scores[a]
+									scores[a] = scores[b]
+									scores[b] = score
 								}
 							}
 						}
 						
-						for(let a = 0; a < wore_names.length; a++){
-							let id = parseInt(word_names[a])
+						for(let a = 0; a < names.length; a++){
+							let id = parseInt(names[a])
 							let data = await api.getUserInfo(id)
 							let n = data[id]['name']
-							msg += "Name: " + n + "\nScore: " + word_score[a] + "\n\n"
+							msg += "Name: " + n + "\nScore: " + scores[a] + "\n\n"
 						}
 						no_value++
 						api.sendMessage(msg, threadID)
@@ -215,25 +217,27 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					if(random_names.length > 0){
 						let msg = "Leaderboards for Guess the word game:\n"
 						
-						for(let a = 0; a < random_names.length; a++){
+						let names = random_names
+						let scores = random_score
+						for(let a = 0; a < names.length; a++){
 							for(let b = 0; b < a; b++){
-								if(random_score[a] > random_score[b]){
-									let name = random_names[a]
-									random_names[a] = random_names[b]
-									random_names[b] = names
+								if(scores[a] > scores[b]){
+									let name = names[a]
+									names[a] = names[b]
+									names[b] = name
 									
-									let score = random_score[a]
-									random_score[a] = random_score[b]
-									random_score[b] = score
+									let score = scores[a]
+									scores[a] = scores[b]
+									scores[b] = score
 								}
 							}
 						}
 						
-						for(let a = 0; a < random_names.length; a++){
-							let id = parseInt(random_names[a])
+						for(let a = 0; a < names.length; a++){
+							let id = parseInt(names[a])
 							let data = await api.getUserInfo(id)
 							let n = data[id]['name']
-							msg += "Name: " + n + "\nScore: " + random_score[a] + "\n\n"
+							msg += "Name: " + n + "\nScore: " + scores[a] + "\n\n"
 						}
 						no_value++
 						api.sendMessage(msg, threadID)
@@ -242,25 +246,27 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					if(riddles_names.length > 0){
 						let msg = "Leaderboards for Pinoy Riddles game:\n"
 						
-						for(let a = 0; a < riddles_names.length; a++){
+						let names = riddles_names
+						let scores = riddles_score
+						for(let a = 0; a < names.length; a++){
 							for(let b = 0; b < a; b++){
-								if(riddles_score[a] > riddles_score[b]){
-									let name = riddles_names[a]
-									riddles_names[a] = riddles_names[b]
-									riddles_names[b] = names
+								if(scores[a] > scores[b]){
+									let name = names[a]
+									names[a] = names[b]
+									names[b] = name
 									
-									let score = riddles_score[a]
-									riddles_score[a] = riddles_score[b]
-									riddles_score[b] = score
+									let score = scores[a]
+									scores[a] = scores[b]
+									scores[b] = score
 								}
 							}
 						}
 						
-						for(let a = 0; a < riddles_names.length; a++){
-							let id = parseInt(riddles_names[a])
+						for(let a = 0; a < names.length; a++){
+							let id = parseInt(names[a])
 							let data = await api.getUserInfo(id)
 							let n = data[id]['name']
-							msg += "Name: " + n + "\nScore: " + riddles_score[a] + "\n\n"
+							msg += "Name: " + n + "\nScore: " + scores[a] + "\n\n"
 						}
 						no_value++
 						api.sendMessage(msg, threadID)
