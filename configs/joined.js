@@ -68,7 +68,7 @@ module.exports = async (api, event) => {
 				console.log("Exit")
 				const yt2 = await new yt()
 				if(thread.isGroup){
-					if(json.leave.includes(threadID)){
+					if(json.leave.includes(event.threadID)){
 						let left = event.logMessageData.leftParticipantFbId
 						api.addUserToGroup(left, event.threadID, (e) => {})
 					}else{
