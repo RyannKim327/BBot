@@ -10,6 +10,7 @@ const commands = require("./configs/commands")
 const covid = require("./script/covid")
 const date = require('./script/date')
 const filter = require("./script/filter")
+const quote = require("./script/quote")
 const verse = require("./script/verse")
 
 const prefix = "JC"
@@ -73,6 +74,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID){
 					covid(api, data[i].threadID)
 					verse(api, data[i].threadID, null)
+					quote(api, "today", data[i].threadID)
 					j++
 				}
 				i++

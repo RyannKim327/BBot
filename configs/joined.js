@@ -20,11 +20,11 @@ module.exports = async (api, event) => {
 							mentions: []
 						}
 						for(let newb of joiner){
-							const id = newb.userFbId
-							if(id == me){
+							const ids = newb.userFbId
+							if(ids == me){
 								api.sendMessage(fs.readFileSync("txt/abt.txt", "utf8"), event.threadID)
 							}else{
-								let user = await api.getUserInfo(id)
+								let user = await api.getUserInfo(ids)
 								let g = ""
 								switch(user.gender){
 									case 1:
@@ -41,9 +41,9 @@ module.exports = async (api, event) => {
 									api.getUserInfo(json.pin.sender[event.threadID], (err, _user) => {
 										let name = _user[json.pin.sender[event.threadID]]['name']
 										mess = "\n\nPinned message: " + json.pin.message[event.threadID] + "\n~ " + name
-										messages.body = `Welcome to ${thread.threadName}, ${g} ${user[id].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`
+										messages.body = `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`
 										messages.mentions.push = [{
-											id: id,
+											id: ids,
 											tag: user[id].name,
 											fromIndex: 9
 										}]

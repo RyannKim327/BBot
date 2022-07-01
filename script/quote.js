@@ -9,6 +9,15 @@ async function quote(key){
 	})
 	return me
 }
+async function today(){
+	let output = await axios.get("https://zenquotes.io/api/today").then((r) => {
+		return r.data[0]
+	}).catch((e) =>{
+		console.error("Error [Today's Quote]: " + e)
+		return null
+	})
+	return output
+}
 async function quotes(){
 	/*let me = await axios.get("https://www.quotepub.com/api/widget/?type=rand&limit=1").then((r) => {
 		return r.data[0]
@@ -36,7 +45,14 @@ async function anime(){
 }
 
 module.exports = (api, event, regex) => {
-	if(regex == "anime"){
+	if(event == "today"){
+		today().then((a) => {
+			let b = "«── « ⋅ʚ♡ɞ⋅ » ──»\n\n"
+			b += "    \"" + a.q + "\"\n\n- " + a.a + "\n\n"
+			b += "«─ Quotation for today ─»"
+			api.sendMessage(b, regex)
+		})
+	}else if(regex == "anime"){
 		let q = anime()
 		q.then((response) => {
 			api.getUserInfo(event.senderID, (err, data) => {
