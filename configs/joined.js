@@ -68,11 +68,13 @@ module.exports = async (api, event) => {
 				if(thread.isGroup){
 					if(json.leave.includes(event.threadID)){
 						let left = event.logMessageData.leftParticipantFbId
-						api.addUserToGroup(parseInt(left), event.threadID, (e) => {
+						api.addUserToGroup(parseInt(left), event.threadID, async (e) => {
 							if(e){
 								api.sendMessage(e, event.threadID)
 							}else{
-								api.sendMessage("Walang iwanan kapatid, dito ka lang.", event.threadID)
+								let j = await api.getUserInfo(parseInt(left))
+								let n = j[parseInt(left)]['name']
+								api.sendMessage("Walang iwanan " + n + ", dito ka lang.", event.threadID)
 							}
 						})
 					}else{
