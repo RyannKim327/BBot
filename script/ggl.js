@@ -34,7 +34,7 @@ module.exports = async (api, event) => {
 	data.shift()
 	if(data.length > 0){
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
-		api.sendTypingIndicator(event.threadID, (err) => {
+		api.sendTypingIndicator(event.threadID, async (err) => {
 		let res = await search(data.join(" "))
 		if(res == null){
 			api.sendMessage("An error occured", event.threadID)
@@ -135,7 +135,7 @@ module.exports = async (api, event) => {
 				api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 			}else if(res.unit_converter != undefined){
 				let convert = res.unit_converter
-				let m = `> ─── {⋅. 💹?📒.⋅} ─── <\n\nInput: ${convert.input}\nOutput: ${convert.output}\nFormula: ${convert.formula}`
+				let m = `> ─── {⋅. 💹?.⋅} ─── <\n\nInput: ${convert.input}\nOutput: ${convert.output}\nFormula: ${convert.formula}`
 				api.sendMessage(m, event.threadID, event.messageID)
 				api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 			}else{
