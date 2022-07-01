@@ -34,7 +34,7 @@ module.exports = async (api, event) => {
 	data.shift()
 	if(data.length > 0){
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
-		api.sendTypingIndicator(event.threadID, (err) => {})
+		api.sendTypingIndicator(event.threadID, (err) => {
 		let res = await search(data.join(" "))
 		if(res == null){
 			api.sendMessage("An error occured", event.threadID)
@@ -170,6 +170,7 @@ module.exports = async (api, event) => {
 			}
 			api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 		}
+		})
 	}else{
 			api.sendMessage(`Yes? Do you have any issues about me? Or something you want to ask? Kindly execute << queries >> if you need something you want me to do.`, event.threadID, event.messageID)
 	}
