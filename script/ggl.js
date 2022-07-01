@@ -34,6 +34,7 @@ module.exports = async (api, event) => {
 	data.shift()
 	if(data.length > 0){
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
+		api.sendTypingIndicator(event.threadID, (err) => {})
 		let res = await search(data.join(" "))
 		if(res == null){
 			api.sendMessage("An error occured", event.threadID)
@@ -44,7 +45,7 @@ module.exports = async (api, event) => {
 				let output = res.knowledge_panel
 				console.log("Log [Info]: " + output.title)
 				let obj = Object.keys(output)
-				let m = `Result [Information]:\n${output.title}`
+				let m = `> ─── {⋅. 📜 .⋅} ─── <\n\n${output.title}`
 				if(output.type != undefined && output.type != "N/A")
 					m += " - " + output.type
 				if(output.description != "N/A")
@@ -82,7 +83,7 @@ module.exports = async (api, event) => {
 				api.sendMessage(`Result [Lyrics]\nTitle: ${output.title}\n${output.type}\n\n${output.lyrics}`, event.threadID, event.messageID)
 			}else if(res.featured_snippet.title != "N/A"){
 				let output = res.featured_snippet
-				let m = "Result [Featured Snippet]:\n"
+				let m = "> ─── {⋅. 🖥 .⋅} ─── <\n\n"
 				m += output.title + "\n~ " + output.description
 				if(output.url != undefined && output.url != "N/A"){
 					let wiki = output.url.split("/")
@@ -94,7 +95,7 @@ module.exports = async (api, event) => {
 				api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 			}else if(res.translation != undefined){
 				let output = res.translation
-				api.sendMessage(`Result [Translate]:\nTranslation from ${output.source_language} to ${output.target_language}\nOriginal: ${output.source_text}\nTranslated: ${output.target_text}`, event.threadID, event.messageID)
+				api.sendMessage(`> ─── {⋅. 📖 .⋅} ─── <\n\nTranslation from ${output.source_language} to ${output.target_language}\nOriginal: ${output.source_text}\nTranslated: ${output.target_text}`, event.threadID, event.messageID)
 				api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 			}else if(res.dictionary != undefined){
 				let output = res.dictionary
@@ -116,7 +117,7 @@ module.exports = async (api, event) => {
 						p.pipe(file)
 						file.on("finish", () => {
 							api.sendMessage({
-								body: `Result [Dictionary]:\n${output.word} (${output.phonetic})\n\nDefinitions:\n${definitions}\n\nExamples:\n${examples}`,
+								body: `> ─── {⋅. 📕 .⋅} ─── <\n\n${output.word} (${output.phonetic})\n\nDefinitions:\n${definitions}\n\nExamples:\n${examples}`,
 								attachment: fs.createReadStream(`${__dirname}/../${output.word}.mp3`).on("end", async () => {
 									if(fs.existsSync(__dirname + "/../" + output.word + ".mp3")){
 										fs.unlink(`${__dirname}/../${output.word}.mp3`, (err) => {
@@ -128,13 +129,13 @@ module.exports = async (api, event) => {
 						})
 					})
 				}else{
-					api.sendMessage(`Result [Dictionary]:\n${output.word} (${output.phonetic})\n\nDefinitions:\n${definitions}\n\nExamples:\n${examples}`, event,threadID, event.messageID)
+					api.sendMessage(`> ─── {⋅. 📕 .⋅} ─── <\n\n${output.word} (${output.phonetic})\n\nDefinitions:\n${definitions}\n\nExamples:\n${examples}`, event,threadID, event.messageID)
 				}
 				define(api, data[data.length - 1], event, "")
 				api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 			}else if(res.unit_converter != undefined){
 				let convert = res.unit_converter
-				let m = `Result [Unit Converter]:\nInput: ${convert.input}\nOutput: ${convert.output}\nFormula: ${convert.formula}`
+				let m = `> ─── {⋅. 💹?📒.⋅} ─── <\n\nInput: ${convert.input}\nOutput: ${convert.output}\nFormula: ${convert.formula}`
 				api.sendMessage(m, event.threadID, event.messageID)
 				api.setMessageReaction("✔", event.messageID, (e) => {}, true)
 			}else{
@@ -153,7 +154,7 @@ module.exports = async (api, event) => {
 						let output = r[rand[i]]
 						if(output.title != undefined || output != undefined){
 							api.sendMessage({
-								body: `Result [Results]:\n${output.title}\n~${output.description}\nSource: ${output.url}`,
+								body: `> ─── {⋅. 🔬 .⋅} ─── <\n\n${output.title}\n~${output.description}\nSource: ${output.url}`,
 								url: output.url
 							}, event.threadID, event.messageID)
 							let wiki = output.url.split("/")
