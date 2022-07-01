@@ -37,7 +37,6 @@ module.exports = async (api, event) => {
 										g = "Mr./Ms."
 								}
 								let mess = ""
-								let json = JSON.parse(fs.readFileSync("prefs/pref.json", "utf8"))
 								if(json.pin.message[event.threadID] != undefined){
 									api.getUserInfo(json.pin.sender[event.threadID], (err, _user) => {
 										let name = _user[json.pin.sender[event.threadID]]['name']

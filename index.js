@@ -372,11 +372,11 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 							c[b[0]] = b[1]
 							fs.writeFileSync("data/tts.json", JSON.stringify(c), "utf8")
 							api.sendMessage("New language added", threadID)
-						}else if(command == "no leave"){
+						}else if(command == "no leave" && !json.leave.includes(threadID)){
 							json.leave += threadID + ", "
 							api.sendMessage("All are settled, no one can leave us to this thread.", threadID)
 							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
-						}else if(command == "can leave"){
+						}else if(command == "can leave" && json.leave.includes(threadID)){
 							json.leave = json.leave.replace(threadID + ", ", "")
 							api.sendMessage("All are settled, anyone can leave to this thread.", threadID)
 							fs.writeFileSync("prefs/pref.json", JSON.stringify(json), "utf8")
