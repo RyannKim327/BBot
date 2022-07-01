@@ -1,6 +1,8 @@
 const fs = require("fs")
 const yt = require("youtubei.js")
 
+let bool = true
+
 module.exports = async (api, event) => {
 	if(event.type == "event"){
 		console.log("Working event")
@@ -9,7 +11,7 @@ module.exports = async (api, event) => {
 		switch(event.logMessageType){
 			case "log:subscribe":
 				console.log("Log [Subs]")
-				if(!json.leave.includes(event.threadID)){
+				if(!json.leave.includes(event.threadID) || bool){
 					if(thread.isGroup){
 						const joiner = await event.logMessageData.addedParticipants
 						const me = api.getCurrentUserID()
@@ -72,9 +74,16 @@ module.exports = async (api, event) => {
 							if(e){
 								api.sendMessage(e, event.threadID)
 							}else{
+								bool = false
 								let j = await api.getUserInfo(parseInt(left))
 								let n = j[parseInt(left)]['name']
-								api.sendMessage("Walang iwanan " + n + ", dito ka lang.", event.threadID)
+								api.sendMessage({
+									body: "Walang iwanan " + n + ", dito ka lang.",
+									mentions: [{
+										id: parseInt(left),
+										tag: n
+									}]
+								}, event.threadID)
 							}
 						})
 					}else{
