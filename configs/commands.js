@@ -68,38 +68,32 @@ module.exports = async (api, event, pre, gc, vip) => {
 
 	if(regex_game_dice.test(body)){
 		dice(api, event) 
-	}else if(regex_game_seq.test(body) || regex_game_ans.test(body)){
+	}else if(regex_game_seq.test(body) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 		if((regex_game_seq.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 			seq(api, event, regex_game_ans)
-		}else if(regex_game_ans.test(body) && json_games.ingame[senderID] == undefined){
-			api.sendMessage("You're not in a game yet.", threadID)
 		}else{
 			api.sendMessage(json_games.ingame[senderID], threadID)
 		}
-	}else if(regex_game_word.test(body) || regex_game_ans.test(body)){
+	}else if(regex_game_word.test(body) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 		if((regex_game_word.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 			seq(api, event, regex_game_ans)
-		}else if(regex_game_ans.test(body) && json_games.ingame[senderID] == undefined){
-			api.sendMessage("You're not in a game yet.", threadID)
 		}else{
 			api.sendMessage(json_games.ingame[senderID], threadID)
 		}
-	}else if(regex_game_random.test(body) || regex_game_ans.test(body)){
+	}else if(regex_game_random.test(body) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 		if((regex_game_random.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 			seq(api, event, regex_game_ans)
-		}else if(regex_game_ans.test(body) && json_games.ingame[senderID] == undefined){
-			api.sendMessage("You're not in a game yet.", threadID)
 		}else{
 			api.sendMessage(json_games.ingame[senderID], threadID)
 		}
-	}else if(regex_game_riddles.test(body) || regex_game_ans.test(body)){
+	}else if(regex_game_riddles.test(body) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 		if((regex_game_riddles.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 			seq(api, event, regex_game_ans)
-		}else if(regex_game_ans.test(body) && json_games.ingame[senderID] == undefined){
-			api.sendMessage("You're not in a game yet.", threadID)
 		}else{
 			api.sendMessage(json_games.ingame[senderID], threadID)
 		}
+	}else if(regex_game_ans.test(body) && json_games.ingame[senderID] == undefined){
+		api.sendMessage("You're not in a game yet.", threadID)
 	}else if(regex_guitar.test(body) && type == "message"){
 		guitar(api, event, regex_guitar)
 	}else if(regex_img.test(body) && type == "message"){
