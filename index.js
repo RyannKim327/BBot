@@ -76,6 +76,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					covid(api, data[i].threadID)
 					verse(api, data[i].threadID, null)
 					quote(api, "today", data[i].threadID)
+					nasa(api, data[i].threadID)
 					j++
 				}
 				i++
@@ -126,7 +127,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				}
 			})
 			if(body == "√nasa"){
-				nasa(api, event)
+				nasa(api, threadID)
 			}
 			if(regex_admin.test(body)){
 				let command = body.match(regex_admin)[1]

@@ -28,7 +28,7 @@ module.exports = (api, event) => {
 							})
 						}
 					})
-				}, event.threadID)
+				}, event)
 			})
 		}
 	})
