@@ -44,7 +44,13 @@ module.exports = async (api, event) => {
 										tag: user[ids].name,
 										fromIndex: 9
 									}]
-									api.sendMessage(messages, event.threadID)
+									api.sendMessage({
+										body: `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`
+										mentions: [{
+											id, ids,
+											tag: user[ids].name
+										}]
+									}, event.threadID)
 								})
 							}else{
 								messages.body = `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`
@@ -53,7 +59,13 @@ module.exports = async (api, event) => {
 									tag: user[ids].name,
 									fromIndex: 9
 								}]
-								api.sendMessage(messages, event.threadID)
+								api.sendMessage({
+									body: `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`,
+									mentions: [{
+										id: ids,
+										tag: user[ids].name
+									}]
+								}, event.threadID)
 							}
 						}
 					}
