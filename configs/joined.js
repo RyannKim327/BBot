@@ -16,7 +16,7 @@ module.exports = async (api, event) => {
 					if(json.pin.message[event.threadID] != undefined){
 						let _id = parseInt(json.pin.sender[event.threadID])
 						let sender = await api.getUserInfo(_id)
-						pin = "\n\nPinned Message:\n\n" + json.pin.message[event.threadID] + "\nBy: " + sender[_id]['nsme']
+						pin = "\n\nPinned Message:\n\n" + json.pin.message[event.threadID] + "\nBy: " + sender[_id]['name']
 					}
 					for(let newb of joiner){
 						const ids = parseInt(newb.userFbId)
