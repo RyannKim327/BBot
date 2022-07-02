@@ -45,7 +45,7 @@ module.exports = async (api, event) => {
 										fromIndex: 9
 									}]
 									api.sendMessage({
-										body: `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`
+										body: `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`,
 										mentions: [{
 											id, ids,
 											tag: user[ids].name
