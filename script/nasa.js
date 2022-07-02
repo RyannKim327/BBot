@@ -16,20 +16,19 @@ module.exports = (api, event) => {
 	nasayou().then((r) => {
 		if(r.media_type == "image"){
 			let file = fs.createWriteStream("temp/nasa.jpg")
-			request(r.hdurl, (r2) => {
-				r2.pipe(file)
-				file.on("close", () => {
-					api.sendMessage({
-						body: `${r.title}\n    "${r.explanation}"\n\n~ ${r.copyright} - ${r.date}`,
-						attachment: fs.createReadStream(__dirname + "/../temp/nasa.jpg").on("end", () => {
-							if(fs.existsSync(__dirname + "/../temp/nasa.jpg")){
-								fs.unlink(__dirname + "/../temp/nasa.jpg", (e) => {
-									if(e) return console.error("Error [Nasa Unlink]: " + e)
-								})
-							}
-						})
-					}, event.threadID)
-				})
+			let r2 = request(r.hdurl)
+			r2.pipe(file)
+			file.on("close", () => {
+				api.sendMessage({
+					body: `${r.title}\n    "${r.explanation}"\n\n~ ${r.copyright} - ${r.date}`,
+					attachment: fs.createReadStream(__dirname + "/../temp/nasa.jpg").on("end", () => {
+						if(fs.existsSync(__dirname + "/../temp/nasa.jpg")){
+							fs.unlink(__dirname + "/../temp/nasa.jpg", (e) => {
+								if(e) return console.error("Error [Nasa Unlink]: " + e)
+							})
+						}
+					})
+				}, event.threadID)
 			})
 		}
 	})
