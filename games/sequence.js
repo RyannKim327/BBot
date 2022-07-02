@@ -2,7 +2,7 @@ const fs = require("fs")
 
 function fibbo(){
 	let a = Math.floor(Math.random() * 100) + 1
-	let p = Math.floor(Math.random() * 14) + 1
+	let p = Math.floor(Math.random() * 13) + 1
 	let r = [1]
 	let t = a
 	let o = ""
@@ -18,8 +18,8 @@ function fibbo(){
 }
 
 function pell(){
-	let a = Math.floor(Math.random() * 4) + 1
-	let p = Math.floor(Math.random() * 9) + 1
+	let a = Math.floor(Math.random() * 9) + 1
+	let p = Math.floor(Math.random() * 8) + 1
 	let r = [0, a]
 	let o = ""
 	let b = 0
@@ -50,8 +50,9 @@ module.exports = (api, event, regex) => {
 			json.seq.score[event.senderID] = 0
 		}
 		json.seq.data[event.senderID] = s[1]
-		json.ingame[event.senderID] = true
-		api.sendMessage("Here's your sequence:\n" + s[0] + "\n\nTo answer this, kindly message with this format: JC, the answer is <number>", event.threadID)
+		let hold = "Here's your sequence:\n" + s[0] + "\n\nTo answer this, kindly message with this format: JC, the answer is <number>"
+		json.ingame[event.senderID] = hold
+		api.sendMessage(hold, event.threadID)
 	}else{
 		let d = event.body.match(regex)[1]
 		if(d == json.seq.data[event.senderID]){

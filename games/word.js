@@ -111,11 +111,12 @@ module.exports = async (api, event, regex) => {
 				output += "*"
 			}
 		}
-		json.ingame[event.senderID] = true
+		let hold = `- Word Game -\nHere's your clue: ${output}\nDefinition: ${r.definition}\n\nFormat: JC, the answer is <answer>`
+		json.ingame[event.senderID] = hold
 		word.data[event.senderID] = words
 		word.trials[event.senderID] = 3
 		//fs.writeFileSync(event.threadID + "_word.txt", words, "utf8")
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
-		api.sendMessage(`- Word Game -\nHere's your clue: ${output}\nDefinition: ${r.definition}\n\nFormat: JC, the answer is <answer>`, event.threadID)
+		api.sendMessage(hold, event.threadID)
 	}
 }

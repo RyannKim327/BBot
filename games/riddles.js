@@ -15,12 +15,13 @@ module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	if(json.riddles.ans[event.senderID] == undefined){
 		let data = await riddle()
-		json.ingame[event.senderID] = true
 		json.riddles.ans[event.senderID] = data.s.replace(/([^\w\s]+)/g, "").toLowerCase()
 		if(json.riddles.score[event.senderID] == undefined){
 			json.riddles.score[event.senderID] = 0
 		}
-		api.sendMessage("Here's your riddle:\n\n" + data.b + "\n\nJust send a message using the format: JC, the answer is <answer>", event.threadID)
+		let hold = "Here's your riddle:\n\n" + data.b + "\n\nJust send a message using the format: JC, the answer is <answer>"
+		json.ingame[event.senderID] = hold
+		api.sendMessage(hold, event.threadID)
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}else{
 		let data = event.body.match(regex)[1]
