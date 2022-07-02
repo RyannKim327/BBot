@@ -27,7 +27,7 @@ module.exports = async (api, event, regex) => {
 	}else{
 		let data = event.body.match(regex)[1]
 		let ans = data.replace(/([^\w\s]+)/, "").toLowerCase()
-		if(ans == json.riddles.ans[event.senderID]){
+		if(json.riddles.ans[event.senderID].includes(ans)){
 			json.riddles.score[event.senderID] += 1
 			api.sendMessage("You've got it.\n\nCurrent score: " + json.riddles.score[event.senderID], event.threadID)
 		}else{
