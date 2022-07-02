@@ -80,7 +80,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 		}else{
 			api.sendMessage(json_games.ingame[senderID], threadID)
 		}
-	}else if(regex_game_random.test(body) || (regex_game_ans.test(body) && json_games.random.data[senderID] != undefined)){
+	}else if(regex_game_random_word.test(body) || (regex_game_ans.test(body) && json_games.random.data[senderID] != undefined)){
 		if((regex_game_random.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 			seq(api, event, regex_game_ans)
 		}else{
