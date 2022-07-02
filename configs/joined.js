@@ -44,13 +44,7 @@ module.exports = async (api, event) => {
 										tag: user[ids].name,
 										fromIndex: 9
 									}]
-									api.sendMessage({
-										body: `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`,
-										mentions: [{
-											id, ids,
-											tag: user[ids].name
-										}]
-									}, event.threadID)
+									api.sendMessage(messages, event.threadID)
 								})
 							}else{
 								messages.body = `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`
@@ -59,13 +53,7 @@ module.exports = async (api, event) => {
 									tag: user[ids].name,
 									fromIndex: 9
 								}]
-								api.sendMessage({
-									body: `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`,
-									mentions: [{
-										id: ids,
-										tag: user[ids].name
-									}]
-								}, event.threadID)
+								api.sendMessage(messages, event.threadID)
 							}
 						}
 					}
@@ -124,7 +112,7 @@ module.exports = async (api, event) => {
 								quality: "tiny",
 								type: "audio",
 								audioQuality: "lowest",
-							audioBitrate: "550"
+								audioBitrate: "550"
 							})
 							f.pipe(file)
 							f.on("end", () => {
