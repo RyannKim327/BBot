@@ -36,9 +36,12 @@ module.exports = async (api, event, regex) => {
 					word.trials[event.senderID] -= 1
 				}else{
 					word.trials[event.senderID] -= 1
-					word.score[event.senderID] -= 1
+					if(word.score[event.senderID] > 0){
+						word.score[event.senderID] -= 1
+					)
 					api.sendMessage("Wrong, the correct answer is: " + got + "\n\nYour score: " +  (word.score[event.senderID]), event.threadID, event.messageID)
 					word.data[event.senderID] = undefined
+					json.current_game[event.senderID] = undefined
 					json.ingame[event.senderID] = undefined
 				}
 			}
@@ -113,6 +116,7 @@ module.exports = async (api, event, regex) => {
 		}
 		let hold = `- Word Game -\nHere's your clue: ${output}\nDefinition: ${r.definition}\n\nFormat: JC, the answer is <answer>`
 		json.ingame[event.senderID] = hold
+		json.current_game[event.senderID] = "Guess the word"
 		word.data[event.senderID] = words
 		word.trials[event.senderID] = 3
 		//fs.writeFileSync(event.threadID + "_word.txt", words, "utf8")

@@ -52,6 +52,7 @@ module.exports = (api, event, regex) => {
 		json.seq.data[event.senderID] = s[1]
 		let hold = "Here's your sequence:\n" + s[0] + "\n\nTo answer this, kindly message with this format: JC, the answer is <number>"
 		json.ingame[event.senderID] = hold
+		json.current_game[event.senderID] = "Sequencing game"
 		api.sendMessage(hold, event.threadID)
 	}else{
 		let d = event.body.match(regex)[1]
@@ -59,11 +60,14 @@ module.exports = (api, event, regex) => {
 			json.seq.score[event.senderID] += 1
 			api.sendMessage("You've got it.\n\nCurrent score:  " + json.seq.score[event.senderID], event.threadID)
 		}else{
-			json.seq.score[event.senderID] -= 1
+			if(json.seq.score[event.senderID] > 0){
+				json.seq.score[event.senderID] -= 1
+			}
 			api.sendMessage("Wrong answer, the correct one is: " + json.seq.data[event.senderID] + ".\n\nCurrent score:  " + json.seq.score[event.senderID], event.threadID)
 		}
 		json.seq.data[event.senderID] = undefined
 		json.ingame[event.senderID] = undefined
+		json.current_game[event.senderID] = undefined
 	}
 	fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 }

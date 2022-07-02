@@ -21,6 +21,7 @@ module.exports = async (api, event, regex) => {
 		}
 		let hold = "Here's your riddle:\n\n" + data.b + "\n\nJust send a message using the format: JC, the answer is <answer>"
 		json.ingame[event.senderID] = hold
+		json.current_game[event.senderID] = "Pinoy Riddles"
 		api.sendMessage(hold, event.threadID)
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}else{
@@ -30,11 +31,14 @@ module.exports = async (api, event, regex) => {
 			json.riddles.score[event.senderID] += 1
 			api.sendMessage("You've got it.\n\nCurrent score: " + json.riddles.score[event.senderID], event.threadID)
 		}else{
-			json.riddles.score[event.senderID] -= 1
+			if(json.riddles.score[event.senderID] > 0){
+				json.riddles.score[event.senderID] -= 1
+			}
 			api.sendMessage("Wrong answer, the correct answer is " + json.riddles.ans[event.senderID] + "\n\nCurrent score: " + json.riddles.score[event.senderID], event.threadID)
 		}
 		json.riddles.ans[event.senderID] = undefined
 		json.ingame[event.senderID] = undefined
+		json.current_game[event.senderID] = undefined
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}
 }
