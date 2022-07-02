@@ -1,8 +1,6 @@
 const fs = require("fs")
 const yt = require("youtubei.js")
 
-let bool = true
-
 module.exports = async (api, event) => {
 	if(event.type == "event"){
 		console.log("Working event")
@@ -11,53 +9,51 @@ module.exports = async (api, event) => {
 		switch(event.logMessageType){
 			case "log:subscribe":
 				console.log("Log [Subs]")
-				if(!json.leave.includes(event.threadID) || bool){
-					if(thread.isGroup){
-						const joiner = await event.logMessageData.addedParticipants
-						const me = api.getCurrentUserID()
-						let messages = {
-							body: "",
-							mentions: []
-						}
-						for(let newb of joiner){
-							const ids = newb.userFbId
-							if(ids == me){
-								api.sendMessage(fs.readFileSync("txt/abt.txt", "utf8"), event.threadID)
-							}else{
-								let user = await api.getUserInfo(ids)
-								let g = ""
-								switch(user.gender){
-									case 1:
-										g = "Ms."
-									break
-									case 2:
-										g = "Mr."
-									break
-									default:
-										g = "Mr./Ms."
-								}
-								let mess = ""
-								if(json.pin.message[event.threadID] != undefined){
-									api.getUserInfo(json.pin.sender[event.threadID], (err, _user) => {
-										let name = _user[json.pin.sender[event.threadID]]['name']
-										mess = "\n\nPinned message: " + json.pin.message[event.threadID] + "\n~ " + name
-										messages.body = `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`
-										messages.mentions.push = [{
-											id: ids,
-											tag: user[id].name,
-											fromIndex: 9
-										}]
-										api.sendMessage(messages, event.threadID)
-									})
-								}else{
-									messages.body = `Welcome to ${thread.threadName}, ${g} ${user[id].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`
-										messages.mentions.push = [{
-										id: id,
-										tag: user[id].name,
+				if(thread.isGroup){
+					const joiner = await event.logMessageData.addedParticipants
+					const me = api.getCurrentUserID()
+					let messages = {
+						body: "",
+						mentions: []
+					}
+					for(let newb of joiner){
+						const ids = newb.userFbId
+						if(ids == me){
+							api.sendMessage(fs.readFileSync("txt/abt.txt", "utf8"), event.threadID)
+						}else{
+							let user = await api.getUserInfo(ids)
+							let g = ""
+							switch(user.gender){
+								case 1:
+									g = "Ms."
+								break
+								case 2:
+									g = "Mr."
+								break
+								default:
+									g = "Mr./Ms."
+							}
+							let mess = ""
+							if(json.pin.message[event.threadID] != undefined){
+								api.getUserInfo(json.pin.sender[event.threadID], (err, _user) => {
+									let name = _user[json.pin.sender[event.threadID]]['name']
+									mess = "\n\nPinned message: " + json.pin.message[event.threadID] + "\n~ " + name
+									messages.body = `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`
+									messages.mentions.push = [{
+										id: ids,
+										tag: user[ids].name,
 										fromIndex: 9
 									}]
 									api.sendMessage(messages, event.threadID)
-								}
+								})
+							}else{
+								messages.body = `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`
+								messages.mentions.push = [{
+									id: ids,
+									tag: user[ids].name,
+									fromIndex: 9
+								}]
+								api.sendMessage(messages, event.threadID)
 							}
 						}
 					}
@@ -73,7 +69,6 @@ module.exports = async (api, event) => {
 							if(e){
 								api.sendMessage(e, event.threadID)
 							}else{
-								bool = false
 								let j = await api.getUserInfo(parseInt(left))
 								let n = j[parseInt(left)]['name']
 								api.sendMessage({
