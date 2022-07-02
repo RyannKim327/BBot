@@ -10,6 +10,7 @@ const commands = require("./configs/commands")
 const covid = require("./script/covid")
 const date = require('./script/date')
 const filter = require("./script/filter")
+const nasa = require("./script/nasa")
 const quote = require("./script/quote")
 const verse = require("./script/verse")
 
@@ -124,6 +125,9 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					gc_admin.push(list[i].id)
 				}
 			})
+			if(body == "√nasa"){
+				nasa(api, event)
+			}
 			if(regex_admin.test(body)){
 				let command = body.match(regex_admin)[1]
 				if(command == "queries"){
