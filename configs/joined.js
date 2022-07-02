@@ -12,12 +12,14 @@ module.exports = async (api, event) => {
 				if(thread.isGroup){
 					const joiner = await event.logMessageData.addedParticipants
 					const me = api.getCurrentUserID()
-					let messages = {
-						body: "",
-						mentions: []
+					let pin = ""
+					if(json.pin.message[event.threadID] != undefined){
+						let _id = parseInt(json.pin.sender[event.threadID])
+						let sender = await api.getUserInfo(_id)
+						pin = "\n\nPinned Message:\n\n" + json.pin.message[event.threadID] + "\nBy: " + sender[_id]['nsme']
 					}
 					for(let newb of joiner){
-						const ids = newb.userFbId
+						const ids = parseInt(newb.userFbId)
 						if(ids == me){
 							api.sendMessage(fs.readFileSync("txt/abt.txt", "utf8"), event.threadID)
 						}else{
@@ -33,28 +35,14 @@ module.exports = async (api, event) => {
 								default:
 									g = "Mr./Ms."
 							}
-							let mess = ""
-							if(json.pin.message[event.threadID] != undefined){
-								api.getUserInfo(json.pin.sender[event.threadID], (err, _user) => {
-									let name = _user[json.pin.sender[event.threadID]]['name']
-									mess = "\n\nPinned message: " + json.pin.message[event.threadID] + "\n~ " + name
-									messages.body = `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins. ${mess}`
-									messages.mentions.push = [{
-										id: ids,
-										tag: user[ids].name,
-										fromIndex: 9
-									}]
-									api.sendMessage(messages, event.threadID)
-								})
-							}else{
-								messages.body = `Welcome to ${thread.threadName}, ${g} ${user[ids].name}. Enjoy your staying here, always be patience and be active if you can. Respect all members specially admins.`
-								messages.mentions.push = [{
+							let n = user[ids]['name']
+							api.sendMessage({
+								body: `Welcome to ${thread.threadName} ${g} ${n}. We hope that you'll enjoy here share and gain knowledge that helps us for our future. Be mindful, respectful and kind to all members. ${pin}`,
+								mentions: [{
 									id: ids,
-									tag: user[ids].name,
-									fromIndex: 9
+									tag: n
 								}]
-								api.sendMessage(messages, event.threadID)
-							}
+							}, event.threadID)
 						}
 					}
 				}
