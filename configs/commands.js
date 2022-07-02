@@ -67,7 +67,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	let json_games = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 
 	if(regex_game_dice.test(body)){
-		dice(api, event) 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
+		dice(api, event) 
 	}else if((regex_game_seq.test(body) && json_games.seq.data[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined && json_games.seq.data[senderID] != undefined)){
 		if(json_games.ingame[senderID] == undefined && regex_game_ans.test(body)){
 			seq(api, event, regex_game_ans)
