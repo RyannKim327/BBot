@@ -76,19 +76,19 @@ module.exports = async (api, event, pre, gc, vip) => {
 		}
 	}else if(regex_game_word.test(body) || (regex_game_ans.test(body) && json_games.word.data[senderID] != undefined)){
 		if((regex_game_word.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
-			seq(api, event, regex_game_ans)
+			word(api, event, regex_game_ans)
 		}else{
 			api.sendMessage(json_games.ingame[senderID], threadID)
 		}
 	}else if(regex_game_random_word.test(body) || (regex_game_ans.test(body) && json_games.random.data[senderID] != undefined)){
 		if((regex_game_random.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
-			seq(api, event, regex_game_ans)
+			random_word(api, event, regex_game_ans)
 		}else{
 			api.sendMessage(json_games.ingame[senderID], threadID)
 		}
 	}else if(regex_game_riddles.test(body) || (regex_game_ans.test(body) && json_games.riddles.ans[senderID] != undefined)){
 		if((regex_game_riddles.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
-			seq(api, event, regex_game_ans)
+			riddles(api, event, regex_game_ans)
 		}else{
 			api.sendMessage(json_games.ingame[senderID], threadID)
 		}
