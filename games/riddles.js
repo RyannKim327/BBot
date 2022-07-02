@@ -15,7 +15,11 @@ module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	if(json.riddles.ans[event.senderID] == undefined){
 		let data = await riddle()
-		json.riddles.ans[event.senderID] = data.s.replace(/([^\w\s]+)/g, "").toLowerCase()
+		let arr = []
+		data.s.forEach((r) => {
+			arr.push(r.toLowerCase())
+		})
+		json.riddles.ans[event.senderID] = arr
 		if(json.riddles.score[event.senderID] == undefined){
 			json.riddles.score[event.senderID] = 0
 		}
