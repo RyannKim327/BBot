@@ -16,8 +16,8 @@ module.exports = (api, event) => {
 	nasayou().then((r) => {
 		if(r.media_type == "image"){
 			let file = fs.createWriteStream("temp/nasa.jpg")
-			request(r.hdurl, (r) => {
-				r.pipe(file)
+			request(r.hdurl, (r2) => {
+				r2.pipe(file)
 				file.on("close", () => {
 					api.sendMessage({
 						body: `${r.title}\n    "${r.explanation}"\n\n~ ${r.copyright} - ${r.date}`,
