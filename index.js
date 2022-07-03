@@ -126,9 +126,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 					gc_admin.push(list[i].id)
 				}
 			})
-			if(body == "√nasa"){
-				nasa(api, threadID)
-			}
 			if(regex_admin.test(body)){
 				let command = body.match(regex_admin)[1]
 				if(command == "queries"){

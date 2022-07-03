@@ -13,6 +13,7 @@ const riddles = require("./../games/riddles")
 const seq = require("./../games/sequence")
 const word = require("./../games/word")
 
+const baybay = require("./../script/baybayin")
 const ggl = require("./../script/ggl")
 const guitar = require("./../script/guitar")
 const img = require("./../script/img")
@@ -36,6 +37,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	const regex_game_word = new RegExp(prefix + " play guess the word", "i")
 	const regex_game_ans = new RegExp(prefix + " the answer is ([\\w\\W]+)", "i")
 	
+	const regex_baybayin = new RegExp(prefix + " please transliterate (\[\w\\W+]) to baybayin", "i")
 	const regex_guitar = new RegExp(prefix + " may I have the guitar chords of ([\\w\\W]+) please", "i")
 	const regex_img = new RegExp(prefix + " may I have a random image of ([\\w\\W]+) please", "i")
 	const regex_img_v2 = new RegExp(prefix + " what does this photo means", "i")
@@ -94,6 +96,8 @@ module.exports = async (api, event, pre, gc, vip) => {
 		}
 	}else if(regex_game_ans.test(body) && json_games.ingame[senderID] == undefined){
 		api.sendMessage("You're not in a game yet.", threadID)
+	}else if(regex_baybayin.test(body)){
+		baybay(api, event, regex_baybayin)
 	}else if(regex_guitar.test(body) && type == "message"){
 		guitar(api, event, regex_guitar)
 	}else if(regex_img.test(body) && type == "message"){
