@@ -477,7 +477,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				}else{
 					if(bad_regex.test(body) && vip.includes(senderID)){
 						let data = body.match(bad_regex)[1]
-						if(json.badwords.includes(data)){
+						if(json.badwords.includes(data) && data != prefix){
 							api.sendMessage("This word is already included to the badwords list.", threadID)
 						}else{
 							json.badwords.push(data)
