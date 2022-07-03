@@ -37,7 +37,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	const regex_game_word = new RegExp(prefix + " play guess the word", "i")
 	const regex_game_ans = new RegExp(prefix + " the answer is ([\\w\\W]+)", "i")
 	
-	const regex_baybayin = new RegExp(prefix + " please transliterate (\[\w\\W+]) to baybayin", "i")
+	const regex_baybayin = new RegExp(prefix + " please transliterate (\[\w\\W]+) to baybayin", "i")
 	const regex_guitar = new RegExp(prefix + " may I have the guitar chords of ([\\w\\W]+) please", "i")
 	const regex_img = new RegExp(prefix + " may I have a random image of ([\\w\\W]+) please", "i")
 	const regex_img_v2 = new RegExp(prefix + " what does this photo means", "i")
