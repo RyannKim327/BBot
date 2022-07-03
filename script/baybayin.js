@@ -10,8 +10,8 @@ async function t(text){
 	return result
 }
 
-module.exports = (api, event, regex) => {
+module.exports = async (api, event, regex) => {
 	let data = event.body.match(regex)[1]
-	let r = t(data)
+	let r = await t(data)
 	api.sendMessage("Result: " + data + " in baybayin is " + r.baybay, event.threadID)
 }
