@@ -13,5 +13,5 @@ async function t(text){
 module.exports = (api, event, regex) => {
 	let data = event.body.match(regex)[1]
 	let r = t(data)
-	api.sendMessage("Result:\n\n" + r, event.threadID)
+	api.sendMessage("Result: " + data + " in baybayin is " + r.baybay, event.threadID)
 }
