@@ -35,6 +35,22 @@ function pell(){
 	return [o, r[p]]
 }
 
+function def_seq(){
+	let m = Math.floor(Math.random() * 100) + 1
+	let p = Math.floor(Math.random() * 14) + 1
+	let x = 0
+	let r = []
+	let y = ""
+	for(let i = 0; i < 15; i++){
+		x += m
+		r[i] = x
+	}
+	for(let i = 0; i < r.length; i++){
+		y += ((i == p) ? "*" : r[i]) + ", "
+	}
+	return [y, r[p]]
+}
+
 module.exports = (api, event, regex) => {
 	let a = Math.floor(Math.random() * 2)
 	let json = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
@@ -42,6 +58,8 @@ module.exports = (api, event, regex) => {
 		let s
 		if(a == 1){
 			s = pell()
+		}else if(){
+			s = def_seq()
 		}else{
 			s = fibbo()
 		}
