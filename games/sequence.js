@@ -52,13 +52,13 @@ function def_seq(){
 }
 
 module.exports = (api, event, regex) => {
-	let a = Math.floor(Math.random() * 2)
+	let a = Math.floor(Math.random() * 3)
 	let json = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
 	if(json.ingame[event.senderID] == undefined){
 		let s
 		if(a == 1){
 			s = pell()
-		}else if(){
+		}else if(a == 2){
 			s = def_seq()
 		}else{
 			s = fibbo()
