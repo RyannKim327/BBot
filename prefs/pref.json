@@ -16,12 +16,14 @@
 		"message": {
 			"4929914667091422": "B0t Helpdesk:\n\n/help -> Zodiac\n?help -> Baby bot\n$help -> kagura\n^help -> Cypher",
 			"4740250299437612": "tang inang mga site yan",
-			"4761757843909617": "B0t Helpdesk:\n\n/help -> Zodiac\n?help -> Baby bot\n//commands -> Mākuguren Bot "
+			"4761757843909617": "B0t Helpdesk:\n\n/help -> Zodiac\n?help -> Baby bot\n//commands -> Mākuguren Bot ",
+			"7244767385593438": "mali naman"
 		},
 		"sender": {
 			"4929914667091422": "100006530747445",
 			"4740250299437612": "100065084151905",
-			"4761757843909617": "100082302972517"
+			"4761757843909617": "100082302972517",
+			"7244767385593438": "100057444813165"
 		}
 	},
 	"greet": {
