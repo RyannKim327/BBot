@@ -37,7 +37,8 @@ module.exports = (api, event, regex) => {
 			}else{
 				let result = "⊱ ──── ༺❀༻ ──── ⊰\n\n"
 				for(let i = 0; i < r.length; i++){
-					result += `[ ${r[i].bookname} ${r[i].chapter}:${r[i].verse} ]\n${r[i].text}\n\n`
+					let verse = r[i].text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
+					result += `[ ${r[i].bookname} ${r[i].chapter}:${r[i].verse} ]\n${verse}\n\n`
 				}
 				result += "⊱ ─ { Bible verse of the day } ─ ⊰"
 				api.sendMessage(result, event)
@@ -63,7 +64,8 @@ module.exports = (api, event, regex) => {
 					let result = ""
 					let total = r.length
 					for(let i = 0; i < total; i++){
-						result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + r[i].text + "\n\n"
+						let verse = r[i].text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
+						result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + verse + "\n\n"
 					}
 					api.sendMessage({
 						body: `A random verse for you ${gender} ${user}\n\n${result}`,
@@ -78,7 +80,8 @@ module.exports = (api, event, regex) => {
 					let result = ""
 					let total = r.length
 					for(let i = 0; i < total; i++){
-						result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + r[i].text + "\n\n"
+						let verse = r[i].text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
+						result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + verse + "\n\n"
 					}
 					api.sendMessage({
 						body: `Here's the bible verse of the day ${gender} ${user}\n\n${result}`,
@@ -97,7 +100,8 @@ module.exports = (api, event, regex) => {
 						let result = ""
 						let total = r.length
 						for(let i = 0; i < total; i++){
-							result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + r[i].text + "\n\n"
+							let verse = r[i].text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
+							result += "[ " + r[i].bookname + " " + r[i].chapter + ":" + r[i].verse + " ]\n" + verse + "\n\n"
 						}
 						api.sendMessage({
 							body: `Here's the bible verse you've requested ${gender} ${user}\n\n${result}`,
