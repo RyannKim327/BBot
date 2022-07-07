@@ -142,6 +142,10 @@ module.exports = async (api, event, pre, gc, vip) => {
 	}else if(regex_weather.test(body) && type == "message"){
 		weather(api, event, regex_weather)
 	}else{
-		ggl(api, event)
+		if(json_games.ingame[senderID] != undefined){})
+			ggl(api, event)
+		}else{
+			api.sendMessage("Disabled feature, you're still in a game.", threadID)
+		}
 	}
 }
