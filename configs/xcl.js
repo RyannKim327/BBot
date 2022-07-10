@@ -3,7 +3,7 @@ module.exports = async (api, event) => {
 	if(event.type == "event"){
 		if(event.logMessageType == "log:subscribe"){
 			const joiner = await event.logMessageData.addedParticipants
-			for(let n in data){
+			for(let n in joiner){
 				let usrID = parseInt(n.userFbId)
 				let data = await api.getUserInfo(usrID)
 				let g = ""
