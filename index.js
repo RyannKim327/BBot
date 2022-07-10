@@ -4,6 +4,7 @@ const fs = require("fs")
 const cron = require("node-cron")
 
 const joined = require("./configs/joined")
+const xcl = require("./configs/xcl")
 const bday = require("./configs/bday")
 const commands = require("./configs/commands")
 
@@ -25,6 +26,8 @@ const bad_regex = /JC, ([\w]+) is a bad word/i
 const gc = process.env['gc']
 let vip = []
 let gc_admin = []
+
+const excludeGC = process.env['xgc']
 
 function resetTime(time, json){
 	let morning = json.greet.morning
@@ -72,7 +75,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			let i = 0
 			let j = 0
 			while(j < 10 && i < data.length){
-				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID){
+				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID && data[i] != excludeGC){
 					covid(api, data[i].threadID)
 					verse(api, data[i].threadID, null)
 					quote(api, "today", data[i].threadID)
@@ -96,8 +99,12 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
 		let json = JSON.parse(fs.readFileSync("prefs/pref.json", "utf8"))
-		joined(api, event)
-		if(event.body != null){
+		if(event.threadID != excludeGC){
+			joined(api, event)
+		}else{
+			xcl(api, event)
+		}
+		if(event.body != null && event.threadID != excludeGC){
 			let {
 				body,
 				messageID,
