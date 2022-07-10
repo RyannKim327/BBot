@@ -7,7 +7,7 @@ module.exports = async (api, event) => {
 				let usrID = parseInt(n.userFbId)
 				let data = await api.getUserInfo(usrID)
 				let g = ""
-				switch(user.gender){
+				switch(data.gender){
 					case 1:
 						g = "Ms."
 					break
