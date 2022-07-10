@@ -19,7 +19,7 @@ module.exports = async (api, event) => {
 				}
 				let name = data[usrID]['name']
 				api.sendMessage({
-					body: `Welcome ${g} ${name} please watch this vid to learn more about saga AI`,
+					body: `Hello ${g} ${name}!!!\n\n    Welcome to SAGA AI please watch and understand this video to learn more about Saga AI and to maximize your income without investing.`,
 					url: "https://youtu.be/HbIgnweie3M",
 					mentions:[{
 						id: usrID,
