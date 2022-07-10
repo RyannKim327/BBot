@@ -75,7 +75,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			let i = 0
 			let j = 0
 			while(j < 10 && i < data.length){
-				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID && data[i] != excludeGC){
+				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID && data[i].threadID != excludeGC){
 					covid(api, data[i].threadID)
 					verse(api, data[i].threadID, null)
 					quote(api, "today", data[i].threadID)
