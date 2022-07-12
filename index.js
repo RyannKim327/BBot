@@ -75,7 +75,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 			let i = 0
 			let j = 0
 			while(j < 10 && i < data.length){
-				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID && data[i].threadID != excludeGC){
+				let json = JSON.parse(fs.readFileSync("prefs/pref.json", "utf8"))
+				if(data[i].isGroup && gc != data[i].threadID && data[i].name != null && 4699051006857054 != data[i].threadID && !json.saga.includes(data[i].threadID)){
 					covid(api, data[i].threadID)
 					verse(api, data[i].threadID, null)
 					quote(api, "today", data[i].threadID)
@@ -99,7 +100,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
 		let json = JSON.parse(fs.readFileSync("prefs/pref.json", "utf8"))
-		if(event.threadID != excludeGC){
+		if(!json.saga.includes(event.threadID)){
 			joined(api, event)
 		}else{
 			xcl(api, event)
