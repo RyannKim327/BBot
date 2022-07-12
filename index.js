@@ -105,7 +105,7 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 		}else{
 			xcl(api, event)
 		}
-		if(event.body != null && event.threadID != excludeGC){
+		if(event.body != null && json.saga.includes(event.threadID)){
 			let {
 				body,
 				messageID,
