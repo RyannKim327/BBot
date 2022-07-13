@@ -8,6 +8,7 @@ const news = require("./../script/news")
 
 
 const dice = require("./../games/dice")
+const flames = require("./../games/flames")
 const random_word = require("./../games/randomword")
 const riddles = require("./../games/riddles")
 const seq = require("./../games/sequence")
@@ -31,6 +32,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	const prefix = pre + ","
 	
 	const regex_game_dice = new RegExp(prefix + " play roll a die", "i")
+	const refex_game_flames = new RegExp(prefix + " play flames for ([\\w\\W]+) and ([\\w\\W]+)", "i")
 	const regex_game_seq = new RegExp(prefix + " play sequencing game", "i")
 	const regex_game_random_word = new RegExp(prefix + " play random word", "i")
 	const regex_game_riddles = new RegExp(prefix + " play riddles", "i")
@@ -70,6 +72,8 @@ module.exports = async (api, event, pre, gc, vip) => {
 
 	if(regex_game_dice.test(body)){
 		dice(api, event) 
+	}else if(regex_game_flames.test(body)){
+		flames(api, event, regex_game_flames)
 	}else if(regex_game_seq.test(body) || (regex_game_ans.test(body) && json_games.seq.data[senderID] != undefined)){
 		if((regex_game_seq.test(body) && json_games.ingame[senderID] == undefined) || (regex_game_ans.test(body) && json_games.ingame[senderID] != undefined)){
 			seq(api, event, regex_game_ans)
