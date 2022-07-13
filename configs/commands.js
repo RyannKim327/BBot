@@ -32,7 +32,7 @@ module.exports = async (api, event, pre, gc, vip) => {
 	const prefix = pre + ","
 	
 	const regex_game_dice = new RegExp(prefix + " play roll a die", "i")
-	const refex_game_flames = new RegExp(prefix + " play flames for ([\\w\\W]+) and ([\\w\\W]+)", "i")
+	const regex_game_flames = new RegExp(prefix + " play flames for ([\\w\\W]+) and ([\\w\\W]+)", "i")
 	const regex_game_seq = new RegExp(prefix + " play sequencing game", "i")
 	const regex_game_random_word = new RegExp(prefix + " play random word", "i")
 	const regex_game_riddles = new RegExp(prefix + " play riddles", "i")
