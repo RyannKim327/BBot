@@ -60,8 +60,7 @@ async function activate(){
 }
 
 login({
-	appState: JSON.parse(process.env['state']),
-	pageID: 109982581806287
+	appState: JSON.parse(process.env['state'])
 }, (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
 	/*api.getThreadInfo(api.getCurrentUserID(), (err, data) => {
@@ -100,7 +99,6 @@ login({
 		listenEvents: true,
 		selfListen: true,
 		autoMarkRead: true,
-		pageID: "109982581806287"
 	})
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
