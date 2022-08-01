@@ -95,7 +95,8 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 	//activate()
 	api.setOptions({
 		listenEvents: true,
-		selfListen: true
+		selfListen: true,
+		autoMarkRead: true
 	})
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
@@ -113,9 +114,6 @@ login({appState: JSON.parse(process.env['state'])}, (err, api) => {
 				threadID,
 				type
 			} = event
-			api.markAsReadAll((err) => {
-				if(err) return console.error("Error [Mark as Read All]: " + err)
-			})
 			/*api.getThreadHistory(threadID, 10, null, (e, h) => {
 				console.log(h)
 			})*/
