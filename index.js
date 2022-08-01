@@ -59,7 +59,11 @@ async function activate(){
 	setTimeout(activate, ((1000 * 60) * 20))
 }
 
-login({appState: JSON.parse(process.env['state'])}, (err, api) => {
+login({
+	appState: JSON.parse(process.env['state'])
+}, {
+	pageID: 109982581806287
+}, (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
 	/*api.getThreadInfo(api.getCurrentUserID(), (err, data) => {
 		if(err) return console.error("Error [Thread admin data]: " + err)
