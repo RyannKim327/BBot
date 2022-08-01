@@ -60,8 +60,7 @@ async function activate(){
 }
 
 login({
-	appState: JSON.parse(process.env['state'])
-}, {
+	appState: JSON.parse(process.env['state']),
 	pageID: 109982581806287
 }, (err, api) => {
 	if(err) return console.error("Error [Api error]: " + err)
