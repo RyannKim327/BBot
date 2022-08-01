@@ -99,10 +99,14 @@ login({
 	api.setOptions({
 		listenEvents: true,
 		selfListen: true,
-		autoMarkRead: true
+		autoMarkRead: true,
+		pageID: "109982581806287"
 	})
 	api.listen(async (err, event) => {
 		if(err) return console.error("Error [Listen events]: " + err)
+		
+		await api.markAsReadAll()
+		
 		let json = JSON.parse(fs.readFileSync("prefs/pref.json", "utf8"))
 		if(!json.saga.includes(event.threadID)){
 			joined(api, event)
