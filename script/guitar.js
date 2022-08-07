@@ -44,22 +44,6 @@ module.exports = async (api, event, regex) => {
 				break
 			}
 		}
-		/*
-		for(let i = 0; i < d.length; i++){
-			let o = d[i].url
-			if(o.includes("tabs.ultimate-guitar.com")){
-				b = false
-				let tab = await tabs(o)
-				//console.log(tab)
-				let m = tab.store.page.data.tab_view.wiki_tab.content
-				let n = tab.store.page.data.tab
-				let message = `${n.song_name} - ${n.artist_name}\nChords/Tabs by: ${n.username}\nTuning: ${n.tonality_name}\n\n` + m.replace(/(\[\/ch\]|\[\/tab\]|\[tab\]|\[ch\])/gi,"")
-				console.log(tab.store.page.data.tab_view.wiki_tab.meta)
-				api.sendMessage(message, event.threadID, event.messageID)
-				api.setMessageReaction("✔", event.messageID, () => {}, true)
-				break
-			}
-		}*/
 		if(b && j >= d.length){
 			api.sendMessage("Song not found on the query", event.threadID, event.messageID)
 			api.setMessageReaction("✖", event.messageID, () => {}, true)

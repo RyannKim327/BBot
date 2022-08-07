@@ -38,6 +38,7 @@ module.exports = async (api, event) => {
 		if(res == null){
 			api.sendMessage("An error occured", event.threadID)
 		}else{
+			console.log(res)
 			if(res.did_you_mean != undefined)
 				api.sendMessage("You mean: " + res.did_you_mean, event.threadID, event.messageID)
 			if(res.knowledge_panel.title != "N/A" && res.knowledge_panel.lyrics == undefined && (res.knowledge_panel.description != "N/A" || res.featured_snippet.description != "N/A")){
